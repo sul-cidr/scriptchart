@@ -13,5 +13,10 @@ Based on [the Minimal React Webpack Babel Setup](https://www.robinwieruch.de/min
 
 ## Development
 
-* yarn start
+* `yarn start` to start the development server
+* visit `http://localhost:8080/`
+
+## Production
+
+* `yarn build` to build the application into the `dist` folder
 * visit `http://localhost:8080/`

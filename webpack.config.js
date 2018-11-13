@@ -32,7 +32,7 @@ module.exports = {
       { from: 'node_modules/mirador/dist/css/*', to: 'mirador/css', flatten: true },
       { from: 'node_modules/mirador/dist/fonts/*', to: 'mirador/fonts', flatten: true },
       { from: 'node_modules/mirador/dist/images/*', to: 'mirador/images', flatten: true },
-      { from: 'node_modules/mirador/dist/locales/**/translation.json', to: 'mirador/locales', flatten: true },
+      { from: 'node_modules/mirador/dist/locales/en/translation.json', to: 'mirador/locales/en', flatten: true },
     ], { copyUnmodified: true }),
     new HtmlWebpackPlugin({
       title: "Mirador 2 + Webpack 4 + React 16",

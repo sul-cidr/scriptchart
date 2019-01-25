@@ -48,17 +48,4 @@ module.exports = {
       ],
       { copyUnmodified: true }
     )
-    // new HtmlWebpackPlugin({
-    //   title: "Mirador 2 + Webpack 4 + React 16",
-    //   template: "./src/index.html"
-    // }),
-    // new HtmlWebpackIncludeAssetsPlugin({
-    //   assets: ['mirador/css/mirador-combined.min.css'],
-    //   append: true
-    // })
-  ]
-  // devServer: {
-  //   contentBase: "./dist",
-  //   hot: true
-  // }
 };

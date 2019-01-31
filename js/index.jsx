@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "./components/index.css";
+import App from "./components/App";
 
-import MiradorViewer from './components/MiradorViewer';
+//import MiradorViewer from './components/MiradorViewer';
 
 ReactDOM.render(
-  <MiradorViewer />,
+  <App />,
   document.getElementById('app')
 );
 

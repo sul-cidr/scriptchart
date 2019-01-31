@@ -1,0 +1,59 @@
+/* .App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+} */
+
+header {
+  height: 10vh;
+  border-bottom: 1px black solid;
+  padding-top: 2vh;
+  background-color: #990000;
+  z-index: auto;
+}
+
+.navbar {
+  background-color: #990000;
+}
+
+.navbar-item,
+.navbar-link {
+  color: white;
+}
+
+.navbar-dropdown .navbar-item {
+  color: black;
+}
+
+.main-content {
+  padding: 20px;
+  margin-top: 10px;
+  min-height: 80vh;
+}
+
+.top-panel {
+  max-height: 50vh;
+  overflow: scroll;
+  margin-bottom: 10px;
+}
+
+.bottom-panel {
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+.control {
+  margin-top: 20px;
+}
+
+.panel-heading {
+  margin-bottom: 10px;
+}
+
+input {
+  margin-left: 10px;
+}
+
+footer {
+  height: 10vh;
+}

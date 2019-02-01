@@ -8,7 +8,7 @@ module.exports = {
   entry: ["script-loader!mirador/dist/mirador.min", "./js/index.jsx"],
   mode: "development",
   output: {
-    path: path.resolve(__dirname, "src"),
+    path: path.resolve(__dirname, "src/assets"),
     filename: "bundle.js"
   },
   resolve: {
@@ -58,22 +58,22 @@ module.exports = {
       [
         {
           from: "node_modules/mirador/dist/css/*",
-          to: "mirador/css",
+          to: "../mirador/css",
           flatten: true
         },
         {
           from: "node_modules/mirador/dist/fonts/*",
-          to: "mirador/fonts",
+          to: "../mirador/fonts",
           flatten: true
         },
         {
           from: "node_modules/mirador/dist/images/*",
-          to: "mirador/images",
+          to: "../mirador/images",
           flatten: true
         },
         {
           from: "node_modules/mirador/dist/locales/en/translation.json",
-          to: "mirador/locales/en",
+          to: "../mirador/locales/en",
           flatten: true
         }
       ],

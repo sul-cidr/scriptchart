@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import "bulma/css/bulma.min.css";
 import "font-awesome/css/font-awesome.min.css";
-import "./main.css";
+// import "./main.css";
 
 import Header from "./Header";
 
@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header sidebarToggle={this.sidebarToggle} />
+        {/* <Header sidebarToggle={this.sidebarToggle} /> */}
         <Sidebar
           sidebar={
             <div className={"box"}>
@@ -52,9 +52,12 @@ class App extends Component {
           onSetOpen={this.onSetSidebarOpen}
           styles={{ sidebar: { background: "white" } }}
         >
-          <DashTabs />
         </Sidebar>
-        <Footer />
+        <button className={"button"} onClick={this.sidebarToggle}>
+          Show/hide form
+        </button>
+        <DashTabs />
+        {/* <Footer /> */}
       </div>
     );
   }

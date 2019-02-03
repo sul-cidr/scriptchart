@@ -1,0 +1,43 @@
+body {
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+html {
+  text-rendering: optimizeLegibility;
+}
+
+.nav-wrapper {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.site-header {
+  background-color: #990000;
+  z-index: 35;
+  min-height: auto;
+}
+  
+.site-title {
+  font-size: normal;
+  line-height: auto;
+  letter-spacing: -1px;
+  margin-bottom: 0;
+  float: left;
+}
+
+.site-title:visited {
+  color: white;
+}
+  
+.site-nav {
+  float: right;
+  line-height: auto;
+}

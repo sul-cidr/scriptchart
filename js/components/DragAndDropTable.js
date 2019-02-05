@@ -1,8 +1,7 @@
 import React from "react";
-//import { DragDropContext } from 'react-dnd';
-//import HTML5Backend from 'react-dnd-html5-backend';
+
 import cloneDeep from "lodash/cloneDeep";
-//import findIndex from 'lodash/findIndex';
+
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
 import * as resolve from "table-resolver";
@@ -25,10 +24,6 @@ import serta_gamal from "./images/Syriac_Serta_gamal.png";
 import serta_dalat from "./images/Syriac_Serta_dalat.png";
 import serta_he from "./images/Syriac_Serta_he.png";
 import serta_waw from "./images/Syriac_Serta_waw.png";
-
-//import sample from "./images/sample-letter.png";
-//import sample2 from "./images/sample-letter2.png";
-//import sample3 from "./images/sample-letter3.png";
 
 import "./DragAndDropTable.css";
 /* PMB These should come in handy when the content is pulled in dynamically
@@ -133,6 +128,7 @@ class DragAndDropTable extends React.Component {
       rows
     };
 
+    /* Iteratively populate the columns */
     for (let i = 0; i < manuscripts.length; i++) {
       let column = {
         property: "manuscript" + (i + 1),

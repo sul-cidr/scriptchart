@@ -18,45 +18,21 @@ import ManuscriptForm from "./ManuscriptForm";
 import Sidebar from "react-sidebar";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebarOpen: false,
-      sidebarDocked: true
-    };
-    this.sidebarToggle = this.sidebarToggle.bind(this);
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
-
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
-
-  sidebarToggle(docked) {
-    this.setState({ sidebarDocked: !this.state.sidebarDocked });
-  }
-
   render() {
     return (
-      <div>
-        {/* <Header sidebarToggle={this.sidebarToggle} /> */}
-        <Sidebar
-          sidebar={
+      <div className="App">
+        {/* <Header className="App-header" /> */}
+        <div className={"columns main-content"}>
+          <div className={"column is-one-quarter"}>
             <div className={"box"}>
               <h4 className={"title is-4"}>Scriptchart options</h4>
               <ManuscriptForm />
             </div>
-          }
-          open={this.state.sidebarOpen}
-          docked={this.state.sidebarDocked}
-          onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { background: "white" } }}
-        >
-        </Sidebar>
-        <button className={"button"} onClick={this.sidebarToggle}>
-          Show/hide form
-        </button>
-        <DashTabs />
+          </div>
+          <div className="column">
+            <DashTabs />
+          </div>
+        </div>
         {/* <Footer /> */}
       </div>
     );

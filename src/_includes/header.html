@@ -1,12 +1,12 @@
 <header class="site-header" role="banner">
 
-  <div class="wrapper">
+  <div class="nav-wrapper">
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
     <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
 
     {%- if page_paths -%}
-      <nav class="site-nav">
+      <div class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
           <span class="menu-icon">
@@ -24,7 +24,7 @@
             {%- endif -%}
           {%- endfor -%}
         </div>
-      </nav>
+      </div>
     {%- endif -%}
   </div>
 </header>

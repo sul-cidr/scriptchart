@@ -26,38 +26,6 @@ import serta_he from "./images/Syriac_Serta_he.png";
 import serta_waw from "./images/Syriac_Serta_waw.png";
 
 import "./DragAndDropTable.css";
-/* PMB These should come in handy when the content is pulled in dynamically
-const schema = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'integer'
-    },
-    letter: {
-      type: 'string'
-    },
-    manuscript1: {
-      type: 'string'    
-    },
-    manuscript2: {
-      type: 'string'    
-    },
-    manuscript3: {
-      type: 'string'    
-    },
-    manuscript4: {
-      type: 'string'    
-    },
-    manuscript5: {
-      type: 'string'    
-    },
-    manuscript6: {
-      type: 'string'    
-    }
-  },
-  required: ['id', 'letter', 'manuscript1', 'manuscript2', 'manuscript3', 'manuscript4', 'manuscript5', 'manuscript6']
-}
-*/
 
 const sampleLetters = [
   eastern_alap,
@@ -84,6 +52,26 @@ const letters = ["ʾĀlep̄", "Bēṯ", "Gāmal", "Dālaṯ", "Hē", "Waw"];
 const manuscripts = ["A", "B", "C", "D", "E", "F"];
 var rows = [];
 let sampleLetterCount = 0;
+
+/* PMB These should come in handy when the content is pulled in dynamically
+const schema = {
+  type: "object",
+  properties: {
+    id: {
+      type: "integer"
+    },
+    letter: {
+      type: "string"
+    },
+    required: ["id", "letter"]
+  }
+};
+for (let i = 0; i < manuscripts.length; i++) {
+  let colId = "manuscript" + (i + 1);
+  schema["properties"][colId] = { type: "string" };
+  schema["required"].push(colId);
+}
+*/
 
 /* Load the sample letter images into the rows array */
 for (let i = 0; i < letters.length; i++) {

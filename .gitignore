@@ -1,6 +1,7 @@
 _site
 .sass-cache
 .jekyll-metadata
+.DS_Store
 node_modules/
 src/assets/bundle.js
 src/mirador

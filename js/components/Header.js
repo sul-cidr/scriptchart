@@ -1,5 +1,4 @@
 import React from "react";
-// import "./Header.css";
 
 class Header extends React.Component {
   render() {
@@ -40,9 +39,6 @@ class Header extends React.Component {
               <button className={"button"} onClick={this.props.sidebarToggle}>
                 Show/hide form
               </button>
-              {/* <a className={"button"} href=".">
-              Script Chart Generator 
-            </a> */}
             </div>
           </div>
         </div>

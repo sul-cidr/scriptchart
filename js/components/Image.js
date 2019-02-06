@@ -15,13 +15,13 @@ export default class Image extends Component {
       backgroundColor: "gray"
     };
 
-    let important = {
+    let background = {
       backgroundImage: `url("${src}")`,
       backgroundSize: size,
       backgroundPosition: "center center",
       backgroundRepeat: "no-repeat"
     };
 
-    return <div {...props} style={{ ...defaults, ...style, ...important }} />;
+    return <div {...props} style={{ ...defaults, ...style, ...background }} />;
   }
 }

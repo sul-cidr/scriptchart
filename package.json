@@ -9,7 +9,10 @@
     "build": "node_modules/.bin/webpack -p && bundle exec jekyll clean && bundle exec jekyll build",
     "dev": "yarn concurrently \"node_modules/.bin/webpack --watch\" \"bundle exec jekyll serve\"",
     "precommit": "lint-staged",
-    "deploy": "gh-pages -d _site"
+    "deploy": "gh-pages -d _site",
+    "test": "node_modules/.bin/jest",
+    "test:update": "node_modules/.bin/jest -u",
+    "coverage": "node_modules/.bin/jest --coverage"
   },
   "lint-staged": {
     "*.{js,jsx,json,css}": [
@@ -20,6 +23,16 @@
   "keywords": [],
   "author": "Scott Bailey, Peter Broadwell, Javier de la Rosa",
   "license": "ISC",
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "setupFiles": [
+      "./js/config/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/js/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/js/__mocks__/styleMock.js"
+    }
+  },
   "dependencies": {
     "bulma": "^0.7.2",
     "copy-webpack-plugin": "^4.6.0",
@@ -44,9 +57,13 @@
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "concurrently": "^4.1.0",
     "css-loader": "^2.1.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^5.12.1",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
@@ -54,6 +71,7 @@
     "font-awesome": "^4.7.0",
     "gh-pages": "^2.0.1",
     "image-webpack-loader": "^4.6.0",
+    "jest": "^24.1.0",
     "lint-staged": "^8.1.1",
     "prettier": "^1.16.2",
     "prop-types": "^15.6.2",

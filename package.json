@@ -2,12 +2,14 @@
   "name": "DASH",
   "version": "0.0.1",
   "description": "Repository for the DASH project on Syriac manuscripts",
+  "homepage": "https://sul-cidr.github.io/scriptchart",
   "main": "index.js",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
     "build": "node_modules/.bin/webpack -p && bundle exec jekyll clean && bundle exec jekyll build",
     "dev": "yarn concurrently \"node_modules/.bin/webpack --watch\" \"bundle exec jekyll serve\"",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "deploy": "gh-pages -d _site"
   },
   "lint-staged": {
     "*.{js,jsx,json,css}": [
@@ -50,6 +52,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "file-loader": "^3.0.1",
     "font-awesome": "^4.7.0",
+    "gh-pages": "^2.0.1",
     "image-webpack-loader": "^4.6.0",
     "lint-staged": "^8.1.1",
     "prettier": "^1.16.2",

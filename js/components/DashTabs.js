@@ -48,7 +48,7 @@ class DashTabs extends React.Component {
   render() {
     return (
       <section className="section">
-        <div className="container">
+        <div className="container is-fluid">
           <Tabs
             tabList={tabList}
             activeTab={this.state.activeTab}

@@ -31,9 +31,9 @@ module.exports = {
         use: [
           {
             loader: "url-loader",
-            options: {
+            /*options: {
               limit: 8192
-            }
+            }*/
           }
         ]
       },
@@ -44,8 +44,8 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "fonts/", // where the fonts will go
-              publicPath: "../" // override the default path
+              outputPath: "fonts/" // where the fonts will go
+              //publicPath: "../" // DO NOT override the default path
             }
           }
         ]

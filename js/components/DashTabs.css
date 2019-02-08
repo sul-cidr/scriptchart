@@ -1,9 +1,11 @@
 .tabs-content {
     padding: 0 5px;
     position: relative;
+    width: 100%;
+    height: 100%;
   }
   .tabs-content div {
-    position: absolute;
+    position: relative;
   }
   
   .tabs ul li a {
@@ -27,9 +29,4 @@
   .fade-leave-active {
     opacity: 0;
     transition: opacity 150ms ease-in;
-  }
-  
-  .tabs-content {
-      width: 100%;
-      height: 100%;
   }

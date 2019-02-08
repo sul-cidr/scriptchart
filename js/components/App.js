@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import "bulma/css/bulma.min.css";
 import "font-awesome/css/font-awesome.min.css";
 
-import Header from "./Header";
+//import Header from "./Header";
 
-import Footer from "./Footer";
+//import Footer from "./Footer";
 import DashTabs from "./DashTabs";
 
 import HTML5Backend from "react-dnd-html5-backend";

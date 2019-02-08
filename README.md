@@ -23,6 +23,6 @@ Based on [the Minimal React Webpack Babel Setup](https://www.robinwieruch.de/min
 
 - `yarn build` to build the application into the `_site` folder
 
-##Deployment
+## Deployment
 
 - `yarn deploy` updates the remotely hosted version of the site with the contents of the `_site` folder. At present, the remote site is accessed by visiting this Github Pages URL: `https://sul-cidr.github.io/scriptchart/`

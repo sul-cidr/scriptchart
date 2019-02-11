@@ -1,0 +1,934 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App test App should match snapshot 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="columns main-content"
+  >
+    <div
+      className="column is-one-quarter"
+    >
+      <div
+        className="box"
+      >
+        <h4
+          className="title is-4"
+        >
+          Scriptchart options
+        </h4>
+        <form
+          className="manuscript-form"
+        >
+          <div
+            className="field"
+          >
+            <label
+              className="control"
+            >
+              Select Manuscripts:
+            </label>
+            <div
+              className="control"
+            >
+              <div
+                className="select is-multiple"
+              >
+                <select
+                  multiple={true}
+                >
+                  <option>
+                    Manuscript A
+                  </option>
+                  <option>
+                    Manuscript B
+                  </option>
+                  <option>
+                    Manuscript C
+                  </option>
+                  <option>
+                    Manuscript D
+                  </option>
+                  <option>
+                    Manuscript E
+                  </option>
+                  <option>
+                    Manuscript F
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div
+              className="control sort-option"
+            >
+              <p>
+                Order manuscripts by:
+              </p>
+              <label
+                className="radio"
+              >
+                Shelfmark:
+                <input
+                  defaultChecked={true}
+                  name="Shelfmark"
+                  type="radio"
+                />
+              </label>
+              <label
+                className="radio"
+              >
+                Date:
+                <input
+                  name="Date"
+                  type="radio"
+                />
+              </label>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <label
+              className="control"
+            >
+              Select Letters:
+            </label>
+            <div
+              className="control"
+            >
+              <div
+                className="select is-multiple"
+              >
+                <select
+                  multiple={true}
+                >
+                  <option>
+                    ʾĀlep̄
+                  </option>
+                  <option>
+                    Bēṯ
+                  </option>
+                  <option>
+                    Gāmal
+                  </option>
+                  <option>
+                    Dālaṯ
+                  </option>
+                  <option>
+                    Hē
+                  </option>
+                  <option>
+                    Waw
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <label
+              className="control"
+            >
+              Select number of letter examples:
+            </label>
+            <div
+              className="control"
+            >
+              <div
+                className="select"
+              >
+                <select>
+                  <option>
+                    1
+                  </option>
+                  <option>
+                    2
+                  </option>
+                  <option>
+                    3
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <label
+              className="checkbox"
+            >
+              Show binarized images?
+              <input
+                type="checkbox"
+              />
+            </label>
+          </div>
+          <div
+            className="field"
+          >
+            <label
+              className="control"
+            >
+              Select image size:
+            </label>
+            <div
+              className="control"
+            >
+              <div
+                className="select"
+              >
+                <select>
+                  <option>
+                    Small
+                  </option>
+                  <option>
+                    Medium
+                  </option>
+                  <option>
+                    Large
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <div
+              className="control"
+            >
+              <button
+                className="button is-link"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div
+      className="column"
+    >
+      <section
+        className="section"
+      >
+        <div
+          className="container is-fluid"
+        >
+          <div
+            className="tabs is-toggle is-boxed"
+          >
+            <ul>
+              <li
+                className="is-active"
+                onClick={[Function]}
+              >
+                <a>
+                  <span
+                    className="icon is-small"
+                  >
+                    <i
+                      className="fa fa-table"
+                    />
+                  </span>
+                  <span>
+                    Scriptchart
+                  </span>
+                </a>
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+              >
+                <a>
+                  <span
+                    className="icon is-small"
+                  >
+                    <i
+                      className="fa fa-image"
+                    />
+                  </span>
+                  <span>
+                    Manuscript Viewer
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div
+            className="tabs-content"
+          >
+            <div>
+              <div>
+                <div>
+                  <div
+                    className="visibility-container"
+                  >
+                    <label
+                      className="visibility-label"
+                      htmlFor="visibility-toggle-0"
+                    >
+                      <span
+                        className="visibility-value"
+                      >
+                        Scriptchart
+                      </span>
+                      <input
+                        checked={true}
+                        className="visibility-toggle"
+                        id="visibility-toggle-0"
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                    </label>
+                    <label
+                      className="visibility-label"
+                      htmlFor="visibility-toggle-1"
+                    >
+                      <span
+                        className="visibility-value"
+                      >
+                        Manuscript A
+                      </span>
+                      <input
+                        checked={true}
+                        className="visibility-toggle"
+                        id="visibility-toggle-1"
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                    </label>
+                    <label
+                      className="visibility-label"
+                      htmlFor="visibility-toggle-2"
+                    >
+                      <span
+                        className="visibility-value"
+                      >
+                        Manuscript B
+                      </span>
+                      <input
+                        checked={true}
+                        className="visibility-toggle"
+                        id="visibility-toggle-2"
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                    </label>
+                    <label
+                      className="visibility-label"
+                      htmlFor="visibility-toggle-3"
+                    >
+                      <span
+                        className="visibility-value"
+                      >
+                        Manuscript C
+                      </span>
+                      <input
+                        checked={true}
+                        className="visibility-toggle"
+                        id="visibility-toggle-3"
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                    </label>
+                    <label
+                      className="visibility-label"
+                      htmlFor="visibility-toggle-4"
+                    >
+                      <span
+                        className="visibility-value"
+                      >
+                        Manuscript D
+                      </span>
+                      <input
+                        checked={true}
+                        className="visibility-toggle"
+                        id="visibility-toggle-4"
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                    </label>
+                    <label
+                      className="visibility-label"
+                      htmlFor="visibility-toggle-5"
+                    >
+                      <span
+                        className="visibility-value"
+                      >
+                        Manuscript E
+                      </span>
+                      <input
+                        checked={true}
+                        className="visibility-toggle"
+                        id="visibility-toggle-5"
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                    </label>
+                    <label
+                      className="visibility-label"
+                      htmlFor="visibility-toggle-6"
+                    >
+                      <span
+                        className="visibility-value"
+                      >
+                        Manuscript F
+                      </span>
+                      <input
+                        checked={true}
+                        className="visibility-toggle"
+                        id="visibility-toggle-6"
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                    </label>
+                  </div>
+                  <table
+                    className="pure-table pure-table-striped"
+                    style={
+                      Object {
+                        "overflowX": "auto",
+                      }
+                    }
+                  >
+                    <thead>
+                      <tr>
+                        <th
+                          style={
+                            Object {
+                              "fontWeight": "bold",
+                            }
+                          }
+                        >
+                          Scriptchart
+                        </th>
+                        <th>
+                          Manuscript A
+                        </th>
+                        <th>
+                          Manuscript B
+                        </th>
+                        <th>
+                          Manuscript C
+                        </th>
+                        <th>
+                          Manuscript D
+                        </th>
+                        <th>
+                          Manuscript E
+                        </th>
+                        <th>
+                          Manuscript F
+                        </th>
+                        <th
+                          style={
+                            Object {
+                              "width": 50,
+                            }
+                          }
+                        />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        className=""
+                      >
+                        <td
+                          label="Letter"
+                          style={
+                            Object {
+                              "fontWeight": "bold",
+                            }
+                          }
+                        >
+                          ʾĀlep̄
+                        </td>
+                        <td
+                          label="Manuscript A"
+                        >
+                          <img
+                            alt="letter 1"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript B"
+                        >
+                          <img
+                            alt="letter 2"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript C"
+                        >
+                          <img
+                            alt="letter 3"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript D"
+                        >
+                          <img
+                            alt="letter 4"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript E"
+                        >
+                          <img
+                            alt="letter 5"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript F"
+                        >
+                          <img
+                            alt="letter 6"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          style={
+                            Object {
+                              "width": 50,
+                            }
+                          }
+                        >
+                          <span
+                            className="remove"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "cursor": "pointer",
+                              }
+                            }
+                          >
+                            ✗
+                          </span>
+                        </td>
+                      </tr>
+                      <tr
+                        className=""
+                      >
+                        <td
+                          label="Letter"
+                          style={
+                            Object {
+                              "fontWeight": "bold",
+                            }
+                          }
+                        >
+                          Bēṯ
+                        </td>
+                        <td
+                          label="Manuscript A"
+                        >
+                          <img
+                            alt="letter 7"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript B"
+                        >
+                          <img
+                            alt="letter 8"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript C"
+                        >
+                          <img
+                            alt="letter 9"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript D"
+                        >
+                          <img
+                            alt="letter 10"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript E"
+                        >
+                          <img
+                            alt="letter 11"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript F"
+                        >
+                          <img
+                            alt="letter 12"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          style={
+                            Object {
+                              "width": 50,
+                            }
+                          }
+                        >
+                          <span
+                            className="remove"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "cursor": "pointer",
+                              }
+                            }
+                          >
+                            ✗
+                          </span>
+                        </td>
+                      </tr>
+                      <tr
+                        className=""
+                      >
+                        <td
+                          label="Letter"
+                          style={
+                            Object {
+                              "fontWeight": "bold",
+                            }
+                          }
+                        >
+                          Gāmal
+                        </td>
+                        <td
+                          label="Manuscript A"
+                        >
+                          <img
+                            alt="letter 13"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript B"
+                        >
+                          <img
+                            alt="letter 14"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript C"
+                        >
+                          <img
+                            alt="letter 15"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript D"
+                        >
+                          <img
+                            alt="letter 16"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript E"
+                        >
+                          <img
+                            alt="letter 17"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript F"
+                        >
+                          <img
+                            alt="letter 0"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          style={
+                            Object {
+                              "width": 50,
+                            }
+                          }
+                        >
+                          <span
+                            className="remove"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "cursor": "pointer",
+                              }
+                            }
+                          >
+                            ✗
+                          </span>
+                        </td>
+                      </tr>
+                      <tr
+                        className=""
+                      >
+                        <td
+                          label="Letter"
+                          style={
+                            Object {
+                              "fontWeight": "bold",
+                            }
+                          }
+                        >
+                          Dālaṯ
+                        </td>
+                        <td
+                          label="Manuscript A"
+                        >
+                          <img
+                            alt="letter 1"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript B"
+                        >
+                          <img
+                            alt="letter 2"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript C"
+                        >
+                          <img
+                            alt="letter 3"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript D"
+                        >
+                          <img
+                            alt="letter 4"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript E"
+                        >
+                          <img
+                            alt="letter 5"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript F"
+                        >
+                          <img
+                            alt="letter 6"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          style={
+                            Object {
+                              "width": 50,
+                            }
+                          }
+                        >
+                          <span
+                            className="remove"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "cursor": "pointer",
+                              }
+                            }
+                          >
+                            ✗
+                          </span>
+                        </td>
+                      </tr>
+                      <tr
+                        className=""
+                      >
+                        <td
+                          label="Letter"
+                          style={
+                            Object {
+                              "fontWeight": "bold",
+                            }
+                          }
+                        >
+                          Hē
+                        </td>
+                        <td
+                          label="Manuscript A"
+                        >
+                          <img
+                            alt="letter 7"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript B"
+                        >
+                          <img
+                            alt="letter 8"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript C"
+                        >
+                          <img
+                            alt="letter 9"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript D"
+                        >
+                          <img
+                            alt="letter 10"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript E"
+                        >
+                          <img
+                            alt="letter 11"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript F"
+                        >
+                          <img
+                            alt="letter 12"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          style={
+                            Object {
+                              "width": 50,
+                            }
+                          }
+                        >
+                          <span
+                            className="remove"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "cursor": "pointer",
+                              }
+                            }
+                          >
+                            ✗
+                          </span>
+                        </td>
+                      </tr>
+                      <tr
+                        className=""
+                      >
+                        <td
+                          label="Letter"
+                          style={
+                            Object {
+                              "fontWeight": "bold",
+                            }
+                          }
+                        >
+                          Waw
+                        </td>
+                        <td
+                          label="Manuscript A"
+                        >
+                          <img
+                            alt="letter 13"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript B"
+                        >
+                          <img
+                            alt="letter 14"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript C"
+                        >
+                          <img
+                            alt="letter 15"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript D"
+                        >
+                          <img
+                            alt="letter 16"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript E"
+                        >
+                          <img
+                            alt="letter 17"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          label="Manuscript F"
+                        >
+                          <img
+                            alt="letter 0"
+                            src="test-file-stub"
+                          />
+                        </td>
+                        <td
+                          style={
+                            Object {
+                              "width": 50,
+                            }
+                          }
+                        >
+                          <span
+                            className="remove"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "cursor": "pointer",
+                              }
+                            }
+                          >
+                            ✗
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+`;

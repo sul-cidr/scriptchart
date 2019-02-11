@@ -1,0 +1,49 @@
+webpackHotUpdate("main",{
+
+/***/ "./js/components/MiradorContainer.js":
+/*!*******************************************!*\
+  !*** ./js/components/MiradorContainer.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _MiradorViewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MiradorViewer */ \"./js/components/MiradorViewer.jsx\");\n\n\n\nvar MiradorContainer = function MiradorContainer() {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MiradorViewer__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (MiradorContainer);\n\n//# sourceURL=webpack:///./js/components/MiradorContainer.js?");
+
+/***/ }),
+
+/***/ "./js/components/MiradorViewer.css":
+/*!*****************************************!*\
+  !*** ./js/components/MiradorViewer.css ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!./MiradorViewer.css */ \"./node_modules/css-loader/dist/cjs.js!./js/components/MiradorViewer.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(true) {\n\tmodule.hot.accept(/*! !../../node_modules/css-loader/dist/cjs.js!./MiradorViewer.css */ \"./node_modules/css-loader/dist/cjs.js!./js/components/MiradorViewer.css\", function() {\n\t\tvar newContent = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!./MiradorViewer.css */ \"./node_modules/css-loader/dist/cjs.js!./js/components/MiradorViewer.css\");\n\n\t\tif(typeof newContent === 'string') newContent = [[module.i, newContent, '']];\n\n\t\tvar locals = (function(a, b) {\n\t\t\tvar key, idx = 0;\n\n\t\t\tfor(key in a) {\n\t\t\t\tif(!b || a[key] !== b[key]) return false;\n\t\t\t\tidx++;\n\t\t\t}\n\n\t\t\tfor(key in b) idx--;\n\n\t\t\treturn idx === 0;\n\t\t}(content.locals, newContent.locals));\n\n\t\tif(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');\n\n\t\tupdate(newContent);\n\t});\n\n\tmodule.hot.dispose(function() { update(); });\n}\n\n//# sourceURL=webpack:///./js/components/MiradorViewer.css?");
+
+/***/ }),
+
+/***/ "./js/components/MiradorViewer.jsx":
+/*!*****************************************!*\
+  !*** ./js/components/MiradorViewer.jsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return MiradorViewer; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _MiradorViewer_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MiradorViewer.css */ \"./js/components/MiradorViewer.css\");\n/* harmony import */ var _MiradorViewer_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_MiradorViewer_css__WEBPACK_IMPORTED_MODULE_1__);\nfunction _typeof(obj) { if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nfunction _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === \"object\" || typeof call === \"function\")) { return call; } return _assertThisInitialized(self); }\n\nfunction _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return self; }\n\nfunction _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function\"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }\n\nfunction _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }\n\n //import PropTypes from 'prop-types';\n\n\n\nvar MiradorViewer =\n/*#__PURE__*/\nfunction (_Component) {\n  _inherits(MiradorViewer, _Component);\n\n  function MiradorViewer() {\n    _classCallCheck(this, MiradorViewer);\n\n    return _possibleConstructorReturn(this, _getPrototypeOf(MiradorViewer).apply(this, arguments));\n  }\n\n  _createClass(MiradorViewer, [{\n    key: \"componentDidMount\",\n    // constructor(props) {\n    //   super(props);\n    // }\n    value: function componentDidMount() {\n      Mirador({\n        id: \"mirador\",\n        layout: \"1x1\",\n        buildPath: \"mirador/\",\n        data: [{\n          manifestUri: \"https://iiif.harvardartmuseums.org/manifests/object/299843\",\n          \"location\": \"Harvard University\"\n        }, {\n          manifestUri: \"https://iiif.harvardartmuseums.org/manifests/object/304136\",\n          \"location\": \"Harvard University\"\n        }, {\n          manifestUri: \"https://iiif.harvardartmuseums.org/manifests/object/198021\",\n          \"location\": \"Harvard University\"\n        }, {\n          manifestUri: \"https://iiif.harvardartmuseums.org/manifests/object/320567\",\n          \"location\": \"Harvard University\"\n        }, {\n          manifestUri: \"https://media.nga.gov/public/manifests/nga_highlights.json\",\n          \"location\": \"National Gallery of Art\"\n        }, {\n          manifestUri: \"https://media.nga.gov/public/manifests/multispectral_demo.json\",\n          \"location\": \"National Gallery of Art\"\n        }],\n        windowObjects: [{\n          loadedManifest: \"https://iiif.harvardartmuseums.org/manifests/object/299843\",\n          viewType: \"ImageView\" //slotAddress: \"row1.column1\"\n\n          /*,{\n           loadedManifest: \"https://media.nga.gov/public/manifests/nga_highlights.json\",\n           slotAddress: \"row1.column2\",\n           viewType: \"ImageView\"\n          }*/\n\n        }],\n        annotationEndpoint: {\n          name: \"Local Storage\",\n          module: \"LocalStorageEndpoint\"\n        },\n        windowSettings: {\n          canvasControls: {\n            imageManipulation: {\n              manipulationLayer: true,\n              controls: {\n                mirror: true\n              }\n            }\n          }\n        }\n      });\n    }\n  }, {\n    key: \"render\",\n    value: function render() {\n      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n        id: \"mirador\"\n      });\n    }\n  }]);\n\n  return MiradorViewer;\n}(react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"]); // MiradorViewer.propTypes = {\n// };\n// MiradorViewer.defaultProps = {\n// }\n\n\n\n\n//# sourceURL=webpack:///./js/components/MiradorViewer.jsx?");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./js/components/MiradorViewer.css":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./js/components/MiradorViewer.css ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".mirador-container .mirador-viewer {\\n    height: 100vh;\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./js/components/MiradorViewer.css?./node_modules/css-loader/dist/cjs.js");
+
+/***/ })
+
+})

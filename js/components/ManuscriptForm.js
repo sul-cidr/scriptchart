@@ -66,42 +66,18 @@ class ManuscriptForm extends React.Component {
       </div>
       <div className={"field"}>
         <label className={"control"}>Select Letters:</label>
-          <div className={"buttons are-small"}>
-            <LetterButton letter="ܐ" />
-            <LetterButton letter="ܒ" />
-            <LetterButton letter="ܓ" />
-            <LetterButton letter="ܔ" />
-            <LetterButton letter="ܕ" />
-            <LetterButton letter="ܖ" />
-            <LetterButton letter="ܗ" />
-            <LetterButton letter="ܘ" />
-            <LetterButton letter="ܙ" />
-            <LetterButton letter="ܚ" />
-            <LetterButton letter="ܛ" />
-            <LetterButton letter="ܜ" />
-            <LetterButton letter="ܝ" />
-            <LetterButton letter="ܞ" />
-            <LetterButton letter="ܟ" />
-            <LetterButton letter="ܠ" />
-            <LetterButton letter="ܡ" />
-            <LetterButton letter="ܢ" />
-            <LetterButton letter="ܣ" />
-            <LetterButton letter="ܤ" />
-            <LetterButton letter="ܥ" />
-            <LetterButton letter="ܦ" />
-            <LetterButton letter="ܧ" />
-            <LetterButton letter="ܨ" />
-            <LetterButton letter="ܩ" />
-            <LetterButton letter="ܪ" />
-            <LetterButton letter="ܫ" />
-            <LetterButton letter="ܬ" />
-            <LetterButton letter="ܭ" />
-            <LetterButton letter="ܮ" />
-            <LetterButton letter="ܯ" />
-            <LetterButton letter="ݍ" />
-            <LetterButton letter="ݎ" />
-            <LetterButton letter="ݏ" />
-          </div> 
+        <div className={"control"}>
+          <div className={"select is-multiple"}>
+            <select multiple>
+              <option>ʾĀlep̄</option>
+              <option>Bēṯ</option>
+              <option>Gāmal</option>
+              <option>Dālaṯ</option>
+              <option>Hē</option>
+              <option>Waw</option>
+            </select>
+          </div>
+        </div>
       </div>
       <div className={"field"}>
         <label className={"control"}>Select number of letter examples:</label>

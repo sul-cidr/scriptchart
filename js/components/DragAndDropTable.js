@@ -201,7 +201,7 @@ class DragAndDropTable extends React.Component {
           className="pure-table pure-table-striped"
           style={{ overflowX: 'auto' }}
           renderers={renderers}
-          columns={columns}
+          columns={cols}
         >
           <Table.Header  />
 
@@ -263,7 +263,6 @@ class DragAndDropTable extends React.Component {
     }
   }
   onToggleColumn({ columnIndex }) {
-    console.log("column toggled");
     const columns = cloneDeep(this.state.columns);
     const column = columns[columnIndex];
 

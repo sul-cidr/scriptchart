@@ -1,9 +1,10 @@
 import React from "react";
 
-import cloneDeep from "lodash/cloneDeep";
+import { cloneDeep, findIndex } from "lodash";
 
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
+import VisibilityToggles from 'react-visibility-toggles';
 
 import eastern_alap from "./images/Syriac_Eastern_alap.png";
 import eastern_bet from "./images/Syriac_Eastern_bet.png";
@@ -104,48 +105,78 @@ class DragAndDropTable extends React.Component {
     super(props);
 
     this.state = {
-      columns: [
-        {
-          property: "letter",
-          props: {
-            label: "Letter",
-            style: {
-              fontWeight: "bold"
-            }
-          },
-          header: {
-            label: "Scriptchart",
-            props: {
-              onMove: o => this.onMoveColumn(o)
-            }
-          }
-        }
-      ],
-      rows
+      columns: this.getColumns(),
+      rows,
+      query: {}, // search query, also used to hide/show columns
     };
-
-    /* Iteratively populate the columns */
-    for (let i = 0; i < manuscripts.length; i++) {
-      let column = {
-        property: "manuscript" + (i + 1),
-        header: {
-          label: "Manuscript " + manuscripts[i],
-          props: {
-            onMove: o => this.onMoveColumn(o)
-          }
-        },
-        props: {
-          label: "Manuscript " + manuscripts[i]
-        }
-      };
-      this.state.columns.push(column);
-    }
 
     this.onRow = this.onRow.bind(this);
     this.onMoveRow = this.onMoveRow.bind(this);
     this.onMoveColumn = this.onMoveColumn.bind(this);
     this.onMoveChildColumn = this.onMoveChildColumn.bind(this);
+    this.onToggleColumn = this.onToggleColumn.bind(this);
+    this.onRemove = this.onRemove.bind(this);
   }
+
+  getColumns() {
+    let cols = [
+      {
+        property: "letter",
+        props: {
+          label: "Letter",
+          style: {
+            fontWeight: "bold"
+          }
+        },
+        visible: true,
+        header: {
+          label: "Scriptchart",
+          props: {
+            onMove: o => this.onMoveColumn(o)
+          }
+        }
+      }
+    ];
+    /* Iteratively populate the columns */
+    for (let i = 0; i < manuscripts.length; i++) {
+      let column = {
+        property: "manuscript" + (i + 1),
+        header: {
+          label: manuscripts[i],
+          props: {
+            onMove: o => this.onMoveColumn(o)
+          }
+        },
+        visible: true,
+        props: {
+          label: manuscripts[i]
+        }
+      };
+      cols.push(column);
+    }
+    let rowRemover = {
+      props: {
+        style: {
+          width: 50
+        }
+      },
+      cell: {
+        formatters: [
+          (value, { rowData }) => (
+            <span
+              className="remove"
+              onClick={() => this.onRemove(rowData.id)} style={{ cursor: 'pointer' }}
+            >
+              &#10007;
+            </span>
+          )
+        ]
+      },
+      visible: true
+    }
+    cols.push(rowRemover);
+    return cols;
+  };
 
   render() {
     const renderers = {
@@ -157,18 +188,26 @@ class DragAndDropTable extends React.Component {
       }
     };
     const { columns, rows } = this.state;
+    const cols = columns.filter(column => column.visible);
+    const query = this.state.query;
 
     return (
-      <Table.Provider
-      className="pure-table pure-table-striped"
-      style={{ overflowX: 'auto' }}
-      renderers={renderers}
-      columns={columns}
-      >
-        <Table.Header  />
+      <div>
+        <VisibilityToggles
+          columns={columns}
+          onToggleColumn={this.onToggleColumn}
+        />
+        <Table.Provider
+          className="pure-table pure-table-striped"
+          style={{ overflowX: 'auto' }}
+          renderers={renderers}
+          columns={columns}
+        >
+          <Table.Header  />
 
-        <Table.Body rows={rows} rowKey="id" onRow={this.onRow} />
-      </Table.Provider>
+          <Table.Body rows={rows} rowKey="id" onRow={this.onRow} />
+        </Table.Provider>
+      </div>
     );
   }
   onRow(row) {
@@ -222,6 +261,27 @@ class DragAndDropTable extends React.Component {
       // Here we assume children have the same width.
       this.setState({ columns });
     }
+  }
+  onToggleColumn({ columnIndex }) {
+    console.log("column toggled");
+    const columns = cloneDeep(this.state.columns);
+    const column = columns[columnIndex];
+
+    column.visible = !column.visible;
+
+    const query = cloneDeep(this.state.query);
+    delete query[column.property];
+
+    this.setState({ columns, query });
+  }
+  onRemove(id) {
+    const rows = cloneDeep(this.state.rows);
+    const idx = findIndex(rows, { id });
+
+    // this could go through flux etc.
+    rows.splice(idx, 1);
+
+    this.setState({ rows });
   }
 }
 

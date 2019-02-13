@@ -6,11 +6,11 @@ import DragAndDropTable from '../DragAndDropTable';
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 
-const DDContext = DragDropContext(HTML5Backend);
+const DDContext = DragDropContext(HTML5Backend)(DragAndDropTable);
 
 describe('DragAndDropTable test', () => {
   it('DragAndDropTable should match snapshot', () => {
-    const component = renderer.create(<DDContext><DragAndDropTable /></DDContext>);
+    const component = renderer.create(<DDContext />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

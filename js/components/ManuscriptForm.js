@@ -1,4 +1,5 @@
 import React from "react";
+import ManuscriptMenu from "./ManuscriptMenu"
 
 // In this component, we would actually pass a list of
 // manuscripts, and have a toggle to sort by date or name
@@ -35,35 +36,7 @@ class ManuscriptForm extends React.Component {
   render() {
   return (
     <form className={"manuscript-form"}>
-      <div className={"field"}>
-        <label className={"control"}>Select Manuscripts:</label>
-        <div className={"control"}>
-          <div className={"select is-multiple"}>
-            <select multiple>
-              <option>Vat. Syr. 157</option>
-              <option>Vat. Syr. 161</option>
-              <option>Vat. Syr. 283</option>
-              <option>Vat. Syr. 586</option>
-              <option>Vat. Syr. 252</option>
-              <option>Bor. Syr. 13</option>
-              <option>BL. Add. 12144</option>
-              <option>BL. Add. 12139</option>
-              <option>BL. Add. 12146</option>
-            </select>
-          </div>
-        </div>
-        <div className={"control sort-option"}>
-          <p>Order manuscripts by:</p>
-          <label className={"radio"}>
-            Shelfmark:
-            <input type={"radio"} name={"Shelfmark"} defaultChecked />
-          </label>
-          <label className={"radio"}>
-            Date:
-            <input type={"radio"} name={"Date"} />
-          </label>
-        </div>
-      </div>
+      <ManuscriptMenu />
       <div className={"field"}>
         <label className={"control"}>Select Letters:</label>
           <div className={"buttons are-small"}>

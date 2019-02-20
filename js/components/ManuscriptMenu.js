@@ -6,19 +6,16 @@ class ManuscriptsLoader extends React.Component {
     this.state = { manuscripts: [] };
   }
   componentDidMount() {
-    fetch('http://localhost:8000/manuscripts/?format=json')
+    fetch('http://localhost:8000/api/manuscripts?format=json')
     .then(results => {
-      console.log("fetched URL");
       return results.json();
     })
     .then(data => {
-      console.log("processing results");
       let ms = data.map((manuscript) => {
         return (
           <option key={manuscript.id}>{manuscript.shelfmark}</option>
         )
       })
-      console.log("manuscripts", ms);
       this.setState({ manuscripts: ms });
     })
   }

@@ -5,11 +5,13 @@
   "homepage": "https://sul-cidr.github.io/scriptchart",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0",
     "build": "node_modules/.bin/webpack -p && bundle exec jekyll clean && bundle exec jekyll build",
     "dev": "yarn concurrently \"node_modules/.bin/webpack --watch\" \"bundle exec jekyll serve\"",
     "precommit": "lint-staged",
-    "deploy": "gh-pages -d _site"
+    "deploy": "gh-pages -d _site",
+    "test": "node_modules/.bin/jest",
+    "test:update": "node_modules/.bin/jest -u",
+    "coverage": "node_modules/.bin/jest --coverage"
   },
   "lint-staged": {
     "*.{js,jsx,json,css}": [
@@ -54,6 +56,8 @@
     "font-awesome": "^4.7.0",
     "gh-pages": "^2.0.1",
     "image-webpack-loader": "^4.6.0",
+    "jest": "^24.1.0",
+    "jest-serializer-enzyme": "^1.0.0",
     "lint-staged": "^8.1.1",
     "prettier": "^1.16.2",
     "prop-types": "^15.6.2",

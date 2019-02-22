@@ -11,7 +11,6 @@ class LetterButton extends React.Component {
     return (
       <span
         className={this.state.class}
-        id={this.letter}
         onClick={this.onLetterClicked}
       >
         {this.letter}

@@ -6,6 +6,43 @@ import LetterButton from "./LetterButton";
 // manuscripts, and have a toggle to sort by date or name
 // The list could come from a json object with name and date
 
+const letters = [
+  "ܐ",
+  "ܒ",
+  "ܓ",
+  "ܔ",
+  "ܕ",
+  "ܖ",
+  "ܗ",
+  "ܘ",
+  "ܙ",
+  "ܚ",
+  "ܛ",
+  "ܜ",
+  "ܝ",
+  "ܞ",
+  "ܟ",
+  "ܠ",
+  "ܡ",
+  "ܢ",
+  "ܣ",
+  "ܤ",
+  "ܥ",
+  "ܦ",
+  "ܧ",
+  "ܨ",
+  "ܩ",
+  "ܪ",
+  "ܫ",
+  "ܬ",
+  "ܭ",
+  "ܮ",
+  "ܯ",
+  "ݍ",
+  "ݎ",
+  "ݏ"
+];
+
 class ManuscriptForm extends React.Component {
   render() {
     return (
@@ -42,40 +79,9 @@ class ManuscriptForm extends React.Component {
         <div className={"field"}>
           <label className={"control"}>Select Letters:</label>
           <div className={"buttons are-small"}>
-            <LetterButton letter="ܐ" />
-            <LetterButton letter="ܒ" />
-            <LetterButton letter="ܓ" />
-            <LetterButton letter="ܔ" />
-            <LetterButton letter="ܕ" />
-            <LetterButton letter="ܖ" />
-            <LetterButton letter="ܗ" />
-            <LetterButton letter="ܘ" />
-            <LetterButton letter="ܙ" />
-            <LetterButton letter="ܚ" />
-            <LetterButton letter="ܛ" />
-            <LetterButton letter="ܜ" />
-            <LetterButton letter="ܝ" />
-            <LetterButton letter="ܞ" />
-            <LetterButton letter="ܟ" />
-            <LetterButton letter="ܠ" />
-            <LetterButton letter="ܡ" />
-            <LetterButton letter="ܢ" />
-            <LetterButton letter="ܣ" />
-            <LetterButton letter="ܤ" />
-            <LetterButton letter="ܥ" />
-            <LetterButton letter="ܦ" />
-            <LetterButton letter="ܧ" />
-            <LetterButton letter="ܨ" />
-            <LetterButton letter="ܩ" />
-            <LetterButton letter="ܪ" />
-            <LetterButton letter="ܫ" />
-            <LetterButton letter="ܬ" />
-            <LetterButton letter="ܭ" />
-            <LetterButton letter="ܮ" />
-            <LetterButton letter="ܯ" />
-            <LetterButton letter="ݍ" />
-            <LetterButton letter="ݎ" />
-            <LetterButton letter="ݏ" />
+            {letters.map(letter => (
+              <LetterButton key={letter} letter={letter} />
+            ))}
           </div>
         </div>
         <div className={"field"}>

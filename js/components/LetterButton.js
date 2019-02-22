@@ -9,10 +9,7 @@ class LetterButton extends React.Component {
   }
   render() {
     return (
-      <span
-        className={this.state.class}
-        onClick={this.onLetterClicked}
-      >
+      <span className={this.state.class} onClick={this.onLetterClicked}>
         {this.letter}
       </span>
     );

@@ -17,8 +17,12 @@ Based on [the Minimal React Webpack Babel Setup](https://www.robinwieruch.de/min
 ## Development
 
 - `yarn dev` to start the development server
-- visit `http://localhost:4000`
+- visit `http://localhost:4000/scriptchart/`
 
 ## Production
 
 - `yarn build` to build the application into the `_site` folder
+
+## Deployment
+
+- `yarn deploy` updates the remotely hosted version of the site with the contents of the `_site` folder. At present, the remote site is accessed by visiting this Github Pages URL: `https://sul-cidr.github.io/scriptchart/`

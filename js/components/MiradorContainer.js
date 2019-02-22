@@ -1,6 +1,6 @@
 import React from "react";
 
-import MiradorViewer from './MiradorViewer';
+import MiradorViewer from "./MiradorViewer";
 
 const MiradorContainer = () => {
   return <MiradorViewer />;

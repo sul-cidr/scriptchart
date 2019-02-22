@@ -48,8 +48,18 @@ const sampleLetters = [
 ];
 
 const letters = ["ʾĀlep̄", "Bēṯ", "Gāmal", "Dālaṯ", "Hē", "Waw"];
-const manuscripts = ["Vat. Syr. 157", "Vat. Syr. 161", "Vat. Syr. 283", "Vat. Syr. 586", "Vat. Syr. 252", "Bor. Syr. 13", "BL. Add. 12144", "BL. Add. 12139", "BL. Add. 12146"];
-const dates = ["NA","NA","NA","NA","NA","NA","1081","999-1000","1007"];
+const manuscripts = [
+  "Vat. Syr. 157",
+  "Vat. Syr. 161",
+  "Vat. Syr. 283",
+  "Vat. Syr. 586",
+  "Vat. Syr. 252",
+  "Bor. Syr. 13",
+  "BL. Add. 12144",
+  "BL. Add. 12139",
+  "BL. Add. 12146"
+];
+const dates = ["NA", "NA", "NA", "NA", "NA", "NA", "1081", "999-1000", "1007"];
 var rows = [];
 let sampleLetterCount = 0;
 
@@ -74,7 +84,7 @@ for (let i = 0; i < manuscripts.length; i++) {
 */
 
 /* Add dates row */
-let row = { id: 0, letter: 'Date' };
+let row = { id: 0, letter: "Date" };
 
 for (let i = 0; i < dates.length; i++) {
   row["manuscript" + (i + 1)] = dates[i];
@@ -106,7 +116,7 @@ class DragAndDropTable extends React.Component {
     this.state = {
       columns: this.getColumns(),
       rows,
-      query: {}, // search query, also used to hide/show columns
+      query: {} // search query, also used to hide/show columns
     };
 
     this.onRow = this.onRow.bind(this);
@@ -152,7 +162,7 @@ class DragAndDropTable extends React.Component {
       cols.push(column);
     }
     return cols;
-  };
+  }
 
   render() {
     const renderers = {
@@ -166,16 +176,16 @@ class DragAndDropTable extends React.Component {
     const { columns, rows } = this.state;
 
     return (
-        <Table.Provider
-          className="pure-table pure-table-striped"
-          style={{ overflowX: 'auto' }}
-          renderers={renderers}
-          columns={columns}
-        >
-          <Table.Header  />
+      <Table.Provider
+        className="pure-table pure-table-striped"
+        style={{ overflowX: "auto" }}
+        renderers={renderers}
+        columns={columns}
+      >
+        <Table.Header />
 
-          <Table.Body rows={rows} rowKey="id" onRow={this.onRow} />
-        </Table.Provider>
+        <Table.Body rows={rows} rowKey="id" onRow={this.onRow} />
+      </Table.Provider>
     );
   }
   onRow(row) {

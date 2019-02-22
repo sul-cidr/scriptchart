@@ -2,6 +2,7 @@ _site
 .sass-cache
 .jekyll-metadata
 .DS_Store
+.snap
 node_modules/
 src/assets/bundle.js
 src/mirador

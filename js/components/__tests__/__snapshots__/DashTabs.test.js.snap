@@ -1,0 +1,686 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DashTabs test DashTabs should match snapshot 1`] = `
+<section
+  className="section"
+>
+  <div
+    className="container is-fluid"
+  >
+    <div
+      className="tabs is-toggle is-boxed"
+    >
+      <ul>
+        <li
+          className="is-active"
+          onClick={[Function]}
+        >
+          <a>
+            <span
+              className="icon is-small"
+            >
+              <i
+                className="fa fa-table"
+              />
+            </span>
+            <span>
+              Scriptchart
+            </span>
+          </a>
+        </li>
+        <li
+          className=""
+          onClick={[Function]}
+        >
+          <a>
+            <span
+              className="icon is-small"
+            >
+              <i
+                className="fa fa-image"
+              />
+            </span>
+            <span>
+              Manuscript Viewer
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="tabs-content"
+    >
+      <div>
+        <div>
+          <table
+            className="pure-table pure-table-striped"
+            style={
+              Object {
+                "overflowX": "auto",
+              }
+            }
+          >
+            <thead>
+              <tr>
+                <th
+                  style={
+                    Object {
+                      "fontWeight": "bold",
+                    }
+                  }
+                >
+                  Scriptchart
+                </th>
+                <th>
+                  Vat. Syr. 157
+                </th>
+                <th>
+                  Vat. Syr. 161
+                </th>
+                <th>
+                  Vat. Syr. 283
+                </th>
+                <th>
+                  Vat. Syr. 586
+                </th>
+                <th>
+                  Vat. Syr. 252
+                </th>
+                <th>
+                  Bor. Syr. 13
+                </th>
+                <th>
+                  BL. Add. 12144
+                </th>
+                <th>
+                  BL. Add. 12139
+                </th>
+                <th>
+                  BL. Add. 12146
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                className=""
+              >
+                <td
+                  label="Letter"
+                  style={
+                    Object {
+                      "fontWeight": "bold",
+                    }
+                  }
+                >
+                  Date
+                </td>
+                <td
+                  label="Vat. Syr. 157"
+                >
+                  NA
+                </td>
+                <td
+                  label="Vat. Syr. 161"
+                >
+                  NA
+                </td>
+                <td
+                  label="Vat. Syr. 283"
+                >
+                  NA
+                </td>
+                <td
+                  label="Vat. Syr. 586"
+                >
+                  NA
+                </td>
+                <td
+                  label="Vat. Syr. 252"
+                >
+                  NA
+                </td>
+                <td
+                  label="Bor. Syr. 13"
+                >
+                  NA
+                </td>
+                <td
+                  label="BL. Add. 12144"
+                >
+                  1081
+                </td>
+                <td
+                  label="BL. Add. 12139"
+                >
+                  999-1000
+                </td>
+                <td
+                  label="BL. Add. 12146"
+                >
+                  1007
+                </td>
+              </tr>
+              <tr
+                className=""
+              >
+                <td
+                  label="Letter"
+                  style={
+                    Object {
+                      "fontWeight": "bold",
+                    }
+                  }
+                >
+                  ʾĀlep̄
+                </td>
+                <td
+                  label="Vat. Syr. 157"
+                >
+                  <img
+                    alt="letter 1"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 161"
+                >
+                  <img
+                    alt="letter 2"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 283"
+                >
+                  <img
+                    alt="letter 3"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 586"
+                >
+                  <img
+                    alt="letter 4"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 252"
+                >
+                  <img
+                    alt="letter 5"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Bor. Syr. 13"
+                >
+                  <img
+                    alt="letter 6"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12144"
+                >
+                  <img
+                    alt="letter 7"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12139"
+                >
+                  <img
+                    alt="letter 8"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12146"
+                >
+                  <img
+                    alt="letter 9"
+                    src="test-file-stub"
+                  />
+                </td>
+              </tr>
+              <tr
+                className=""
+              >
+                <td
+                  label="Letter"
+                  style={
+                    Object {
+                      "fontWeight": "bold",
+                    }
+                  }
+                >
+                  Bēṯ
+                </td>
+                <td
+                  label="Vat. Syr. 157"
+                >
+                  <img
+                    alt="letter 10"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 161"
+                >
+                  <img
+                    alt="letter 11"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 283"
+                >
+                  <img
+                    alt="letter 12"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 586"
+                >
+                  <img
+                    alt="letter 13"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 252"
+                >
+                  <img
+                    alt="letter 14"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Bor. Syr. 13"
+                >
+                  <img
+                    alt="letter 15"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12144"
+                >
+                  <img
+                    alt="letter 16"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12139"
+                >
+                  <img
+                    alt="letter 17"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12146"
+                >
+                  <img
+                    alt="letter 0"
+                    src="test-file-stub"
+                  />
+                </td>
+              </tr>
+              <tr
+                className=""
+              >
+                <td
+                  label="Letter"
+                  style={
+                    Object {
+                      "fontWeight": "bold",
+                    }
+                  }
+                >
+                  Gāmal
+                </td>
+                <td
+                  label="Vat. Syr. 157"
+                >
+                  <img
+                    alt="letter 1"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 161"
+                >
+                  <img
+                    alt="letter 2"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 283"
+                >
+                  <img
+                    alt="letter 3"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 586"
+                >
+                  <img
+                    alt="letter 4"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 252"
+                >
+                  <img
+                    alt="letter 5"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Bor. Syr. 13"
+                >
+                  <img
+                    alt="letter 6"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12144"
+                >
+                  <img
+                    alt="letter 7"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12139"
+                >
+                  <img
+                    alt="letter 8"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12146"
+                >
+                  <img
+                    alt="letter 9"
+                    src="test-file-stub"
+                  />
+                </td>
+              </tr>
+              <tr
+                className=""
+              >
+                <td
+                  label="Letter"
+                  style={
+                    Object {
+                      "fontWeight": "bold",
+                    }
+                  }
+                >
+                  Dālaṯ
+                </td>
+                <td
+                  label="Vat. Syr. 157"
+                >
+                  <img
+                    alt="letter 10"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 161"
+                >
+                  <img
+                    alt="letter 11"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 283"
+                >
+                  <img
+                    alt="letter 12"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 586"
+                >
+                  <img
+                    alt="letter 13"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 252"
+                >
+                  <img
+                    alt="letter 14"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Bor. Syr. 13"
+                >
+                  <img
+                    alt="letter 15"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12144"
+                >
+                  <img
+                    alt="letter 16"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12139"
+                >
+                  <img
+                    alt="letter 17"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12146"
+                >
+                  <img
+                    alt="letter 0"
+                    src="test-file-stub"
+                  />
+                </td>
+              </tr>
+              <tr
+                className=""
+              >
+                <td
+                  label="Letter"
+                  style={
+                    Object {
+                      "fontWeight": "bold",
+                    }
+                  }
+                >
+                  Hē
+                </td>
+                <td
+                  label="Vat. Syr. 157"
+                >
+                  <img
+                    alt="letter 1"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 161"
+                >
+                  <img
+                    alt="letter 2"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 283"
+                >
+                  <img
+                    alt="letter 3"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 586"
+                >
+                  <img
+                    alt="letter 4"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 252"
+                >
+                  <img
+                    alt="letter 5"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Bor. Syr. 13"
+                >
+                  <img
+                    alt="letter 6"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12144"
+                >
+                  <img
+                    alt="letter 7"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12139"
+                >
+                  <img
+                    alt="letter 8"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12146"
+                >
+                  <img
+                    alt="letter 9"
+                    src="test-file-stub"
+                  />
+                </td>
+              </tr>
+              <tr
+                className=""
+              >
+                <td
+                  label="Letter"
+                  style={
+                    Object {
+                      "fontWeight": "bold",
+                    }
+                  }
+                >
+                  Waw
+                </td>
+                <td
+                  label="Vat. Syr. 157"
+                >
+                  <img
+                    alt="letter 10"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 161"
+                >
+                  <img
+                    alt="letter 11"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 283"
+                >
+                  <img
+                    alt="letter 12"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 586"
+                >
+                  <img
+                    alt="letter 13"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Vat. Syr. 252"
+                >
+                  <img
+                    alt="letter 14"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="Bor. Syr. 13"
+                >
+                  <img
+                    alt="letter 15"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12144"
+                >
+                  <img
+                    alt="letter 16"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12139"
+                >
+                  <img
+                    alt="letter 17"
+                    src="test-file-stub"
+                  />
+                </td>
+                <td
+                  label="BL. Add. 12146"
+                >
+                  <img
+                    alt="letter 0"
+                    src="test-file-stub"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;

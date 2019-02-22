@@ -30,7 +30,7 @@ module.exports = {
         test: /\.(png|jpg|gif)$/i,
         use: [
           {
-            loader: "url-loader",
+            loader: "url-loader"
             /*options: {
               limit: 8192
             }*/
@@ -44,8 +44,8 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "fonts/" // where the fonts will go
-              //publicPath: "../" // DO NOT override the default path
+              outputPath: "fonts/", // where the fonts will go
+              publicPath: "../" // override the default path
             }
           }
         ]

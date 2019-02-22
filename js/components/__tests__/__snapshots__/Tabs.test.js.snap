@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs test Tabs should match snapshot 1`] = `
+<div
+  className="tabs is-toggle is-boxed"
+>
+  <ul />
+</div>
+`;

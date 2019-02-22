@@ -1,0 +1,380 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
+<form
+  className="manuscript-form"
+>
+  <div
+    className="field"
+  >
+    <label
+      className="control"
+    >
+      Select Manuscripts:
+    </label>
+    <div
+      className="control"
+    >
+      <div
+        className="select is-multiple"
+      >
+        <select
+          multiple={true}
+        >
+          <option>
+            Vat. Syr. 157
+          </option>
+          <option>
+            Vat. Syr. 161
+          </option>
+          <option>
+            Vat. Syr. 283
+          </option>
+          <option>
+            Vat. Syr. 586
+          </option>
+          <option>
+            Vat. Syr. 252
+          </option>
+          <option>
+            Bor. Syr. 13
+          </option>
+          <option>
+            BL. Add. 12144
+          </option>
+          <option>
+            BL. Add. 12139
+          </option>
+          <option>
+            BL. Add. 12146
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="control sort-option"
+    >
+      <p>
+        Order manuscripts by:
+      </p>
+      <label
+        className="radio"
+      >
+        Shelfmark:
+        <input
+          defaultChecked={true}
+          name="Shelfmark"
+          type="radio"
+        />
+      </label>
+      <label
+        className="radio"
+      >
+        Date:
+        <input
+          name="Date"
+          type="radio"
+        />
+      </label>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="control"
+    >
+      Select Letters:
+    </label>
+    <div
+      className="buttons are-small"
+    >
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܐ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܒ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܓ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܔ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܕ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܖ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܗ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܘ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܙ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܚ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܛ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܜ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܝ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܞ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܟ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܠ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܡ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܢ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܣ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܤ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܥ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܦ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܧ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܨ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܩ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܪ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܫ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܬ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܭ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܮ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ܯ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ݍ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ݎ
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        ݏ
+      </span>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="control"
+    >
+      Select number of letter examples:
+    </label>
+    <div
+      className="control"
+    >
+      <div
+        className="select"
+      >
+        <select>
+          <option>
+            1
+          </option>
+          <option>
+            2
+          </option>
+          <option>
+            3
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="checkbox"
+    >
+      Show binarized images?
+      <input
+        type="checkbox"
+      />
+    </label>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="control"
+    >
+      Select image size:
+    </label>
+    <div
+      className="control"
+    >
+      <div
+        className="select"
+      >
+        <select>
+          <option>
+            Small
+          </option>
+          <option>
+            Medium
+          </option>
+          <option>
+            Large
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <div
+      className="control"
+    >
+      <button
+        className="button is-link"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
+`;

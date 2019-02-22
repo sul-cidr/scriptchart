@@ -1,10 +1,9 @@
 import React from "react";
 
-import cloneDeep from "lodash/cloneDeep";
+import { cloneDeep } from "lodash";
 
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
-import * as resolve from "table-resolver";
 
 import eastern_alap from "./images/Syriac_Eastern_alap.png";
 import eastern_bet from "./images/Syriac_Eastern_bet.png";
@@ -49,7 +48,18 @@ const sampleLetters = [
 ];
 
 const letters = ["ʾĀlep̄", "Bēṯ", "Gāmal", "Dālaṯ", "Hē", "Waw"];
-const manuscripts = ["A", "B", "C", "D", "E", "F"];
+const manuscripts = [
+  "Vat. Syr. 157",
+  "Vat. Syr. 161",
+  "Vat. Syr. 283",
+  "Vat. Syr. 586",
+  "Vat. Syr. 252",
+  "Bor. Syr. 13",
+  "BL. Add. 12144",
+  "BL. Add. 12139",
+  "BL. Add. 12146"
+];
+const dates = ["NA", "NA", "NA", "NA", "NA", "NA", "1081", "999-1000", "1007"];
 var rows = [];
 let sampleLetterCount = 0;
 
@@ -73,9 +83,17 @@ for (let i = 0; i < manuscripts.length; i++) {
 }
 */
 
+/* Add dates row */
+let row = { id: 0, letter: "Date" };
+
+for (let i = 0; i < dates.length; i++) {
+  row["manuscript" + (i + 1)] = dates[i];
+}
+rows.push(row);
+
 /* Load the sample letter images into the rows array */
 for (let i = 0; i < letters.length; i++) {
-  let row = { id: i + 1, letter: letters[i] };
+  let row = { id: i + 2, letter: letters[i] };
 
   for (let j = 0; j < manuscripts.length; j++) {
     sampleLetterCount++;
@@ -96,47 +114,54 @@ class DragAndDropTable extends React.Component {
     super(props);
 
     this.state = {
-      columns: [
-        {
-          property: "letter",
-          props: {
-            label: "Letter",
-            style: {
-              fontWeight: "bold"
-            }
-          },
-          header: {
-            label: "Scriptchart",
-            props: {
-              onMove: o => this.onMoveColumn(o)
-            }
-          }
-        }
-      ],
-      rows
+      columns: this.getColumns(),
+      rows,
+      query: {} // search query, also used to hide/show columns
     };
-
-    /* Iteratively populate the columns */
-    for (let i = 0; i < manuscripts.length; i++) {
-      let column = {
-        property: "manuscript" + (i + 1),
-        header: {
-          label: "Manuscript " + manuscripts[i],
-          props: {
-            onMove: o => this.onMoveColumn(o)
-          }
-        },
-        props: {
-          label: "Manuscript " + manuscripts[i]
-        }
-      };
-      this.state.columns.push(column);
-    }
 
     this.onRow = this.onRow.bind(this);
     this.onMoveRow = this.onMoveRow.bind(this);
     this.onMoveColumn = this.onMoveColumn.bind(this);
     this.onMoveChildColumn = this.onMoveChildColumn.bind(this);
+  }
+
+  getColumns() {
+    let cols = [
+      {
+        property: "letter",
+        props: {
+          label: "Letter",
+          style: {
+            fontWeight: "bold"
+          }
+        },
+        visible: true,
+        header: {
+          label: "Scriptchart",
+          props: {
+            onMove: o => this.onMoveColumn(o)
+          }
+        }
+      }
+    ];
+    /* Iteratively populate the columns */
+    for (let i = 0; i < manuscripts.length; i++) {
+      let column = {
+        property: "manuscript" + (i + 1),
+        header: {
+          label: manuscripts[i],
+          props: {
+            onMove: o => this.onMoveColumn(o)
+          }
+        },
+        visible: true,
+        props: {
+          label: manuscripts[i]
+        }
+      };
+      cols.push(column);
+    }
+    return cols;
   }
 
   render() {
@@ -149,17 +174,17 @@ class DragAndDropTable extends React.Component {
       }
     };
     const { columns, rows } = this.state;
-    const resolvedColumns = resolve.columnChildren({ columns });
-    const resolvedRows = resolve.resolve({
-      columns: resolvedColumns,
-      method: resolve.nested
-    })(rows);
 
     return (
-      <Table.Provider renderers={renderers} columns={resolvedColumns}>
-        <Table.Header headerRows={resolve.headerRows({ columns })} />
+      <Table.Provider
+        className="pure-table pure-table-striped"
+        style={{ overflowX: "auto" }}
+        renderers={renderers}
+        columns={columns}
+      >
+        <Table.Header />
 
-        <Table.Body rows={resolvedRows} rowKey="id" onRow={this.onRow} />
+        <Table.Body rows={rows} rowKey="id" onRow={this.onRow} />
       </Table.Provider>
     );
   }

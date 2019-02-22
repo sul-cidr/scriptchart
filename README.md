@@ -1,4 +1,4 @@
-# DASH
+# DASH: Digital Analysis of Syriac Handwriting
 
 Based on [the Minimal React Webpack Babel Setup](https://www.robinwieruch.de/minimal-react-webpack-babel-setup/) and our own webpack set up for the [Noh Theater Project](https://github.com/sul-cidr/noh)
 

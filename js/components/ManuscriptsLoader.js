@@ -29,10 +29,10 @@ class ManuscriptsLoader extends React.Component {
         return fallbackManuscripts;
       })
       .then(data => {
-        let ms = data.map(manuscript => {
+        let manuscripts = data.map(manuscript => {
           return <option key={manuscript.id}>{manuscript.shelfmark}</option>;
         });
-        this.setState({ manuscripts: ms });
+        this.setState({ manuscripts: manuscripts });
       });
   }
   render() {

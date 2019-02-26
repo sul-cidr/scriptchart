@@ -3,10 +3,7 @@ import React from "react";
 import ManuscriptsLoader from "./ManuscriptsLoader";
 
 class ManuscriptMenu extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+  
   render() {
     return (
       <div className={"field"}>

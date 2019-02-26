@@ -5,6 +5,8 @@ import { CSSTransitionGroup } from "react-transition-group";
 import ScriptChart from "./ScriptChart";
 import MiradorContainer from "./MiradorContainer";
 
+import ChartControls from "./Chartcontrols";
+
 import Tabs from "./Tabs";
 
 import "./DashTabs.css";
@@ -54,6 +56,7 @@ class DashTabs extends React.Component {
             activeTab={this.state.activeTab}
             changeActiveTab={this.changeActiveTab.bind(this)}
           />
+          <ChartControls />
 
           <CSSTransitionGroup
             className="tabs-content"

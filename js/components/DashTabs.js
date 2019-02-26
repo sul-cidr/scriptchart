@@ -5,7 +5,7 @@ import { CSSTransitionGroup } from "react-transition-group";
 import ScriptChart from "./ScriptChart";
 import MiradorContainer from "./MiradorContainer";
 
-import ChartControls from "./Chartcontrols";
+import ChartAccordion from "./ControlAccordion";
 
 import Tabs from "./Tabs";
 
@@ -51,13 +51,18 @@ class DashTabs extends React.Component {
     return (
       <section className="section">
         <div className="container is-fluid">
-          <Tabs
-            tabList={tabList}
-            activeTab={this.state.activeTab}
-            changeActiveTab={this.changeActiveTab.bind(this)}
-          />
-          <ChartControls />
-
+          <div className="columns">
+            <div className={"column"}>
+              <Tabs
+                tabList={tabList}
+                activeTab={this.state.activeTab}
+                changeActiveTab={this.changeActiveTab.bind(this)}
+              />
+            </div>
+            <div className={"column"}>
+              <ChartAccordion />
+            </div>
+          </div>
           <CSSTransitionGroup
             className="tabs-content"
             component="div"

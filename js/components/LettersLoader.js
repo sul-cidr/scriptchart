@@ -22,7 +22,7 @@ const activeLetters = [
   { id: 19, letter: "Kaph", is_script: true, display: "ܟ" },
   { id: 20, letter: "Kaph (Final)", is_script: true, display: "ܟ (final)" },
   { id: 21, letter: "Lamadh", is_script: true, display: "ܠ" },
-  { d: 23, letter: "Lamadh (Final, closed)", is_script: true, display: "ܠ (closed)" },
+  { id: 23, letter: "Lamadh (Final, closed)", is_script: true, display: "ܠ (closed)" },
   { id: 25, letter: "Lamadh (Final, open)", is_script: true, display: "ܠ (open)" },
   { id: 26, letter: "Mim", is_script: true, display: "ܡ" },
   { id: 27, letter: "Mim (Final)", is_script: true, display: "ܡ (final)" },
@@ -67,8 +67,7 @@ class LettersLoader extends React.Component {
       .then(data => {
         let buttons = data.map(letter => {
           return (
-            <LetterButton
-              key={letter.id}
+            <LetterButton key={letter.id}
               letter={
                 letter.hasOwnProperty("display")
                   ? letter.display

@@ -1,0 +1,23 @@
+webpackHotUpdate("main",{
+
+/***/ "./js/components/ControlAccordion.js":
+/*!*******************************************!*\
+  !*** ./js/components/ControlAccordion.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nSyntaxError: /Users/pmb/Documents/dash/scriptchart/js/components/ControlAccordion.js: Unexpected token, expected \\\",\\\" (6:6)\\n\\n\\u001b[0m \\u001b[90m 4 | \\u001b[39m\\u001b[36mconst\\u001b[39m \\u001b[33mAccordionStyle\\u001b[39m \\u001b[33m=\\u001b[39m {\\u001b[0m\\n\\u001b[0m \\u001b[90m 5 | \\u001b[39m  margin\\u001b[33m:\\u001b[39m \\u001b[32m'0px'\\u001b[39m\\u001b[33m,\\u001b[39m\\u001b[0m\\n\\u001b[0m\\u001b[31m\\u001b[1m>\\u001b[22m\\u001b[39m\\u001b[90m 6 | \\u001b[39m  font\\u001b[33m-\\u001b[39mweight\\u001b[33m:\\u001b[39m \\u001b[32m'12pt'\\u001b[39m\\u001b[33m,\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m   | \\u001b[39m      \\u001b[31m\\u001b[1m^\\u001b[22m\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 7 | \\u001b[39m  border\\u001b[33m:\\u001b[39m \\u001b[32m'5px dotted red'\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 8 | \\u001b[39m}\\u001b[33m;\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 9 | \\u001b[39m\\u001b[0m\\n    at Object.raise (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:3831:17)\\n    at Object.unexpected (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:5143:16)\\n    at Object.expect (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:5135:28)\\n    at Object.parseObj (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:6600:14)\\n    at Object.parseExprAtom (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:6229:21)\\n    at Object.parseExprAtom (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:3552:20)\\n    at Object.parseExprSubscripts (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:5862:23)\\n    at Object.parseMaybeUnary (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:5842:21)\\n    at Object.parseExprOps (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:5729:23)\\n    at Object.parseMaybeConditional (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:5702:23)\\n    at Object.parseMaybeAssign (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:5647:21)\\n    at Object.parseVar (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:7880:26)\\n    at Object.parseVarStatement (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:7714:10)\\n    at Object.parseStatementContent (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:7310:21)\\n    at Object.parseStatement (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:7243:17)\\n    at Object.parseBlockOrModuleBlockBody (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:7810:25)\\n    at Object.parseBlockBody (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:7797:10)\\n    at Object.parseTopLevel (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:7181:10)\\n    at Object.parse (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:8660:17)\\n    at parse (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/parser/lib/index.js:10660:38)\\n    at parser (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\\n    at normalizeFile (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\\n    at runSync (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/core/lib/transformation/index.js:44:43)\\n    at runAsync (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/core/lib/transformation/index.js:35:14)\\n    at process.nextTick (/Users/pmb/Documents/dash/scriptchart/node_modules/@babel/core/lib/transform.js:34:34)\\n    at processTicksAndRejections (internal/process/next_tick.js:74:9)\");\n\n//# sourceURL=webpack:///./js/components/ControlAccordion.js?");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/react-accessible-accordion/dist/fancy-example.css":
+false,
+
+/***/ "./node_modules/react-accessible-accordion/dist/fancy-example.css":
+false,
+
+/***/ "./node_modules/react-accessible-accordion/dist/umd/index.js":
+false
+
+})

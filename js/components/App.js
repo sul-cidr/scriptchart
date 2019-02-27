@@ -22,7 +22,7 @@ class App extends Component {
               <ManuscriptForm />
             </div>
           </div>
-          <div className="column">
+          <div className={"column"}>
             <DashTabs />
           </div>
         </div>

@@ -7,6 +7,11 @@ import LetterButton from "./LetterButton";
  * display strings for the letters (to be used in the form and the chart)
  * and represents the "in-use" subset of the full letters table from the DB.
  */
+
+// XXX To display the letters in the proper web fonts, use the download from
+// this URL, and encode them as follows:
+/*<p style="direction: rtl; font-size: 2em; font-family: SertoJerusalem;" >ܒܟܬܒܗ</p>*/
+/*<p style="direction: rtl; font-size: 2em; font-family: EstrangeloEdessa;" >ܒܟܬܒܗ</p>*/ 
 const activeLetters = [
   { id: 2, letter: "Alaph (Angular)", is_script: true, display: "ܐ (angular)" },
   { id: 4, letter: "Alaph (Round)", is_script: true, display: "ܐ (round)" },

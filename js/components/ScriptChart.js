@@ -88,7 +88,7 @@ class DragAndDropTable extends React.Component {
     this.state = {
       columns: this.getColumns(),
       rows: this.getRows(),
-      query: {} // search query, also used to hide/show columns
+      //query: {} // search query, also used to hide/show columns
     };
 
     this.onRow = this.onRow.bind(this);
@@ -105,12 +105,12 @@ class DragAndDropTable extends React.Component {
   
     let sampleLetterCount = 0;
   
-    let colRemoverRow = { id: 0, letter: "", visible: true };
+    let colRemoverRow = { id: 0, letter: "hide", visible: true };
   
     for (let i = 0; i < manuscripts.length; i++) {
       colRemoverRow["manuscript" + (i + 1)] = <span
                                                 className="remove"
-                                                onClick={() => this.onToggleColumn(i+1)} style={{ cursor: 'pointer' }}
+                                                onClick={() => this.onToggleColumn(i+2)} style={{ cursor: 'pointer' }}
                                               >
                                                 &#10007;
                                               </span>
@@ -158,14 +158,15 @@ class DragAndDropTable extends React.Component {
         },
         visible: true,
         header: {
-          label: "Scriptchart",
+          label: "Letter",
           props: {
             onMove: o => this.onMoveColumn(o)
           }
         }
       }
     ];
-    let rowRemover = {
+    let rowRemoverColumn = {
+      property: "row_remover",
       props: {
         style: {
           width: 50
@@ -185,7 +186,7 @@ class DragAndDropTable extends React.Component {
       },
       visible: true
     }
-    cols.push(rowRemover);
+    cols.push(rowRemoverColumn);
     /* Iteratively populate the columns */
     for (let i = 0; i < manuscripts.length; i++) {
       let column = {
@@ -207,6 +208,7 @@ class DragAndDropTable extends React.Component {
   };
 
   render() {
+    console.log("Rendering scriptchart");
     const renderers = {
       header: {
         cell: dnd.Header
@@ -217,7 +219,7 @@ class DragAndDropTable extends React.Component {
     };
     const { columns, rows } = this.state;
     const cols = columns.filter(column => column.visible);
-    const query = this.state.query;
+    //const query = this.state.query;
 
     return (
       <div>
@@ -290,30 +292,35 @@ class DragAndDropTable extends React.Component {
     const columns = cloneDeep(this.state.columns);
     const column = columns[columnIndex];
 
-    column.visible = !column.visible;
+    console.log("toggling column index " + columnIndex + " label is " + column.props.label);
 
-    if (column.visible === false) {
-      this.props.toggleVector( "hide", "column", columnIndex, column.props.label);
+    if (column.visible === true) {
+      this.props.onHiddenChange( "hide", "column", columnIndex, column.props.label);
     }
 
-    const query = cloneDeep(this.state.query);
+    column.visible = !column.visible;
+
+    /*const query = cloneDeep(this.state.query);
     delete query[column.property];
 
-    this.setState({ columns, query });
+    this.setState({ columns, query });*/
+    this.setState({ columns });
   }
   onToggleRow( id ) {
     const rows = cloneDeep(this.state.rows);
     const idx = findIndex(rows, { id });
     const row = rows[idx];
 
+    if (row.visible === true) {
+      this.props.onHiddenChange("hide", "row", idx, row.letter);
+    }
+
     row.visible = !row.visible;
 
-    if (row.visible === false) {
-      this.props.toggleVector("hide", "row", idx, row.letter);
-    }
-    const query = cloneDeep(this.state.query);
+    /*const query = cloneDeep(this.state.query);
     delete query[row.property];
-    this.setState({ rows, query });
+    this.setState({ rows, query });*/
+    this.setState({ rows });
   }
 }
 

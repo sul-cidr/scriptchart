@@ -20,27 +20,12 @@ class ChartAccordion extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      // manuscript should be keyed by column ID, value is shelfmark
-      // letters should be keyed by row ID, value is letter
-      manuscriptIDs: {},
-      letterIDs: {},
-      hiddenManuscripts : {},
-      hiddenLetters : {}
-    };
+    console.log("Accordion hidden manuscripts prop is " + this.props.hiddenManuscripts);
 
-    this.hiddenManuscripts =  <ul>
-                                <li>Manuscript 1</li>
-                                <li>Manuscript 2</li>
-                              </ul>;
+    // hiddenManuscripts and hiddenLetters should be passed in as props
+    //this.onToggleManuscript = this.onToggleManuscript.bind(this);
+    //this.onToggleLetter = this.onToggleLetter.bind(this);
 
-    this.hiddenLetters = <div className={"buttons are-small"}>
-                             <LetterButton key="1" letter="Letter 1" />
-                             <LetterButton key="2" letter="Letter 2"/>
-                           </div>;
-
-    this.onToggleManuscript = this.onToggleManuscript.bind(this);
-    this.onToggleLetter = this.onToggleLetter.bind(this);
   }
 
   // row = letter, column = manuscript
@@ -64,6 +49,7 @@ class ChartAccordion extends React.Component {
   }
 
   render() {
+    console.log("Accordion rendering, hiddenManuscripts prop is " + this.props.hiddenManuscripts);
     return (
       <Accordion style={AccordionStyle}>
         <AccordionItem>
@@ -81,7 +67,11 @@ class ChartAccordion extends React.Component {
                   </h4>
                 </AccordionItemTitle>
                 <AccordionItemBody>
-                  {this.hiddenManuscripts}
+                  <ul>
+                    { this.props.hiddenManuscripts.map(ms => {
+                        return <li key={ms.id}>{ms.shelfmark}</li>
+                    }) }
+                  </ul>
                 </AccordionItemBody>
               </AccordionItem>
               <AccordionItem>
@@ -91,7 +81,11 @@ class ChartAccordion extends React.Component {
                   </h4>
                 </AccordionItemTitle>
                 <AccordionItemBody>
-                  {this.hiddenLetters}
+                  <div className={"buttons are-small"}>
+                    { this.props.hiddenLetters.map(lt => {
+                        return <LetterButton key={lt.id} letter={lt.letter} />
+                    }) }
+                  </div>
                 </AccordionItemBody>
               </AccordionItem>
             </Accordion>

@@ -70,6 +70,7 @@
     "eslint": "^5.12.1",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "eslint-config-react-app": "^3.0.7",
     "file-loader": "^3.0.1",
     "font-awesome": "^4.7.0",
     "gh-pages": "^2.0.1",

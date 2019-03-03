@@ -74,7 +74,7 @@ class DashTabs extends React.Component {
                 <TabList>
                   <Tab>Scriptchart</Tab>
                   <Tab>Manuscript Viewer</Tab>
-                  <Tab>Hidden Items</Tab>
+                  <Tab disabled={(this.state.hiddenManuscripts.length == 0 && this.state.hiddenLetters.length == 0)}>Hidden Items</Tab>
                 </TabList>
                 <TabPanel>
                   <ScriptChart onHiddenChange={this.onHiddenChange}
@@ -87,8 +87,7 @@ class DashTabs extends React.Component {
                 <TabPanel>
                   <ChartAccordion onHiddenChange={this.onHiddenChange} 
                                   hiddenManuscripts={this.state.hiddenManuscripts}
-                                  hiddenLetters={this.state.hiddenLetters}
-                  />
+                                  hiddenLetters={this.state.hiddenLetters} />
                 </TabPanel>
               </Tabs>
             </div>

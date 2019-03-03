@@ -1,9 +1,8 @@
 import React from "react";
-//import ReactDOM from 'react-dom';
 
 import LetterButton from "./LetterButton";
-
 import SyriacLetter from "./SyriacLetter";
+import ManuscriptItem from "./ManuscriptItem";
 
 import { manuscripts } from "./ScriptChart";
 
@@ -23,21 +22,12 @@ import "../../node_modules/react-accessible-accordion/dist/fancy-example.css";
 class ChartAccordion extends React.Component {
   constructor(props) {
     super(props);
-    this.onManuscriptClicked = this.onManuscriptClicked.bind(this);
-  }
-  onManuscriptClicked(id) {
-    if (this.props.hasOwnProperty("onHiddenChange")) {
-      console.log("manuscript clicked event: " + Object.keys(id));
-      //this.props.onHiddenChange("show", "column", this.props.letterID);
-    }
   }
 
   render() {
-    console.log("Accordion rendering, hiddenManuscripts prop is " + this.props.hiddenManuscripts);
-    console.log("Accordion rendering, hiddenLetters prop is " + this.props.hiddenLetters);
-
     return (
-      <Accordion style={AccordionStyle}>
+      <Accordion style={AccordionStyle} accordion={false}>
+      {/* Use this wrapper section if the accordion is separate from the tabs
         <AccordionItem>
           <AccordionItemTitle>
             <h3 className="u-position-relative">Hidden items
@@ -45,8 +35,8 @@ class ChartAccordion extends React.Component {
             </h3>
           </AccordionItemTitle>
           <AccordionItemBody>
-            <Accordion accordion={false}>
-              <AccordionItem>
+            <Accordion accordion={false}> */}
+              <AccordionItem expanded={(this.props.hiddenManuscripts.length > 0)}>
                 <AccordionItemTitle>
                   <h4 className="u-position-relative">Columns (manuscripts)
                     <div className="accordion__arrow" role="presentation"/>
@@ -56,13 +46,12 @@ class ChartAccordion extends React.Component {
                   <ul>
                     { this.props.hiddenManuscripts.map(msid => {
                         let msIndex = manuscripts.findIndex(m => m['id'] == msid);
-                        let shelfmark = manuscripts[msIndex]['shelfmark'];
-                        return <li key={msIndex} msid={msIndex} onClick={this.onManuscriptClicked} style={{ cursor: 'pointer' }}>{shelfmark}</li>
-                    }, this) }
+                        return <ManuscriptItem key={msid} manuscriptID={msid} onHiddenChange={this.props.onHiddenChange} display={manuscripts[msIndex]['shelfmark']} />
+                    }) }
                   </ul>
                 </AccordionItemBody>
               </AccordionItem>
-              <AccordionItem>
+              <AccordionItem expanded={(this.props.hiddenLetters.length > 0)}>
                 <AccordionItemTitle>
                   <h4 className="u-position-relative">Rows (letters, dates)
                     <div className="accordion__arrow" role="presentation" />
@@ -76,9 +65,9 @@ class ChartAccordion extends React.Component {
                   </div>
                 </AccordionItemBody>
               </AccordionItem>
-            </Accordion>
+            {/*</Accordion>
           </AccordionItemBody>
-        </AccordionItem>
+        </AccordionItem>*/}
       </Accordion>
     );
   }

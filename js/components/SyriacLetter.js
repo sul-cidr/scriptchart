@@ -24,7 +24,7 @@ export const letterInfo = [
     { id: 23, letter: "Lamadh (Final, closed)", is_script: true, display: "ܠ", script: "serto" },
     { id: 25, letter: "Lamadh (Final, open)", is_script: true, display: "ܠ", script: "estrangela" },
     { id: 26, letter: "Mim", is_script: true, display: "ܡܩ", script: "estrangela" },
-    { id: 27, letter: "Mim (Final)", is_script: true, display: "ܡ", script: "estrangela "},
+    { id: 27, letter: "Mim (Final)", is_script: true, display: "ܡ", script: "estrangela"},
     { id: 28, letter: "Nun", is_script: true, display: "ܢܩ", script: "estrangela" },
     { id: 30, letter: "Nun (Final, connected)", is_script: true, display: "ܩܢ", script: "estrangela" },
     { id: 31, letter: "Nun (Final, unconnected)", is_script: true, display: "ܢ", script: "estrangela" },
@@ -46,6 +46,7 @@ export const letterInfo = [
 ];
   // XXX Info from Prof. Penn suggests that Waw should have two letter forms, an open
   // (estrangela) and closed (serto) version, but the DB only has the one above. 
+  // They do look quite similar...
 
 class SyriacLetter extends React.Component {
   constructor(props) {

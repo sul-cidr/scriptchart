@@ -1,32 +1,3 @@
-.tabs-content {
-    padding: 0 5px;
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  .tabs-content div {
-    position: relative;
-  }
-  
-  .tabs ul li a {
-    transition: color 300ms linear, border-color 300ms linear;
-  }
-  
-  .fade-enter {
-    opacity: 0;
-  }
-  
-  .fade-enter-active {
-    opacity: 1;
-    transition: opacity 150ms ease-in;
-    transition-delay: 150ms;
-  }
-  
-  .fade-leave {
-    opacity: 1;
-  }
-  
-  .fade-leave-active {
-    opacity: 0;
-    transition: opacity 150ms ease-in;
-  }
+.no-padding {
+    padding: 0px 0px;
+}

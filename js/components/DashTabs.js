@@ -1,18 +1,15 @@
 import React from "react";
 
-import { CSSTransitionGroup } from "react-transition-group";
-
 import ScriptChart from "./ScriptChart";
 import MiradorContainer from "./MiradorContainer";
 import ChartAccordion from "./ChartAccordion";
 
-import Tabs from "./Tabs";
-
-import "./DashTabs.css";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import "react-tabs/style/react-tabs.css";
 
 import "../../vendor/syriac_fonts.css";
 
-const ActiveTabContent = props => <div>{props.content}</div>;
+import "./DashTabs.css";
 
 class DashTabs extends React.Component {
   constructor(props) {
@@ -20,55 +17,26 @@ class DashTabs extends React.Component {
 
     /* Hidden manuscripts and letters will always be arrays of
      * the database IDs of the manuscripts and letters, or
-     * a special string (e.g., "dates")
+     * a special string (e.g., "Date")
      */
 
     this.state = {
       hiddenManuscripts: [],
       hiddenLetters: [],
-      activeTab: "Scriptchart"
+      tabIndex: 0
     };
 
     this.onHiddenChange = this.onHiddenChange.bind(this);
-
-    /*
-    this.miradorContainer = <MiradorContainer />;
-   
-    this.tabList = [
-      {
-        name: "Scriptchart",
-        icon: "fa fa-table",
-        content: this.scriptchart
-      },
-      {
-        name: "Manuscript Viewer",
-        icon: "fa fa-image",
-        content: this.miradorContainer
-      }
-    ];
-  */
   }
-  /*
-  changeActiveTab(tab) {
-    this.setState({ activeTab: tab });
-  }
-
-  activeTabContent() {
-    const activeIndex = this.tabList.findIndex(tab => {
-      return tab.name === this.state.activeTab;
-    });
-
-    return this.tabList[activeIndex].content;
-  }
-  */
 
   onHiddenChange( showOrHide, rowOrColumn, itemID ) {
-    console.log("Just got a request to " + showOrHide + " " + rowOrColumn + " id " + itemID);
+    //console.log("Just got a request to " + showOrHide + " " + rowOrColumn + " id " + itemID);
 
     if (showOrHide == "show") {
       // Show (aka "unhide") requests only come from the accordion and are sent to the scriptchart
       if (rowOrColumn == "column") {
         let hiddenIndex = this.state.hiddenManuscripts.findIndex(i => i==itemID );
+        console.log("index of column being shown is " + hiddenIndex)
         if (hiddenIndex !== -1) {
           let hiddenCopy = [...this.state.hiddenManuscripts];
           hiddenCopy.splice(hiddenIndex, 1);
@@ -85,7 +53,6 @@ class DashTabs extends React.Component {
     } else if (showOrHide == "hide") {
       // Hide requests only come from the scriptchart and are sent to the accordion
       if (rowOrColumn == "column") {
-        console.log("hidden manuscripts state is " + this.state.hiddenManuscripts + ", length is " + this.state.hiddenManuscripts.length);
         this.setState({
           hiddenManuscripts: [...this.state.hiddenManuscripts, itemID]
         });
@@ -98,42 +65,34 @@ class DashTabs extends React.Component {
   }
 
   render() {
-    console.log("DashTabs rendering");
     return (
-      <section className="section">
+      <section className="section no-padding">
         <div className="container is-fluid">
           <div className="columns">
             <div className={"column"}>
-              {/*<Tabs
-                tabList={this.tabList}
-                activeTab={this.state.activeTab}
-                changeActiveTab={this.changeActiveTab.bind(this)}
-              />*/}
-              <ScriptChart onHiddenChange={this.onHiddenChange}
-                           hiddenManuscripts={this.state.hiddenManuscripts}
-                           hiddenLetters={this.state.hiddenLetters} />
-            </div>
-            <div className={"column"}>
-              <ChartAccordion onHiddenChange={this.onHiddenChange} 
-                              hiddenManuscripts={this.state.hiddenManuscripts}
-                              hiddenLetters={this.state.hiddenLetters}
-              />
+              <Tabs>
+                <TabList>
+                  <Tab>Scriptchart</Tab>
+                  <Tab>Manuscript Viewer</Tab>
+                  <Tab>Hidden Items</Tab>
+                </TabList>
+                <TabPanel>
+                  <ScriptChart onHiddenChange={this.onHiddenChange}
+                               hiddenManuscripts={this.state.hiddenManuscripts}
+                               hiddenLetters={this.state.hiddenLetters} />
+                </TabPanel>
+                <TabPanel>
+                  <MiradorContainer />
+                </TabPanel>
+                <TabPanel>
+                  <ChartAccordion onHiddenChange={this.onHiddenChange} 
+                                  hiddenManuscripts={this.state.hiddenManuscripts}
+                                  hiddenLetters={this.state.hiddenLetters}
+                  />
+                </TabPanel>
+              </Tabs>
             </div>
           </div>
-          {/*
-          <CSSTransitionGroup
-            className="tabs-content"
-            component="div"
-            transitionName="fade"
-            transitionEnterTimeout={0}
-            transitionLeaveTimeout={150}
-          >
-            <ActiveTabContent
-              key={this.state.activeTab}
-              content={this.activeTabContent()}
-            />
-          </CSSTransitionGroup>
-          */}
         </div>
       </section>
     );

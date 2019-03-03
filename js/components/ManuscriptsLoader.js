@@ -1,7 +1,7 @@
 import React from "react";
 
 /* Mock data to use in development when local API backend is not available */
-const fallbackManuscripts = [
+export const fallbackManuscripts = [
   { id: 20, shelfmark: "BL. Add. 12146", date: "1007 " },
   { id: 21, shelfmark: "BL. Or. 8732", date: "770" },
   { id: 22, shelfmark: "BL. Or. 8606", date: "723" },

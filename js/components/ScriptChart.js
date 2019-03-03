@@ -5,6 +5,8 @@ import { cloneDeep, findIndex } from "lodash";
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
 
+import SyriacLetter, { letterInfo } from "./SyriacLetter";
+
 import eastern_alap from "./images/Syriac_Eastern_alap.png";
 import eastern_bet from "./images/Syriac_Eastern_bet.png";
 import eastern_gamal from "./images/Syriac_Eastern_gamal.png";
@@ -47,19 +49,128 @@ const sampleLetters = [
   serta_waw
 ];
 
-const letters = ["ʾĀlep̄", "Bēṯ", "Gāmal", "Dālaṯ", "Hē", "Waw"];
-const manuscripts = [
-  "Vat. Syr. 157",
-  "Vat. Syr. 161",
-  "Vat. Syr. 283",
-  "Vat. Syr. 586",
-  "Vat. Syr. 252",
-  "Bor. Syr. 13",
-  "BL. Add. 12144",
-  "BL. Add. 12139",
-  "BL. Add. 12146"
-];
-const dates = ["NA", "NA", "NA", "NA", "NA", "NA", "1081", "999-1000", "1007"];
+export const manuscripts = [
+{
+  "id": 1,
+  "shelfmark": "Vat. Syr. 110",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "",
+  "resolution": "Color ",
+  "notes": "523/6C",
+  "manifest": null
+},
+{
+  "id": 2,
+  "shelfmark": "Vat. Syr. 163",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "",
+  "resolution": "Black and White",
+  "notes": "540",
+  "manifest": null
+},
+{
+  "id": 3,
+  "shelfmark": "Vat. Syr. 092",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "823",
+  "resolution": "Color",
+  "notes": "",
+  "manifest": null
+},
+{
+  "id": 4,
+  "shelfmark": "Vat. Syr. 586",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "",
+  "resolution": "Color",
+  "notes": "13thC",
+  "manifest": null
+},
+{
+  "id": 5,
+  "shelfmark": "Vat. Syr. 283",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "",
+  "resolution": "",
+  "notes": "",
+  "manifest": null
+},
+{
+  "id": 6,
+  "shelfmark": "Vat. Syr. 161",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "",
+  "resolution": "Black and White",
+  "notes": "9thC",
+  "manifest": null
+},
+{
+  "id": 7,
+  "shelfmark": "Bor. Syr. 13",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "",
+  "resolution": "",
+  "notes": "",
+  "manifest": null
+},
+{
+  "id": 8,
+  "shelfmark": "Vat. Syr. 059",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "",
+  "resolution": "Black and White",
+  "notes": "1266AD",
+  "manifest": null
+},
+{
+  "id": 9,
+  "shelfmark": "Vat. Syr. 112",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "552",
+  "resolution": " ",
+  "notes": "",
+  "manifest": null
+},
+{
+  "id": 10,
+  "shelfmark": "Vat. Syr. 125",
+  "source": null,
+  "page": null,
+  "folio": "",
+  "scribe": "",
+  "date": "",
+  "resolution": "Black and White",
+  "notes": "",
+  "manifest": null
+}
+]
 
 /* PMB These should come in handy when the content is pulled in dynamically
 const schema = {
@@ -81,36 +192,36 @@ for (let i = 0; i < manuscripts.length; i++) {
 }
 */
 
-class DragAndDropTable extends React.Component {
+class ScriptChart extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       columns: this.getColumns(),
       rows: this.getRows(),
-      //query: {} // search query, also used to hide/show columns
     };
 
     this.onRow = this.onRow.bind(this);
     this.onMoveRow = this.onMoveRow.bind(this);
     this.onMoveColumn = this.onMoveColumn.bind(this);
     this.onMoveChildColumn = this.onMoveChildColumn.bind(this);
-    this.onToggleColumn = this.onToggleColumn.bind(this);
-    this.onToggleRow = this.onToggleRow.bind(this);
+    this.onHideColumn = this.onHideColumn.bind(this);
+    this.onHideRow = this.onHideRow.bind(this);
   }
 
   getRows() {
 
+    console.log("Running getRows");
     let rows = [];
   
     let sampleLetterCount = 0;
   
-    let colRemoverRow = { id: 0, letter: "hide", visible: true };
+    let colRemoverRow = { id: 0, letter: "", visible: true };
   
     for (let i = 0; i < manuscripts.length; i++) {
       colRemoverRow["manuscript" + (i + 1)] = <span
                                                 className="remove"
-                                                onClick={() => this.onToggleColumn(i+2)} style={{ cursor: 'pointer' }}
+                                                onClick={() => this.onHideColumn(manuscripts[i]['id'])} style={{ cursor: 'pointer' }}
                                               >
                                                 &#10007;
                                               </span>
@@ -118,16 +229,19 @@ class DragAndDropTable extends React.Component {
     rows.push(colRemoverRow);
   
     /* Add dates row */
-    let datesRow = { id: 1, letter: "Date", visible: true };
+    let datesRow = { id: 1, letter: "Date", ltid: "Date", visible: (!this.props.hiddenLetters.includes("Date")) };
   
-    for (let i = 0; i < dates.length; i++) {
-      datesRow["manuscript" + (i + 1)] = dates[i];
+    for (let i = 0; i < manuscripts.length; i++) {
+      datesRow["manuscript" + (i + 1)] = manuscripts[i]['date'];
     }
     rows.push(datesRow);
   
-    /* Load the sample letter images into the rows array */
-    for (let i = 0; i < letters.length; i++) {
-      let row = { id: i + 3, letter: letters[i], visible: true };
+    /* Load the sample letters into the rows array */
+    for (let i = 0; i < 10; i++) {
+      let row = { id: i + 3, ltid: letterInfo[i]['id'],
+                  letter: <SyriacLetter id={letterInfo[i]['id']} />,
+                  visible: (!this.props.hiddenLetters.includes(letterInfo[i]['id'])) };
+      console.log(row['visible']);
   
       for (let j = 0; j < manuscripts.length; j++) {
         sampleLetterCount++;
@@ -147,18 +261,17 @@ class DragAndDropTable extends React.Component {
 
   getColumns() {
 
+    console.log("Running getColumns");
     let cols = [
       {
         property: "letter",
         props: {
-          label: "Letter",
           style: {
             fontWeight: "bold"
           }
         },
         visible: true,
         header: {
-          label: "Letter",
           props: {
             onMove: o => this.onMoveColumn(o)
           }
@@ -177,7 +290,7 @@ class DragAndDropTable extends React.Component {
           (value, { rowData }) => (rowData.id > 0) ?
             <span
               className="remove"
-              onClick={() => this.onToggleRow(rowData.id)} style={{ cursor: 'pointer' }}
+              onClick={() => this.onHideRow(rowData.ltid)} style={{ cursor: 'pointer' }}
             >
               &#10007;
             </span>
@@ -192,50 +305,21 @@ class DragAndDropTable extends React.Component {
       let column = {
         property: "manuscript" + (i + 1),
         header: {
-          label: manuscripts[i],
+          label: manuscripts[i]['shelfmark'],
           props: {
             onMove: o => this.onMoveColumn(o)
           }
         },
-        visible: true,
+        visible: (!this.props.hiddenManuscripts.includes(manuscripts[i]['id'])),
         props: {
-          label: manuscripts[i]
+          label: manuscripts[i]['shelfmark'],
+          msid: manuscripts[i]['id']
         }
       };
       cols.push(column);
     }
     return cols;
   };
-
-  render() {
-    console.log("Rendering scriptchart");
-    const renderers = {
-      header: {
-        cell: dnd.Header
-      },
-      body: {
-        row: dnd.Row
-      }
-    };
-    const { columns, rows } = this.state;
-    const cols = columns.filter(column => column.visible);
-    //const query = this.state.query;
-
-    return (
-      <div>
-        <Table.Provider
-          className="pure-table pure-table-striped"
-          style={{ overflowX: "auto" }}
-          renderers={renderers}
-          columns={columns.filter(column => column.visible)}
-        >
-          <Table.Header />
-
-          <Table.Body rows={rows.filter(row => row.visible)} rowKey="id" onRow={this.onRow} />
-        </Table.Provider>
-      </div>
-    );
-  }
   onRow(row) {
     return {
       rowId: row.id,
@@ -288,40 +372,41 @@ class DragAndDropTable extends React.Component {
       this.setState({ columns });
     }
   }
-  onToggleColumn( columnIndex ) {
-    const columns = cloneDeep(this.state.columns);
-    const column = columns[columnIndex];
-
-    console.log("toggling column index " + columnIndex + " label is " + column.props.label);
-
-    if (column.visible === true) {
-      this.props.onHiddenChange( "hide", "column", columnIndex, column.props.label);
-    }
-
-    column.visible = !column.visible;
-
-    /*const query = cloneDeep(this.state.query);
-    delete query[column.property];
-
-    this.setState({ columns, query });*/
-    this.setState({ columns });
+  onHideColumn( manuscriptID ) {
+    this.props.onHiddenChange( "hide", "column", manuscriptID);
   }
-  onToggleRow( id ) {
-    const rows = cloneDeep(this.state.rows);
-    const idx = findIndex(rows, { id });
-    const row = rows[idx];
+  onHideRow(letterID) {
+    this.props.onHiddenChange("hide", "row", letterID);
+  }
 
-    if (row.visible === true) {
-      this.props.onHiddenChange("hide", "row", idx, row.letter);
-    }
+  render() {
+    console.log("Scriptchart rendering, hiddenManuscripts prop is " + this.props.hiddenManuscripts);
+    console.log("Scriptchart rendering, hiddenLetters prop is " + this.props.hiddenLetters);
+    const renderers = {
+      header: {
+        cell: dnd.Header
+      },
+      body: {
+        row: dnd.Row
+      }
+    };
+    const { columns, rows } = this.state;
 
-    row.visible = !row.visible;
+    return (
+      <div>
+        <Table.Provider
+          className="pure-table pure-table-striped"
+          style={{ overflowX: "auto" }}
+          renderers={renderers}
+          columns={columns.filter(column => !this.props.hiddenManuscripts.includes(column.props.msid))}
+        >
+          <Table.Header />
 
-    /*const query = cloneDeep(this.state.query);
-    delete query[row.property];
-    this.setState({ rows, query });*/
-    this.setState({ rows });
+          <Table.Body rows={rows.filter(row => !this.props.hiddenLetters.includes(row.ltid))} rowKey="id" onRow={this.onRow} />
+        </Table.Provider>
+      </div>
+    );
   }
 }
 
-export default DragAndDropTable;
+export default ScriptChart;

@@ -3,6 +3,10 @@ import React from "react";
 
 import LetterButton from "./LetterButton";
 
+import SyriacLetter from "./SyriacLetter";
+
+import { manuscripts } from "./ScriptChart";
+
 const AccordionStyle = {
   border: '2px dotted gray',
 };
@@ -19,37 +23,19 @@ import "../../node_modules/react-accessible-accordion/dist/fancy-example.css";
 class ChartAccordion extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log("Accordion hidden manuscripts prop is " + this.props.hiddenManuscripts);
-
-    // hiddenManuscripts and hiddenLetters should be passed in as props
-    //this.onToggleManuscript = this.onToggleManuscript.bind(this);
-    //this.onToggleLetter = this.onToggleLetter.bind(this);
-
+    this.onManuscriptClicked = this.onManuscriptClicked.bind(this);
   }
-
-  // row = letter, column = manuscript
-  // This is called from the parent (DashTabs), indicating that a row or
-  // column has been hidden in the scriptchart
-  onToggleManuscript( id, shelfmark ) {
-    if (id in this.state.manuscriptIDs) {
-      delete this.state.manuscriptIDs[id];
-      this.toggleVector( "hide", "column", id, shelfmark );
-    } else {
-      this.state.manuscriptIDs[id] = shelfmark;
-    }
-  }
-  onToggleLetter( id, letter ) {
-    if (id in this.state.letterIDs) {
-      delete this.state.letterIDs[id];
-      this.toggleVector( "hide", "row", id, letter );
-    } else {
-      this.state.letterIDs[id] = letter;
+  onManuscriptClicked(id) {
+    if (this.props.hasOwnProperty("onHiddenChange")) {
+      console.log("manuscript clicked event: " + Object.keys(id));
+      //this.props.onHiddenChange("show", "column", this.props.letterID);
     }
   }
 
   render() {
     console.log("Accordion rendering, hiddenManuscripts prop is " + this.props.hiddenManuscripts);
+    console.log("Accordion rendering, hiddenLetters prop is " + this.props.hiddenLetters);
+
     return (
       <Accordion style={AccordionStyle}>
         <AccordionItem>
@@ -62,28 +48,30 @@ class ChartAccordion extends React.Component {
             <Accordion accordion={false}>
               <AccordionItem>
                 <AccordionItemTitle>
-                  <h4 className="u-position-relative">Manuscripts
+                  <h4 className="u-position-relative">Columns (manuscripts)
                     <div className="accordion__arrow" role="presentation"/>
                   </h4>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                   <ul>
-                    { this.props.hiddenManuscripts.map(ms => {
-                        return <li key={ms.id}>{ms.shelfmark}</li>
-                    }) }
+                    { this.props.hiddenManuscripts.map(msid => {
+                        let msIndex = manuscripts.findIndex(m => m['id'] == msid);
+                        let shelfmark = manuscripts[msIndex]['shelfmark'];
+                        return <li key={msIndex} msid={msIndex} onClick={this.onManuscriptClicked} style={{ cursor: 'pointer' }}>{shelfmark}</li>
+                    }, this) }
                   </ul>
                 </AccordionItemBody>
               </AccordionItem>
               <AccordionItem>
                 <AccordionItemTitle>
-                  <h4 className="u-position-relative">Letters
+                  <h4 className="u-position-relative">Rows (letters, dates)
                     <div className="accordion__arrow" role="presentation" />
                   </h4>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                   <div className={"buttons are-small"}>
-                    { this.props.hiddenLetters.map(lt => {
-                        return <LetterButton key={lt.id} letter={lt.letter} />
+                    { this.props.hiddenLetters.map(ltid => {
+                        return <LetterButton key={ltid} letterID={ltid} onHiddenChange={this.props.onHiddenChange} letter={<SyriacLetter id={ltid} />} />
                     }) }
                   </div>
                 </AccordionItemBody>

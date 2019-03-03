@@ -4,12 +4,13 @@ import { CSSTransitionGroup } from "react-transition-group";
 
 import ScriptChart from "./ScriptChart";
 import MiradorContainer from "./MiradorContainer";
-
 import ChartAccordion from "./ChartAccordion";
 
 import Tabs from "./Tabs";
 
 import "./DashTabs.css";
+
+import "../../vendor/syriac_fonts.css";
 
 const ActiveTabContent = props => <div>{props.content}</div>;
 
@@ -17,17 +18,22 @@ class DashTabs extends React.Component {
   constructor(props) {
     super(props);
 
+    /* Hidden manuscripts and letters will always be arrays of
+     * the database IDs of the manuscripts and letters, or
+     * a special string (e.g., "dates")
+     */
+
     this.state = {
-      activeTab: "Scriptchart",
       hiddenManuscripts: [],
       hiddenLetters: [],
+      activeTab: "Scriptchart"
     };
 
     this.onHiddenChange = this.onHiddenChange.bind(this);
 
-    this.scriptchart = <ScriptChart onHiddenChange={this.onHiddenChange} />;
+    /*
     this.miradorContainer = <MiradorContainer />;
-
+   
     this.tabList = [
       {
         name: "Scriptchart",
@@ -40,39 +46,9 @@ class DashTabs extends React.Component {
         content: this.miradorContainer
       }
     ];
-
+  */
   }
-
-  onHiddenChange( showOrHide, rowOrColumn, id, representation ) {
-    console.log("Just got a request to " + showOrHide + " " + rowOrColumn + " " + id + " " + representation);
-
-    if (showOrHide == "show") {
-      // Show (aka "unhide") requests only come from the accordion and are sent to the scriptchart
-      if (rowOrColumn == "column") {
-        this.scriptchart.onToggleColumn(id);
-      } else if (rowOrColumn == "row") {
-        this.scriptchart.onToggleRow(id);
-      }
-    } else if (showOrHide == "hide") {
-      // Hide requests only come from the scriptchart and are sent to the accordion
-      if (rowOrColumn == "column") {
-        console.log("hidden manuscripts state is " + this.state.hiddenManuscripts + ", length is " + this.state.hiddenManuscripts.length);
-        this.setState({
-          hiddenManuscripts: [...this.state.hiddenManuscripts, { "id": id, "shelfmark": representation }]
-        });
-        
-        //this.setState( { hiddenManuscripts: this.state.hiddenManuscripts.push({ "id": id, "shelfmark": representation }) });
-        console.log("hidden manuscripts state is " + this.state.hiddenManuscripts + ", length is " + this.state.hiddenManuscripts.length);
-        //this.setState( { hiddenManuscripts: { id: id, shelfmark: representation } } );
-
-        //this.chartAccordion.setState({ newColumn: id });
-        //this.chartAccordion.onToggleManuscript( id, representation);
-      } else if (rowOrColumn == "row") {
-        //this.chartAccordion.onToggleLetter( id, representation);
-      }
-    }
-  }
-
+  /*
   changeActiveTab(tab) {
     this.setState({ activeTab: tab });
   }
@@ -84,6 +60,42 @@ class DashTabs extends React.Component {
 
     return this.tabList[activeIndex].content;
   }
+  */
+
+  onHiddenChange( showOrHide, rowOrColumn, itemID ) {
+    console.log("Just got a request to " + showOrHide + " " + rowOrColumn + " id " + itemID);
+
+    if (showOrHide == "show") {
+      // Show (aka "unhide") requests only come from the accordion and are sent to the scriptchart
+      if (rowOrColumn == "column") {
+        let hiddenIndex = this.state.hiddenManuscripts.findIndex(i => i==itemID );
+        if (hiddenIndex !== -1) {
+          let hiddenCopy = [...this.state.hiddenManuscripts];
+          hiddenCopy.splice(hiddenIndex, 1);
+          this.setState({hiddenManuscripts: hiddenCopy});
+        }
+      } else if (rowOrColumn == "row") {
+        let hiddenIndex = this.state.hiddenLetters.findIndex(i => i==itemID );
+        if (hiddenIndex !== -1) {
+          let hiddenCopy = [...this.state.hiddenLetters];
+          hiddenCopy.splice(hiddenIndex, 1);
+          this.setState({hiddenLetters: hiddenCopy});
+        }
+      }
+    } else if (showOrHide == "hide") {
+      // Hide requests only come from the scriptchart and are sent to the accordion
+      if (rowOrColumn == "column") {
+        console.log("hidden manuscripts state is " + this.state.hiddenManuscripts + ", length is " + this.state.hiddenManuscripts.length);
+        this.setState({
+          hiddenManuscripts: [...this.state.hiddenManuscripts, itemID]
+        });
+      } else if (rowOrColumn == "row") {
+        this.setState({
+          hiddenLetters: [...this.state.hiddenLetters, itemID ]
+        });
+      }
+    }
+  }
 
   render() {
     console.log("DashTabs rendering");
@@ -92,11 +104,14 @@ class DashTabs extends React.Component {
         <div className="container is-fluid">
           <div className="columns">
             <div className={"column"}>
-              <Tabs
+              {/*<Tabs
                 tabList={this.tabList}
                 activeTab={this.state.activeTab}
                 changeActiveTab={this.changeActiveTab.bind(this)}
-              />
+              />*/}
+              <ScriptChart onHiddenChange={this.onHiddenChange}
+                           hiddenManuscripts={this.state.hiddenManuscripts}
+                           hiddenLetters={this.state.hiddenLetters} />
             </div>
             <div className={"column"}>
               <ChartAccordion onHiddenChange={this.onHiddenChange} 
@@ -105,6 +120,7 @@ class DashTabs extends React.Component {
               />
             </div>
           </div>
+          {/*
           <CSSTransitionGroup
             className="tabs-content"
             component="div"
@@ -117,6 +133,7 @@ class DashTabs extends React.Component {
               content={this.activeTabContent()}
             />
           </CSSTransitionGroup>
+          */}
         </div>
       </section>
     );

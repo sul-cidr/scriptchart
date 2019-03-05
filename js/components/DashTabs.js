@@ -32,7 +32,7 @@ class DashTabs extends React.Component {
   }
 
   onManifestSelected( selectedURL ) {
-    this.setState({ manifestURL: selectedURL });
+    this.setState({ manifestURL: selectedURL, tabIndex: 1 });
   }
 
   onHiddenChange( showOrHide, rowOrColumn, itemID ) {
@@ -76,7 +76,7 @@ class DashTabs extends React.Component {
         <div className="container is-fluid">
           <div className="columns">
             <div className={"column"}>
-              <Tabs>
+              <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
                 <TabList>
                   <Tab>Scriptchart</Tab>
                   <Tab>Manuscript Viewer</Tab>

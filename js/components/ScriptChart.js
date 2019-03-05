@@ -1,9 +1,11 @@
 import React from "react";
 
-import { cloneDeep, findIndex } from "lodash";
+import { cloneDeep } from "lodash";
 
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
+
+import ManuscriptHeader from "./ManuscriptHeader";
 
 import SyriacLetter, { letterInfo } from "./SyriacLetter";
 
@@ -27,6 +29,9 @@ import serta_he from "./images/Syriac_Serta_he.png";
 import serta_waw from "./images/Syriac_Serta_waw.png";
 
 import "./ScriptChart.css";
+
+// For development only; eventually URLs will be read from DB REST API
+const defaultManifest = "https://purl.stanford.edu/zv668dm4974/iiif/manifest";
 
 const sampleLetters = [
   eastern_alap,
@@ -207,6 +212,12 @@ class ScriptChart extends React.Component {
     this.onMoveChildColumn = this.onMoveChildColumn.bind(this);
     this.onHideColumn = this.onHideColumn.bind(this);
     this.onHideRow = this.onHideRow.bind(this);
+    this.viewManifest = this.viewManifest.bind(this);
+  }
+
+  viewManifest(manifestURL, manifestActivator) {
+    console.log("viewManifest called with URL " + manifestURL);
+    manifestActivator(manifestURL);
   }
 
   getRows() {
@@ -305,27 +316,31 @@ class ScriptChart extends React.Component {
       let column = {
         property: "manuscript" + (i + 1),
         header: {
-          label: manuscripts[i]['shelfmark'],
+          label: <ManuscriptHeader shelfmark={manuscripts[i]['shelfmark']}
+                                   manifestURL={defaultManifest}
+                                   displayManifest={this.viewManifest}
+                                   onManifestSelected={this.props.onManifestSelected} />,
           props: {
             onMove: o => this.onMoveColumn(o)
           }
         },
         visible: (!this.props.hiddenManuscripts.includes(manuscripts[i]['id'])),
         props: {
-          label: manuscripts[i]['shelfmark'],
           msid: manuscripts[i]['id']
         }
       };
       cols.push(column);
     }
     return cols;
-  };
+  }
+
   onRow(row) {
     return {
       rowId: row.id,
       onMove: this.onMoveRow
     };
   }
+
   onMoveRow({ sourceRowId, targetRowId }) {
     const rows = dnd.moveRows({
       sourceRowId,
@@ -336,6 +351,7 @@ class ScriptChart extends React.Component {
       this.setState({ rows });
     }
   }
+
   onMoveColumn(labels) {
     const movedColumns = dnd.moveLabels(this.state.columns, labels);
 
@@ -360,6 +376,7 @@ class ScriptChart extends React.Component {
       });
     }
   }
+
   onMoveChildColumn(labels) {
     const movedChildren = dnd.moveChildrenLabels(this.state.columns, labels);
 
@@ -372,9 +389,11 @@ class ScriptChart extends React.Component {
       this.setState({ columns });
     }
   }
+
   onHideColumn( manuscriptID ) {
     this.props.onHiddenChange( "hide", "column", manuscriptID);
   }
+
   onHideRow(letterID) {
     this.props.onHiddenChange("hide", "row", letterID);
   }

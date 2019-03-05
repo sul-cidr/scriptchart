@@ -1,7 +1,7 @@
 import React from "react";
 
 import ScriptChart from "./ScriptChart";
-import MiradorContainer from "./MiradorContainer";
+import MiradorViewer from "./MiradorViewer";
 import ChartAccordion from "./ChartAccordion";
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -23,10 +23,16 @@ class DashTabs extends React.Component {
     this.state = {
       hiddenManuscripts: [],
       hiddenLetters: [],
+      manifestURL: null,
       tabIndex: 0
     };
 
     this.onHiddenChange = this.onHiddenChange.bind(this);
+    this.onManifestSelected = this.onManifestSelected.bind(this);
+  }
+
+  onManifestSelected( selectedURL ) {
+    this.setState({ manifestURL: selectedURL });
   }
 
   onHiddenChange( showOrHide, rowOrColumn, itemID ) {
@@ -79,10 +85,11 @@ class DashTabs extends React.Component {
                 <TabPanel>
                   <ScriptChart onHiddenChange={this.onHiddenChange}
                                hiddenManuscripts={this.state.hiddenManuscripts}
-                               hiddenLetters={this.state.hiddenLetters} />
+                               hiddenLetters={this.state.hiddenLetters} 
+                               onManifestSelected={this.onManifestSelected} />
                 </TabPanel>
                 <TabPanel>
-                  <MiradorContainer />
+                  <MiradorViewer manifestURL={this.state.manifestURL} />
                 </TabPanel>
                 <TabPanel>
                   <ChartAccordion onHiddenChange={this.onHiddenChange} 

@@ -10,6 +10,10 @@ export default class MiradorViewer extends Component {
       buildPath: "mirador/",
       data: [
         {
+          manifestUri: this.props.manifestURL,
+          location: "Stanford University"
+        },
+        {
           manifestUri: "https://iiif.lib.harvard.edu/manifests/drs:42715137",
           location: "Harvard Library"
         },
@@ -24,10 +28,6 @@ export default class MiradorViewer extends Component {
           location: "Biblioteca Apostolica Vaticana"
         },
         {
-          manifestUri: "https://purl.stanford.edu/zv668dm4974/iiif/manifest",
-          location: "Stanford University"
-        },
-        {
           manifestUri:
             "https://gallica.bnf.fr/iiif/ark:/12148/btv1b531151912/manifest.json",
           location: "Bibliotheque Nationale"
@@ -40,7 +40,7 @@ export default class MiradorViewer extends Component {
       ],
       windowObjects: [
         {
-          loadedManifest: "https://iiif.lib.harvard.edu/manifests/drs:42715137",
+          loadedManifest: this.props.manifestURL,
           viewType: "ImageView"
         }
       ],

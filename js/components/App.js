@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 
 import "bulma/css/bulma.min.css";
-import "font-awesome/css/font-awesome.min.css";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faBookOpen);
 
 import DashTabs from "./DashTabs";
 

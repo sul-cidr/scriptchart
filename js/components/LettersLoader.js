@@ -53,7 +53,7 @@ class LettersLoader extends React.Component {
     this.state = { letterButtons: [] };
   }
   componentDidMount() {
-    fetch("http://localhost:8000/api/letters?format=json")
+    fetch("https://db.syriac.reclaim.hosting/api/letters?format=json")
       .then(response => {
         return response.json();
       })

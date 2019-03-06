@@ -17,7 +17,7 @@ class ManuscriptsLoader extends React.Component {
     this.state = { manuscripts: [] };
   }
   componentDidMount() {
-    fetch("http://localhost:8000/api/manuscripts?format=json")
+    fetch("https://db.syriac.reclaim.hosting/api/manuscripts?format=json")
       .then(response => {
         return response.json();
       })

@@ -3,7 +3,6 @@ import React from "react";
 import DragAndDropTable from "./DragAndDropTable";
 
 class ScriptChart extends React.Component {
-
   render() {
     return (
       <div>
@@ -11,7 +10,6 @@ class ScriptChart extends React.Component {
       </div>
     );
   }
-
 }
 
 export default ScriptChart;

@@ -48,7 +48,9 @@ export default class MiradorViewer extends Component {
         name: "Local Storage",
         module: "LocalStorageEndpoint"
       },
-      windowSettings: {
+      openManifestPage: false,
+      sidePanel: false
+      /*windowSettings: {
         canvasControls: {
           imageManipulation: {
             manipulationLayer: true,
@@ -57,7 +59,7 @@ export default class MiradorViewer extends Component {
             }
           }
         }
-      }
+      }*/
     });
   }
 

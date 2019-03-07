@@ -248,7 +248,7 @@ class ScriptChart extends React.Component {
     rows.push(datesRow);
   
     /* Load the sample letters into the rows array */
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 14; i++) {
       let row = { id: i + 3, ltid: letterInfo[i]['id'],
                   letter: <SyriacLetter id={letterInfo[i]['id']} />,
                   visible: (!this.props.hiddenLetters.includes(letterInfo[i]['id'])) };

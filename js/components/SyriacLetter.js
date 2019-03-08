@@ -49,7 +49,7 @@ class SyriacLetter extends React.Component {
     if ( this.letter !== undefined) {
       this.display = this.letter.display;
       this.script = this.letter.script;
-      // Fonts available from https://sedra.bethmardutho.org/about/fonts
+      // Fonts provided by https://sedra.bethmardutho.org/about/fonts
       if (this.script == "serto") {
         this.font = "SertoJerusalem";
       } else if (this.script == "estrangela") {

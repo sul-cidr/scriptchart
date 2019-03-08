@@ -10,6 +10,7 @@ import "react-tabs/style/react-tabs.css";
 import "../../vendor/syriac_fonts.css";
 
 import "./DashTabs.css";
+import { blockParams } from "handlebars";
 
 class DashTabs extends React.Component {
   constructor(props) {
@@ -73,10 +74,10 @@ class DashTabs extends React.Component {
   render() {
     return (
       <section className="section no-padding">
-        <div className="container is-fluid">
+        <div className="container">
           <div className="columns">
-            <div className={"column"}>
-              <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
+            <div className="column">
+              <Tabs className="scrollTabs" selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
                 <TabList>
                   <Tab>Scriptchart</Tab>
                   <Tab>Manuscript Viewer</Tab>

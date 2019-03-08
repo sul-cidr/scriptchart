@@ -2,6 +2,8 @@ import React from "react";
 
 import { cloneDeep } from "lodash";
 
+import { manuscripts } from "./ManuscriptsLoader";
+
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
 
@@ -53,129 +55,6 @@ const sampleLetters = [
   serta_he,
   serta_waw
 ];
-
-export const manuscripts = [
-{
-  "id": 1,
-  "shelfmark": "Vat. Syr. 110",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "",
-  "resolution": "Color ",
-  "notes": "523/6C",
-  "manifest": null
-},
-{
-  "id": 2,
-  "shelfmark": "Vat. Syr. 163",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "",
-  "resolution": "Black and White",
-  "notes": "540",
-  "manifest": null
-},
-{
-  "id": 3,
-  "shelfmark": "Vat. Syr. 092",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "823",
-  "resolution": "Color",
-  "notes": "",
-  "manifest": null
-},
-{
-  "id": 4,
-  "shelfmark": "Vat. Syr. 586",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "",
-  "resolution": "Color",
-  "notes": "13thC",
-  "manifest": null
-},
-{
-  "id": 5,
-  "shelfmark": "Vat. Syr. 283",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "",
-  "resolution": "",
-  "notes": "",
-  "manifest": null
-},
-{
-  "id": 6,
-  "shelfmark": "Vat. Syr. 161",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "",
-  "resolution": "Black and White",
-  "notes": "9thC",
-  "manifest": null
-},
-{
-  "id": 7,
-  "shelfmark": "Bor. Syr. 13",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "",
-  "resolution": "",
-  "notes": "",
-  "manifest": null
-},
-{
-  "id": 8,
-  "shelfmark": "Vat. Syr. 059",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "",
-  "resolution": "Black and White",
-  "notes": "1266AD",
-  "manifest": null
-},
-{
-  "id": 9,
-  "shelfmark": "Vat. Syr. 112",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "552",
-  "resolution": " ",
-  "notes": "",
-  "manifest": null
-},
-{
-  "id": 10,
-  "shelfmark": "Vat. Syr. 125",
-  "source": null,
-  "page": null,
-  "folio": "",
-  "scribe": "",
-  "date": "",
-  "resolution": "Black and White",
-  "notes": "",
-  "manifest": null
-}
-]
 
 /* PMB These should come in handy when the content is pulled in dynamically
 const schema = {
@@ -236,7 +115,7 @@ class ScriptChart extends React.Component {
     for (let i = 0; i < manuscripts.length; i++) {
       colControls["manuscript" + (i + 1)] = <ColumnControls
                                                 msid={manuscripts[i]['id']}
-                                                manifestURL={defaultManifest}
+                                                manifestURL={manuscripts[i]['manifest']}
                                                 displayManifest={this.viewManifest}
                                                 onHideColumn={this.onHideColumn}
                                                 onHiddenChange={this.props.onHiddenChange}
@@ -403,8 +282,6 @@ class ScriptChart extends React.Component {
   }
 
   render() {
-    console.log("Scriptchart rendering, hiddenManuscripts prop is " + this.props.hiddenManuscripts);
-    console.log("Scriptchart rendering, hiddenLetters prop is " + this.props.hiddenLetters);
     const renderers = {
       header: {
         cell: dnd.Header

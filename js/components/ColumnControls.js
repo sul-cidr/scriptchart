@@ -19,8 +19,12 @@ class ColumnControls extends React.Component {
     }
   
     render() {
-      return <p><span style={{float: "left"}} className="remove" onClick={this.hideColumn} style={{ cursor: 'pointer' }}>&#10007;</span>
-      <span style={{float: "right"}}><FontAwesomeIcon color="#0000FF" icon="book-open" onClick={this.showManifest} style={{ cursor: 'pointer' }} /></span></p>;
+      let manifestSpan = "";
+      if (this.props.manifestURL != null) {
+        manifestSpan = <span style={{float: "right"}}><FontAwesomeIcon color="#0000FF" icon="book-open" onClick={this.showManifest} style={{ cursor: 'pointer' }} /></span>;
+      }
+      return (<p><span style={{float: "left"}} className="remove" onClick={this.hideColumn} style={{ cursor: 'pointer' }}>&#10007;</span>
+      {manifestSpan}</p>);
     }
   }
 

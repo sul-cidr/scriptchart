@@ -4,7 +4,7 @@ import LetterButton from "./LetterButton";
 import SyriacLetter from "./SyriacLetter";
 import ManuscriptItem from "./ManuscriptItem";
 
-import { manuscripts } from "./ScriptChart";
+import { manuscripts } from "./ManuscriptsLoader";
 
 const AccordionStyle = {
   border: '2px dotted gray',

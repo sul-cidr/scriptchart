@@ -61,11 +61,9 @@ class SyriacLetter extends React.Component {
       // "spacer" letters to make them display properly. Note that
       // positions are read from right to left.
       if (this.letter.hasOwnProperty("trailing_letter")) {
-        console.log("Trailing letter of " + this.display + " is " + this.letter.trailing_letter);
         this.trailing = <span style={{ color: 'transparent' }}>{this.letter.trailing_letter}</span>;
       }
       if (this.letter.hasOwnProperty("leading_letter")) {
-        console.log("Leading letter of " + this.display + " is " + this.letter.leading_letter);
         this.leading = <span style={{ color: 'transparent' }}>{this.letter.leading_letter}</span>;
       }
     } else {

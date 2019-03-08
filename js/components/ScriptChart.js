@@ -5,7 +5,7 @@ import { cloneDeep } from "lodash";
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
 
-import ManuscriptHeader from "./ManuscriptHeader";
+import ColumnControls from "./ColumnControls";
 
 import SyriacLetter, { letterInfo } from "./SyriacLetter";
 
@@ -220,6 +220,10 @@ class ScriptChart extends React.Component {
     manifestActivator(manifestURL);
   }
 
+  onHideColumn( manuscriptID, columnHider ) {
+    columnHider(manuscriptID);
+  }
+
   getRows() {
 
     console.log("Running getRows");
@@ -227,17 +231,19 @@ class ScriptChart extends React.Component {
   
     let sampleLetterCount = 0;
   
-    let colRemoverRow = { id: 0, letter: "", visible: true };
+    let colControls = { id: 0, letter: "", visible: true };
   
     for (let i = 0; i < manuscripts.length; i++) {
-      colRemoverRow["manuscript" + (i + 1)] = <span
-                                                className="remove"
-                                                onClick={() => this.onHideColumn(manuscripts[i]['id'])} style={{ cursor: 'pointer' }}
-                                              >
-                                                &#10007;
-                                              </span>
+      colControls["manuscript" + (i + 1)] = <ColumnControls
+                                                msid={manuscripts[i]['id']}
+                                                manifestURL={defaultManifest}
+                                                displayManifest={this.viewManifest}
+                                                onHideColumn={this.onHideColumn}
+                                                onHiddenChange={this.props.onHiddenChange}
+                                                onManifestSelected={this.props.onManifestSelected}
+                                            />
     }
-    rows.push(colRemoverRow);
+    rows.push(colControls);
   
     /* Add dates row */
     let datesRow = { id: 1, letter: "Date", ltid: "Date", visible: (!this.props.hiddenLetters.includes("Date")) };
@@ -277,16 +283,12 @@ class ScriptChart extends React.Component {
       {
         property: "letter",
         props: {
+          label: "Letter",
           style: {
             fontWeight: "bold"
           }
         },
-        visible: true,
-        header: {
-          props: {
-            onMove: o => this.onMoveColumn(o)
-          }
-        }
+        visible: true
       }
     ];
     let rowRemoverColumn = {
@@ -316,11 +318,9 @@ class ScriptChart extends React.Component {
       let column = {
         property: "manuscript" + (i + 1),
         header: {
-          label: <ManuscriptHeader shelfmark={manuscripts[i]['shelfmark']}
-                                   manifestURL={defaultManifest}
-                                   displayManifest={this.viewManifest}
-                                   onManifestSelected={this.props.onManifestSelected} />,
+          label: manuscripts[i]['shelfmark'],
           props: {
+            label: manuscripts[i]['shelfmark'],
             onMove: o => this.onMoveColumn(o)
           }
         },
@@ -353,9 +353,15 @@ class ScriptChart extends React.Component {
   }
 
   onMoveColumn(labels) {
+
+    console.log("onMoveColumn labels " + labels.sourceLabel + " " + labels);
+
     const movedColumns = dnd.moveLabels(this.state.columns, labels);
 
+    console.log("movedColumns: " + movedColumns);
+
     if (movedColumns) {
+      console.log("Column move detected");
       // Retain widths to avoid flashing while drag and dropping.
       const source = movedColumns.source;
       const target = movedColumns.target;
@@ -380,6 +386,8 @@ class ScriptChart extends React.Component {
   onMoveChildColumn(labels) {
     const movedChildren = dnd.moveChildrenLabels(this.state.columns, labels);
 
+    console.log("Column child move detected");
+
     if (movedChildren) {
       const columns = cloneDeep(this.state.columns);
 
@@ -388,10 +396,6 @@ class ScriptChart extends React.Component {
       // Here we assume children have the same width.
       this.setState({ columns });
     }
-  }
-
-  onHideColumn( manuscriptID ) {
-    this.props.onHiddenChange( "hide", "column", manuscriptID);
   }
 
   onHideRow(letterID) {

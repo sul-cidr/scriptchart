@@ -35,6 +35,9 @@
     }
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "bulma": "^0.7.2",
     "copy-webpack-plugin": "^4.6.0",
     "html-webpack-include-assets-plugin": "^1.0.6",
@@ -69,8 +72,8 @@
     "enzyme-to-json": "^3.3.5",
     "eslint": "^5.12.1",
     "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-prettier": "^3.0.1",
     "eslint-config-react-app": "^3.0.7",
+    "eslint-plugin-prettier": "^3.0.1",
     "file-loader": "^3.0.1",
     "gh-pages": "^2.0.1",
     "image-webpack-loader": "^4.6.0",

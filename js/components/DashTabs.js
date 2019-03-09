@@ -10,7 +10,6 @@ import "react-tabs/style/react-tabs.css";
 import "../../vendor/syriac_fonts.css";
 
 import "./DashTabs.css";
-import { blockParams } from "handlebars";
 
 class DashTabs extends React.Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React from "react";
 
 import LetterButton from "./LetterButton";
 
-import SyriacLetter, { letterInfo } from "./SyriacLetter";
+import SyriacLetter, { letters } from "./SyriacLetter";
 
 class LettersLoader extends React.Component {
   constructor(props) {
@@ -21,14 +21,14 @@ class LettersLoader extends React.Component {
         //return response.json();
         // XXX Probably need to update the DB with the data from
         // letterInfo, or just not use the DB as source letter data
-        return letterInfo;
+        return letters;
       })
       /* In production, it's likely preferable for the menu to display
        * a blank list when the backend API is down, rather than
        * displaying data that may not reflect the database state.
        */
       .catch(function(error) {
-        return letterInfo;
+        return letters;
       })
       .then(data => {
         let buttons = data.map(lt => {

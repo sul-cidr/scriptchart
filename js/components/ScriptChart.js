@@ -58,26 +58,6 @@ const sampleLetters = [
   serta_waw
 ];
 
-/* PMB These should come in handy when the content is pulled in dynamically
-const schema = {
-  type: "object",
-  properties: {
-    id: {
-      type: "integer"
-    },
-    letter: {
-      type: "string"
-    },
-    required: ["id", "letter"]
-  }
-};
-for (let i = 0; i < manuscripts.length; i++) {
-  let colId = "manuscript" + (i + 1);
-  schema["properties"][colId] = { type: "string" };
-  schema["required"].push(colId);
-}
-*/
-
 class ScriptChart extends React.Component {
   constructor(props) {
     super(props);
@@ -91,6 +71,8 @@ class ScriptChart extends React.Component {
     console.log("TABLE LETTERS: " + Object.keys(this.props.tableData['3']));
     console.log("TABLE PAGES: " + Object.keys(this.props.tableData['3']['2']));
 
+    this.getRows = this.getRows.bind(this);
+    this.getColumns = this.getColumns.bind(this);
     this.onRow = this.onRow.bind(this);
     this.onMoveRow = this.onMoveRow.bind(this);
     this.onMoveColumn = this.onMoveColumn.bind(this);
@@ -120,16 +102,19 @@ class ScriptChart extends React.Component {
   getRows() {
 
     console.log("Running getRows");
+    if (this.state && (this.state.rows.length > 0)) {
+      // Need to figure out how to update these in place
+      return this.state.rows;
+    }
+
     let rows = [];
-  
-    let sampleLetterCount = 0;
   
     let colControls = { id: 0, letter: "", visible: true };
 
     /* Add dates row */
     let datesRow = { id: 1, letter: "Date", ltid: "Date", visible: (!this.props.hiddenLetters.includes("Date")) };
-  
-    for (let i=0, len=manuscripts.length; i < len; i++) {
+
+    for (let i=0, len=manuscripts.length; i<len; i++) {
       colControls["manuscript" + (i + 1)] = <ColumnControls
                                                 msid={manuscripts[i]['id']}
                                                 manifestURL={manuscripts[i]['manifest']}
@@ -180,25 +165,36 @@ class ScriptChart extends React.Component {
   getColumns() {
 
     console.log("Running getColumns");
+    if (this.state && (this.state.columns.length > 0)) {
+      // Need to figure out how to update these in place
+      return this.state.columns;
+    }
+
     let cols = [
       {
         property: "letter",
-        props: {
-          label: "Letter",
-          style: {
-            fontWeight: "bold",
-            width: 80
+        header: {
+          label: "Date",
+          props: {
+            label: "Date"
           }
         },
-        visible: true
+        visible: true,
+        props: {
+          style: { width: 80 }
+        }
       }
     ];
     let rowRemoverColumn = {
       property: "row_remover",
-      props: {
-        style: {
-          width: 45
+      header: {
+        label: "X",
+        props: {
+          label: "X"
         }
+      },
+      props: {
+        style: { width: 45 },
       },
       cell: {
         formatters: [
@@ -245,18 +241,22 @@ class ScriptChart extends React.Component {
   }
 
   onMoveRow({ sourceRowId, targetRowId }) {
+    console.log("Row move detected");
     const rows = dnd.moveRows({
       sourceRowId,
       targetRowId
     })(this.state.rows);
+    console.log("after move, rows is " + rows);
 
     if (rows) {
+      console.log("updating rows: " + Object.keys(rows));
       this.setState({ rows });
     }
   }
 
   onMoveColumn(labels) {
 
+    console.log("Column move detected");
     const movedColumns = dnd.moveLabels(this.state.columns, labels);
 
     if (movedColumns) {

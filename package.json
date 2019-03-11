@@ -53,6 +53,7 @@
     "react-tabs": "^3.0.0",
     "react-transition-group": "1.2.1",
     "reactabular-dnd": "8.16.0",
+    "reactabular-sticky": "^8.14.0",
     "reactabular-table": "8.14.0",
     "script-loader": "^0.7.2",
     "table-resolver": "4.1.1"

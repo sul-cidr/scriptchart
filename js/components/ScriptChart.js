@@ -2,14 +2,19 @@ import React from "react";
 
 import { cloneDeep } from "lodash";
 
+// Remove this soon -- this data will come from DashTabs
+// (the parent component) instead
 import { manuscripts } from "./ManuscriptsLoader";
 
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
+import * as Sticky from 'reactabular-sticky';
+
+import SyriacLetter, { letters } from "./SyriacLetter";
+
+import LetterImage from "./LetterImage";
 
 import ColumnControls from "./ColumnControls";
-
-import SyriacLetter, { letterInfo } from "./SyriacLetter";
 
 import eastern_alap from "./images/Syriac_Eastern_alap.png";
 import eastern_bet from "./images/Syriac_Eastern_bet.png";
@@ -31,9 +36,6 @@ import serta_he from "./images/Syriac_Serta_he.png";
 import serta_waw from "./images/Syriac_Serta_waw.png";
 
 import "./ScriptChart.css";
-
-// For development only; eventually URLs will be read from DB REST API
-const defaultManifest = "https://purl.stanford.edu/zv668dm4974/iiif/manifest";
 
 const sampleLetters = [
   eastern_alap,
@@ -82,17 +84,29 @@ class ScriptChart extends React.Component {
 
     this.state = {
       columns: this.getColumns(),
-      rows: this.getRows(),
+      rows: this.getRows()
     };
+
+    console.log("TABLE MANUSCRIPTS: " + Object.keys(this.props.tableData));
+    console.log("TABLE LETTERS: " + Object.keys(this.props.tableData['3']));
+    console.log("TABLE PAGES: " + Object.keys(this.props.tableData['3']['2']));
 
     this.onRow = this.onRow.bind(this);
     this.onMoveRow = this.onMoveRow.bind(this);
     this.onMoveColumn = this.onMoveColumn.bind(this);
-    this.onMoveChildColumn = this.onMoveChildColumn.bind(this);
+    //this.onMoveChildColumn = this.onMoveChildColumn.bind(this);
     this.onHideColumn = this.onHideColumn.bind(this);
     this.onHideRow = this.onHideRow.bind(this);
     this.viewManifest = this.viewManifest.bind(this);
   }
+
+  /* Table data should be stored as a two-dimensional array.
+   * First key: letter ID (row)
+   * Second key: manuscript ID (column)
+   * Value: an Object containing the data necessary to render
+   * 1-3 image letter excerpts (binarized or not). This includes
+   * the link to the page URL and the coordinates of each letter.
+   */
 
   viewManifest(manifestURL, manifestActivator) {
     console.log("viewManifest called with URL " + manifestURL);
@@ -111,8 +125,11 @@ class ScriptChart extends React.Component {
     let sampleLetterCount = 0;
   
     let colControls = { id: 0, letter: "", visible: true };
+
+    /* Add dates row */
+    let datesRow = { id: 1, letter: "Date", ltid: "Date", visible: (!this.props.hiddenLetters.includes("Date")) };
   
-    for (let i = 0; i < manuscripts.length; i++) {
+    for (let i=0, len=manuscripts.length; i < len; i++) {
       colControls["manuscript" + (i + 1)] = <ColumnControls
                                                 msid={manuscripts[i]['id']}
                                                 manifestURL={manuscripts[i]['manifest']}
@@ -120,26 +137,30 @@ class ScriptChart extends React.Component {
                                                 onHideColumn={this.onHideColumn}
                                                 onHiddenChange={this.props.onHiddenChange}
                                                 onManifestSelected={this.props.onManifestSelected}
-                                            />
-    }
-    rows.push(colControls);
-  
-    /* Add dates row */
-    let datesRow = { id: 1, letter: "Date", ltid: "Date", visible: (!this.props.hiddenLetters.includes("Date")) };
-  
-    for (let i = 0; i < manuscripts.length; i++) {
+                                            />;
       datesRow["manuscript" + (i + 1)] = manuscripts[i]['date'];
     }
+    rows.push(colControls);
     rows.push(datesRow);
   
-    /* Load the sample letters into the rows array */
-    for (let i = 0; i < 14; i++) {
-      let row = { id: i + 3, ltid: letterInfo[i]['id'],
-                  letter: <SyriacLetter id={letterInfo[i]['id']} />,
-                  visible: (!this.props.hiddenLetters.includes(letterInfo[i]['id'])) };
+    /* Load the letters data into the rows array */
+    for (let i = 0; i < letters.length; i++) {
+      let ltID = letters[i]['id'];
+      let row = { id: i + 3, ltid: ltID,
+                  letter: <SyriacLetter id={ltID} />,
+                  visible: (!this.props.hiddenLetters.includes(ltID)) };
       console.log(row['visible']);
   
-      for (let j = 0; j < manuscripts.length; j++) {
+      /* This is where the actual letter instances from the manuscript
+       * pages are added */
+      for (let j=0, len=manuscripts.length; j < len; j++) {
+        let msID = manuscripts[j]['id'];
+        
+        //let cellContents = this.props.tableData[msID][ltID].map(coords => {return coords['id']}).join("<br>");
+        let cellContents = this.props.tableData[msID][ltID].map(coords => {return <LetterImage key={coords.id} coords={coords}/>});
+        row["manuscript" + (j + 1)] = cellContents;
+
+        /*
         sampleLetterCount++;
         let sampleLetterIndex = sampleLetterCount % sampleLetters.length;
         row["manuscript" + (j + 1)] = (
@@ -148,6 +169,7 @@ class ScriptChart extends React.Component {
             alt={"letter " + sampleLetterIndex}
           />
         );
+        */
       }
   
       rows.push(row);
@@ -164,7 +186,8 @@ class ScriptChart extends React.Component {
         props: {
           label: "Letter",
           style: {
-            fontWeight: "bold"
+            fontWeight: "bold",
+            width: 80
           }
         },
         visible: true
@@ -174,7 +197,7 @@ class ScriptChart extends React.Component {
       property: "row_remover",
       props: {
         style: {
-          width: 50
+          width: 45
         }
       },
       cell: {
@@ -193,7 +216,7 @@ class ScriptChart extends React.Component {
     }
     cols.push(rowRemoverColumn);
     /* Iteratively populate the columns */
-    for (let i = 0; i < manuscripts.length; i++) {
+    for (let i=0, len=manuscripts.length; i < len; i++) {
       let column = {
         property: "manuscript" + (i + 1),
         header: {
@@ -205,7 +228,8 @@ class ScriptChart extends React.Component {
         },
         visible: (!this.props.hiddenManuscripts.includes(manuscripts[i]['id'])),
         props: {
-          msid: manuscripts[i]['id']
+          msid: manuscripts[i]['id'],
+          style: {width: 200}
         }
       };
       cols.push(column);
@@ -233,14 +257,9 @@ class ScriptChart extends React.Component {
 
   onMoveColumn(labels) {
 
-    console.log("onMoveColumn labels " + labels.sourceLabel + " " + labels);
-
     const movedColumns = dnd.moveLabels(this.state.columns, labels);
 
-    console.log("movedColumns: " + movedColumns);
-
     if (movedColumns) {
-      console.log("Column move detected");
       // Retain widths to avoid flashing while drag and dropping.
       const source = movedColumns.source;
       const target = movedColumns.target;
@@ -262,6 +281,7 @@ class ScriptChart extends React.Component {
     }
   }
 
+  /*
   onMoveChildColumn(labels) {
     const movedChildren = dnd.moveChildrenLabels(this.state.columns, labels);
 
@@ -275,13 +295,23 @@ class ScriptChart extends React.Component {
       // Here we assume children have the same width.
       this.setState({ columns });
     }
-  }
+  }*/
 
   onHideRow(letterID) {
     this.props.onHiddenChange("hide", "row", letterID);
   }
 
+  componentDidMount() {
+    // We have refs now. Force update to get those to Header/Body.
+    // XXX Is this necessary?
+    this.forceUpdate();
+  }
+
   render() {
+    console.log("Rendering ScriptChart");
+    if (this.props.tableData['3']['2'].length > 0) {
+      console.log("tableData[3][2][0] is " + Object.keys(this.props.tableData['3']['2'][0]));
+    }
     const renderers = {
       header: {
         cell: dnd.Header
@@ -290,7 +320,9 @@ class ScriptChart extends React.Component {
         row: dnd.Row
       }
     };
-    const { columns, rows } = this.state;
+    //const { columns, rows } = this.state;
+    const columns = this.getColumns();
+    const rows = this.getRows();
 
     return (
       <div>
@@ -300,9 +332,28 @@ class ScriptChart extends React.Component {
           renderers={renderers}
           columns={columns.filter(column => !this.props.hiddenManuscripts.includes(column.props.msid))}
         >
-          <Table.Header />
-
-          <Table.Body rows={rows.filter(row => !this.props.hiddenLetters.includes(row.ltid))} rowKey="id" onRow={this.onRow} />
+          <Sticky.Header
+            style={{
+              maxWidth: 800
+            }}
+            ref={tableHeader => {
+              this.tableHeader = tableHeader && tableHeader.getRef();
+            }}
+            tableBody={this.tableBody}
+          />
+          <Sticky.Body
+            rows={rows.filter(row => !this.props.hiddenLetters.includes(row.ltid))}
+            rowKey="id"
+            onRow={this.onRow} 
+            style={{
+              maxWidth: 800,
+              maxHeight: 800
+            }}
+            ref={tableBody => {
+              this.tableBody = tableBody && tableBody.getRef();
+            }}
+            tableHeader={this.tableHeader}
+            />
         </Table.Provider>
       </div>
     );

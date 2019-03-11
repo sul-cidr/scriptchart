@@ -27,7 +27,7 @@ export const manuscripts = [
     notes: null,
     manifest: "https://digi.vatlib.it/iiif/MSS_Vat.sir.112/manifest.json",
     display: true
-  },
+  }/*,
   {
     id: 11,
     shelfmark: "Vat. Syr. 140",
@@ -170,7 +170,7 @@ export const manuscripts = [
     notes: null,
     manifest: null,
     display: true
-  }
+  }*/
 ];
 
 class ManuscriptsLoader extends React.Component {

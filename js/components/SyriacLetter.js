@@ -1,8 +1,8 @@
 import React from "react";
 
-export const letterInfo = [
+export const letters = [
     { id: 2, letter: "Alaph (Angular)", is_script: true, display: "ܐ", script: "estrangela" },
-    { id: 4, letter: "Alaph (Round)", is_script: true, display: "ܐ", script: "serto" },
+    { id: 4, letter: "Alaph (Round)", is_script: true, display: "ܐ", script: "serto" }/*,
     { id: 9, letter: "Beth", is_script: true, display: "ܒ", script: "estrangela" },
     { id: 14, letter: "Gamal", is_script: true, display: "ܓ", script: "estrangela" },
     { id: 12, letter: "Dalath (Angular)", is_script: true, display: "ܕ", script: "estrangela" },
@@ -35,14 +35,14 @@ export const letterInfo = [
     { id: 39, letter: "Shin", is_script: true, display: "ܫ", script: "estrangela" },
     { id: 43, letter: "Taw (Looped)", is_script: true, display: "ܬ", script: "estrangela" },
     { id: 44, letter: "Taw (Triangular)", is_script: true, display: "ܬ", script: "serto", trailing_letter: "ܩ" },
-    { id: 42, letter: "Taw (L-shaped)", is_script: true, display: "ܬ", script: "serto" }
+    { id: 42, letter: "Taw (L-shaped)", is_script: true, display: "ܬ", script: "serto" }*/
 ];
 
 class SyriacLetter extends React.Component {
   constructor(props) {
     super(props);
 
-    this.letter = letterInfo.find(lt => lt.id == this.props.id);
+    this.letter = letters.find(lt => lt.id == this.props.id);
     this.trailing = "";
     this.leading = "";
 

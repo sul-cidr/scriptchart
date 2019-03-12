@@ -23,6 +23,8 @@ class ManuscriptForm extends React.Component {
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
+                <option>4</option>
+                <option>5</option>
               </select>
             </div>
           </div>
@@ -30,7 +32,7 @@ class ManuscriptForm extends React.Component {
         <div className={"field"}>
           <label className={"checkbox"}>
             Show binarized images?
-            <input type={"checkbox"} />
+            <input type={"checkbox"} checked />
           </label>
         </div>
         <div className={"field"}>

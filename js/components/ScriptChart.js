@@ -63,6 +63,8 @@ class ScriptChart extends React.Component {
     super(props);
 
     this.state = {
+      /*columns: [],
+      rows: []*/
       columns: this.getColumns(),
       rows: this.getRows()
     };
@@ -103,8 +105,46 @@ class ScriptChart extends React.Component {
 
     console.log("Running getRows");
     if (this.state && (this.state.rows.length > 0)) {
-      // Need to figure out how to update these in place
-      return this.state.rows;
+      // Need to update cells with new letter instances that have come in from the API
+      // queries (which happen asynchronously)
+
+      console.log("Scanning existing rows for needed updates");
+      let rowsCopy = [...this.state.rows];
+
+      let changesMade = false;
+
+      for (let msID of Object.keys(this.props.tableData)) {
+        for (let ltID of Object.keys(this.props.tableData[msID])) {
+          if (this.props.tableData[msID][ltID].length > 0) {
+            console.log("Finding current state of msID " + msID + ", ltID " + ltID + " which has data length " + this.props.tableData[msID][ltID].length);
+            // Find the row in this.state.rows
+            let rowIndex = rowsCopy.findIndex(rw => rw["ltid"] == ltID);
+            console.log("Letter " + ltID + " is at row index " + rowIndex);
+            let row = rowsCopy[rowIndex];
+            for (let c=0, len=manuscripts.length; c<len; c++) {
+              let cellIndex = "manuscript" + (c + 1);
+              let cell = row[cellIndex];
+              console.log("checking cell " + Object.keys(cell.props.children));
+              if (cell.props['msid'] == msID) {
+                console.log("Manuscript " + msID + " is at col index " + cellIndex + " which has children length " + cell.props["children"].length);
+                if (cell.props["children"].length < this.props.tableData[msID][ltID].length) {
+                  console.log("Updating contents of cell");
+                  let cellContents = this.props.tableData[msID][ltID].map(coords => {return <LetterImage key={coords.id} coords={coords}/>});
+                  rowsCopy[rowIndex][cellIndex] = <div msid={msID}>{cellContents}</div>;
+                  changesMade = true;
+                }
+              }
+            }
+          }
+        }
+      }
+      if (changesMade) {
+        console.log("returning changed rows");
+        return rowsCopy;
+      } else {
+        console.log("returning unchanged rows");
+        return this.state.rows;
+      }      
     }
 
     let rows = [];
@@ -143,7 +183,7 @@ class ScriptChart extends React.Component {
         
         //let cellContents = this.props.tableData[msID][ltID].map(coords => {return coords['id']}).join("<br>");
         let cellContents = this.props.tableData[msID][ltID].map(coords => {return <LetterImage key={coords.id} coords={coords}/>});
-        row["manuscript" + (j + 1)] = cellContents;
+        row["manuscript" + (j + 1)] = <div msid={msID}>{cellContents}</div>;
 
         /*
         sampleLetterCount++;
@@ -166,7 +206,8 @@ class ScriptChart extends React.Component {
 
     console.log("Running getColumns");
     if (this.state && (this.state.columns.length > 0)) {
-      // Need to figure out how to update these in place
+      // Only rows need to be updated in place as new letter
+      // instances are added (I think)
       return this.state.columns;
     }
 
@@ -304,7 +345,15 @@ class ScriptChart extends React.Component {
   componentDidMount() {
     // We have refs now. Force update to get those to Header/Body.
     // XXX Is this necessary?
+    /*this.setState({ columns: this.getColumns(),
+                    rows: this.getRows() });*/
     this.forceUpdate();
+  }
+
+  componentDidUpdate() {
+    /*
+    this.setState({ columns: this.getColumns(),
+                    rows: this.getRows() });*/
   }
 
   render() {

@@ -19,7 +19,6 @@ class LetterImage extends React.Component {
   }
 
   render() {
-    console.log("LetterImage coords keys are " + Object.keys(this.props.coords));
     return (
       <span style={{display: "inline-block"}}>
         <canvas ref="canvas" width={this.props.coords["width"]} height={this.props.coords["height"]} />

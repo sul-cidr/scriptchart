@@ -2,8 +2,8 @@ import React from "react";
 
 export const letters = [
     { id: 2, letter: "Alaph (Angular)", is_script: true, display: "ܐ", script: "estrangela" },
-    { id: 4, letter: "Alaph (Round)", is_script: true, display: "ܐ", script: "serto" }/*,
-    { id: 9, letter: "Beth", is_script: true, display: "ܒ", script: "estrangela" },
+    { id: 4, letter: "Alaph (Round)", is_script: true, display: "ܐ", script: "serto" },
+    { id: 9, letter: "Beth", is_script: true, display: "ܒ", script: "estrangela" }/*,
     { id: 14, letter: "Gamal", is_script: true, display: "ܓ", script: "estrangela" },
     { id: 12, letter: "Dalath (Angular)", is_script: true, display: "ܕ", script: "estrangela" },
     { id: 13, letter: "Dalath (Round)", is_script: true, display: "ܕ", script: "serto" },

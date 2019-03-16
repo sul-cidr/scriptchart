@@ -6,7 +6,24 @@ import LettersLoader from "./LettersLoader";
 // manuscripts, and have a toggle to sort by date or name
 // The list could come from a json object with name and date
 
+
 class ManuscriptForm extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showBinarized: true
+    };
+
+    this.toggleBinarized = this.toggleBinarized.bind(this);
+
+  }
+
+  toggleBinarized() {
+    this.setState({showBinarized: !this.state.showBinarized});
+  }
+
   render() {
     return (
       <form className={"manuscript-form"}>
@@ -32,7 +49,7 @@ class ManuscriptForm extends React.Component {
         <div className={"field"}>
           <label className={"checkbox"}>
             Show binarized images?
-            <input type={"checkbox"} checked />
+            <input onChange={this.toggleBinarized} type={"checkbox"} checked />
           </label>
         </div>
         <div className={"field"}>

@@ -13,20 +13,37 @@ class ManuscriptForm extends React.Component {
     super(props);
 
     this.state = {
-      showBinarized: true
+      showBinarized: true,
+      letterExamples: 3,
+      imageSize: "Small"
     };
 
-    this.toggleBinarized = this.toggleBinarized.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
-  toggleBinarized() {
-    this.setState({showBinarized: !this.state.showBinarized});
+  handleChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({
+      [name]: value
+    });
+
+  }
+
+  handleSubmit(event) {
+    // Stop the whole darn page from reloading on submit
+    event.preventDefault();
+    // Pass all of the form's state to the handler (which is DashTabs)
+    this.props.formSubmit(this.state);
   }
 
   render() {
     return (
-      <form className={"manuscript-form"}>
+      <form className={"manuscript-form"} onSubmit={this.handleSubmit}>
         <ManuscriptMenu />
         <div className={"field"}>
           <label className={"control"}>Select Letters:</label>
@@ -36,7 +53,10 @@ class ManuscriptForm extends React.Component {
           <label className={"control"}>Select number of letter examples:</label>
           <div className={"control"}>
             <div className={"select"}>
-              <select>
+              <select value={this.state.letterExamples}
+                      type="number"
+                      name="letterExamples"
+                      onChange={this.handleChange}>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -49,14 +69,21 @@ class ManuscriptForm extends React.Component {
         <div className={"field"}>
           <label className={"checkbox"}>
             Show binarized images?
-            <input onChange={this.toggleBinarized} type={"checkbox"} checked />
+            <input 
+              onChange={this.handleChange}
+              type="checkbox"
+              name="showBinarized"
+              checked={this.state.showBinarized}/>
           </label>
         </div>
         <div className={"field"}>
           <label className={"control"}>Select image size:</label>
           <div className={"control"}>
             <div className={"select"}>
-              <select>
+              <select value={this.state.imageSize}
+                      type="string"
+                      name="imageSize"
+                      onChange={this.handleChange}>
                 <option>Small</option>
                 <option>Medium</option>
                 <option>Large</option>

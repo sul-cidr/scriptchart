@@ -17,8 +17,6 @@ import LetterImage from "./LetterImage";
 
 import ColumnControls from "./ColumnControls";
 
-const MAX_EXAMPLES = 3;
-
 import "./ScriptChart.css";
 
 class ScriptChart extends React.Component {
@@ -27,11 +25,9 @@ class ScriptChart extends React.Component {
 
     this.state = {
       columns: [],
-      rows: [],
-      tableData: {}
+      srows: []
+      //tableData: {}
     };
-
-    this.queryCache = {};
 
     this.getRows = this.getRows.bind(this);
     this.getColumns = this.getColumns.bind(this);
@@ -42,13 +38,6 @@ class ScriptChart extends React.Component {
     this.onHideColumn = this.onHideColumn.bind(this);
     this.onHideRow = this.onHideRow.bind(this);
     this.viewManifest = this.viewManifest.bind(this);
-    this.queryManuscripts = this.queryManuscripts.bind(this);
-    this.queryLetters = this.queryLetters.bind(this);
-    this.processLetters = this.processLetters.bind(this);
-    this.doFetch = this.doFetch.bind(this);
-
-    this.queryManuscripts();
-
   }
 
   /* Table data should be stored as a two-dimensional array.
@@ -68,6 +57,7 @@ class ScriptChart extends React.Component {
     columnHider(manuscriptID);
   }
 
+  /*
   processLetters(coordsData, pageData) {
     let msID = pageData['manuscript'];
     let pageID = pageData['id'];
@@ -89,7 +79,7 @@ class ScriptChart extends React.Component {
         tableDataCopy[msID][ltID] = [];
       }
 
-      if (tableDataCopy[msID][ltID].length >= MAX_EXAMPLES) {
+      if (tableDataCopy[msID][ltID].length >= this.props.formData.letterExamples) {
         console.log("Already have " + tableData[msID][ltID].length + " instances of letter " + letters.find(l => l["id"] == ltID)["display"] + " " + ltID + " on ms " + msID + ", skipping");
         continue;
       }
@@ -148,120 +138,6 @@ class ScriptChart extends React.Component {
     }
   }
 
-  doFetch(url) {
-    if (!(url in this.queryCache)) {
-      let _resp = fetch(url);
-      this.queryCache[url] = _resp;
-      return _resp;
-    } else {
-      console.log(url + " FOUND IN CACHE");
-      return this.queryCache[url];
-    }
-  }
-  
-  queryManuscripts() {
-    /* First get all pages for the manuscript */
-
-    let manuscriptQueries = [];
-    for (let ms of manuscripts) {
-      console.log("adding manuscript " + ms.id);
-      let msQuery = "http://localhost:8000/api/pages?manuscript_id=" + ms.id;
-
-      manuscriptQueries.push(msQuery);
-    }
-    Promise.all(manuscriptQueries.map(url =>
-      this.doFetch(url)
-      .then(resp => resp.json())
-      .catch(function(error) {
-        console.log("URL fetch failed for " + url);
-        return [];
-      })
-    )).then(msResults => {
-      let coordsQueries = [];
-      //let pageToManuscript = {};
-      for (let pages of msResults) {
-        for (let page of pages) {
-          //pageToManuscript[page['id']] = page['manuscript'];
-          for (let letter of letters) {
-            if (letter.id > 9 || letter.id == 5)
-              continue;
-            let coordsQuery = "http://localhost:8000/api/coordinates?page_id=" + page['id'] + "&letter_id=" + letter['id'];
-            coordsQueries.push(coordsQuery);
-          }
-        }
-      }
-      this.processCoords(coordsQueries);
-    });
-
-  }
-
-  processCoords(coordsQueries) {
-
-    Promise.all(coordsQueries.map(url =>
-      this.doFetch(url)
-      .then(resp => resp.json())
-      .catch(function(error) {
-        console.log("URL fetch failed for " + url);
-        return [];
-      })
-      )).then(coordsResults => {
-        let tableData = {};
-
-        for (let coordsData of coordsResults) {
-          if (coordsData.length == 0) {
-            continue;
-          }
-
-          for (let coords of coordsData) {
-
-            let msID = coords['page']['manuscript'];
-            let pageID = coords['page']['id'];
-            let pageURL = coords['page']['url'];
-
-            let ltID = coords['letter'];
-
-            if (!(msID in tableData)) {
-              tableData[msID] = {};
-            }
-            if (!(ltID in tableData[msID])) {
-              tableData[msID][ltID] = [];
-            }
-
-            if (tableData[msID][ltID].length >= MAX_EXAMPLES) {
-              console.log("Already have " + tableData[msID][ltID].length + " instances of letter " + letters.find(l => l["id"] == ltID)["display"] + " " + ltID + " on ms " + msID + ", skipping");
-              continue;
-            }
-
-            if (coords["binary_url"] !== null) {
-              let letterInstance = {'page': pageID, 'pageurl': pageURL, 'letter': ltID, 'binaryurl': coords["binary_url"], 'id': coords["id"], 'top': coords["top"], 'left': coords["left"], 'width': coords["width"], 'height': coords["height"] };
-              console.log("ADDING NEW LETTER INSTANCE OF id " + ltID + " IN MS " + msID + ": " + letters.find(l => l["id"] == ltID)["display"]);
-              tableData[msID][ltID].push(letterInstance);
-            }
-          }
-        }
-        console.log("tableData has " + Object.keys(tableData).length + " manuscript keys");
-        let tableLetters = [];
-        let tableManuscripts = [];
-        for (let msID of Object.keys(tableData)) {
-          if (tableManuscripts.indexOf(msID) === -1) {
-            tableManuscripts.push(msID);
-          }
-          for (let ltID of Object.keys(tableData[msID])) {
-            if (tableLetters.indexOf(ltID) === -1) {
-              tableLetters.push(ltID);
-            }
-          }
-        }
-        console.log("tableData has " + tableManuscripts.length + " manuscrips cols " + tableManuscripts);
-        console.log("tableData has " + tableLetters.length + " letter rows " + tableLetters);
-
-        this.setState({ columns: this.getColumns(tableData),
-                        rows: this.getRows(tableData) });
-      })
-    }
-
-        /*
-  })
 }
 
             //console.log("queryLetters querying " + coordsQuery);
@@ -308,7 +184,7 @@ class ScriptChart extends React.Component {
         });
       }*/
 
-  getRows(tableData) {
+  getRows() {
 
     console.log("Running getRows");
     /*
@@ -395,13 +271,13 @@ class ScriptChart extends React.Component {
       for (let j=0, len=manuscripts.length; j < len; j++) {
         let msID = manuscripts[j]['id'];
 
-        if ((!(msID in tableData)) || (!(ltID in tableData[msID]))) {
+        if ((!(msID in this.props.tableData)) || (!(ltID in this.props.tableData[msID]))) {
           console.log("adding blank cell at msID " + msID + ", ltID " + ltID);
           row["manuscript" + (j + 1)] = <div msid={msID} />;
         } else {
-          let cellContents = tableData[msID][ltID].map(coords => {return <LetterImage key={coords.id} coords={coords}/>});
-          console.log("adding " + tableData[msID][ltID].length + " new letter instances at msID " + msID + ", ltID " + ltID);
-          tableData[msID][ltID].map(coords => { console.log("letter " + coords['letter'] + " binary URL is " + coords["binaryurl"]); });
+          let cellContents = this.props.tableData[msID][ltID].slice(0,this.props.formData.letterExamples).map(coords => {return <LetterImage key={coords.id} coords={coords}/>});
+          console.log("adding " + this.props.tableData[msID][ltID].length + " new letter instances at msID " + msID + ", ltID " + ltID);
+          //this.prop.tableData[msID][ltID].map(coords => { console.log("letter " + coords['letter'] + " binary URL is " + coords["binaryurl"]); });
           row["manuscript" + (j + 1)] = <div msid={msID}>{cellContents}</div>;
         }
         //row["manuscript" + (j + 1)] = <div msid={msID} />
@@ -501,6 +377,27 @@ class ScriptChart extends React.Component {
     return cols;
   }
 
+  /* Ideas for replacement row and column move code:
+   *
+   * onMove for columns inclues the following info:
+   * (source and target labels aka shelfmarks)
+   * sourceLabel: "Vat. Syr. 092"
+   * targetLabel: "Vat. Syr. 112"
+   * 
+   * onMove for rows gives the source and dest row IDs
+   * when output from moveRows, rowIDs always start
+   * with 0 for the column hider rows, and 1 for the date
+   * The rest are the letters in order.
+   * So a replacement onMoveRow could just ignore moves
+   * involving targets or sources in rows 0 and 1.
+   * 
+   * The basic idea is that DashTabs would keep track of
+   * the row and column orders. Any dnd of a row or col
+   * would be handled in DashTabs and trigger a render
+   * of the scriptchart, which would be passed the 
+   * manuscript and letter orders as props.
+   */
+
   onRow(row) {
     return {
       rowId: row.id,
@@ -509,7 +406,7 @@ class ScriptChart extends React.Component {
   }
 
   onMoveRow({ sourceRowId, targetRowId }) {
-    console.log("Row move detected");
+    console.log("Row move source " + sourceRowId + " target " + targetRowId);
     const rows = dnd.moveRows({
       sourceRowId,
       targetRowId
@@ -524,7 +421,8 @@ class ScriptChart extends React.Component {
 
   onMoveColumn(labels) {
 
-    console.log("Column move detected");
+    console.log("Column move labels");
+    console.log(labels);
     const movedColumns = dnd.moveLabels(this.state.columns, labels);
 
     if (movedColumns) {
@@ -570,21 +468,27 @@ class ScriptChart extends React.Component {
   }
 
   componentDidMount() {
-    /*this.setState({ columns: this.getColumns(),
-      rows: this.getRows() });*/
+    //this.queryManuscripts();
+    this.setState({ columns: this.getColumns(),
+      rows: this.getRows() });
   }
 
   componentDidUpdate() {
+    //this.queryManuscripts();
     /*this.setState({ columns: this.getColumns(),
                     rows: this.getRows() });*/
   }
 
   render() {
+
     console.log("Rendering ScriptChart");
 
+    let rows = this.getRows();
+    let columns = this.getColumns();
+
     return (
-      <DragTable rows={this.state.rows}
-                 columns={this.state.columns}
+      <DragTable rows={rows}
+                 columns={columns}
                  hiddenLetters={this.props.hiddenLetters}
                  hiddenManuscripts={this.props.hiddenManuscripts}
                  onRow={this.onRow}

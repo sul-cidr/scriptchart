@@ -89,10 +89,44 @@ class ScriptChart extends React.Component {
     /* Load the letters data into the rows array */
     for (let i=0, len=this.props.rowLetters.length; i < len; i++) {
 
+      let thisLetter = this.props.rowLetters[i];
+
+      /* Syriac row labels will only drag-and-drop correctly when
+       * instantiated manually here -- wrapping them in a
+       * <SyriacLetter> component doesn't seem to work (though
+       * it's fine for the buttons). */
+      let trailing = "";
+      let leading = "";
+      let thisFont = "sans-serif";
+
+      let display = thisLetter.display;
+      let script = thisLetter.script;
+      if (script == "serto") {
+        thisFont = "SertoJerusalem";
+      } else if (script == "estrangela") {
+        thisFont = "EstrangeloEdessa";
+      } 
+
+      if (thisLetter.hasOwnProperty("trailing_letter")) {
+        trailing = <span style={{ color: 'transparent' }}>{thisLetter.trailing_letter}</span>;
+      }
+      if (thisLetter.hasOwnProperty("leading_letter")) {
+        leading = <span style={{ color: 'transparent' }}>{thisLetter.leading_letter}</span>;
+      }
+      if (thisLetter.hasOwnProperty("display")) {
+        display = thisLetter.display;
+      }
+      else if (thisLetter.hasOwnProperty("letter")) {
+        display = thisLetter.letter;
+      } else {
+        display = thisLetter.id;
+      }
+
       let ltID = this.props.rowLetters[i]['id'];
       let row = { id: i + 2, ltid: ltID,
-                  letter: <SyriacLetter id={ltID} />,
+                  //letter: <SyriacLetter id={ltID} />,
                   //letter: <p>{ltID}</p>,
+                  letter: <span style={{direction: "rtl", fontSize: "2em", fontFamily: thisFont}}>{trailing}{display}{leading}</span>,
                   visible: (!this.props.hiddenLetters.includes(ltID)) };
  
       /* This is where the actual letter instances from the manuscript

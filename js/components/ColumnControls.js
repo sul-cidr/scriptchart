@@ -15,6 +15,7 @@ class ColumnControls extends React.Component {
       this.props.displayManifest(this.props.manifestURL, this.props.onManifestSelected);
     }
     hideColumn() {
+      console.log("Clicked button to hide manuscript column " + this.props.msid);
       this.props.onHiddenChange( "hide", "column", this.props.msid);
     }
   

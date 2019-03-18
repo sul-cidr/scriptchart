@@ -4,8 +4,6 @@ import LetterButton from "./LetterButton";
 import SyriacLetter from "./SyriacLetter";
 import ManuscriptItem from "./ManuscriptItem";
 
-import { manuscripts } from "./ManuscriptsLoader";
-
 const AccordionStyle = {
   border: '2px dotted gray',
 };
@@ -45,8 +43,8 @@ class ChartAccordion extends React.Component {
                 <AccordionItemBody>
                   <ul>
                     { this.props.hiddenManuscripts.map(msid => {
-                        let msIndex = manuscripts.findIndex(m => m['id'] == msid);
-                        return <ManuscriptItem key={msid} manuscriptID={msid} onHiddenChange={this.props.onHiddenChange} display={manuscripts[msIndex]['shelfmark']} />
+                        let msIndex = this.props.columnManuscripts.findIndex(m => m['id'] == msid);
+                        return <ManuscriptItem key={msid} manuscriptID={msid} onHiddenChange={this.props.onHiddenChange} display={this.props.columnManuscripts[msIndex]['shelfmark']} />
                     }) }
                   </ul>
                 </AccordionItemBody>

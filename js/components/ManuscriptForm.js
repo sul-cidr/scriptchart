@@ -2,6 +2,9 @@ import React from "react";
 import ManuscriptMenu from "./ManuscriptMenu";
 import LettersLoader from "./LettersLoader";
 
+import { letters } from "./SyriacLetter";
+import { manuscripts } from "./ManuscriptsLoader";
+
 // In this component, we would actually pass a list of
 // manuscripts, and have a toggle to sort by date or name
 // The list could come from a json object with name and date
@@ -15,7 +18,9 @@ class ManuscriptForm extends React.Component {
     this.state = {
       showBinarized: true,
       letterExamples: 3,
-      imageSize: "Small"
+      imageSize: "Small",
+      manuscripts: manuscripts.slice(),
+      letters: letters.slice(0,3)
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +33,8 @@ class ManuscriptForm extends React.Component {
     const name = target.name;
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
+    console.log(name + " changed to " + value);
+
     this.setState({
       [name]: value
     });
@@ -36,6 +43,7 @@ class ManuscriptForm extends React.Component {
 
   handleSubmit(event) {
     // Stop the whole darn page from reloading on submit
+    console.log("Submit button clicked");
     event.preventDefault();
     // Pass all of the form's state to the handler (which is DashTabs)
     this.props.formSubmit(this.state);

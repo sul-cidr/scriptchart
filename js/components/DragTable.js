@@ -13,8 +13,6 @@ class DragTable extends React.Component {
   componentDidMount() {
     // We have refs now. Force update to get those to Header/Body.
     // XXX Is this necessary?
-    /*this.setState({ columns: this.getColumns(),
-                    rows: this.getRows() });*/
     this.forceUpdate();
   }
 
@@ -33,10 +31,7 @@ class DragTable extends React.Component {
       }
     };
 
-    /*
-    let columns = this.props.getColumns();
-    let rows = this.props.getRows();
-    */
+
     return (
       <Table.Provider
         className="pure-table pure-table-striped"

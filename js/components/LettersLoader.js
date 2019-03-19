@@ -7,7 +7,21 @@ import SyriacLetter, { letters } from "./SyriacLetter";
 class LettersLoader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { letterButtons: [] };
+    this.state = { letterButtons: [],
+                   selectedLetters: [] };
+
+    this.buttonClick = this.buttonClick.bind(this);
+  }
+
+  buttonClick(letterID, operation) {
+    let selectedLetters = [...this.state.selectedLetters];
+    if (operation == "select") {
+      selectedLetters.push(letters.find(lt => lt['id'] == letterID));
+    } else {
+      selectedLetters.splice(selectedLetters.findIndex(lt => lt['id'] == letterID), 1);
+    }
+    this.props.handleSelect("letters", selectedLetters);
+    this.setState({selectedLetters});
   }
 
   // If the API data source is not available, the set of letters to be
@@ -33,7 +47,7 @@ class LettersLoader extends React.Component {
       .then(data => {
         let buttons = data.map(lt => {
           return (
-            <LetterButton key={lt.id}
+            <LetterButton key={lt.id} letterID={lt.id} onLetterClick={this.buttonClick}
               letter={<SyriacLetter id={lt.id} />}
             />
           );

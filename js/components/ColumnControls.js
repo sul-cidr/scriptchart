@@ -11,11 +11,11 @@ class ColumnControls extends React.Component {
     }
   
     showManifest() {
-      console.log("Header notes manifest display request for " + this.props.manifestURL);
+      //console.log("Header notes manifest display request for " + this.props.manifestURL);
       this.props.displayManifest(this.props.manifestURL, this.props.onManifestSelected);
     }
     hideColumn() {
-      console.log("Clicked button to hide manuscript column " + this.props.msid);
+      //console.log("Clicked button to hide manuscript column " + this.props.msid);
       this.props.onHiddenChange( "hide", "column", this.props.msid);
     }
   

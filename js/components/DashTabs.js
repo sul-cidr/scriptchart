@@ -4,6 +4,9 @@ import ScriptChart from "./ScriptChart";
 import MiradorViewer from "./MiradorViewer";
 import ChartAccordion from "./ChartAccordion";
 
+//import { letters } from "./SyriacLetter";
+//import { manuscripts } from "./ManuscriptsLoader";
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 
@@ -14,8 +17,6 @@ import "./DashTabs.css";
 class DashTabs extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log("INITIALIZING DashTabs");
 
     // DashTabs probably will get manuscript list as prop from parent
 
@@ -40,9 +41,9 @@ class DashTabs extends React.Component {
     let columnManuscripts = [];
 
     if (this.state.columnManuscripts.length == 0) {
-      columnManuscripts = this.props.formData.manuscripts.slice();
+      columnManuscripts = [...this.props.manuscripts];
     } else {
-      columnManuscripts = this.state.columnManuscripts.slice();
+      columnManuscripts = [...this.state.columnManuscripts];
     }
 
     let sourceShelfmark = labels['sourceLabel'];
@@ -58,21 +59,17 @@ class DashTabs extends React.Component {
   }
 
   onRowMove( sourceRowId, targetRowId ) {
-    console.log("HANDLING ROW MOVE, source and target IDs are " + sourceRowId + " " + targetRowId);
 
     if ((sourceRowId == "Date") || (sourceRowId == "") || (targetRowId == "Date") || (targetRowId == "")) {
-      console.log("Can't move those rows");
       return;
     }
 
     let rowLetters = [];
     if (this.state.rowLetters.length == 0) {
-      rowLetters = this.props.formData.letters.slice();
+      rowLetters = [...this.props.formData.letters];
     } else {
-      rowLetters = this.state.rowLetters.slice();
+      rowLetters = [...this.state.rowLetters];
     }
-
-    console.log(rowLetters);
 
     let sourceIndex = rowLetters.findIndex(lt => lt.id == sourceRowId);
     let targetIndex = rowLetters.findIndex(lt => lt.id == targetRowId);
@@ -88,13 +85,11 @@ class DashTabs extends React.Component {
   }
 
   onHiddenChange( showOrHide, rowOrColumn, itemID ) {
-    console.log("Just got a request to " + showOrHide + " " + rowOrColumn + " id " + itemID);
 
     if (showOrHide == "show") {
       // Show (aka "unhide") requests only come from the accordion and are sent to the scriptchart
       if (rowOrColumn == "column") {
         let hiddenIndex = this.state.hiddenManuscripts.findIndex(i => i==itemID );
-        //console.log("index of column being shown is " + hiddenIndex)
         if (hiddenIndex !== -1) {
           let hiddenCopy = [...this.state.hiddenManuscripts];
           hiddenCopy.splice(hiddenIndex, 1);
@@ -140,32 +135,40 @@ class DashTabs extends React.Component {
       return <div></div>
     }
 
-    console.log("Rendering DashTabs, letterExamples is " + this.props.formData.letterExamples);
+    console.log("Rendering DashTabs");
 
     let columnManuscripts = [];
     let rowLetters = [];
+    let hiddenManuscripts = [];
+    let hiddenLetters = [];
+
+    if (!this.state.redrawChart) {
+      hiddenManuscripts = this.state.hiddenManuscripts;
+      hiddenLetters = this.state.hiddenLetters;
+    }
 
     if (this.state.rowLetters.length == 0) {
-      console.log("Determining row orders from scratch");
-      console.log("length of this.props.formData.letters is " + this.props.formData.letters.length);
+      //console.log("Determining row orders from scratch");
+      //console.log("length of this.props.formData.letters is " + this.props.formData.letters.length);
       for (let j=0, llen=this.props.formData.letters.length; j<llen; j++) {
-        console.log("DashTabs adding letter " + j);
+        //console.log("DashTabs adding letter " + this.props.formData.letters[j]['id']);
+        //rowLetters.push(letters.find(lt => lt['id'] == this.props.formData.letters[j]));
         rowLetters.push(this.props.formData.letters[j]);
       }
     } else {
-      console.log("Getting row orders from state");
+      //console.log("Getting row orders from state");
       rowLetters = this.state.rowLetters;
     }
 
     if (this.state.columnManuscripts.length == 0) {
-      console.log("Determining column orders from scratch");
-      console.log("length of this.props.formData.manuscripts is " + this.props.formData.manuscripts.length);
-      for (let i=0, len=this.props.formData.manuscripts.length; i<len; i++) {
-        console.log("DashTabs adding ms " + i);
-        columnManuscripts.push(this.props.formData.manuscripts[i]);
+      //console.log("Determining column orders from scratch");
+      //console.log("length of this.props.manuscripts is " + this.props.manuscripts.length);
+      for (let i=0, len=this.props.manuscripts.length; i<len; i++) {
+        //console.log("DashTabs adding ms " + i + ": " + this.props.manuscripts[i]);
+        columnManuscripts.push(this.props.manuscripts[i]);
       }
     } else {
-      console.log("Getting column orders from state");
+      //console.log("Getting column orders from state");
       columnManuscripts = this.state.columnManuscripts;
     }
 
@@ -182,15 +185,13 @@ class DashTabs extends React.Component {
                 </TabList>
                 <TabPanel>
                   <ScriptChart onHiddenChange={this.onHiddenChange}
-                               hiddenManuscripts={this.state.hiddenManuscripts}
-                               hiddenLetters={this.state.hiddenLetters} 
+                               hiddenManuscripts={hiddenManuscripts}
+                               hiddenLetters={hiddenLetters} 
                                onManifestSelected={this.onManifestSelected} 
                                formData={this.props.formData}
                                tableData={this.props.tableData}
                                columnManuscripts={columnManuscripts}
                                rowLetters={rowLetters}
-                               //columnManuscripts={this.state.columnManuscripts}
-                               //rowLetters={this.state.rowLetters}
                                onRowMove={this.onRowMove}
                                onColumnMove={this.onColumnMove}
                                />
@@ -201,8 +202,8 @@ class DashTabs extends React.Component {
                 <TabPanel>
                   <ChartAccordion onHiddenChange={this.onHiddenChange} 
                                   columnManuscripts={columnManuscripts}
-                                  hiddenManuscripts={this.state.hiddenManuscripts}
-                                  hiddenLetters={this.state.hiddenLetters} />
+                                  hiddenManuscripts={hiddenManuscripts}
+                                  hiddenLetters={hiddenLetters} />
                 </TabPanel>
               </Tabs>
             </div>

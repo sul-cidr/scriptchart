@@ -1,7 +1,7 @@
 import React from "react";
 
 /* Mock data to use in development when local API backend is not available */
-export const manuscripts = [
+export const defaultManuscripts = [
   {
     id: 3,
     shelfmark: "Vat. Syr. 092",
@@ -27,7 +27,7 @@ export const manuscripts = [
     notes: null,
     manifest: "https://digi.vatlib.it/iiif/MSS_Vat.sir.112/manifest.json",
     display: true
-  }/*,
+  },
   {
     id: 11,
     shelfmark: "Vat. Syr. 140",
@@ -170,36 +170,54 @@ export const manuscripts = [
     notes: null,
     manifest: null,
     display: true
-  }*/
+  }
 ];
 
 class ManuscriptsLoader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { manuscripts: [] };
+    this.state = { selectedShelfmarks: []    
+                 };
+
+    this.handleSelect = this.handleSelect.bind(this);
   }
-  componentDidMount() {
-    //fetch("https://db.syriac.reclaim.hosting/api/manuscripts?display=true")
-    fetch("http://localhost:8000/api/manuscripts?display=true")
-      .then(response => {
-        return response.json();
-      })
-      /* In production, it's likely preferable for the menu to display
-       * a blank list when the backend API is down, rather than
-       * displaying mock data that does not reflect the database state.
-       */
-      .catch(function(error) {
-        return manuscripts;
-      })
-      .then(data => {
-        let manuscripts = data.map(manuscript => {
-          return <option key={manuscript.id}>{manuscript.shelfmark}</option>;
-        });
-        this.setState({ manuscripts: manuscripts });
-      });
+
+  handleSelect(event) {
+    let options = event.target.options;
+    let name = event.target.name;
+    let value = [];
+    let selectedShelfmarks = [];
+    for (let i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+        selectedShelfmarks.push(options[i].value);
+      }
+    }
+    this.setState({ selectedShelfmarks });
+
+    /*
+    let manuscriptSelectors = this.props.manuscripts.map(manuscript => {
+      return <option key={manuscript.id}>{manuscript.shelfmark}</option>;
+    });
+    this.setState( { manuscriptSelectors, selectedShelfmarks });
+    */
+    this.props.handleSelect(name, value);
   }
+
   render() {
-    return <select multiple>{this.state.manuscripts}</select>;
+
+    let manuscriptSelectors = this.props.manuscripts.map(ms => {
+      return <option key={ms.id} value={ms.shelfmark}>{ms.shelfmark}</option>;
+    });
+
+    return <select
+             type="string"
+             name="selectedShelfmarks"
+             value={this.state.selectedShelfmarks}
+             onChange={this.handleSelect}
+             multiple={true}>
+             {manuscriptSelectors}
+            </select>;
   }
 }
 

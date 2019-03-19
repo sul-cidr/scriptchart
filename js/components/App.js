@@ -13,8 +13,7 @@ import { DragDropContext } from "react-dnd";
 
 import ManuscriptForm from "./ManuscriptForm";
 
-import { letters } from "./SyriacLetter";
-import { manuscripts } from "./ManuscriptsLoader";
+import {defaultManuscripts} from "./ManuscriptsLoader";
 
 const MAX_EXAMPLES = 5;
 
@@ -23,6 +22,8 @@ class App extends Component {
     super(props);
 
     this.state = {
+      manuscripts: [],
+      allManuscripts: [],
       showTabs: false,
       formData: {},
       tableData: {}
@@ -36,10 +37,6 @@ class App extends Component {
     this.processCoords = this.processCoords.bind(this);
   }
 
-  handleSubmit(formData) {
-    console.log("Got form submission");
-    this.queryManuscripts(formData);
-  }
   /*
   doFetch(url) {
     if (!(url in this.queryCache)) {
@@ -52,16 +49,47 @@ class App extends Component {
     }
   }*/
   
-  queryManuscripts(formData) {
+  queryManuscripts() {
     /* First get all pages for the manuscript */
+    console.log("Querying manuscripts");
+
+    fetch("http://localhost:8000/api/manuscripts?display=true")
+    .then(response => {
+      return response.json();
+    })
+    /* In production, it's likely preferable for the menu to display
+     * a blank list when the backend API is down, rather than
+     * displaying mock data that does not reflect the database state.
+     */
+    .catch(function(error) {
+      return defaultManuscripts;
+    })
+    .then(data => {
+      this.setState({ allManuscripts: data });
+    });
+  }
+
+  handleSubmit(formData) {
 
     let manuscriptQueries = [];
-    for (let ms of formData.manuscripts) {
-      console.log("adding manuscript " + ms.id);
+    let manuscripts = [];
+    for (let ms of this.state.allManuscripts) {
+
+      if (formData.selectedShelfmarks.indexOf(ms['shelfmark']) < 0) {
+        continue;
+      }
+
+      manuscripts.push(ms);
+        
+      //console.log("adding manuscript " + ms.id);
+
       let msQuery = "http://localhost:8000/api/pages?manuscript_id=" + ms.id;
 
       manuscriptQueries.push(msQuery);
     }
+
+    this.setState({manuscripts});
+
     Promise.all(manuscriptQueries.map(url =>
       //this.doFetch(url)
       fetch(url)
@@ -82,7 +110,6 @@ class App extends Component {
       }
       this.processCoords(coordsQueries, formData);
     });
-
   }
 
   processCoords(coordsQueries, formData) {
@@ -97,7 +124,6 @@ class App extends Component {
         return [];
       })
       )).then(coordsResults => {
-        console.log("Processing coords results");
         let tableData = {};
 
         for (let coordsData of coordsResults) {
@@ -121,18 +147,18 @@ class App extends Component {
             }
 
             if (tableData[msID][ltID].length >= MAX_EXAMPLES) {
-              console.log("Already have " + tableData[msID][ltID].length + " instances of letter " + formData.letters.find(l => l["id"] == ltID)["display"] + " " + ltID + " on ms " + msID + ", skipping");
+              //console.log("Already have " + tableData[msID][ltID].length + " instances of letter " + formData.letters.find(l => l["id"] == ltID)["display"] + " " + ltID + " on ms " + msID + ", skipping");
               continue;
             }
 
             if (coords["binary_url"] !== null) {
               let letterInstance = {'page': pageID, 'pageurl': pageURL, 'letter': ltID, 'binaryurl': coords["binary_url"], 'id': coords["id"], 'top': coords["top"], 'left': coords["left"], 'width': coords["width"], 'height': coords["height"] };
-              console.log("ADDING NEW LETTER INSTANCE OF id " + ltID + " IN MS " + msID + ": " + formData.letters.find(l => l["id"] == ltID)["display"]);
+              //console.log("ADDING NEW LETTER INSTANCE OF id " + ltID + " IN MS " + msID + ": " + formData.letters.find(l => l["id"] == ltID)["display"]);
               tableData[msID][ltID].push(letterInstance);
             }
           }
         }
-        console.log("tableData has " + Object.keys(tableData).length + " manuscript keys");
+        /*console.log("tableData has " + Object.keys(tableData).length + " manuscript keys");
         let tableLetters = [];
         let tableManuscripts = [];
         for (let msID of Object.keys(tableData)) {
@@ -147,14 +173,28 @@ class App extends Component {
         }
         console.log("tableData has " + tableManuscripts.length + " manuscrips cols " + tableManuscripts);
         console.log("tableData has " + tableLetters.length + " letter rows " + tableLetters);
-
-        this.setState({ tableData: tableData, formData: formData, showTabs: true });
-        //this.setState({ columns: this.getColumns(tableData),
-        //                rows: this.getRows(tableData) });
+        */
+        this.setState({ tableData: tableData, formData: formData, showTabs: true});
       })
-    }
+  }
+
+  componentDidMount() {
+    this.queryManuscripts();
+  }
 
   render() {
+    console.log("Rendering App");
+
+    /* Use the form input values as a uniquish key for the scriptchart;
+     * changing this value will cause the entire tabs/chart component to
+     * be regenerated from scratch. This may seem like kind of a hack to
+     * get around the challenges of clearing local state on all of the
+     * child components. On the other hand, the specification is that
+     * submitting a new query via the form SHOULD completely reset the
+     * chart, and that's what this does.
+     */
+    let chartKey=JSON.stringify(this.state.formData);
+
     return (
       <div className="App">
         {/* <Header className="App-header" /> */}
@@ -162,11 +202,15 @@ class App extends Component {
           <div className={"column is-one-quarter"}>
             <div className={"box"}>
               <h4 className={"title is-4"}>Scriptchart options</h4>
-              <ManuscriptForm formSubmit={this.handleSubmit} />
+              <ManuscriptForm formSubmit={this.handleSubmit} manuscripts={this.state.allManuscripts} />
             </div>
           </div>
           <div className={"column"}>
-            <DashTabs showTabs={this.state.showTabs} formData={this.state.formData} tableData={this.state.tableData} />
+            <DashTabs key={chartKey}
+                      showTabs={this.state.showTabs}
+                      formData={this.state.formData}
+                      tableData={this.state.tableData}
+                      manuscripts={this.state.manuscripts} />
           </div>
         </div>
         {/* <Footer /> */}

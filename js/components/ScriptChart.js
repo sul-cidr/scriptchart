@@ -6,11 +6,9 @@ import React from "react";
 // Remove this soon -- this data will come from DashTabs
 // (the parent component) instead
 
-import * as dnd from "reactabular-dnd";
+//import * as dnd from "reactabular-dnd";
 
 import DragTable from "./DragTable";
-
-import SyriacLetter from "./SyriacLetter";
 
 import LetterImage from "./LetterImage";
 
@@ -48,7 +46,6 @@ class ScriptChart extends React.Component {
    */
 
   viewManifest(manifestURL, manifestActivator) {
-    console.log("viewManifest called with URL " + manifestURL);
     manifestActivator(manifestURL);
   }
 
@@ -56,13 +53,17 @@ class ScriptChart extends React.Component {
     columnHider(manuscriptID);
   }
 
-  getRows() {
+  resizeKeepAspect(inWidth, inHeight, maxDim) {
+    let hwRatio = parseFloat(inHeight) / parseFloat(inWidth);
+    if (inWidth >= inHeight) {
+      return { 'height': Math.round(hwRatio * maxDim), 'width': maxDim };
+    } else {
+      return { 'height': maxDim, 'width': Math.round(maxDim / hwRatio) };
+    }
+  }
 
-    console.log("Running getRows");
-   
-    console.log("REBUILDING ROWS FROM SCRATCH");
-    console.log("Length of this.props.rowLetters is " + this.props.rowLetters.length);
-    console.log(this.props.rowLetters);
+
+  getRows() {
 
     let rows = [];
   
@@ -135,11 +136,13 @@ class ScriptChart extends React.Component {
         let msID = this.props.columnManuscripts[j]['id'];
 
         if ((!(msID in this.props.tableData)) || (!(ltID in this.props.tableData[msID]))) {
-          console.log("adding blank cell at msID " + msID + ", ltID " + ltID);
           row["manuscript" + (j + 1)] = <div msid={msID} />;
         } else {
-          let cellContents = this.props.tableData[msID][ltID].slice(0,this.props.formData.letterExamples).map(coords => {return <LetterImage key={coords.id} coords={coords}/>});
-          console.log("adding " + this.props.tableData[msID][ltID].length + " new letter instances at msID " + msID + ", ltID " + ltID);
+          let cellContents = this.props.tableData[msID][ltID]
+                             .slice(0,this.props.formData.letterExamples)
+                             .map(coords => { 
+                              return <LetterImage key={coords.id} coords={coords} sizeClass={this.props.formData.imageSize} />});
+          //console.log("adding " + this.props.tableData[msID][ltID].length + " new letter instances at msID " + msID + ", ltID " + ltID);
           //this.prop.tableData[msID][ltID].map(coords => { console.log("letter " + coords['letter'] + " binary URL is " + coords["binaryurl"]); });
           row["manuscript" + (j + 1)] = <div msid={msID}>{cellContents}</div>;
         }
@@ -147,15 +150,10 @@ class ScriptChart extends React.Component {
   
       rows.push(row);
     }
-    console.log("RETURNING FROM GETROWS");
     return rows;
   }
 
   getColumns() {
-
-    console.log("Running getColumns");
-
-    console.log("REBUILDING COLUMNS FROM SCRATCH");
 
     let cols = [
       {
@@ -199,11 +197,7 @@ class ScriptChart extends React.Component {
     }
     cols.push(rowRemoverColumn);
     /* Iteratively populate the columns */
-   //for (let i=0, len=manuscripts.length; i < len; i++) {
-    console.log("Length of this.props.columnManuscripts is " + this.props.columnManuscripts.length);
-    console.log(this.props.columnManuscripts);
     for (let i=0, len=this.props.columnManuscripts.length; i < len; i++) {
-      console.log("column shelfmark is " + this.props.columnManuscripts[i].shelfmark);
       // Consider just not generating values for currently hidden columns...
       let column = {
         property: "manuscript" + (i + 1),
@@ -233,15 +227,12 @@ class ScriptChart extends React.Component {
   }
 
   onMoveRow({ sourceRowId, targetRowId }) {
-    console.log("Row move source " + sourceRowId + " target " + targetRowId);
 
     this.props.onRowMove(sourceRowId, targetRowId);
   }
 
   onMoveColumn(labels) {
 
-    console.log("Column move labels");
-    console.log(labels);
     this.props.onColumnMove(labels);
   
   }

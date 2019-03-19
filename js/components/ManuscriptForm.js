@@ -9,7 +9,6 @@ import { manuscripts } from "./ManuscriptsLoader";
 // manuscripts, and have a toggle to sort by date or name
 // The list could come from a json object with name and date
 
-
 class ManuscriptForm extends React.Component {
 
   constructor(props) {
@@ -19,11 +18,13 @@ class ManuscriptForm extends React.Component {
       showBinarized: true,
       letterExamples: 3,
       imageSize: "Small",
-      manuscripts: manuscripts.slice(),
-      letters: letters.slice(0,3)
+      selectedShelfmarks: [],
+      manuscripts: [],
+      letters: []
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
@@ -33,8 +34,14 @@ class ManuscriptForm extends React.Component {
     const name = target.name;
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
-    console.log(name + " changed to " + value);
+    this.setState({
+      [name]: value
+    });
 
+  }
+
+  /* Probably need a separate handler for multi-select events */
+  handleSelect(name, value) {
     this.setState({
       [name]: value
     });
@@ -43,19 +50,19 @@ class ManuscriptForm extends React.Component {
 
   handleSubmit(event) {
     // Stop the whole darn page from reloading on submit
-    console.log("Submit button clicked");
     event.preventDefault();
     // Pass all of the form's state to the handler (which is DashTabs)
     this.props.formSubmit(this.state);
   }
 
   render() {
+    console.log("Rendering ManuscriptForm");
     return (
       <form className={"manuscript-form"} onSubmit={this.handleSubmit}>
-        <ManuscriptMenu />
+        <ManuscriptMenu handleChange={this.handleChange} handleSelect={this.handleSelect} manuscripts={this.props.manuscripts} />
         <div className={"field"}>
           <label className={"control"}>Select Letters:</label>
-          <LettersLoader />
+          <LettersLoader handleSelect={this.handleSelect} />
         </div>
         <div className={"field"}>
           <label className={"control"}>Select number of letter examples:</label>

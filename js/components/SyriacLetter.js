@@ -77,7 +77,6 @@ class SyriacLetter extends React.Component {
   }
 
   render() {
-    console.log("rendering Syriac letter " + this.display);
     return <span style={{direction: "rtl", fontSize: "2em", fontFamily: this.font}}>{this.trailing}{this.display}{this.leading}</span>;
   }
 }

@@ -176,8 +176,7 @@ export const defaultManuscripts = [
 class ManuscriptsLoader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedShelfmarks: []    
-                 };
+    this.state = { selectedShelfmarks: [] };
 
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -195,12 +194,6 @@ class ManuscriptsLoader extends React.Component {
     }
     this.setState({ selectedShelfmarks });
 
-    /*
-    let manuscriptSelectors = this.props.manuscripts.map(manuscript => {
-      return <option key={manuscript.id}>{manuscript.shelfmark}</option>;
-    });
-    this.setState( { manuscriptSelectors, selectedShelfmarks });
-    */
     this.props.handleSelect(name, value);
   }
 

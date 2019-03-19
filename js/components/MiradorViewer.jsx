@@ -8,7 +8,8 @@ export default class MiradorViewer extends Component {
       id: "mirador",
       layout: "1x1",
       buildPath: "mirador/",
-      data: [
+      /* XXX Eventually need to be able to load multiple MSs dynamically */
+      data: [ 
         {
           manifestUri: this.props.manifestURL,
           location: "Stanford University"

@@ -1,20 +1,24 @@
 import React, { Component } from "react";
 
 import "bulma/css/bulma.min.css";
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faBookOpen);
+/* Loading fontawesome icons via React seems easier than doing it via site-wide CSS */
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faBookOpen, faTable, faImage } from '@fortawesome/free-solid-svg-icons';
+library.add(faBookOpen, faTable, faImage);
 
 import DashTabs from "./DashTabs";
 
+/* The entire app needs to be wrapped in the drag-and-drop context */
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 
 import ManuscriptForm from "./ManuscriptForm";
 
+/* Include a backup MS list in case the API/network is down */
 import {defaultManuscripts} from "./ManuscriptsLoader";
 
+/* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
 class App extends Component {
@@ -37,6 +41,7 @@ class App extends Component {
     this.processCoords = this.processCoords.bind(this);
   }
 
+  /* Probably we can just rely on the browser to handle query caching */
   /*
   doFetch(url) {
     if (!(url in this.queryCache)) {
@@ -50,17 +55,12 @@ class App extends Component {
   }*/
   
   queryManuscripts() {
-    /* First get all pages for the manuscript */
     console.log("Querying manuscripts");
 
     fetch("http://localhost:8000/api/manuscripts?display=true")
     .then(response => {
       return response.json();
     })
-    /* In production, it's likely preferable for the menu to display
-     * a blank list when the backend API is down, rather than
-     * displaying mock data that does not reflect the database state.
-     */
     .catch(function(error) {
       return defaultManuscripts;
     })
@@ -80,11 +80,7 @@ class App extends Component {
       }
 
       manuscripts.push(ms);
-        
-      //console.log("adding manuscript " + ms.id);
-
       let msQuery = "http://localhost:8000/api/pages?manuscript_id=" + ms.id;
-
       manuscriptQueries.push(msQuery);
     }
 
@@ -113,7 +109,6 @@ class App extends Component {
   }
 
   processCoords(coordsQueries, formData) {
-    console.log("Running coords queries");
 
     Promise.all(coordsQueries.map(url =>
       //this.doFetch(url)
@@ -147,33 +142,15 @@ class App extends Component {
             }
 
             if (tableData[msID][ltID].length >= MAX_EXAMPLES) {
-              //console.log("Already have " + tableData[msID][ltID].length + " instances of letter " + formData.letters.find(l => l["id"] == ltID)["display"] + " " + ltID + " on ms " + msID + ", skipping");
               continue;
             }
 
             if (coords["binary_url"] !== null) {
               let letterInstance = {'page': pageID, 'pageurl': pageURL, 'letter': ltID, 'binaryurl': coords["binary_url"], 'id': coords["id"], 'top': coords["top"], 'left': coords["left"], 'width': coords["width"], 'height': coords["height"] };
-              //console.log("ADDING NEW LETTER INSTANCE OF id " + ltID + " IN MS " + msID + ": " + formData.letters.find(l => l["id"] == ltID)["display"]);
               tableData[msID][ltID].push(letterInstance);
             }
           }
         }
-        /*console.log("tableData has " + Object.keys(tableData).length + " manuscript keys");
-        let tableLetters = [];
-        let tableManuscripts = [];
-        for (let msID of Object.keys(tableData)) {
-          if (tableManuscripts.indexOf(msID) === -1) {
-            tableManuscripts.push(msID);
-          }
-          for (let ltID of Object.keys(tableData[msID])) {
-            if (tableLetters.indexOf(ltID) === -1) {
-              tableLetters.push(ltID);
-            }
-          }
-        }
-        console.log("tableData has " + tableManuscripts.length + " manuscrips cols " + tableManuscripts);
-        console.log("tableData has " + tableLetters.length + " letter rows " + tableLetters);
-        */
         this.setState({ tableData: tableData, formData: formData, showTabs: true});
       })
   }
@@ -191,13 +168,14 @@ class App extends Component {
      * get around the challenges of clearing local state on all of the
      * child components. On the other hand, the specification is that
      * submitting a new query via the form SHOULD completely reset the
-     * chart, and that's what this does.
+     * chart, and that's what this does. Also, the key could eventually
+     * be used as an external 'bookmark' for any specific set of
+     * letters, manuscripts, and display options.
      */
     let chartKey=JSON.stringify(this.state.formData);
 
     return (
       <div className="App">
-        {/* <Header className="App-header" /> */}
         <div className={"columns main-content"}>
           <div className={"column is-one-quarter"}>
             <div className={"box"}>
@@ -213,7 +191,6 @@ class App extends Component {
                       manuscripts={this.state.manuscripts} />
           </div>
         </div>
-        {/* <Footer /> */}
       </div>
     );
   }

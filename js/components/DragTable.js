@@ -41,7 +41,7 @@ class DragTable extends React.Component {
       >
         <Sticky.Header
           style={{
-            maxWidth: 800
+            maxWidth: "100vw"
           }}
           ref={tableHeader => {
             this.tableHeader = tableHeader && tableHeader.getRef();
@@ -53,8 +53,8 @@ class DragTable extends React.Component {
           rowKey="id"
           onRow={this.props.onRow} 
           style={{
-            maxWidth: 800,
-            maxHeight: 800
+            maxWidth: "100vw",
+            maxHeight: "100vh"
           }}
           ref={tableBody => {
             this.tableBody = tableBody && tableBody.getRef();

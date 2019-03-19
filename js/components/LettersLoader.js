@@ -2,14 +2,14 @@ import React from "react";
 
 import LetterButton from "./LetterButton";
 
-import SyriacLetter, { letters } from "./SyriacLetter";
+import SyriacLetter, {letters} from "./SyriacLetter";
 
 class LettersLoader extends React.Component {
   constructor(props) {
     super(props);
     this.state = { letterButtons: [],
-                   selectedLetters: [] };
-
+                   selectedLetters: []
+                 };
     this.buttonClick = this.buttonClick.bind(this);
   }
 
@@ -24,37 +24,21 @@ class LettersLoader extends React.Component {
     this.setState({selectedLetters});
   }
 
-  // If the API data source is not available, the set of letters to be
-  // displayed will be the IDs of the active letters data structure
-  // in SyriacLetter.js
-  //data = Object.keys(SyriacLetter.letterInfo);
-
+  /* For convenience, use the Syriac letters defined in SyriacLetter.js, rather
+   * than those avaialble via the API. The letter set is extremely unlikely to
+   * change (unlike the manuscripts/pages/coords), so loading it dynamically
+   * doesn't seem worth the hassle. Care must of course be taken that the
+   * static letters list remains in sync with the DB, particulary regarding IDs.
+   */
   componentDidMount() {
-    fetch("http://localhost:8000/api/letters?format=json")
-      .then(response => {
-        //return response.json();
-        // XXX Probably need to update the DB with the data from
-        // letterInfo, or just not use the DB as source letter data
-        return letters;
-      })
-      /* In production, it's likely preferable for the menu to display
-       * a blank list when the backend API is down, rather than
-       * displaying data that may not reflect the database state.
-       */
-      .catch(function(error) {
-        return letters;
-      })
-      .then(data => {
-        let buttons = data.map(lt => {
-          return (
-            <LetterButton key={lt.id} letterID={lt.id} onLetterClick={this.buttonClick}
-              letter={<SyriacLetter id={lt.id} />}
-            />
-          );
-        });
-        this.setState({ letterButtons: buttons });
-      });
+    let buttons = letters.map(lt => {
+      return (<LetterButton key={lt.id} letterID={lt.id} onLetterClick={this.buttonClick}
+              letter={<SyriacLetter id={lt.id} />} />);
+    });
+
+    this.setState({ letterButtons: buttons });
   }
+  
   render() {
     return (
       <div className={"buttons are-small"}>{this.state.letterButtons}</div>

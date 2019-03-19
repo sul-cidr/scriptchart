@@ -3,6 +3,17 @@ import React from "react";
 import ManuscriptsLoader from "./ManuscriptsLoader";
 
 class ManuscriptMenu extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.handleSelect = this.handleSelect.bind(this);
+
+  }
+
+  handleSelect(name, value) {
+    this.props.handleSelect(name, value);
+  }
   
   render() {
     return (
@@ -10,7 +21,7 @@ class ManuscriptMenu extends React.Component {
         <label className={"control"}>Select Manuscripts:</label>
         <div className={"control"}>
           <div className={"select is-multiple"}>
-            <ManuscriptsLoader />
+            <ManuscriptsLoader handleSelect={this.handleSelect} manuscripts={this.props.manuscripts} />
           </div>
         </div>
         <div className={"control sort-option"}>

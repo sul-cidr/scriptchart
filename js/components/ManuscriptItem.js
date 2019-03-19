@@ -1,5 +1,7 @@
 import React from "react";
 
+/* Basic representation of a manuscript, to be used in the "Hidden Items" accordion */
+
 class ManuscriptItem extends React.Component {
   constructor(props) {
     super(props);

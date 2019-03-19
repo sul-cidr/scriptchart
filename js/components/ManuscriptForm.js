@@ -2,13 +2,6 @@ import React from "react";
 import ManuscriptMenu from "./ManuscriptMenu";
 import LettersLoader from "./LettersLoader";
 
-import { letters } from "./SyriacLetter";
-import { manuscripts } from "./ManuscriptsLoader";
-
-// In this component, we would actually pass a list of
-// manuscripts, and have a toggle to sort by date or name
-// The list could come from a json object with name and date
-
 class ManuscriptForm extends React.Component {
 
   constructor(props) {
@@ -40,7 +33,10 @@ class ManuscriptForm extends React.Component {
 
   }
 
-  /* Probably need a separate handler for multi-select events */
+  /* This is the handler for the multi-select items (manuscript list and letter
+    * button grid). It would be nice to integrate this with handleChagne(),
+    * but this hasn't been workable so far.
+    */
   handleSelect(name, value) {
     this.setState({
       [name]: value
@@ -51,7 +47,7 @@ class ManuscriptForm extends React.Component {
   handleSubmit(event) {
     // Stop the whole darn page from reloading on submit
     event.preventDefault();
-    // Pass all of the form's state to the handler (which is DashTabs)
+    // Pass all of the form's state to the handler (which is in DashTabs)
     this.props.formSubmit(this.state);
   }
 

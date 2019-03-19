@@ -7,6 +7,9 @@ class LetterImage extends React.Component {
     this.resizeKeepAspect = this.resizeKeepAspect.bind(this);
   }
 
+  /* Canvas-based code will eventually be useful when loading
+   * non-binarized images with variable-sized crop margins.
+   */
   /*componentDidMount() {
 
     const ctx = this.refs.canvas.getContext('2d');
@@ -45,8 +48,6 @@ class LetterImage extends React.Component {
       maxDim = 100;
       dims = this.resizeKeepAspect(imgWidth, imgHeight, maxDim);
     }
-
-    //console.log("Image input wh is " + imgWidth + "," + imgHeight + " resized is " + dims['width'] + "," + dims['height']);
 
     return (
       <span style={{display: "inline-block"}}>

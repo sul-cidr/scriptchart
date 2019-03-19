@@ -1,11 +1,7 @@
 import React from "react";
 
-// Only needed if we have child header cells
-//import { cloneDeep } from "lodash";
-
-// Remove this soon -- this data will come from DashTabs
-// (the parent component) instead
-
+/* Formerly needed for drag-and-drop, but currently
+ * overridden. */
 //import * as dnd from "reactabular-dnd";
 
 import DragTable from "./DragTable";
@@ -20,28 +16,19 @@ class ScriptChart extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      //columns: [],
-      //rows: []
-      //tableData: {}
-    };
-
     this.getRows = this.getRows.bind(this);
     this.getColumns = this.getColumns.bind(this);
     this.onRow = this.onRow.bind(this);
-    this.onMoveRow = this.onMoveRow.bind(this);
-    this.onMoveColumn = this.onMoveColumn.bind(this);
-    //this.onMoveChildColumn = this.onMoveChildColumn.bind(this);
     this.onHideColumn = this.onHideColumn.bind(this);
     this.onHideRow = this.onHideRow.bind(this);
     this.viewManifest = this.viewManifest.bind(this);
   }
 
-  /* Table data should be stored as a two-dimensional array.
+  /* Table data is stored as a two-dimensional array.
    * First key: letter ID (row)
    * Second key: manuscript ID (column)
    * Value: an Object containing the data necessary to render
-   * 1-3 image letter excerpts (binarized or not). This includes
+   * 1-5 image letter excerpts (binarized or not). This includes
    * the link to the page URL and the coordinates of each letter.
    */
 
@@ -53,20 +40,11 @@ class ScriptChart extends React.Component {
     columnHider(manuscriptID);
   }
 
-  resizeKeepAspect(inWidth, inHeight, maxDim) {
-    let hwRatio = parseFloat(inHeight) / parseFloat(inWidth);
-    if (inWidth >= inHeight) {
-      return { 'height': Math.round(hwRatio * maxDim), 'width': maxDim };
-    } else {
-      return { 'height': maxDim, 'width': Math.round(maxDim / hwRatio) };
-    }
-  }
-
-
   getRows() {
 
     let rows = [];
   
+    /* Add row that will contain link to Mirador viewer, column hider Xs */
     let colControls = { id: 0, ltid: "", letter: "", visible: true };
 
     /* Add dates row */
@@ -94,8 +72,9 @@ class ScriptChart extends React.Component {
 
       /* Syriac row labels will only drag-and-drop correctly when
        * instantiated manually here -- wrapping them in a
-       * <SyriacLetter> component doesn't seem to work (though
-       * it's fine for the buttons). */
+       * <SyriacLetter> component doesn't seem to work here, though
+       * it's fine for the buttons. So there's some code repetition
+       * between this and SyriacLetter.js at the moment. */
       let trailing = "";
       let leading = "";
       let thisFont = "sans-serif";
@@ -126,7 +105,6 @@ class ScriptChart extends React.Component {
       let ltID = this.props.rowLetters[i]['id'];
       let row = { id: i + 2, ltid: ltID,
                   //letter: <SyriacLetter id={ltID} />,
-                  //letter: <p>{ltID}</p>,
                   letter: <span style={{direction: "rtl", fontSize: "2em", fontFamily: thisFont}}>{trailing}{display}{leading}</span>,
                   visible: (!this.props.hiddenLetters.includes(ltID)) };
  
@@ -142,8 +120,6 @@ class ScriptChart extends React.Component {
                              .slice(0,this.props.formData.letterExamples)
                              .map(coords => { 
                               return <LetterImage key={coords.id} coords={coords} sizeClass={this.props.formData.imageSize} />});
-          //console.log("adding " + this.props.tableData[msID][ltID].length + " new letter instances at msID " + msID + ", ltID " + ltID);
-          //this.prop.tableData[msID][ltID].map(coords => { console.log("letter " + coords['letter'] + " binary URL is " + coords["binaryurl"]); });
           row["manuscript" + (j + 1)] = <div msid={msID}>{cellContents}</div>;
         }
       }
@@ -205,7 +181,7 @@ class ScriptChart extends React.Component {
           label: this.props.columnManuscripts[i]['shelfmark'],
           props: {
             label: this.props.columnManuscripts[i]['shelfmark'],
-            onMove: o => this.onMoveColumn(o)
+            onMove: o => this.props.onColumnMove(o)
           }
         },
         visible: (!this.props.hiddenManuscripts.includes(this.props.columnManuscripts[i]['id'])),
@@ -222,19 +198,8 @@ class ScriptChart extends React.Component {
   onRow(row) {
     return {
       rowId: row.ltid,
-      onMove: this.onMoveRow
+      onMove: this.props.onRowMove
     };
-  }
-
-  onMoveRow({ sourceRowId, targetRowId }) {
-
-    this.props.onRowMove(sourceRowId, targetRowId);
-  }
-
-  onMoveColumn(labels) {
-
-    this.props.onColumnMove(labels);
-  
   }
 
   onHideRow(letterID) {

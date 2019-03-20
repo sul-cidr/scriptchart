@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+/* MiradorViewer - embedded version of the Mirador IIIF viewer application,
+ * which is a Javascript app loaded as an NPM module.
+ */
+
 import "./MiradorViewer.css";
 
 export default class MiradorViewer extends Component {
@@ -9,7 +13,7 @@ export default class MiradorViewer extends Component {
       layout: "1x1",
       buildPath: "mirador/",
       /* XXX Eventually need to be able to load multiple MSs dynamically */
-      data: [ 
+      data: [
         {
           manifestUri: this.props.manifestURL,
           location: "Stanford University"

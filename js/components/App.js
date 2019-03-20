@@ -40,6 +40,9 @@ import { defaultManuscripts } from "./ManuscriptsLoader";
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
+//const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+const API_ROOT = "http://localhost:8000/api/"
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -60,9 +63,8 @@ class App extends Component {
   }
 
   queryManuscripts() {
-    console.log("Querying manuscripts");
 
-    fetch("http://localhost:8000/api/manuscripts?display=true")
+    fetch(API_ROOT + "manuscripts?display=true&format=json")
       .then(response => {
         return response.json();
       })
@@ -83,7 +85,7 @@ class App extends Component {
       }
 
       manuscripts.push(ms);
-      let msQuery = "http://localhost:8000/api/pages?manuscript_id=" + ms.id;
+      let msQuery = API_ROOT + "pages?manuscript_id=" + ms.id + "&format=json";
       manuscriptQueries.push(msQuery);
     }
 
@@ -104,10 +106,11 @@ class App extends Component {
         for (let page of pages) {
           for (let letter of formData.letters) {
             let coordsQuery =
-              "http://localhost:8000/api/coordinates?page_id=" +
+              API_ROOT + "coordinates?page_id=" +
               page["id"] +
               "&letter_id=" +
-              letter["id"];
+              letter["id"] +
+              "&format=json";
             coordsQueries.push(coordsQuery);
           }
         }

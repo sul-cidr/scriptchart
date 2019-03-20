@@ -1,6 +1,10 @@
 import React from "react";
 
-/* Basic representation of a manuscript, to be used in the "Hidden Items" accordion */
+/* ManuscriptItem: a basic list element representation of a manuscript,
+ * to be displayed in the "Hidden Items" ChartAccordion component.
+ * When clicked, signals the ChartAccordion and eventually the DashTabs
+ * to redisplay the manuscript and remove it from the hidden list.
+ */
 
 class ManuscriptItem extends React.Component {
   constructor(props) {
@@ -15,7 +19,9 @@ class ManuscriptItem extends React.Component {
 
   render() {
     return (
-      <li onClick={this.handleClick} style={{ cursor: 'pointer' }}>{this.props.display}</li>
+      <li onClick={this.handleClick} style={{ cursor: "pointer" }}>
+        {this.props.display}
+      </li>
     );
   }
 }

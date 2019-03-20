@@ -1,5 +1,11 @@
 import React from "react";
 
+/* SyriacLetter - this component renders the specified Syriac letter, keyed by its ID,
+ * based on the data in the "letters" table. note that the script, leading and trailing
+ * letter data is only stored here at present, and not available via the backend
+ * REST API.
+ */
+
 export const letters = [
     { id: 2, letter: "Alaph (Angular)", is_script: true, display: "ܐ", script: "estrangela" },
     { id: 4, letter: "Alaph (Round)", is_script: true, display: "ܐ", script: "serto" },
@@ -38,6 +44,7 @@ export const letters = [
     { id: 42, letter: "Taw (L-shaped)", is_script: true, display: "ܬ", script: "serto" }
 ];
 
+
 class SyriacLetter extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +53,7 @@ class SyriacLetter extends React.Component {
     this.trailing = "";
     this.leading = "";
 
-    if ( this.letter !== undefined) {
+    if (this.letter !== undefined) {
       this.display = this.letter.display;
       this.script = this.letter.script;
       /* Fonts provided by https://sedra.bethmardutho.org/about/fonts */
@@ -55,16 +62,24 @@ class SyriacLetter extends React.Component {
       } else if (this.script == "estrangela") {
         this.font = "EstrangeloEdessa";
       } else {
-        this.font = "sans-serif"
+        this.font = "sans-serif";
       }
-      /* Prefix final letters (and wrap medial letters) via transparent
+      /* Prefix final forms (and wrap medial forms) via transparent
        * "spacer" letters to make them display properly. Note that
        * positions are read from right to left. */
       if (this.letter.hasOwnProperty("trailing_letter")) {
-        this.trailing = <span style={{ color: 'transparent' }}>{this.letter.trailing_letter}</span>;
+        this.trailing = (
+          <span style={{ color: "transparent" }}>
+            {this.letter.trailing_letter}
+          </span>
+        );
       }
       if (this.letter.hasOwnProperty("leading_letter")) {
-        this.leading = <span style={{ color: 'transparent' }}>{this.letter.leading_letter}</span>;
+        this.leading = (
+          <span style={{ color: "transparent" }}>
+            {this.letter.leading_letter}
+          </span>
+        );
       }
     } else {
       if (this.props.hasOwnProperty("letter")) {
@@ -73,11 +88,19 @@ class SyriacLetter extends React.Component {
         this.display = this.props.id;
       }
     }
-
   }
 
   render() {
-    return <span style={{direction: "rtl", fontSize: "2em", fontFamily: this.font}}>{this.trailing}{this.display}{this.leading}</span>;
+    return (
+      <span
+        title={this.display}
+        style={{ direction: "rtl", fontSize: "2em", fontFamily: this.font }}
+      >
+        {this.trailing}
+        {this.display}
+        {this.leading}
+      </span>
+    );
   }
 }
 

@@ -1,15 +1,32 @@
 import React from "react";
 
+/* DashTabs - this is the figurative canvas on which the
+ * scriptchart table and accompanying Mirador viewer
+ * and ChartAccordion list of hidden manuscripts and letters
+ * reside under their own tabs.
+ * 
+ * It is responsible for keeping track of the contents and
+ * orderings of the rows and columns in the table, as well
+ * as those that have been hidden and are listed in the
+ * ChartAccordion. As such, it handles dragging and dropping
+ * of rows and columns, as well as hiding/redisplaying them.
+ * 
+ * Conditional rendering: this component is blank until the
+ * configuration form is submitted, at which time it populates
+ * the letter and manuscript lists with data that the App
+ * has queried from the REST API.
+ */
+
 import ScriptChart from "./ScriptChart";
 import MiradorViewer from "./MiradorViewer";
 import ChartAccordion from "./ChartAccordion";
 
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 import "../../vendor/syriac_fonts.css";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./DashTabs.css";
 
@@ -30,10 +47,11 @@ class DashTabs extends React.Component {
     this.onHiddenChange = this.onHiddenChange.bind(this);
     this.onColumnMove = this.onColumnMove.bind(this);
     this.onRowMove = this.onRowMove.bind(this);
-
   }
 
   onColumnMove(labels) {
+    let sourceShelfmark = labels["sourceLabel"];
+    let targetShelfmark = labels["targetLabel"];
 
     let columnManuscripts = [];
 
@@ -43,21 +61,37 @@ class DashTabs extends React.Component {
       columnManuscripts = [...this.state.columnManuscripts];
     }
 
-    let sourceShelfmark = labels['sourceLabel'];
-    let targetShelfmark = labels['targetLabel'];
+    let sourceIndex = columnManuscripts.findIndex(
+      ms => ms.shelfmark == sourceShelfmark
+    );
+    let targetIndex = columnManuscripts.findIndex(
+      ms => ms.shelfmark == targetShelfmark
+    );
 
-    let sourceIndex = columnManuscripts.findIndex(ms => ms.shelfmark == sourceShelfmark);
-    let targetIndex = columnManuscripts.findIndex(ms => ms.shelfmark == targetShelfmark);
+    /* Cancel the move if it involves the first two,
+     * 'pre-manuscript' columns (which contain the row
+     * letter labels and the Xs used to hide rows).
+     */
+    if ((sourceIndex < 0) || (targetIndex < 0)) {
+      return;
+    }
 
-    columnManuscripts[sourceIndex] = columnManuscripts.splice(targetIndex, 1, columnManuscripts[sourceIndex])[0];
+    columnManuscripts[sourceIndex] = columnManuscripts.splice(
+      targetIndex,
+      1,
+      columnManuscripts[sourceIndex]
+    )[0];
 
     this.setState({ columnManuscripts: columnManuscripts });
-
   }
 
-  onRowMove( { sourceRowId, targetRowId } ) {
-
-    if ((sourceRowId == "Date") || (sourceRowId == "") || (targetRowId == "Date") || (targetRowId == "")) {
+  onRowMove({ sourceRowId, targetRowId }) {
+    if (
+      sourceRowId == "Date" ||
+      sourceRowId == "" ||
+      targetRowId == "Date" ||
+      targetRowId == ""
+    ) {
       return;
     }
 
@@ -70,38 +104,45 @@ class DashTabs extends React.Component {
 
     let sourceIndex = rowLetters.findIndex(lt => lt.id == sourceRowId);
     let targetIndex = rowLetters.findIndex(lt => lt.id == targetRowId);
-    
-    rowLetters[sourceIndex] = rowLetters.splice(targetIndex, 1, rowLetters[sourceIndex])[0];
+
+    rowLetters[sourceIndex] = rowLetters.splice(
+      targetIndex,
+      1,
+      rowLetters[sourceIndex]
+    )[0];
 
     this.setState({ rowLetters: rowLetters });
-
   }
 
-  onManifestSelected( selectedURL ) {
+  onManifestSelected(selectedURL) {
     this.setState({ manifestURL: selectedURL, tabIndex: 1 });
   }
 
-  onHiddenChange( showOrHide, rowOrColumn, itemID ) {
-
+  onHiddenChange(showOrHide, rowOrColumn, itemID) {
     if (showOrHide == "show") {
       // Show (aka "unhide") requests only come from the accordion and are sent to the scriptchart
       if (rowOrColumn == "column") {
-        let hiddenIndex = this.state.hiddenManuscripts.findIndex(i => i==itemID );
+        let hiddenIndex = this.state.hiddenManuscripts.findIndex(
+          i => i == itemID
+        );
         if (hiddenIndex !== -1) {
           let hiddenCopy = [...this.state.hiddenManuscripts];
           hiddenCopy.splice(hiddenIndex, 1);
-          this.setState({hiddenManuscripts: hiddenCopy});
-          if ((hiddenCopy.length == 0) && (this.state.hiddenLetters.length == 0 )) {
+          this.setState({ hiddenManuscripts: hiddenCopy });
+          if (hiddenCopy.length == 0 && this.state.hiddenLetters.length == 0) {
             this.setState({ tabIndex: 0 });
           }
         }
       } else if (rowOrColumn == "row") {
-        let hiddenIndex = this.state.hiddenLetters.findIndex(i => i==itemID );
+        let hiddenIndex = this.state.hiddenLetters.findIndex(i => i == itemID);
         if (hiddenIndex !== -1) {
           let hiddenCopy = [...this.state.hiddenLetters];
           hiddenCopy.splice(hiddenIndex, 1);
-          this.setState({hiddenLetters: hiddenCopy});
-          if ((hiddenCopy.length == 0) && (this.state.hiddenManuscripts.length == 0 )) {
+          this.setState({ hiddenLetters: hiddenCopy });
+          if (
+            hiddenCopy.length == 0 &&
+            this.state.hiddenManuscripts.length == 0
+          ) {
             this.setState({ tabIndex: 0 });
           }
         }
@@ -114,16 +155,15 @@ class DashTabs extends React.Component {
         });
       } else if (rowOrColumn == "row") {
         this.setState({
-          hiddenLetters: [...this.state.hiddenLetters, itemID ]
+          hiddenLetters: [...this.state.hiddenLetters, itemID]
         });
       }
     }
   }
 
   render() {
-
     if (this.props.showTabs == false) {
-      return <div></div>
+      return <div />;
     }
 
     console.log("Rendering DashTabs");
@@ -132,7 +172,11 @@ class DashTabs extends React.Component {
     let rowLetters = [];
 
     if (this.state.rowLetters.length == 0) {
-      for (let j=0, llen=this.props.formData.letters.length; j<llen; j++) {
+      for (
+        let j = 0, llen = this.props.formData.letters.length;
+        j < llen;
+        j++
+      ) {
         rowLetters.push(this.props.formData.letters[j]);
       }
     } else {
@@ -140,7 +184,7 @@ class DashTabs extends React.Component {
     }
 
     if (this.state.columnManuscripts.length == 0) {
-      for (let i=0, len=this.props.manuscripts.length; i<len; i++) {
+      for (let i = 0, len = this.props.manuscripts.length; i < len; i++) {
         columnManuscripts.push(this.props.manuscripts[i]);
       }
     } else {
@@ -152,33 +196,53 @@ class DashTabs extends React.Component {
         <div className="container">
           <div className="columns">
             <div className="column">
-              <Tabs defaultFocus={true} selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
+              <Tabs
+                defaultFocus={true}
+                selectedIndex={this.state.tabIndex}
+                onSelect={tabIndex => this.setState({ tabIndex })}
+              >
                 <TabList>
-                  <Tab><FontAwesomeIcon className={"tab-icon"} icon="table" /> Scriptchart</Tab>
-                  <Tab><FontAwesomeIcon className={"tab-icon"} icon="image" /> Manuscript Viewer</Tab>
-                  <Tab disabled={(this.state.hiddenManuscripts.length == 0 && this.state.hiddenLetters.length == 0)}>Hidden Items</Tab>
+                  <Tab>
+                    <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
+                    Scriptchart
+                  </Tab>
+                  <Tab>
+                    <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
+                    Manuscript Viewer
+                  </Tab>
+                  <Tab
+                    disabled={
+                      this.state.hiddenManuscripts.length == 0 &&
+                      this.state.hiddenLetters.length == 0
+                    }
+                  >
+                    Hidden Items
+                  </Tab>
                 </TabList>
                 <TabPanel>
-                  <ScriptChart onHiddenChange={this.onHiddenChange}
-                               hiddenManuscripts={this.state.hiddenManuscripts}
-                               hiddenLetters={this.state.hiddenLetters} 
-                               onManifestSelected={this.onManifestSelected} 
-                               formData={this.props.formData}
-                               tableData={this.props.tableData}
-                               columnManuscripts={columnManuscripts}
-                               rowLetters={rowLetters}
-                               onRowMove={this.onRowMove}
-                               onColumnMove={this.onColumnMove}
-                               />
+                  <ScriptChart
+                    onHiddenChange={this.onHiddenChange}
+                    hiddenManuscripts={this.state.hiddenManuscripts}
+                    hiddenLetters={this.state.hiddenLetters}
+                    onManifestSelected={this.onManifestSelected}
+                    formData={this.props.formData}
+                    tableData={this.props.tableData}
+                    columnManuscripts={columnManuscripts}
+                    rowLetters={rowLetters}
+                    onRowMove={this.onRowMove}
+                    onColumnMove={this.onColumnMove}
+                  />
                 </TabPanel>
                 <TabPanel>
                   <MiradorViewer manifestURL={this.state.manifestURL} />
                 </TabPanel>
                 <TabPanel>
-                  <ChartAccordion onHiddenChange={this.onHiddenChange} 
-                                  columnManuscripts={columnManuscripts}
-                                  hiddenManuscripts={this.state.hiddenManuscripts}
-                                  hiddenLetters={this.state.hiddenLetters} />
+                  <ChartAccordion
+                    onHiddenChange={this.onHiddenChange}
+                    columnManuscripts={columnManuscripts}
+                    hiddenManuscripts={this.state.hiddenManuscripts}
+                    hiddenLetters={this.state.hiddenLetters}
+                  />
                 </TabPanel>
               </Tabs>
             </div>

@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 
+/* Image - previously used to display placeholder letter images
+ * in the scriptchart; likely can be deleted but may be
+ * reused when displaying cropped letter images.
+ */
+
 export default class Image extends Component {
   render() {
     let { mode, src, height, width, style, ...props } = this.props;

@@ -1,14 +1,23 @@
 import React from "react";
 
-/* Formerly needed for drag-and-drop, but currently
- * overridden. */
-//import * as dnd from "reactabular-dnd";
+/* ScriptChart - This is the central script chart/table rendering
+ * component, situated between its parent DashTabs component, which
+ * stores most of the state of the scriptchart contents, and the
+ * DragTable component, which implements lower-level functions of
+ * the scriptchart.
+ * It instantiates the rows and columns via props passed down from
+ * submission of the selection/configuration form (columnManuscripts,
+ * rowLetters), and populates them -- filling in the rows -- 
+ * with data queried from the API.
+ * It also passes up requests to move and hide rows and columns
+ * and to display manuscripts in the viewer, and is re-rendered
+ * when these changes are processed.
+ */
 
 import DragTable from "./DragTable";
-
 import LetterImage from "./LetterImage";
-
 import ColumnControls from "./ColumnControls";
+import SyriacLetter from "./SyriacLetter";
 
 import "./ScriptChart.css";
 
@@ -36,101 +45,88 @@ class ScriptChart extends React.Component {
     manifestActivator(manifestURL);
   }
 
-  onHideColumn( manuscriptID, columnHider ) {
+  onHideColumn(manuscriptID, columnHider) {
     columnHider(manuscriptID);
   }
 
   getRows() {
-
     let rows = [];
-  
+
     /* Add row that will contain link to Mirador viewer, column hider Xs */
     let colControls = { id: 0, ltid: "", letter: "", visible: true };
 
     /* Add dates row */
-    let datesRow = { id: 1, ltid: "Date", letter: "Date", ltid: "Date", visible: (!this.props.hiddenLetters.includes("Date")) };
+    let datesRow = {
+      id: 1,
+      ltid: "Date",
+      letter: "Date",
+      ltid: "Date",
+      visible: !this.props.hiddenLetters.includes("Date")
+    };
 
-    for (let i=0, len=this.props.columnManuscripts.length; i<len; i++) {
-      colControls["manuscript" + (i + 1)] = <ColumnControls
-                                                msid={this.props.columnManuscripts[i]['id']}
-                                                shelfmark={this.props.columnManuscripts[i]['shelfmark']}
-                                                manifestURL={this.props.columnManuscripts[i]['manifest']}
-                                                displayManifest={this.viewManifest}
-                                                onHideColumn={this.onHideColumn}
-                                                onHiddenChange={this.props.onHiddenChange}
-                                                onManifestSelected={this.props.onManifestSelected}
-                                            />;
-      datesRow["manuscript" + (i + 1)] = this.props.columnManuscripts[i]['date'];
+    for (let i = 0, len = this.props.columnManuscripts.length; i < len; i++) {
+      colControls["manuscript" + (i + 1)] = (
+        <ColumnControls
+          msid={this.props.columnManuscripts[i]["id"]}
+          shelfmark={this.props.columnManuscripts[i]["shelfmark"]}
+          manifestURL={this.props.columnManuscripts[i]["manifest"]}
+          displayManifest={this.viewManifest}
+          onHideColumn={this.onHideColumn}
+          onHiddenChange={this.props.onHiddenChange}
+          onManifestSelected={this.props.onManifestSelected}
+        />
+      );
+      datesRow["manuscript" + (i + 1)] = this.props.columnManuscripts[i][
+        "date"
+      ];
     }
     rows.push(colControls);
     rows.push(datesRow);
-  
-    /* Load the letters data into the rows array */
-    for (let i=0, len=this.props.rowLetters.length; i < len; i++) {
 
+    /* Load the letters data into the rows array */
+    for (let i = 0, len = this.props.rowLetters.length; i < len; i++) {
       let thisLetter = this.props.rowLetters[i];
 
-      /* Syriac row labels will only drag-and-drop correctly when
-       * instantiated manually here -- wrapping them in a
-       * <SyriacLetter> component doesn't seem to work here, though
-       * it's fine for the buttons. So there's some code repetition
-       * between this and SyriacLetter.js at the moment. */
-      let trailing = "";
-      let leading = "";
-      let thisFont = "sans-serif";
+      let ltID = this.props.rowLetters[i]["id"];
+      let row = {
+        id: i + 2,
+        ltid: ltID,
+        letter: <SyriacLetter key={ltID} id={ltID} />,
+        visible: !this.props.hiddenLetters.includes(ltID)
+      };
 
-      let display = thisLetter.display;
-      let script = thisLetter.script;
-      if (script == "serto") {
-        thisFont = "SertoJerusalem";
-      } else if (script == "estrangela") {
-        thisFont = "EstrangeloEdessa";
-      } 
-
-      if (thisLetter.hasOwnProperty("trailing_letter")) {
-        trailing = <span style={{ color: 'transparent' }}>{thisLetter.trailing_letter}</span>;
-      }
-      if (thisLetter.hasOwnProperty("leading_letter")) {
-        leading = <span style={{ color: 'transparent' }}>{thisLetter.leading_letter}</span>;
-      }
-      if (thisLetter.hasOwnProperty("display")) {
-        display = thisLetter.display;
-      }
-      else if (thisLetter.hasOwnProperty("letter")) {
-        display = thisLetter.letter;
-      } else {
-        display = thisLetter.id;
-      }
-
-      let ltID = this.props.rowLetters[i]['id'];
-      let row = { id: i + 2, ltid: ltID,
-                  //letter: <SyriacLetter id={ltID} />,
-                  letter: <span style={{direction: "rtl", fontSize: "2em", fontFamily: thisFont}}>{trailing}{display}{leading}</span>,
-                  visible: (!this.props.hiddenLetters.includes(ltID)) };
- 
       /* This is where the actual letter instances from the manuscript
        * pages are added */
-      for (let j=0, len=this.props.columnManuscripts.length; j < len; j++) {
-        let msID = this.props.columnManuscripts[j]['id'];
+      for (let j = 0, len = this.props.columnManuscripts.length; j < len; j++) {
+        let msID = this.props.columnManuscripts[j]["id"];
 
-        if ((!(msID in this.props.tableData)) || (!(ltID in this.props.tableData[msID]))) {
+        if (
+          !(msID in this.props.tableData) ||
+          !(ltID in this.props.tableData[msID])
+        ) {
           row["manuscript" + (j + 1)] = <div msid={msID} />;
         } else {
           let cellContents = this.props.tableData[msID][ltID]
-                             .slice(0,this.props.formData.letterExamples)
-                             .map(coords => { 
-                              return <LetterImage key={coords.id} coords={coords} sizeClass={this.props.formData.imageSize} />});
+            .slice(0, this.props.formData.letterExamples)
+            .map(coords => {
+              return (
+                <LetterImage
+                  key={coords.id}
+                  coords={coords}
+                  sizeClass={this.props.formData.imageSize}
+                />
+              );
+            });
           row["manuscript" + (j + 1)] = <div msid={msID}>{cellContents}</div>;
         }
       }
-  
+
       rows.push(row);
     }
     return rows;
   }
 
   getColumns() {
-
     let cols = [
       {
         property: "letter",
@@ -155,39 +151,45 @@ class ScriptChart extends React.Component {
         }
       },
       props: {
-        style: { width: 45 },
+        style: { width: 45 }
       },
       cell: {
         formatters: [
-          (value, { rowData }) => (rowData.id > 0) ?
-            <span
-              className="remove"
-              onClick={() => this.onHideRow(rowData.ltid)} style={{ cursor: 'pointer' }}
-            >
-              &#10007;
-            </span>
-          : <span></span>
+          (value, { rowData }) =>
+            rowData.id > 0 ? (
+              <span
+                className="remove"
+                onClick={() => this.onHideRow(rowData.ltid)}
+                style={{ cursor: "pointer" }}
+              >
+                &#10007;
+              </span>
+            ) : (
+              <span />
+            )
         ]
       },
       visible: true
-    }
+    };
     cols.push(rowRemoverColumn);
     /* Iteratively populate the columns */
-    for (let i=0, len=this.props.columnManuscripts.length; i < len; i++) {
+    for (let i = 0, len = this.props.columnManuscripts.length; i < len; i++) {
       // Consider just not generating values for currently hidden columns...
       let column = {
         property: "manuscript" + (i + 1),
         header: {
-          label: this.props.columnManuscripts[i]['shelfmark'],
+          label: this.props.columnManuscripts[i]["shelfmark"],
           props: {
-            label: this.props.columnManuscripts[i]['shelfmark'],
+            label: this.props.columnManuscripts[i]["shelfmark"],
             onMove: o => this.props.onColumnMove(o)
           }
         },
-        visible: (!this.props.hiddenManuscripts.includes(this.props.columnManuscripts[i]['id'])),
+        visible: !this.props.hiddenManuscripts.includes(
+          this.props.columnManuscripts[i]["id"]
+        ),
         props: {
-          msid: this.props.columnManuscripts[i]['id'],
-          style: {width: 200}
+          msid: this.props.columnManuscripts[i]["id"],
+          style: { width: 200 }
         }
       };
       cols.push(column);
@@ -207,18 +209,18 @@ class ScriptChart extends React.Component {
   }
 
   render() {
-
     console.log("Rendering ScriptChart");
 
     let rows = this.getRows();
     let columns = this.getColumns();
 
     return (
-      <DragTable rows={rows}
-                 columns={columns}
-                 hiddenLetters={this.props.hiddenLetters}
-                 hiddenManuscripts={this.props.hiddenManuscripts}
-                 onRow={this.onRow}
+      <DragTable
+        rows={rows}
+        columns={columns}
+        hiddenLetters={this.props.hiddenLetters}
+        hiddenManuscripts={this.props.hiddenManuscripts}
+        onRow={this.onRow}
       />
     );
   }

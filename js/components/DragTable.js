@@ -1,22 +1,24 @@
 import React from "react";
 
+/* DragTable - The lowest level of the scriptchart
+ * component hierarchy; contains mostly boilerplate
+ * implementation of the reactabular "sticky headers"
+ * and "draggable rows/columns" features (custom behavior
+ * is handled by its parent ScriptChart).
+ * 
+ * XXX Currently has some issues with formatting: column
+ * headers don't always match the witdh of their content
+ * cells below, and the chart size/scrollbar capabilities
+ * could use refinement.
+ */
+
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
-import * as Sticky from 'reactabular-sticky';
-
+import * as Sticky from "reactabular-sticky";
 
 class DragTable extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    // We have refs now. Force update to get those to Header/Body.
-    // XXX Is this necessary?
-    this.forceUpdate();
-  }
-
-  componentDidUpdate() {
   }
 
   render() {
@@ -31,13 +33,14 @@ class DragTable extends React.Component {
       }
     };
 
-
     return (
       <Table.Provider
         className="pure-table pure-table-striped"
         style={{ overflowX: "auto" }}
         renderers={renderers}
-        columns={this.props.columns.filter(column => !this.props.hiddenManuscripts.includes(column.props.msid))}
+        columns={this.props.columns.filter(
+          column => !this.props.hiddenManuscripts.includes(column.props.msid)
+        )}
       >
         <Sticky.Header
           style={{
@@ -49,9 +52,11 @@ class DragTable extends React.Component {
           tableBody={this.tableBody}
         />
         <Sticky.Body
-          rows={this.props.rows.filter(row => !this.props.hiddenLetters.includes(row.ltid))}
+          rows={this.props.rows.filter(
+            row => !this.props.hiddenLetters.includes(row.ltid)
+          )}
           rowKey="id"
-          onRow={this.props.onRow} 
+          onRow={this.props.onRow}
           style={{
             maxWidth: "100vw",
             maxHeight: "100vh"
@@ -60,7 +65,7 @@ class DragTable extends React.Component {
             this.tableBody = tableBody && tableBody.getRef();
           }}
           tableHeader={this.tableHeader}
-          />
+        />
       </Table.Provider>
     );
   }

@@ -1,27 +1,37 @@
 import React from "react";
 
+/* LettersLoader - Builds a grid of LetterButtons (containing
+ * SyriacLetter components) for the configuration form.
+ * It doesn't actually "load" the letters from a remote location
+ * -- rather, they're now read from an array in the SyriacLetter
+ * component.
+ * It also updates the form's list of selected letters when one
+ * is selected/deselected.
+ */
+
 import LetterButton from "./LetterButton";
 
-import SyriacLetter, {letters} from "./SyriacLetter";
+import SyriacLetter, { letters } from "./SyriacLetter";
 
 class LettersLoader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { letterButtons: [],
-                   selectedLetters: []
-                 };
+    this.state = { letterButtons: [], selectedLetters: [] };
     this.buttonClick = this.buttonClick.bind(this);
   }
 
   buttonClick(letterID, operation) {
     let selectedLetters = [...this.state.selectedLetters];
     if (operation == "select") {
-      selectedLetters.push(letters.find(lt => lt['id'] == letterID));
+      selectedLetters.push(letters.find(lt => lt["id"] == letterID));
     } else {
-      selectedLetters.splice(selectedLetters.findIndex(lt => lt['id'] == letterID), 1);
+      selectedLetters.splice(
+        selectedLetters.findIndex(lt => lt["id"] == letterID),
+        1
+      );
     }
     this.props.handleSelect("letters", selectedLetters);
-    this.setState({selectedLetters});
+    this.setState({ selectedLetters });
   }
 
   /* For convenience, use the Syriac letters defined in SyriacLetter.js, rather
@@ -32,13 +42,19 @@ class LettersLoader extends React.Component {
    */
   componentDidMount() {
     let buttons = letters.map(lt => {
-      return (<LetterButton key={lt.id} letterID={lt.id} onLetterClick={this.buttonClick}
-              letter={<SyriacLetter id={lt.id} />} />);
+      return (
+        <LetterButton
+          key={lt.id}
+          letterID={lt.id}
+          onLetterClick={this.buttonClick}
+          letter={<SyriacLetter id={lt.id} />}
+        />
+      );
     });
 
     this.setState({ letterButtons: buttons });
   }
-  
+
   render() {
     return (
       <div className={"buttons are-small"}>{this.state.letterButtons}</div>

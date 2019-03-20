@@ -1,5 +1,14 @@
 import React from "react";
 
+/* ManuscriptsLoader - Renders the list of available manuscripts in the
+ * ManuscriptsMenu form component, and passes their selection/deselection
+ * events up the form component chain.
+ * It doesn't actually load the manuscripts list from an external source;
+ * this data has already been queried via the REST API by the App component.
+ * This does however contain the defaultManuscripts array, which the App
+ * component uses if the REST API is not available.
+ */
+
 /* Mock data to use in development when local API backend is not available */
 export const defaultManuscripts = [
   {
@@ -198,19 +207,25 @@ class ManuscriptsLoader extends React.Component {
   }
 
   render() {
-
     let manuscriptSelectors = this.props.manuscripts.map(ms => {
-      return <option key={ms.id} value={ms.shelfmark}>{ms.shelfmark}</option>;
+      return (
+        <option key={ms.id} value={ms.shelfmark}>
+          {ms.shelfmark}
+        </option>
+      );
     });
 
-    return <select
-             type="string"
-             name="selectedShelfmarks"
-             value={this.state.selectedShelfmarks}
-             onChange={this.handleSelect}
-             multiple={true}>
-             {manuscriptSelectors}
-            </select>;
+    return (
+      <select
+        type="string"
+        name="selectedShelfmarks"
+        value={this.state.selectedShelfmarks}
+        onChange={this.handleSelect}
+        multiple={true}
+      >
+        {manuscriptSelectors}
+      </select>
+    );
   }
 }
 

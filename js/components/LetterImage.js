@@ -1,5 +1,16 @@
 import React from "react";
 
+/* LetterImage - displays a letter image retrieved from
+ * a URL that points to the image on the backend server.
+ * It also resizes the image according to the size specified
+ * in the configuration form, maintaining the aspect ratio
+ * of the original.
+ */
+
+const SMALL_DIM = 25;
+const MEDIUM_DIM = 50;
+const LARGE_DIM = 100;
+
 class LetterImage extends React.Component {
   constructor(props) {
     super(props);
@@ -7,8 +18,9 @@ class LetterImage extends React.Component {
     this.resizeKeepAspect = this.resizeKeepAspect.bind(this);
   }
 
-  /* Canvas-based code will eventually be useful when loading
-   * non-binarized images with variable-sized crop margins.
+  /* Canvas-based code may eventually be useful when loading
+   * and possibly cropping non-binarized images with variable-sized
+   * crop margins.
    */
   /*componentDidMount() {
 
@@ -25,35 +37,40 @@ class LetterImage extends React.Component {
   resizeKeepAspect(inWidth, inHeight, maxDim) {
     let hwRatio = parseFloat(inHeight) / parseFloat(inWidth);
     if (inWidth >= inHeight) {
-      return { 'height': Math.round(hwRatio * maxDim), 'width': maxDim };
+      return { height: Math.round(hwRatio * maxDim), width: maxDim };
     } else {
-      return { 'height': maxDim, 'width': Math.round(maxDim / hwRatio) };
+      return { height: maxDim, width: Math.round(maxDim / hwRatio) };
     }
   }
 
   render() {
-
     let imgWidth = this.props.coords["width"];
     let imgHeight = this.props.coords["height"];
 
-    let dims={imgWidth, imgHeight};
+    let dims = { imgWidth, imgHeight };
     let maxDim = Math.max(imgWidth, imgHeight);
     if (this.props.sizeClass == "Small") {
-      maxDim = 25;
+      maxDim = SMALL_DIM;
       dims = this.resizeKeepAspect(imgWidth, imgHeight, maxDim);
     } else if (this.props.sizeClass == "Medium") {
-      maxDim = 50;
+      maxDim = MEDIUM_DIM;
       dims = this.resizeKeepAspect(imgWidth, imgHeight, maxDim);
     } else {
-      maxDim = 100;
+      maxDim = LARGE_DIM;
       dims = this.resizeKeepAspect(imgWidth, imgHeight, maxDim);
     }
 
     return (
-      <span style={{display: "inline-block"}}>
+      <span style={{ display: "inline-block" }}>
         {/*<canvas ref="canvas" width={maxDim} height={maxDim}  />
         <img ref="image" src={this.props.coords.binaryurl} className="hidden" />*/}
-        <img ref="image" width={dims['width']} height={dims['height']} src={this.props.coords.binaryurl} />
+        <img
+          alt="Syriac letter"
+          ref="image"
+          width={dims["width"]}
+          height={dims["height"]}
+          src={this.props.coords.binaryurl}
+        />
       </span>
     );
   }

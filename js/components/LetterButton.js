@@ -1,5 +1,15 @@
 import React from "react";
 
+/* LetterButton - Creats a <span> that contains a Bulma
+ * button item, which contains a <SyriacLetter> component.
+ * When clicked, it either signals the DashTabs and
+ * ScriptChart component to redisplay the letter's row
+ * (if this is a button in the ChartAccordion list)
+ * or adds/removes the letter to the list of selected
+ * letters (if this is a button in the configuration form's
+ * letters grid).
+ */
+
 class LetterButton extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +30,6 @@ class LetterButton extends React.Component {
     }
   }
   render() {
-
     return (
       <span className={this.state.buttonClass} onClick={this.onLetterClicked}>
         {this.props.letter}

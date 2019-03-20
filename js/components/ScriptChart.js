@@ -67,18 +67,16 @@ class ScriptChart extends React.Component {
     for (let i = 0, len = this.props.columnManuscripts.length; i < len; i++) {
       colControls["manuscript" + (i + 1)] = (
         <ColumnControls
-          msid={this.props.columnManuscripts[i]["id"]}
-          shelfmark={this.props.columnManuscripts[i]["shelfmark"]}
-          manifestURL={this.props.columnManuscripts[i]["manifest"]}
+          msid={this.props.columnManuscripts[i].id}
+          shelfmark={this.props.columnManuscripts[i].shelfmark}
+          manifestURL={this.props.columnManuscripts[i].manifest}
           displayManifest={this.viewManifest}
           onHideColumn={this.onHideColumn}
           onHiddenChange={this.props.onHiddenChange}
           onManifestSelected={this.props.onManifestSelected}
         />
       );
-      datesRow["manuscript" + (i + 1)] = this.props.columnManuscripts[i][
-        "date"
-      ];
+      datesRow["manuscript" + (i + 1)] = this.props.columnManuscripts[i].date;
     }
     rows.push(colControls);
     rows.push(datesRow);
@@ -87,7 +85,7 @@ class ScriptChart extends React.Component {
     for (let i = 0, len = this.props.rowLetters.length; i < len; i++) {
       let thisLetter = this.props.rowLetters[i];
 
-      let ltID = this.props.rowLetters[i]["id"];
+      let ltID = this.props.rowLetters[i].id;
       let row = {
         id: i + 2,
         ltid: ltID,
@@ -98,7 +96,7 @@ class ScriptChart extends React.Component {
       /* This is where the actual letter instances from the manuscript
        * pages are added */
       for (let j = 0, len = this.props.columnManuscripts.length; j < len; j++) {
-        let msID = this.props.columnManuscripts[j]["id"];
+        let msID = this.props.columnManuscripts[j].id;
 
         if (
           !(msID in this.props.tableData) ||
@@ -130,12 +128,6 @@ class ScriptChart extends React.Component {
     let cols = [
       {
         property: "letter",
-        header: {
-          label: "Date",
-          props: {
-            label: "Date"
-          }
-        },
         visible: true,
         props: {
           style: { width: 80 }
@@ -144,12 +136,6 @@ class ScriptChart extends React.Component {
     ];
     let rowRemoverColumn = {
       property: "row_remover",
-      header: {
-        label: "X",
-        props: {
-          label: "X"
-        }
-      },
       props: {
         style: { width: 45 }
       },
@@ -158,6 +144,7 @@ class ScriptChart extends React.Component {
           (value, { rowData }) =>
             rowData.id > 0 ? (
               <span
+                title="Hide this row"
                 className="remove"
                 onClick={() => this.onHideRow(rowData.ltid)}
                 style={{ cursor: "pointer" }}
@@ -178,17 +165,17 @@ class ScriptChart extends React.Component {
       let column = {
         property: "manuscript" + (i + 1),
         header: {
-          label: this.props.columnManuscripts[i]["shelfmark"],
+          label: this.props.columnManuscripts[i].shelfmark,
           props: {
-            label: this.props.columnManuscripts[i]["shelfmark"],
+            label: this.props.columnManuscripts[i].shelfmark,
             onMove: o => this.props.onColumnMove(o)
           }
         },
         visible: !this.props.hiddenManuscripts.includes(
-          this.props.columnManuscripts[i]["id"]
+          this.props.columnManuscripts[i].id
         ),
         props: {
-          msid: this.props.columnManuscripts[i]["id"],
+          msid: this.props.columnManuscripts[i].id,
           style: { width: 200 }
         }
       };

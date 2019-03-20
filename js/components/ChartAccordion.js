@@ -51,7 +51,7 @@ class ChartAccordion extends React.Component {
                     key={msid}
                     manuscriptID={msid}
                     onHiddenChange={this.props.onHiddenChange}
-                    display={this.props.columnManuscripts[msIndex]["shelfmark"]}
+                    display={this.props.columnManuscripts[msIndex].shelfmark}
                   />
                 );
               })}

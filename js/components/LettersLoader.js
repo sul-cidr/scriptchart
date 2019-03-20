@@ -23,10 +23,19 @@ class LettersLoader extends React.Component {
   buttonClick(letterID, operation) {
     let selectedLetters = [...this.state.selectedLetters];
     if (operation == "select") {
-      selectedLetters.push(letters.find(lt => lt["id"] == letterID));
+      /* The list of selected letters should be in "aphabetical" order */
+      let newLetter = letters.find(lt => lt.id == letterID);
+      selectedLetters.push(newLetter);
+      let alphabetizedSelection = letters.reduce((result, lt) => {
+        if (selectedLetters.findIndex(l => l.id == lt.id) >= 0) {
+          result.push(lt)
+        }
+        return result;
+      }, []);
+      selectedLetters = alphabetizedSelection;
     } else {
       selectedLetters.splice(
-        selectedLetters.findIndex(lt => lt["id"] == letterID),
+        selectedLetters.findIndex(lt => lt.id == letterID),
         1
       );
     }

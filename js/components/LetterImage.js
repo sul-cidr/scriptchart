@@ -44,8 +44,8 @@ class LetterImage extends React.Component {
   }
 
   render() {
-    let imgWidth = this.props.coords["width"];
-    let imgHeight = this.props.coords["height"];
+    let imgWidth = this.props.coords.width;
+    let imgHeight = this.props.coords.height;
 
     let dims = { imgWidth, imgHeight };
     let maxDim = Math.max(imgWidth, imgHeight);
@@ -66,9 +66,9 @@ class LetterImage extends React.Component {
         <img ref="image" src={this.props.coords.binaryurl} className="hidden" />*/}
         <img
           alt="Syriac letter"
-          ref="image"
-          width={dims["width"]}
-          height={dims["height"]}
+          //ref="image"
+          width={dims.width}
+          height={dims.height}
           src={this.props.coords.binaryurl}
         />
       </span>

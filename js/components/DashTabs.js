@@ -50,8 +50,8 @@ class DashTabs extends React.Component {
   }
 
   onColumnMove(labels) {
-    let sourceShelfmark = labels["sourceLabel"];
-    let targetShelfmark = labels["targetLabel"];
+    let sourceShelfmark = labels.sourceLabel;
+    let targetShelfmark = labels.targetLabel;
 
     let columnManuscripts = [];
 

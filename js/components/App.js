@@ -40,8 +40,8 @@ import { defaultManuscripts } from "./ManuscriptsLoader";
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
-//const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
-const API_ROOT = "http://localhost:8000/api/"
+const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+//const API_ROOT = "http://localhost:8000/api/";
 
 class App extends Component {
   constructor(props) {
@@ -63,7 +63,6 @@ class App extends Component {
   }
 
   queryManuscripts() {
-
     fetch(API_ROOT + "manuscripts?display=true&format=json")
       .then(response => {
         return response.json();
@@ -80,7 +79,7 @@ class App extends Component {
     let manuscriptQueries = [];
     let manuscripts = [];
     for (let ms of this.state.allManuscripts) {
-      if (formData.selectedShelfmarks.indexOf(ms["shelfmark"]) < 0) {
+      if (formData.selectedShelfmarks.indexOf(ms.shelfmark) < 0) {
         continue;
       }
 
@@ -106,10 +105,11 @@ class App extends Component {
         for (let page of pages) {
           for (let letter of formData.letters) {
             let coordsQuery =
-              API_ROOT + "coordinates?page_id=" +
-              page["id"] +
+              API_ROOT +
+              "coordinates?page_id=" +
+              page.id +
               "&letter_id=" +
-              letter["id"] +
+              letter.id +
               "&format=json";
             coordsQueries.push(coordsQuery);
           }
@@ -138,11 +138,11 @@ class App extends Component {
         }
 
         for (let coords of coordsData) {
-          let msID = coords["page"]["manuscript"];
-          let pageID = coords["page"]["id"];
-          let pageURL = coords["page"]["url"];
+          let msID = coords.page.manuscript;
+          let pageID = coords.page.id;
+          let pageURL = coords.page.url;
 
-          let ltID = coords["letter"];
+          let ltID = coords.letter;
 
           if (!(msID in tableData)) {
             tableData[msID] = {};
@@ -155,17 +155,17 @@ class App extends Component {
             continue;
           }
 
-          if (coords["binary_url"] !== null) {
+          if (coords.binary_url !== null) {
             let letterInstance = {
               page: pageID,
               pageurl: pageURL,
               letter: ltID,
-              binaryurl: coords["binary_url"],
-              id: coords["id"],
-              top: coords["top"],
-              left: coords["left"],
-              width: coords["width"],
-              height: coords["height"]
+              binaryurl: coords.binary_url,
+              id: coords.id,
+              top: coords.top,
+              left: coords.left,
+              width: coords.width,
+              height: coords.height
             };
             tableData[msID][ltID].push(letterInstance);
           }

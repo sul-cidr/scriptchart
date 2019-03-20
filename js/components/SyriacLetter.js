@@ -66,7 +66,9 @@ class SyriacLetter extends React.Component {
       }
       /* Prefix final forms (and wrap medial forms) via transparent
        * "spacer" letters to make them display properly. Note that
-       * positions are read from right to left. */
+       * positions are read from right to left. 
+       * XXX This trick may only work in Firefox :-(
+       * */
       if (this.letter.hasOwnProperty("trailing_letter")) {
         this.trailing = (
           <span style={{ color: "transparent" }}>

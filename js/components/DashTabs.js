@@ -24,7 +24,7 @@ import ChartAccordion from "./ChartAccordion";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-import "../../vendor/syriac_fonts.css";
+import "../../src/assets/syriac_fonts.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

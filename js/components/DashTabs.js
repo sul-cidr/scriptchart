@@ -82,7 +82,7 @@ class DashTabs extends React.Component {
       columnManuscripts[sourceIndex]
     )[0];
 
-    this.setState({ columnManuscripts: columnManuscripts });
+    this.setState({ columnManuscripts });
   }
 
   onRowMove({ sourceRowId, targetRowId }) {
@@ -111,7 +111,7 @@ class DashTabs extends React.Component {
       rowLetters[sourceIndex]
     )[0];
 
-    this.setState({ rowLetters: rowLetters });
+    this.setState({ rowLetters });
   }
 
   onManifestSelected(selectedURL) {

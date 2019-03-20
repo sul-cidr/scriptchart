@@ -174,7 +174,7 @@ class ScriptChart extends React.Component {
     cols.push(rowRemoverColumn);
     /* Iteratively populate the columns */
     for (let i = 0, len = this.props.columnManuscripts.length; i < len; i++) {
-      // Consider just not generating values for currently hidden columns...
+      // XXX Consider just not generating values for hidden columns...
       let column = {
         property: "manuscript" + (i + 1),
         header: {

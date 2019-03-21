@@ -23,7 +23,7 @@ import {
   AccordionItemBody
 } from "react-accessible-accordion";
 
-// XXX Should this file live somewhere else?
+// XXX Should this file be somewhere else? It's needed to style the accordion.
 import "../../node_modules/react-accessible-accordion/dist/fancy-example.css";
 
 class ChartAccordion extends React.Component {

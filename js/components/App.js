@@ -18,6 +18,8 @@ import React, { Component } from "react";
 
 import "bulma/css/bulma.min.css";
 
+import "../../src/assets/syriac_fonts.css"
+
 /* Loading fontawesome icons via React seems easier than doing it via site-wide CSS */
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {

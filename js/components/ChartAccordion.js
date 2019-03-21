@@ -43,19 +43,17 @@ class ChartAccordion extends React.Component {
           </AccordionItemTitle>
           <AccordionItemBody>
             <ul>
-              {this.props.hiddenManuscripts.map(msid => {
-                let msIndex = this.props.columnManuscripts.findIndex(
-                  m => m["id"] == msid
-                );
-                return (
-                  <ManuscriptItem
-                    key={msid}
-                    manuscriptID={msid}
-                    onHiddenChange={this.props.onHiddenChange}
-                    display={this.props.columnManuscripts[msIndex].shelfmark}
-                  />
-                );
-              })}
+              {this.props.hiddenManuscripts.map(msid =>
+                <ManuscriptItem
+                  key={msid}
+                  manuscriptID={msid}
+                  onHiddenChange={this.props.onHiddenChange}
+                  display={
+                    this.props.columnManuscripts.find(m => m.id == msid)
+                      .shelfmark
+                  }
+                />
+              )}
             </ul>
           </AccordionItemBody>
         </AccordionItem>
@@ -68,16 +66,14 @@ class ChartAccordion extends React.Component {
           </AccordionItemTitle>
           <AccordionItemBody>
             <div className={"buttons are-small"}>
-              {this.props.hiddenLetters.map(ltid => {
-                return (
+              {this.props.hiddenLetters.map(ltid =>
                   <LetterButton
                     key={ltid}
                     letterID={ltid}
                     onHiddenChange={this.props.onHiddenChange}
                     letter={<SyriacLetter id={ltid} />}
                   />
-                );
-              })}
+              )}
             </div>
           </AccordionItemBody>
         </AccordionItem>

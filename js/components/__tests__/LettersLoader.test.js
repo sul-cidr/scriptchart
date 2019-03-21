@@ -2,13 +2,13 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Tabs from '../Tabs';
+import LettersLoader from '../LettersLoader';
 
 
-describe('Tabs test', () => {
-  it('Tabs should match snapshot', () => {
-    const component = renderer.create(<Tabs
-      tabList={[]} activeTab={undefined} changeActiveTab={undefined} />);
+describe('LettersLoader test', () => {
+  it('LettersLoader should match snapshot', () => {
+    const component = renderer.create(<LettersLoader
+       />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

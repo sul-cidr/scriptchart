@@ -65,7 +65,7 @@ class LetterImage extends React.Component {
         {/*<canvas ref="canvas" width={maxDim} height={maxDim}  />
         <img ref="image" src={this.props.coords.binaryurl} className="hidden" />*/}
         <img
-          alt="Syriac letter"
+          alt={this.props.letter}
           //ref="image"
           width={dims.width}
           height={dims.height}

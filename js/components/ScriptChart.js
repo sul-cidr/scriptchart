@@ -83,7 +83,6 @@ class ScriptChart extends React.Component {
 
     /* Load the letters data into the rows array */
     for (let i = 0, len = this.props.rowLetters.length; i < len; i++) {
-      let thisLetter = this.props.rowLetters[i];
 
       let ltID = this.props.rowLetters[i].id;
       let row = {
@@ -110,6 +109,7 @@ class ScriptChart extends React.Component {
               return (
                 <LetterImage
                   key={coords.id}
+                  letter={this.props.rowLetters[i].letter}
                   coords={coords}
                   sizeClass={this.props.formData.imageSize}
                 />

@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManuscriptsLoader test ManuscriptsLoader should match snapshot 1`] = `
+<select
+  multiple={true}
+  name="selectedShelfmarks"
+  onChange={[Function]}
+  type="string"
+  value={Array []}
+>
+  <option
+    value="Vat. Syr. 092"
+  >
+    Vat. Syr. 092
+  </option>
+  <option
+    value="Vat. Syr. 112"
+  >
+    Vat. Syr. 112
+  </option>
+  <option
+    value="Vat. Syr. 140"
+  >
+    Vat. Syr. 140
+  </option>
+  <option
+    value="BL. Add. 17224"
+  >
+    BL. Add. 17224
+  </option>
+  <option
+    value="BL. Add. 12144"
+  >
+    BL. Add. 12144
+  </option>
+  <option
+    value="BL. Add. 12134"
+  >
+    BL. Add. 12134
+  </option>
+  <option
+    value="BL. Add. 14445"
+  >
+    BL. Add. 14445
+  </option>
+  <option
+    value="BL. Add. 12146"
+  >
+    BL. Add. 12146
+  </option>
+  <option
+    value="BL. Or. 8732"
+  >
+    BL. Or. 8732
+  </option>
+  <option
+    value="BL. Or. 8606"
+  >
+    BL. Or. 8606
+  </option>
+  <option
+    value="BL. Add. 17102"
+  >
+    BL. Add. 17102
+  </option>
+  <option
+    value="BL. Add. 17107"
+  >
+    BL. Add. 17107
+  </option>
+  <option
+    value="BL. Add. 12175"
+  >
+    BL. Add. 12175
+  </option>
+</select>
+`;

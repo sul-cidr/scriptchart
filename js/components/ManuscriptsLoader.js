@@ -1,42 +1,56 @@
 import React from "react";
 
-/* Mock data to use in development when local API backend is not available */
-const fallbackManuscripts = [
-  { id: 20, shelfmark: "BL. Add. 12146", date: "1007 " },
-  { id: 21, shelfmark: "BL. Or. 8732", date: "770" },
-  { id: 22, shelfmark: "BL. Or. 8606", date: "723" },
-  { id: 23, shelfmark: "BL. Add. 17102", date: "598-599" },
-  { id: 24, shelfmark: "BL. Add. 17107", date: "540-541" },
-  { id: 25, shelfmark: "BL. Add. 12175", date: "533-534 " },
-  { id: 26, shelfmark: "BL. Add. 17109", date: "873 - 874" }
-];
+/* ManuscriptsLoader - Renders the list of available manuscripts in the
+ * ManuscriptsMenu form component, and passes their selection/deselection
+ * events up the form component chain.
+ * It doesn't actually load the manuscripts list from an external source;
+ * this data has already been queried via the REST API by the App component.
+ */
 
 class ManuscriptsLoader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { manuscripts: [] };
+    this.state = { selectedShelfmarks: [] };
+
+    this.handleSelect = this.handleSelect.bind(this);
   }
-  componentDidMount() {
-    fetch("https://db.syriac.reclaim.hosting/api/manuscripts?format=json")
-      .then(response => {
-        return response.json();
-      })
-      /* In production, it's likely preferable for the menu to display
-       * a blank list when the backend API is down, rather than
-       * displaying mock data that does not reflect the database state.
-       */
-      .catch(function(error) {
-        return fallbackManuscripts;
-      })
-      .then(data => {
-        let manuscripts = data.map(manuscript => {
-          return <option key={manuscript.id}>{manuscript.shelfmark}</option>;
-        });
-        this.setState({ manuscripts: manuscripts });
-      });
+
+  handleSelect(event) {
+    let options = event.target.options;
+    let name = event.target.name;
+    let value = [];
+    let selectedShelfmarks = [];
+    for (let i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+        selectedShelfmarks.push(options[i].value);
+      }
+    }
+    this.setState({ selectedShelfmarks });
+
+    this.props.handleSelect(name, value);
   }
+
   render() {
-    return <select multiple>{this.state.manuscripts}</select>;
+    let manuscriptSelectors = this.props.manuscripts.map(ms => {
+      return (
+        <option key={ms.id} value={ms.shelfmark}>
+          {ms.shelfmark}
+        </option>
+      );
+    });
+
+    return (
+      <select
+        type="string"
+        name="selectedShelfmarks"
+        value={this.state.selectedShelfmarks}
+        onChange={this.handleSelect}
+        multiple={true}
+      >
+        {manuscriptSelectors}
+      </select>
+    );
   }
 }
 

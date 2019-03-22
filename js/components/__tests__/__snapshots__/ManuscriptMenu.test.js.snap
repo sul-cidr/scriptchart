@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
+<div
+  className="field"
+>
+  <label
+    className="control"
+  >
+    Select Manuscripts:
+  </label>
+  <div
+    className="control"
+  >
+    <div
+      className="select is-multiple"
+    >
+      <select
+        multiple={true}
+        name="selectedShelfmarks"
+        onChange={[Function]}
+        type="string"
+        value={Array []}
+      >
+        <option
+          value="Vat. Syr. 092"
+        >
+          Vat. Syr. 092
+        </option>
+        <option
+          value="Vat. Syr. 112"
+        >
+          Vat. Syr. 112
+        </option>
+        <option
+          value="Vat. Syr. 140"
+        >
+          Vat. Syr. 140
+        </option>
+        <option
+          value="BL. Add. 17224"
+        >
+          BL. Add. 17224
+        </option>
+        <option
+          value="BL. Add. 12144"
+        >
+          BL. Add. 12144
+        </option>
+        <option
+          value="BL. Add. 12134"
+        >
+          BL. Add. 12134
+        </option>
+        <option
+          value="BL. Add. 14445"
+        >
+          BL. Add. 14445
+        </option>
+        <option
+          value="BL. Add. 12146"
+        >
+          BL. Add. 12146
+        </option>
+        <option
+          value="BL. Or. 8732"
+        >
+          BL. Or. 8732
+        </option>
+        <option
+          value="BL. Or. 8606"
+        >
+          BL. Or. 8606
+        </option>
+        <option
+          value="BL. Add. 17102"
+        >
+          BL. Add. 17102
+        </option>
+        <option
+          value="BL. Add. 17107"
+        >
+          BL. Add. 17107
+        </option>
+        <option
+          value="BL. Add. 12175"
+        >
+          BL. Add. 12175
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="control sort-option"
+  >
+    <p>
+      Order manuscripts by:
+    </p>
+    <label
+      className="radio"
+    >
+      Shelfmark:
+      <input
+        defaultChecked={true}
+        name="Shelfmark"
+        type="radio"
+      />
+    </label>
+    <label
+      className="radio"
+    >
+      Date:
+      <input
+        name="Date"
+        type="radio"
+      />
+    </label>
+  </div>
+</div>
+`;

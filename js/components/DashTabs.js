@@ -1,72 +1,250 @@
 import React from "react";
 
-import { CSSTransitionGroup } from "react-transition-group";
+/* DashTabs - this is the figurative canvas on which the
+ * scriptchart table and accompanying Mirador viewer
+ * and ChartAccordion list of hidden manuscripts and letters
+ * reside under their own tabs.
+ * 
+ * It is responsible for keeping track of the contents and
+ * orderings of the rows and columns in the table, as well
+ * as those that have been hidden and are listed in the
+ * ChartAccordion. As such, it handles dragging and dropping
+ * of rows and columns, as well as hiding/redisplaying them.
+ * 
+ * Conditional rendering: this component is blank until the
+ * configuration form is submitted, at which time it populates
+ * the letter and manuscript lists with data that the App
+ * has queried from the REST API.
+ */
 
 import ScriptChart from "./ScriptChart";
-import MiradorContainer from "./MiradorContainer";
+import MiradorViewer from "./MiradorViewer";
+import ChartAccordion from "./ChartAccordion";
 
-import Tabs from "./Tabs";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./DashTabs.css";
-
-const ActiveTabContent = props => <div>{props.content}</div>;
-
-const tabList = [
-  {
-    name: "Scriptchart",
-    icon: "fa fa-table",
-    content: <ScriptChart />
-  },
-  {
-    name: "Manuscript Viewer",
-    icon: "fa fa-image",
-    content: <MiradorContainer />
-  }
-];
 
 class DashTabs extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      activeTab: "Scriptchart"
+      hiddenManuscripts: [],
+      hiddenLetters: [],
+      manifestURL: null,
+      tabIndex: 0,
+      rowLetters: [],
+      columnManuscripts: []
     };
+
+    this.onManifestSelected = this.onManifestSelected.bind(this);
+    this.onHiddenChange = this.onHiddenChange.bind(this);
+    this.onColumnMove = this.onColumnMove.bind(this);
+    this.onRowMove = this.onRowMove.bind(this);
   }
 
-  changeActiveTab(tab) {
-    this.setState({ activeTab: tab });
+  onColumnMove(labels) {
+    let sourceShelfmark = labels.sourceLabel;
+    let targetShelfmark = labels.targetLabel;
+
+    let columnManuscripts = [];
+
+    if (this.state.columnManuscripts.length == 0) {
+      columnManuscripts = [...this.props.manuscripts];
+    } else {
+      columnManuscripts = [...this.state.columnManuscripts];
+    }
+
+    let sourceIndex = columnManuscripts.findIndex(
+      ms => ms.shelfmark == sourceShelfmark
+    );
+    let targetIndex = columnManuscripts.findIndex(
+      ms => ms.shelfmark == targetShelfmark
+    );
+
+    /* Cancel the move if it involves the first two,
+     * 'pre-manuscript' columns (which contain the row
+     * letter labels and the Xs used to hide rows).
+     */
+    if ((sourceIndex < 0) || (targetIndex < 0)) {
+      return;
+    }
+
+    columnManuscripts[sourceIndex] = columnManuscripts.splice(
+      targetIndex,
+      1,
+      columnManuscripts[sourceIndex]
+    )[0];
+
+    this.setState({ columnManuscripts });
   }
 
-  activeTabContent() {
-    const activeIndex = tabList.findIndex(tab => {
-      return tab.name === this.state.activeTab;
-    });
+  onRowMove({ sourceRowId, targetRowId }) {
+    if (
+      sourceRowId == "Date" ||
+      sourceRowId == "" ||
+      targetRowId == "Date" ||
+      targetRowId == ""
+    ) {
+      return;
+    }
 
-    return tabList[activeIndex].content;
+    let rowLetters = [];
+    if (this.state.rowLetters.length == 0) {
+      rowLetters = [...this.props.formData.letters];
+    } else {
+      rowLetters = [...this.state.rowLetters];
+    }
+
+    let sourceIndex = rowLetters.findIndex(lt => lt.id == sourceRowId);
+    let targetIndex = rowLetters.findIndex(lt => lt.id == targetRowId);
+
+    rowLetters[sourceIndex] = rowLetters.splice(
+      targetIndex,
+      1,
+      rowLetters[sourceIndex]
+    )[0];
+
+    this.setState({ rowLetters });
+  }
+
+  onManifestSelected(selectedURL) {
+    this.setState({ manifestURL: selectedURL, tabIndex: 1 });
+  }
+
+  onHiddenChange(showOrHide, rowOrColumn, itemID) {
+    if (showOrHide == "show") {
+      // Show (aka "unhide") requests only come from the accordion and are sent to the scriptchart
+      if (rowOrColumn == "column") {
+        let hiddenIndex = this.state.hiddenManuscripts.findIndex(
+          i => i == itemID
+        );
+        if (hiddenIndex !== -1) {
+          let hiddenCopy = [...this.state.hiddenManuscripts];
+          hiddenCopy.splice(hiddenIndex, 1);
+          this.setState({ hiddenManuscripts: hiddenCopy });
+          if (hiddenCopy.length == 0 && this.state.hiddenLetters.length == 0) {
+            this.setState({ tabIndex: 0 });
+          }
+        }
+      } else if (rowOrColumn == "row") {
+        let hiddenIndex = this.state.hiddenLetters.findIndex(i => i == itemID);
+        if (hiddenIndex !== -1) {
+          let hiddenCopy = [...this.state.hiddenLetters];
+          hiddenCopy.splice(hiddenIndex, 1);
+          this.setState({ hiddenLetters: hiddenCopy });
+          if (
+            hiddenCopy.length == 0 &&
+            this.state.hiddenManuscripts.length == 0
+          ) {
+            this.setState({ tabIndex: 0 });
+          }
+        }
+      }
+    } else if (showOrHide == "hide") {
+      // Hide requests only come from the scriptchart and are sent to the accordion
+      if (rowOrColumn == "column") {
+        this.setState({
+          hiddenManuscripts: [...this.state.hiddenManuscripts, itemID]
+        });
+      } else if (rowOrColumn == "row") {
+        this.setState({
+          hiddenLetters: [...this.state.hiddenLetters, itemID]
+        });
+      }
+    }
   }
 
   render() {
-    return (
-      <section className="section">
-        <div className="container is-fluid">
-          <Tabs
-            tabList={tabList}
-            activeTab={this.state.activeTab}
-            changeActiveTab={this.changeActiveTab.bind(this)}
-          />
+    if (this.props.showTabs == false) {
+      return <div />;
+    }
 
-          <CSSTransitionGroup
-            className="tabs-content"
-            component="div"
-            transitionName="fade"
-            transitionEnterTimeout={0}
-            transitionLeaveTimeout={150}
-          >
-            <ActiveTabContent
-              key={this.state.activeTab}
-              content={this.activeTabContent()}
-            />
-          </CSSTransitionGroup>
+    console.log("Rendering DashTabs");
+
+    let columnManuscripts = [];
+    let rowLetters = [];
+
+    if (this.state.rowLetters.length == 0) {
+      for (
+        let j = 0, llen = this.props.formData.letters.length;
+        j < llen;
+        j++
+      ) {
+        rowLetters.push(this.props.formData.letters[j]);
+      }
+    } else {
+      rowLetters = this.state.rowLetters;
+    }
+
+    if (this.state.columnManuscripts.length == 0) {
+      for (let i = 0, len = this.props.manuscripts.length; i < len; i++) {
+        columnManuscripts.push(this.props.manuscripts[i]);
+      }
+    } else {
+      columnManuscripts = this.state.columnManuscripts;
+    }
+
+    return (
+      <section className="section no-padding">
+        <div className="container">
+          <div className="columns">
+            <div className="column">
+              <Tabs
+                defaultFocus={true}
+                selectedIndex={this.state.tabIndex}
+                onSelect={tabIndex => this.setState({ tabIndex })}
+              >
+                <TabList>
+                  <Tab>
+                    <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
+                    Scriptchart
+                  </Tab>
+                  <Tab>
+                    <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
+                    Manuscript Viewer
+                  </Tab>
+                  <Tab
+                    disabled={
+                      this.state.hiddenManuscripts.length == 0 &&
+                      this.state.hiddenLetters.length == 0
+                    }
+                  >
+                    Hidden Items
+                  </Tab>
+                </TabList>
+                <TabPanel>
+                  <ScriptChart
+                    onHiddenChange={this.onHiddenChange}
+                    hiddenManuscripts={this.state.hiddenManuscripts}
+                    hiddenLetters={this.state.hiddenLetters}
+                    onManifestSelected={this.onManifestSelected}
+                    formData={this.props.formData}
+                    tableData={this.props.tableData}
+                    columnManuscripts={columnManuscripts}
+                    rowLetters={rowLetters}
+                    onRowMove={this.onRowMove}
+                    onColumnMove={this.onColumnMove}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <MiradorViewer manifestURL={this.state.manifestURL} />
+                </TabPanel>
+                <TabPanel>
+                  <ChartAccordion
+                    onHiddenChange={this.onHiddenChange}
+                    columnManuscripts={columnManuscripts}
+                    hiddenManuscripts={this.state.hiddenManuscripts}
+                    hiddenLetters={this.state.hiddenLetters}
+                  />
+                </TabPanel>
+              </Tabs>
+            </div>
+          </div>
         </div>
       </section>
     );

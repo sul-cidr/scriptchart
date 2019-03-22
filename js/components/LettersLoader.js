@@ -1,84 +1,71 @@
 import React from "react";
 
+/* LettersLoader - Builds a grid of LetterButtons (containing
+ * SyriacLetter components) for the configuration form.
+ * It doesn't actually "load" the letters from a remote location
+ * -- rather, they're now read from an array in the SyriacLetter
+ * component.
+ * It also updates the form's list of selected letters when one
+ * is selected/deselected.
+ */
+
 import LetterButton from "./LetterButton";
 
-/* Letters data to use in development when local API backend is not available
- * For development, this also is a temporary holding area for the Unicode
- * display strings for the letters (to be used in the form and the chart)
- * and represents the "in-use" subset of the full letters table from the DB.
- */
-const activeLetters = [
-  { id: 2, letter: "Alaph (Angular)", is_script: true, display: "ܐ (angular)" },
-  { id: 4, letter: "Alaph (Round)", is_script: true, display: "ܐ (round)" },
-  { id: 5, letter: "Ayin", is_script: true, display: "ܥ" },
-  { id: 9, letter: "Beth", is_script: true, display: "ܒ" },
-  { id: 12, letter: "Dalath (Angular)", is_script: true, display: "ܕ (angular)" },
-  { id: 13, letter: "Dalath (Round)", is_script: true, display: "ܕ (round)" },
-  { id: 14, letter: "Gamal", is_script: true, display: "ܓ" },
-  { id: 15, letter: "He", is_script: true, display: "ܗ" },
-  { id: 16, letter: "He (Angular)", is_script: true, display: "ܗ (angular)" },
-  { id: 17, letter: "He (Round)", is_script: true, display: "ܗ (round)" },
-  { id: 18, letter: "Heth", is_script: true, display: "ܚ" },
-  { id: 19, letter: "Kaph", is_script: true, display: "ܟ" },
-  { id: 20, letter: "Kaph (Final)", is_script: true, display: "ܟ (final)" },
-  { id: 21, letter: "Lamadh", is_script: true, display: "ܠ" },
-  { id: 23, letter: "Lamadh (Final, closed)", is_script: true, display: "ܠ (closed)" },
-  { id: 25, letter: "Lamadh (Final, open)", is_script: true, display: "ܠ (open)" },
-  { id: 26, letter: "Mim", is_script: true, display: "ܡ" },
-  { id: 27, letter: "Mim (Final)", is_script: true, display: "ܡ (final)" },
-  { id: 28, letter: "Nun", is_script: true, display: "ܢ" },
-  { id: 30, letter: "Nun (Final, connected)", is_script: true, display: "ܢ (connected)" },
-  { id: 31, letter: "Nun (Final, unconnected)", is_script: true, display: "ܢ (unconnected)" },
-  { id: 32, letter: "Pe", is_script: true, display: "ܦ" },
-  { id: 33, letter: "Qaph", is_script: true, display: "ܩ" },
-  { id: 35, letter: "Rish (Angular)", is_script: true, display: "ܪ (angular)" },
-  { id: 36, letter: "Rish (Round)", is_script: true, display: "ܪ (round)" },
-  { id: 37, letter: "Sadhe", is_script: true, display: "ܨ" },
-  { id: 38, letter: "Semkath", is_script: true, display: "ܣ" },
-  { id: 39, letter: "Shin", is_script: true, display: "ܫ" },
-  { id: 42, letter: "Taw (L-shaped)", is_script: true, display: "ܬ (l-shaped)" },
-  { id: 43, letter: "Taw (Looped)", is_script: true, display: "ܬ (looped)" },
-  { id: 44, letter: "Taw (Triangular)", is_script: true, display: "ܬ (triangular)" },
-  { id: 45, letter: "Teth", is_script: true, display: "ܛ" },
-  { id: 46, letter: "Waw", is_script: true, display: "ܘ" },
-  { id: 47, letter: "Yudh", is_script: true, display: "ܝ" },
-  { id: 48, letter: "Yudh (Connected)", is_script: true, display: "ܝ (connected)" },
-  { id: 49, letter: "Yudh (Stand-alone)", is_script: true, display: "ܝ (standalone)" },
-  { id: 50, letter: "Zain", is_script: true, display: "ܙ" }
-];
+import SyriacLetter from "./SyriacLetter";
+
+import letters from "./letters.json";
 
 class LettersLoader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { letterButtons: [] };
+    this.state = { letterButtons: [], selectedLetters: [] };
+    this.buttonClick = this.buttonClick.bind(this);
   }
+
+  buttonClick(letterID, operation) {
+    let selectedLetters = [...this.state.selectedLetters];
+    if (operation == "select") {
+      /* The list of selected letters should be in "aphabetical" order */
+      let newLetter = letters.find(lt => lt.id == letterID);
+      selectedLetters.push(newLetter);
+      let alphabetizedSelection = letters.reduce((result, lt) => {
+        if (selectedLetters.findIndex(l => l.id == lt.id) >= 0) {
+          result.push(lt)
+        }
+        return result;
+      }, []);
+      selectedLetters = alphabetizedSelection;
+    } else {
+      selectedLetters.splice(
+        selectedLetters.findIndex(lt => lt.id == letterID),
+        1
+      );
+    }
+    this.props.handleSelect("letters", selectedLetters);
+    this.setState({ selectedLetters });
+  }
+
+  /* For convenience, use the Syriac letters defined in SyriacLetter.js, rather
+   * than those avaialble via the API. The letter set is extremely unlikely to
+   * change (unlike the manuscripts/pages/coords), so loading it dynamically
+   * doesn't seem worth the hassle. Care must of course be taken that the
+   * static letters list remains in sync with the DB, particulary regarding IDs.
+   */
   componentDidMount() {
-    fetch("https://db.syriac.reclaim.hosting/api/letters?format=json")
-      .then(response => {
-        return response.json();
-      })
-      /* In production, it's likely preferable for the menu to display
-       * a blank list when the backend API is down, rather than
-       * displaying data that may not reflect the database state.
-       */
-      .catch(function(error) {
-        return activeLetters;
-      })
-      .then(data => {
-        let buttons = data.map(letter => {
-          return (
-            <LetterButton key={letter.id}
-              letter={
-                letter.hasOwnProperty("display")
-                  ? letter.display
-                  : letter.letter
-              }
-            />
-          );
-        });
-        this.setState({ letterButtons: buttons });
-      });
+    let buttons = letters.map(lt => {
+      return (
+        <LetterButton
+          key={lt.id}
+          letterID={lt.id}
+          onLetterClick={this.buttonClick}
+          letter={<SyriacLetter id={lt.id} />}
+        />
+      );
+    });
+
+    this.setState({ letterButtons: buttons });
   }
+
   render() {
     return (
       <div className={"buttons are-small"}>{this.state.letterButtons}</div>

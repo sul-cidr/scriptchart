@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image test Image should match snapshot 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "gray",
+      "backgroundImage": "url(\\"undefined\\")",
+      "backgroundPosition": "center center",
+      "backgroundRepeat": "no-repeat",
+      "backgroundSize": "contain",
+      "height": 100,
+      "width": 100,
+    }
+  }
+/>
+`;

@@ -1,0 +1,961 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
+<form
+  className="manuscript-form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field"
+  >
+    <label
+      className="control"
+    >
+      Select Manuscripts:
+    </label>
+    <div
+      className="control"
+    >
+      <div
+        className="select is-multiple"
+      >
+        <select
+          multiple={true}
+          name="selectedShelfmarks"
+          onChange={[Function]}
+          type="string"
+          value={Array []}
+        >
+          <option
+            value="Vat. Syr. 092"
+          >
+            Vat. Syr. 092
+          </option>
+          <option
+            value="Vat. Syr. 112"
+          >
+            Vat. Syr. 112
+          </option>
+          <option
+            value="Vat. Syr. 140"
+          >
+            Vat. Syr. 140
+          </option>
+          <option
+            value="BL. Add. 17224"
+          >
+            BL. Add. 17224
+          </option>
+          <option
+            value="BL. Add. 12144"
+          >
+            BL. Add. 12144
+          </option>
+          <option
+            value="BL. Add. 12134"
+          >
+            BL. Add. 12134
+          </option>
+          <option
+            value="BL. Add. 14445"
+          >
+            BL. Add. 14445
+          </option>
+          <option
+            value="BL. Add. 12146"
+          >
+            BL. Add. 12146
+          </option>
+          <option
+            value="BL. Or. 8732"
+          >
+            BL. Or. 8732
+          </option>
+          <option
+            value="BL. Or. 8606"
+          >
+            BL. Or. 8606
+          </option>
+          <option
+            value="BL. Add. 17102"
+          >
+            BL. Add. 17102
+          </option>
+          <option
+            value="BL. Add. 17107"
+          >
+            BL. Add. 17107
+          </option>
+          <option
+            value="BL. Add. 12175"
+          >
+            BL. Add. 12175
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="control sort-option"
+    >
+      <p>
+        Order manuscripts by:
+      </p>
+      <label
+        className="radio"
+      >
+        Shelfmark:
+        <input
+          defaultChecked={true}
+          name="Shelfmark"
+          type="radio"
+        />
+      </label>
+      <label
+        className="radio"
+      >
+        Date:
+        <input
+          name="Date"
+          type="radio"
+        />
+      </label>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="control"
+    >
+      Select Letters:
+    </label>
+    <div
+      className="buttons are-small"
+    >
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܐ"
+        >
+          
+          ܐ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "SertoJerusalem",
+              "fontSize": "2em",
+            }
+          }
+          title="ܐ"
+        >
+          
+          ܐ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܒ"
+        >
+          
+          ܒ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܓ"
+        >
+          
+          ܓ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܕ"
+        >
+          
+          ܕ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "SertoJerusalem",
+              "fontSize": "2em",
+            }
+          }
+          title="ܕ"
+        >
+          
+          ܕ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܗ"
+        >
+          
+          ܗ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "SertoJerusalem",
+              "fontSize": "2em",
+            }
+          }
+          title="ܗ"
+        >
+          
+          ܗ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܘ"
+        >
+          
+          ܘ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܙ"
+        >
+          
+          ܙ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܚ"
+        >
+          
+          ܚ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܛ"
+        >
+          
+          ܛ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܝ"
+        >
+          <span
+            style={
+              Object {
+                "color": "transparent",
+              }
+            }
+          >
+            ܝ
+          </span>
+          ܝ
+          <span
+            style={
+              Object {
+                "color": "transparent",
+              }
+            }
+          >
+            ܝ
+          </span>
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܝ"
+        >
+          
+          ܝ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܟ"
+        >
+          
+          ܟ
+          <span
+            style={
+              Object {
+                "color": "transparent",
+              }
+            }
+          >
+            ܝ
+          </span>
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܟ"
+        >
+          
+          ܟ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܠ"
+        >
+          
+          ܠ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܠ"
+        >
+          <span
+            style={
+              Object {
+                "color": "transparent",
+              }
+            }
+          >
+            ܝ
+          </span>
+          ܠ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "SertoJerusalem",
+              "fontSize": "2em",
+            }
+          }
+          title="ܠ"
+        >
+          
+          ܠ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܡ"
+        >
+          
+          ܡ
+          <span
+            style={
+              Object {
+                "color": "transparent",
+              }
+            }
+          >
+            ܝ
+          </span>
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܡ"
+        >
+          
+          ܡ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܢ"
+        >
+          
+          ܢ
+          <span
+            style={
+              Object {
+                "color": "transparent",
+              }
+            }
+          >
+            ܝ
+          </span>
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܢ"
+        >
+          <span
+            style={
+              Object {
+                "color": "transparent",
+              }
+            }
+          >
+            ܝ
+          </span>
+          ܢ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܢ"
+        >
+          
+          ܢ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܣ"
+        >
+          
+          ܣ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܥ"
+        >
+          
+          ܥ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܦ"
+        >
+          
+          ܦ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܨ"
+        >
+          
+          ܨ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܩ"
+        >
+          
+          ܩ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܪ"
+        >
+          
+          ܪ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "SertoJerusalem",
+              "fontSize": "2em",
+            }
+          }
+          title="ܪ"
+        >
+          
+          ܪ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܫ"
+        >
+          
+          ܫ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "EstrangeloEdessa",
+              "fontSize": "2em",
+            }
+          }
+          title="ܬ"
+        >
+          
+          ܬ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "SertoJerusalem",
+              "fontSize": "2em",
+            }
+          }
+          title="ܬ"
+        >
+          <span
+            style={
+              Object {
+                "color": "transparent",
+              }
+            }
+          >
+            ܝ
+          </span>
+          ܬ
+          
+        </span>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <span
+          style={
+            Object {
+              "direction": "rtl",
+              "fontFamily": "SertoJerusalem",
+              "fontSize": "2em",
+            }
+          }
+          title="ܬ"
+        >
+          
+          ܬ
+          
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="control"
+    >
+      Select number of letter examples:
+    </label>
+    <div
+      className="control"
+    >
+      <div
+        className="select"
+      >
+        <select
+          name="letterExamples"
+          onChange={[Function]}
+          type="number"
+          value={3}
+        >
+          <option>
+            1
+          </option>
+          <option>
+            3
+          </option>
+          <option>
+            5
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="checkbox"
+    >
+      Show binarized images?
+      <input
+        checked={true}
+        name="showBinarized"
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </label>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="control"
+    >
+      Select image size:
+    </label>
+    <div
+      className="control"
+    >
+      <div
+        className="select"
+      >
+        <select
+          name="imageSize"
+          onChange={[Function]}
+          type="string"
+          value="Small"
+        >
+          <option>
+            Small
+          </option>
+          <option>
+            Medium
+          </option>
+          <option>
+            Large
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <div
+      className="control"
+    >
+      <button
+        className="button is-link"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
+`;

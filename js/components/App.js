@@ -36,9 +36,6 @@ import { DragDropContext } from "react-dnd";
 import ManuscriptForm from "./ManuscriptForm";
 import DashTabs from "./DashTabs";
 
-/* Include a backup MS list in case the API/network is down */
-import { defaultManuscripts } from "./ManuscriptsLoader";
-
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
@@ -70,7 +67,8 @@ class App extends Component {
         return response.json();
       })
       .catch(function(error) {
-        return defaultManuscripts;
+        console.log("fetch failed for manuscripts list");
+        return [];
       })
       .then(data => {
         this.setState({ allManuscripts: data });

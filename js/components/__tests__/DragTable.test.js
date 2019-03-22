@@ -6,8 +6,7 @@ import toJson from "enzyme-to-json";
 import DragTable from "../DragTable";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
-import { defaultManuscripts } from "../ManuscriptsLoader";
-import { columns } from "../__mocks__/appDataMock";
+import { columns, defaultManuscripts } from "../__mocks__/appDataMock";
 
 const DDContext = DragDropContext(HTML5Backend)(DragTable);
 

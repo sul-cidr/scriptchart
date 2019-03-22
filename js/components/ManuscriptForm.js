@@ -42,7 +42,7 @@ class ManuscriptForm extends React.Component {
   }
 
   /* This is the handler for the multi-select items (manuscript list and letter
-   * button grid). It would be nice to integrate this with handleChagne(),
+   * button grid). It would be nice to integrate this with handleChange(),
    * but that hasn't been workable so far.
    */
   handleSelect(name, value) {
@@ -82,9 +82,7 @@ class ManuscriptForm extends React.Component {
                 onChange={this.handleChange}
               >
                 <option>1</option>
-                <option>2</option>
                 <option>3</option>
-                <option>4</option>
                 <option>5</option>
               </select>
             </div>

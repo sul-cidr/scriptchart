@@ -11,7 +11,9 @@ import React from "react";
 
 import LetterButton from "./LetterButton";
 
-import SyriacLetter, { letters } from "./SyriacLetter";
+import SyriacLetter from "./SyriacLetter";
+
+import letters from "./letters.json";
 
 class LettersLoader extends React.Component {
   constructor(props) {

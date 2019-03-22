@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChartAccordion test ChartAccordion should match snapshot 1`] = `
+<AccordionWrapper
+  accordion={false}
+  className="accordion"
+  onChange={[Function]}
+  style={
+    Object {
+      "border": "2px dotted gray",
+    }
+  }
+>
+  <FromRenderProps
+    expanded={true}
+  >
+    <FromRenderProps>
+      <h4
+        className="u-position-relative"
+      >
+        Columns (manuscripts)
+        <div
+          className="accordion__arrow"
+          role="presentation"
+        />
+      </h4>
+    </FromRenderProps>
+    <FromRenderProps>
+      <ul>
+        <ManuscriptItem
+          display="Vat. Syr. 092"
+          key="3"
+          manuscriptID={3}
+        />
+        <ManuscriptItem
+          display="Vat. Syr. 112"
+          key="9"
+          manuscriptID={9}
+        />
+        <ManuscriptItem
+          display="Vat. Syr. 140"
+          key="11"
+          manuscriptID={11}
+        />
+      </ul>
+    </FromRenderProps>
+  </FromRenderProps>
+  <FromRenderProps
+    expanded={true}
+  >
+    <FromRenderProps>
+      <h4
+        className="u-position-relative"
+      >
+        Rows (letters, dates)
+        <div
+          className="accordion__arrow"
+          role="presentation"
+        />
+      </h4>
+    </FromRenderProps>
+    <FromRenderProps>
+      <div
+        className="buttons are-small"
+      >
+        <LetterButton
+          key="2"
+          letter={
+            <SyriacLetter
+              id={2}
+            />
+          }
+          letterID={2}
+        />
+        <LetterButton
+          key="4"
+          letter={
+            <SyriacLetter
+              id={4}
+            />
+          }
+          letterID={4}
+        />
+        <LetterButton
+          key="9"
+          letter={
+            <SyriacLetter
+              id={9}
+            />
+          }
+          letterID={9}
+        />
+      </div>
+    </FromRenderProps>
+  </FromRenderProps>
+</AccordionWrapper>
+`;

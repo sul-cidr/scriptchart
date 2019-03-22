@@ -3,7 +3,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import ManuscriptMenu from "../ManuscriptMenu";
-import { defaultManuscripts } from "../ManuscriptsLoader";
+import { defaultManuscripts } from "../__mocks__/appDataMock";
 
 describe("ManuscriptMenu test", () => {
   it("ManuscriptMenu should match snapshot", () => {

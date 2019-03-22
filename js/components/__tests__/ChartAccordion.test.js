@@ -4,8 +4,8 @@ import React from "react";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import ChartAccordion from "../ChartAccordion";
-import { defaultManuscripts } from "../ManuscriptsLoader";
-import { letters } from "../SyriacLetter";
+import { defaultManuscripts } from "../__mocks__/appDataMock";
+import letters from "../letters.json";
 
 jest.mock("../ManuscriptItem");
 

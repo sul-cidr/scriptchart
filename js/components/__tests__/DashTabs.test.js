@@ -5,8 +5,11 @@ import renderer from "react-test-renderer";
 import DashTabs from "../DashTabs";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
-import { defaultManuscripts } from "../ManuscriptsLoader";
-import { tableData, formData } from "../__mocks__/appDataMock";
+import {
+  tableData,
+  formData,
+  defaultManuscripts
+} from "../__mocks__/appDataMock";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -16,7 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 library.add(faBookOpen, faTable, faImage);
 
-jest.mock('../DragTable');
+jest.mock("../DragTable");
 
 const DDContext = DragDropContext(HTML5Backend)(DashTabs);
 

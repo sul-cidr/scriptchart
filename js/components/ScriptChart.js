@@ -60,7 +60,6 @@ class ScriptChart extends React.Component {
       id: 1,
       ltid: "Date",
       letter: "Date",
-      ltid: "Date",
       visible: !this.props.hiddenLetters.includes("Date")
     };
 

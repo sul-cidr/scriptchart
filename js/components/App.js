@@ -16,8 +16,6 @@ import React, { Component } from "react";
  * these on to the scriptchart.
  */
 
-import "font-awesome/css/font-awesome.min.css";
-
 import "../../src/assets/syriac_fonts.css";
 
 /* Loading fontawesome icons via React seems easier than doing it via site-wide CSS */

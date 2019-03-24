@@ -2,7 +2,7 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@import "minima";
+// @import "minima";
 
 body {
     -webkit-font-smoothing: antialiased;
@@ -20,37 +20,32 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+// Colors
+
+$off-white: darken(white, 10%);
+
+// custom variables used by Bulma; have to be set before importing bulma
+$navbar-background-color: #990000;
+$navbar-item-color: $off-white;
+$navbar-item-hover-color: lighten($off-white, 20%);
+$navbar-item-hover-background-color: darken(#990000, 5%);
+
+@import "../../node_modules/bulma/bulma.sass";
+
 .wrapper {
   max-width: 100%;
   padding-right: 30px;
   padding-left: 30px;
 }
 
-.nav-wrapper {
-  max-width: 100%;
-  padding-right: 30px;
-  padding-left: 30px;
+.navbar-brand .title {
+  color: $off-white;
 }
 
-.site-header {
-  background-color: #990000;
-  z-index: 35;
-  min-height: auto;
-}
-  
-.site-title {
-  font-size: normal;
-  line-height: auto;
-  letter-spacing: -1px;
-  margin-bottom: 0;
-  float: left;
+.navbar-burger {
+  margin-top: 1.75em;
 }
 
-.site-title:visited {
-  color: white;
-}
-  
-.site-nav {
-  float: right;
-  line-height: auto;
+.page-content {
+  margin-top: 1em;
 }

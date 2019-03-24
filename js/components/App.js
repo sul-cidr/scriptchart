@@ -16,9 +16,7 @@ import React, { Component } from "react";
  * these on to the scriptchart.
  */
 
-import "bulma/css/bulma.min.css";
-
-import "../../src/assets/syriac_fonts.css"
+import "../../src/assets/syriac_fonts.css";
 
 /* Loading fontawesome icons via React seems easier than doing it via site-wide CSS */
 import { library } from "@fortawesome/fontawesome-svg-core";

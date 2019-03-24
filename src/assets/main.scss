@@ -40,12 +40,33 @@ $navbar-item-hover-background-color: darken(#990000, 5%);
 
 .navbar-brand .title {
   color: $off-white;
-}
-
-.navbar-burger {
-  margin-top: 1.75em;
+  line-height: .75;
+  padding-top: 1rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0;
+  padding-left: 0.75rem;
 }
 
 .page-content {
   margin-top: 1em;
 }
+
+//.navbar-burger {
+//  margin-top: 1.75em;
+//}
+
+$spacing-unit: 30px !default;
+
+.navbar {
+  max-height: $spacing-unit * 2.5;
+}
+
+.site-header {
+  //min-height: $spacing-unit * 1.865;
+  max-height: $spacing-unit * 2.5;
+
+  // Positioning context for the mobile navigation icon
+  //position: relative;
+}
+
+

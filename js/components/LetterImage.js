@@ -11,11 +11,18 @@ const SMALL_DIM = 25;
 const MEDIUM_DIM = 50;
 const LARGE_DIM = 100;
 
+const SMALL_MARGIN = 10;
+const MEDIUM_MARGIN = 20;
+const LARGE_MARGIN = 30;
+
 class LetterImage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = { visibleImage: "mask" };
+
     this.resizeKeepAspect = this.resizeKeepAspect.bind(this);
+    this.onImageClick = this.onImageClick.bind(this);
   }
 
   /* Canvas-based code may eventually be useful when loading
@@ -43,6 +50,18 @@ class LetterImage extends React.Component {
     }
   }
 
+  onImageClick() {
+    if (this.state.visibleImage == "mask") {
+      this.refs.mask.className = "hidden";
+      this.refs.context.className = "";
+      this.setState({ visibleImage: "context"})
+    } else {
+      this.refs.mask.className = "";
+      this.refs.context.className = "hidden";
+      this.setState({ visibleImage: "mask"})
+    }
+  }
+
   render() {
     let imgWidth = this.props.coords.width;
     let imgHeight = this.props.coords.height;
@@ -60,13 +79,38 @@ class LetterImage extends React.Component {
       dims = this.resizeKeepAspect(imgWidth, imgHeight, maxDim);
     }
 
+    let margin = MEDIUM_MARGIN;
+
+    let leftExpanded = Math.max(0, this.props.coords.left - margin);
+    let topExpanded = Math.max(0, this.props.coords.top - margin);
+    let rightExpanded = Math.min(this.props.coords.pagewidth, 
+                                 this.props.coords.left + this.props.coords.width + margin);
+    let widthExpanded = rightExpanded - leftExpanded;
+    let bottomExpanded = Math.min(this.props.coords.pageheight,
+                                  this.props.coords.top + this.props.coords.height + margin);
+    let heightExpanded = bottomExpanded - topExpanded;
+
+    let cropURL =
+    "http://127.0.0.1:8000/api/crop?page_url=" +
+    this.props.coords.pageurl +
+    "&x=" +
+    leftExpanded +
+    "&y=" +
+    topExpanded +
+    "&w=" +
+    widthExpanded +
+    "&h=" +
+    heightExpanded;
+
     return (
-      <span style={{ display: "inline-block" }}>
-        {/*<canvas ref="canvas" width={maxDim} height={maxDim}  />
-        <img ref="image" src={this.props.coords.binaryurl} className="hidden" />*/}
+      <span style={{ margin: "5px", display: "inline-block" }}
+            onClick={this.onImageClick}
+      >
+        {/*{<canvas ref="canvas" width={maxDim} height={maxDim} className="hidden"   />*/}
+        <img alt={this.props.letter} ref="context" src={cropURL} className="hidden" />
         <img
           alt={this.props.letter}
-          //ref="image"
+          ref="mask"
           width={dims.width}
           height={dims.height}
           src={this.props.coords.binaryurl}

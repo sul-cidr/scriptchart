@@ -137,8 +137,6 @@ class App extends Component {
 
         for (let coords of coordsData) {
           let msID = coords.page.manuscript;
-          let pageID = coords.page.id;
-          let pageURL = coords.page.url;
 
           let ltID = coords.letter;
 
@@ -155,8 +153,10 @@ class App extends Component {
 
           if (coords.binary_url !== null) {
             let letterInstance = {
-              page: pageID,
-              pageurl: pageURL,
+              page: coords.page.id,
+              pageurl: coords.page.url,
+              pagewidth: coords.page.width,
+              pageheight: coords.page.height,
               letter: ltID,
               binaryurl: coords.binary_url,
               id: coords.id,

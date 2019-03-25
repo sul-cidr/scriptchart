@@ -1,5 +1,7 @@
 import React from "react";
 
+import { API_ROOT } from "./App";
+
 /* LetterImage - displays a letter image retrieved from
  * a URL that points to the image on the backend server.
  * It also resizes the image according to the size specified
@@ -54,11 +56,11 @@ class LetterImage extends React.Component {
     if (this.state.visibleImage == "mask") {
       this.refs.mask.className = "hidden";
       this.refs.context.className = "";
-      this.setState({ visibleImage: "context"})
+      this.setState({ visibleImage: "context" });
     } else {
       this.refs.mask.className = "";
       this.refs.context.className = "hidden";
-      this.setState({ visibleImage: "mask"})
+      this.setState({ visibleImage: "mask" });
     }
   }
 
@@ -83,31 +85,42 @@ class LetterImage extends React.Component {
 
     let leftExpanded = Math.max(0, this.props.coords.left - margin);
     let topExpanded = Math.max(0, this.props.coords.top - margin);
-    let rightExpanded = Math.min(this.props.coords.pagewidth, 
-                                 this.props.coords.left + this.props.coords.width + margin);
+    let rightExpanded = Math.min(
+      this.props.coords.pagewidth,
+      this.props.coords.left + this.props.coords.width + margin
+    );
     let widthExpanded = rightExpanded - leftExpanded;
-    let bottomExpanded = Math.min(this.props.coords.pageheight,
-                                  this.props.coords.top + this.props.coords.height + margin);
+    let bottomExpanded = Math.min(
+      this.props.coords.pageheight,
+      this.props.coords.top + this.props.coords.height + margin
+    );
     let heightExpanded = bottomExpanded - topExpanded;
 
     let cropURL =
-    "http://127.0.0.1:8000/api/crop?page_url=" +
-    this.props.coords.pageurl +
-    "&x=" +
-    leftExpanded +
-    "&y=" +
-    topExpanded +
-    "&w=" +
-    widthExpanded +
-    "&h=" +
-    heightExpanded;
+      API_ROOT +
+      "crop?page_url=" +
+      this.props.coords.pageurl +
+      "&x=" +
+      leftExpanded +
+      "&y=" +
+      topExpanded +
+      "&w=" +
+      widthExpanded +
+      "&h=" +
+      heightExpanded;
 
     return (
-      <span style={{ margin: "5px", display: "inline-block" }}
-            onClick={this.onImageClick}
+      <span
+        style={{ margin: "5px", display: "inline-block" }}
+        onClick={this.onImageClick}
       >
         {/*{<canvas ref="canvas" width={maxDim} height={maxDim} className="hidden"   />*/}
-        <img alt={this.props.letter} ref="context" src={cropURL} className="hidden" />
+        <img
+          alt={this.props.letter}
+          ref="context"
+          src={cropURL}
+          className="hidden"
+        />
         <img
           alt={this.props.letter}
           ref="mask"

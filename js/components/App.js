@@ -37,7 +37,7 @@ import DashTabs from "./DashTabs";
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
-const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
 //const API_ROOT = "http://localhost:8000/api/";
 
 class App extends Component {

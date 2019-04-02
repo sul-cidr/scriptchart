@@ -18,7 +18,8 @@ import React, { Component } from "react";
 
 import "../../src/assets/syriac_fonts.css";
 
-/* Loading fontawesome icons via React seems easier than doing it via site-wide CSS */
+/* Loading fontawesome icons via React seems easier than doing
+ * it via site-wide CSS */
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faBookOpen,
@@ -37,7 +38,7 @@ import DashTabs from "./DashTabs";
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
-const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
 //const API_ROOT = "http://localhost:8000/api/";
 
 class App extends Component {
@@ -45,35 +46,102 @@ class App extends Component {
     super(props);
 
     this.state = {
-      manuscripts: [],
-      allManuscripts: [],
+      manuscripts: [], // Only the selected mss, sent to the table (sorted)
+      allManuscripts: [], // Populates the form list, to be sorted as needed
       showTabs: false,
       formData: {},
-      tableData: {}
+      tableData: {},
+      loadingMessage:
+        'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
     };
 
-    this.queryCache = {};
+    //this.queryCache = {}; // XXX Just let the browser cache handle this?
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.queryManuscripts = this.queryManuscripts.bind(this);
     this.processCoords = this.processCoords.bind(this);
+    this.getYearFromDate = this.getYearFromDate.bind(this);
+    this.sortManuscripts = this.sortManuscripts.bind(this);
+  }
+
+  /* The ms date field in the DB is a bit unruly. We'll do our best
+   * to parse it to a sortable 4-digit year, or else return 'NA'.
+   */
+  getYearFromDate(date) {
+    if (date == null) {
+      return "NA";
+    }
+    try {
+      // Remove qualifiers from the date
+      date = date.replace("?", "").replace("ca.", "");
+      // Get the YYYY if the date is formatted M/D/YYYY
+      if (date.indexOf("/") >= 0) {
+        date = date.split("/").pop();
+      }
+      // If the date is a range (766-767), use the first year
+      if (date.indexOf("-") >= 0) {
+        date = date.split("-").shift();
+      }
+      // Otherwise, the year is usually the first word
+      if (date.indexOf(" ") >= 0) {
+        date = date.split(" ").shift();
+      }
+      // Round years with decimals (832.5) to the nearest int, then trim any
+      // remaining whitespace and pad to 4 digits to facilitate sorting.
+      return String(parseInt(date.trim())).padStart(4, "0");
+    } catch (err) {
+      return "NA";
+    }
+  }
+
+  sortManuscripts(orderBy, allManuscripts) {
+    // If the manuscripts list in the component state has not been set,
+    // use the optional function argument instead.
+    if (
+      this.state.allManuscripts !== null &&
+      this.state.allManuscripts.length > 0
+    ) {
+      allManuscripts = [...this.state.allManuscripts];
+    }
+
+    allManuscripts.sort(
+      function(a, b) {
+        if (orderBy == "shelfmark") {
+          a = a.shelfmark.toLowerCase();
+          b = b.shelfmark.toLowerCase();
+        } else {
+          a = this.getYearFromDate(a.date);
+          b = this.getYearFromDate(b.date);
+        }
+        if (a < b) {
+          return -1;
+        } else if (a > b) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }.bind(this)
+    );
+
+    this.setState({ allManuscripts });
   }
 
   queryManuscripts() {
     fetch(API_ROOT + "manuscripts?display=true&format=json")
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .catch(function(error) {
         console.log("fetch failed for manuscripts list");
         return [];
       })
-      .then(data => {
-        this.setState({ allManuscripts: data });
-      });
+      .then(data => this.sortManuscripts("shelfmark", data));
   }
 
   handleSubmit(formData) {
+    this.setState({
+      showTabs: false,
+      loadingMessage: "Table data is loading..."
+    });
+
     let manuscriptQueries = [];
     let manuscripts = [];
     for (let ms of this.state.allManuscripts) {
@@ -158,6 +226,8 @@ class App extends Component {
               page: pageID,
               pageurl: pageURL,
               letter: ltID,
+              pagewidth: coords.page.width,
+              pageheight: coords.page.height,
               binaryurl: coords.binary_url,
               id: coords.id,
               top: coords.top,
@@ -205,6 +275,7 @@ class App extends Component {
               <ManuscriptForm
                 formSubmit={this.handleSubmit}
                 manuscripts={this.state.allManuscripts}
+                sortManuscripts={this.sortManuscripts}
               />
             </div>
           </div>
@@ -215,6 +286,7 @@ class App extends Component {
               formData={this.state.formData}
               tableData={this.state.tableData}
               manuscripts={this.state.manuscripts}
+              loadingMessage={this.state.loadingMessage}
             />
           </div>
         </div>

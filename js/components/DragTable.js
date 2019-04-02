@@ -59,7 +59,7 @@ class DragTable extends React.Component {
           onRow={this.props.onRow}
           style={{
             maxWidth: "100vw",
-            maxHeight: "100vh"
+            maxHeight: "100%"
           }}
           ref={tableBody => {
             this.tableBody = tableBody && tableBody.getRef();

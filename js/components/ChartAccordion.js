@@ -2,7 +2,7 @@ import React from "react";
 
 /* ChartAccordion - This collapsible accordion menu, built on
  * react-acessible-accordion, lives under the "Hidden Items"
- * tab. It display manuscript and letter items for the columns
+ * tab. It displays manuscript and letter items for the columns
  * and rows that have been hidden on the scriptchart, and
  * signals the scriptchart to redisplay them when they are
  * selected.
@@ -23,7 +23,6 @@ import {
   AccordionItemBody
 } from "react-accessible-accordion";
 
-// XXX Should this file be somewhere else? It's needed to style the accordion.
 import "../../node_modules/react-accessible-accordion/dist/fancy-example.css";
 
 class ChartAccordion extends React.Component {
@@ -70,6 +69,7 @@ class ChartAccordion extends React.Component {
                   <LetterButton
                     key={ltid}
                     letterID={ltid}
+                    buttonClass="button is-outlined"
                     onHiddenChange={this.props.onHiddenChange}
                     letter={<SyriacLetter id={ltid} />}
                   />

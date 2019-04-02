@@ -8,44 +8,26 @@ import React from "react";
  */
 
 class ManuscriptsLoader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { selectedShelfmarks: [] };
-
-    this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleSelect(event) {
-    let options = event.target.options;
-    let name = event.target.name;
-    let value = [];
-    let selectedShelfmarks = [];
-    for (let i = 0, l = options.length; i < l; i++) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-        selectedShelfmarks.push(options[i].value);
-      }
-    }
-    this.setState({ selectedShelfmarks });
-
-    this.props.handleSelect(name, value);
-  }
 
   render() {
-    let manuscriptSelectors = this.props.manuscripts.map(ms => {
-      return (
-        <option key={ms.id} value={ms.shelfmark}>
-          {ms.shelfmark}
-        </option>
-      );
-    });
+    let manuscriptSelectors = <option>Finding manuscripts...</option>;
 
+    if ((this.props.manuscripts !== null) && (this.props.manuscripts.length > 0)) {
+      manuscriptSelectors = this.props.manuscripts.map(ms => {
+        return (
+          <option key={ms.id} value={ms.shelfmark}>
+            {ms.shelfmark} ({ms.date ? ms.date : 'NA'})
+          </option>
+        );
+      });
+    }
+    
     return (
-      <select
+      <select multiple size="8"
         type="string"
         name="selectedShelfmarks"
-        value={this.state.selectedShelfmarks}
-        onChange={this.handleSelect}
+        value={this.props.selectedShelfmarks}
+        onChange={this.props.handleSelect}
         multiple={true}
       >
         {manuscriptSelectors}

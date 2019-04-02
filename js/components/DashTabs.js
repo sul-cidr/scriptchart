@@ -4,17 +4,17 @@ import React from "react";
  * scriptchart table and accompanying Mirador viewer
  * and ChartAccordion list of hidden manuscripts and letters
  * reside under their own tabs.
- * 
+ *
  * It is responsible for keeping track of the contents and
  * orderings of the rows and columns in the table, as well
  * as those that have been hidden and are listed in the
  * ChartAccordion. As such, it handles dragging and dropping
  * of rows and columns, as well as hiding/redisplaying them.
- * 
- * Conditional rendering: this component is blank until the
- * configuration form is submitted, at which time it populates
- * the letter and manuscript lists with data that the App
- * has queried from the REST API.
+ *
+ * Conditional rendering: this component displays a text prompt
+ * until the configuration form is submitted, at which time it
+ * populates the letter and manuscript lists with data that the
+ * App has queried from the REST API.
  */
 
 import ScriptChart from "./ScriptChart";
@@ -26,7 +26,7 @@ import "react-tabs/style/react-tabs.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./DashTabs.css";
+import "./index.css";
 
 class DashTabs extends React.Component {
   constructor(props) {
@@ -70,7 +70,7 @@ class DashTabs extends React.Component {
      * 'pre-manuscript' columns (which contain the row
      * letter labels and the Xs used to hide rows).
      */
-    if ((sourceIndex < 0) || (targetIndex < 0)) {
+    if (sourceIndex < 0 || targetIndex < 0) {
       return;
     }
 
@@ -161,7 +161,13 @@ class DashTabs extends React.Component {
 
   render() {
     if (this.props.showTabs == false) {
-      return <div />;
+      return (
+        <div>
+          <span>
+            <strong>{this.props.loadingMessage}</strong>
+          </span>
+        </div>
+      );
     }
 
     console.log("Rendering DashTabs");

@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node_modules/.bin/webpack -p && bundle exec jekyll clean && bundle exec jekyll build",
-    "dev": "yarn concurrently \"node_modules/.bin/webpack --watch\" \"bundle exec jekyll serve\"",
+    "dev": "yarn concurrently \"bundle exec jekyll serve\" \"node_modules/.bin/webpack --watch\"",
     "precommit": "lint-staged",
     "deploy": "gh-pages -d _site",
     "test": "node_modules/.bin/jest",

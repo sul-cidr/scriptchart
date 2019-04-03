@@ -19,7 +19,7 @@ import LetterImage from "./LetterImage";
 import ColumnControls from "./ColumnControls";
 import SyriacLetter from "./SyriacLetter";
 
-import "./ScriptChart.css";
+import "./index.css";
 
 class ScriptChart extends React.Component {
   constructor(props) {
@@ -41,8 +41,9 @@ class ScriptChart extends React.Component {
    * the link to the page URL and the coordinates of each letter.
    */
 
-  viewManifest(manifestURL, manifestActivator) {
-    manifestActivator(manifestURL);
+  viewManifest(manifestURL) {
+    this.props.onManifestSelected(manifestURL);
+    //manifestActivator(manifestURL);
   }
 
   onHideColumn(manuscriptID, columnHider) {
@@ -72,7 +73,7 @@ class ScriptChart extends React.Component {
           displayManifest={this.viewManifest}
           onHideColumn={this.onHideColumn}
           onHiddenChange={this.props.onHiddenChange}
-          onManifestSelected={this.props.onManifestSelected}
+          //onManifestSelected={this.props.onManifestSelected}
         />
       );
       datesRow["manuscript" + (i + 1)] = this.props.columnManuscripts[i].date;
@@ -110,7 +111,9 @@ class ScriptChart extends React.Component {
                   key={coords.id}
                   letter={this.props.rowLetters[i].letter}
                   coords={coords}
-                  sizeClass={this.props.formData.imageSize}
+                  imageSize={this.props.formData.imageSize}
+                  imageDisplay={this.props.formData.imageDisplay}
+                  cropMargin={this.props.formData.cropMargin}
                 />
               );
             });
@@ -124,10 +127,17 @@ class ScriptChart extends React.Component {
   }
 
   getColumns() {
+    /* First two columns are the images of the letters and the "X" to hide
+     * each row.
+     * XXX The transparent header labels are being used to wedge the column
+     * widths to a uniform setting -- need to find a better way to do this.
+     */
     let cols = [
       {
         property: "letter",
-        visible: true,
+        header: {
+          label: <span style={{ color: "transparent" }}>Letter</span>
+        },
         props: {
           style: { width: 80 }
         }
@@ -135,6 +145,9 @@ class ScriptChart extends React.Component {
     ];
     let rowRemoverColumn = {
       property: "row_remover",
+      header: {
+        label: <span style={{ color: "transparent" }}>X</span>
+      },
       props: {
         style: { width: 45 }
       },
@@ -143,7 +156,7 @@ class ScriptChart extends React.Component {
           (value, { rowData }) =>
             rowData.id > 0 ? (
               <span
-                title="Hide this row"
+                title="Hidden row"
                 className="remove"
                 onClick={() => this.onHideRow(rowData.ltid)}
                 style={{ cursor: "pointer" }}
@@ -167,6 +180,7 @@ class ScriptChart extends React.Component {
           label: this.props.columnManuscripts[i].shelfmark,
           props: {
             label: this.props.columnManuscripts[i].shelfmark,
+            style: { width: 200 },
             onMove: o => this.props.onColumnMove(o)
           }
         },

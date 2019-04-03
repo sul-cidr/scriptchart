@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node_modules/.bin/webpack -p && bundle exec jekyll clean && bundle exec jekyll build",
-    "dev": "yarn concurrently \"bundle exec jekyll serve\" \"node_modules/.bin/webpack --watch\"",
+    "dev": "yarn concurrently \"node_modules/.bin/webpack --watch\" \"bundle exec jekyll serve\"",
     "precommit": "lint-staged",
     "deploy": "gh-pages -d _site",
     "test": "node_modules/.bin/jest",
@@ -55,6 +55,7 @@
     "reactabular-dnd": "8.16.0",
     "reactabular-sticky": "^8.14.0",
     "reactabular-table": "8.14.0",
+    "reactjs-popup": "^1.3.2",
     "script-loader": "^0.7.2",
     "table-resolver": "4.1.1"
   },

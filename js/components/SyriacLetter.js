@@ -1,9 +1,9 @@
 import React from "react";
 
-/* SyriacLetter - this component renders the specified Syriac letter, keyed by its ID,
- * based on the data in the "letters" table. note that the script, leading and trailing
- * letter data is only stored here at present, and not available via the backend
- * REST API.
+/* SyriacLetter - this component renders the specified Syriac letter, keyed by
+ * its ID, based on the data in the "letters" table. Note that the script,
+ * leading and trailing letter data is loaded from letters.json at present,
+ * and not available via the backend REST API.
  */
 
 import letters from "./letters.json";

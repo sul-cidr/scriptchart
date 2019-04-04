@@ -43,7 +43,6 @@ class ScriptChart extends React.Component {
 
   viewManifest(manifestURL) {
     this.props.onManifestSelected(manifestURL);
-    //manifestActivator(manifestURL);
   }
 
   onHideColumn(manuscriptID, columnHider) {
@@ -73,7 +72,6 @@ class ScriptChart extends React.Component {
           displayManifest={this.viewManifest}
           onHideColumn={this.onHideColumn}
           onHiddenChange={this.props.onHiddenChange}
-          //onManifestSelected={this.props.onManifestSelected}
         />
       );
       datesRow["manuscript" + (i + 1)] = this.props.columnManuscripts[i].date;

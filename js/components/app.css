@@ -1,0 +1,15 @@
+.arrow-button:hover {
+    color: hsl(217, 71%, 53%);
+}
+
+.sidebar-closed {
+    display: none;
+}
+
+.sidebar-open {
+    display: block;
+}
+
+.closed-menu {
+    padding-bottom: 2.25rem;
+}

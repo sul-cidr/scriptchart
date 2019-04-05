@@ -17,6 +17,7 @@ import React, { Component } from "react";
  */
 
 import "../../src/assets/syriac_fonts.css";
+import "./app.css";
 
 /* Loading fontawesome icons via React seems easier than doing
  * it via site-wide CSS */
@@ -51,6 +52,7 @@ class App extends Component {
       showTabs: false,
       formData: {},
       tableData: {},
+      sidebarOpen: true,
       loadingMessage:
         'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
     };
@@ -62,6 +64,8 @@ class App extends Component {
     this.processCoords = this.processCoords.bind(this);
     this.getYearFromDate = this.getYearFromDate.bind(this);
     this.sortManuscripts = this.sortManuscripts.bind(this);
+    this.closeSidebar = this.closeSidebar.bind(this);
+    this.openSidebar = this.openSidebar.bind(this);
   }
 
   /* The ms date field in the DB is a bit unruly. We'll do our best
@@ -247,6 +251,15 @@ class App extends Component {
     });
   }
 
+  closeSidebar() {
+    this.setState({ sidebarOpen: false });
+    console.log("close the sidebar");
+  }
+
+  openSidebar() {
+    this.setState({ sidebarOpen: true });
+  }
+
   componentDidMount() {
     this.queryManuscripts();
   }
@@ -269,14 +282,53 @@ class App extends Component {
     return (
       <div className="App">
         <div className={"columns main-content"}>
-          <div className={"column is-one-quarter"}>
-            <div className={"box"}>
-              <h4 className={"title is-4"}>Scriptchart options</h4>
-              <ManuscriptForm
-                formSubmit={this.handleSubmit}
-                manuscripts={this.state.allManuscripts}
-                sortManuscripts={this.sortManuscripts}
+          <div
+            className={
+              "button column is-narrow closed-menu " +
+              (!this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
+            }
+            onClick={this.openSidebar}
+          >
+            Menu{" "}
+            <span className={"icon arrow-button"} onClick={this.openSidebar}>
+              <i
+                className={"fa fa-arrow-right"}
+                aria-hidden="true"
+                title="Open the script form."
               />
+            </span>
+          </div>
+          <div
+            className={
+              "column is-one-quarter " +
+              (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
+            }
+          >
+            <div className={"box"}>
+              <div className={"box-header columns"}>
+                <div className={"column is-three-quarters"}>
+                  <h4 className={"title is-5"}>Scriptchart options </h4>
+                </div>
+                <div className={"column is-one-quarter"}>
+                  <span
+                    className={"icon arrow-button"}
+                    onClick={this.closeSidebar}
+                  >
+                    <i
+                      className={"fa fa-arrow-left"}
+                      aria-hidden="true"
+                      title="Close the script form."
+                    />
+                  </span>
+                </div>
+              </div>
+              <div className={"box-content"}>
+                <ManuscriptForm
+                  formSubmit={this.handleSubmit}
+                  manuscripts={this.state.allManuscripts}
+                  sortManuscripts={this.sortManuscripts}
+                />
+              </div>
             </div>
           </div>
           <div className={"column"}>

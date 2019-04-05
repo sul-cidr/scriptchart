@@ -12,4 +12,9 @@
 
 .closed-menu {
     padding-bottom: 2.25rem;
+    margin-top: .75rem;
+}
+
+.closed-menu:hover {
+    color: hsl(217, 71%, 53%);
 }

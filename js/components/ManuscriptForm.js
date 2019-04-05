@@ -26,7 +26,6 @@ class ManuscriptForm extends React.Component {
       imageDisplay: "hover",
       imageSize: "Small",
       selectedShelfmarks: [],
-      manuscripts: [],
       letters: []
     };
 
@@ -85,7 +84,7 @@ class ManuscriptForm extends React.Component {
           selectedLetters.findIndex(l => l.id == ltid) < 0
         ) {
           selectedLetters.push(lt);
-        } else if (which == "Invert selection") {
+        } /*else if (which == "Invert selection") {
           if (selectedLetters.findIndex(l => l.id == ltid) < 0) {
             selectedLetters.push(lt);
           } else {
@@ -94,7 +93,7 @@ class ManuscriptForm extends React.Component {
               1
             );
           }
-        }
+        }*/
       }
     }
     this.handleSelect("letters", selectedLetters);
@@ -147,9 +146,9 @@ class ManuscriptForm extends React.Component {
             <span className="button is-small" onClick={this.lettersSelect}>
               Select none
             </span>
-            <span className="button is-small" onClick={this.lettersSelect}>
+            {/*<span className="button is-small" onClick={this.lettersSelect}>
               Invert selection
-            </span>
+            </span>*/}
           </div>
           <LettersLoader
             selectedLetters={this.state.letters}

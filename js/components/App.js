@@ -64,8 +64,7 @@ class App extends Component {
     this.processCoords = this.processCoords.bind(this);
     this.getYearFromDate = this.getYearFromDate.bind(this);
     this.sortManuscripts = this.sortManuscripts.bind(this);
-    this.closeSidebar = this.closeSidebar.bind(this);
-    this.openSidebar = this.openSidebar.bind(this);
+    this.toggleSidebar = this.toggleSidebar.bind(this);
   }
 
   /* The ms date field in the DB is a bit unruly. We'll do our best
@@ -141,10 +140,11 @@ class App extends Component {
   }
 
   handleSubmit(formData) {
+    this.setState({
+      showTabs: false,
+      loadingMessage: "Loading manuscripts..."
+    });
 
-    this.setState({ showTabs: false,
-                    loadingMessage: "Loading manuscripts..." });
-    
     let manuscriptQueries = [];
     let manuscripts = [];
     for (let ms of this.state.allManuscripts) {
@@ -174,7 +174,6 @@ class App extends Component {
       this.setState({ loadingMessage: "Loading manuscript pages..." });
 
       for (let pages of msResults) {
-
         for (let page of pages) {
           for (let letter of formData.letters) {
             let coordsQuery =
@@ -193,7 +192,6 @@ class App extends Component {
   }
 
   processCoords(coordsQueries, formData) {
-
     Promise.all(
       coordsQueries.map(url =>
         fetch(url)
@@ -206,10 +204,11 @@ class App extends Component {
     ).then(coordsResults => {
       let tableData = {};
 
-      this.setState({ loadingMessage: "Processing letters on manuscript pages..." });
+      this.setState({
+        loadingMessage: "Processing letters on manuscript pages..."
+      });
 
       for (let coordsData of coordsResults) {
-        
         if (coordsData.length == 0) {
           continue;
         }
@@ -258,13 +257,8 @@ class App extends Component {
     });
   }
 
-  closeSidebar() {
-    this.setState({ sidebarOpen: false });
-    console.log("close the sidebar");
-  }
-
-  openSidebar() {
-    this.setState({ sidebarOpen: true });
+  toggleSidebar() {
+    this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
   componentDidMount() {
@@ -294,10 +288,10 @@ class App extends Component {
               "button column is-narrow closed-menu " +
               (!this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
             }
-            onClick={this.openSidebar}
+            onClick={this.toggleSidebar}
           >
             Menu{" "}
-            <span className={"icon arrow-button"} onClick={this.openSidebar}>
+            <span className={"icon arrow-button"} onClick={this.toggleSidebar}>
               <i
                 className={"fa fa-arrow-right"}
                 aria-hidden="true"
@@ -319,7 +313,7 @@ class App extends Component {
                 <div className={"column is-one-quarter"}>
                   <span
                     className={"icon arrow-button"}
-                    onClick={this.closeSidebar}
+                    onClick={this.toggleSidebar}
                   >
                     <i
                       className={"fa fa-arrow-left"}

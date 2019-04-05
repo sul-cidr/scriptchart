@@ -45,13 +45,13 @@ class ManuscriptMenu extends React.Component {
         let sm = ms.shelfmark;
         if (which == "Select all" && selectedShelfmarks.indexOf(sm) < 0) {
           selectedShelfmarks.push(sm);
-        } else if (which == "Invert selection") {
+        } /* else if (which == "Invert selection") {
           if (selectedShelfmarks.indexOf(sm) < 0) {
             selectedShelfmarks.push(sm);
           } else {
             selectedShelfmarks.splice(selectedShelfmarks.indexOf(sm), 1);
           }
-        }
+        }*/
       }
     }
     this.props.handleSelect("selectedShelfmarks", selectedShelfmarks);
@@ -80,9 +80,9 @@ class ManuscriptMenu extends React.Component {
           <span className="button is-small" onClick={this.manuscriptsSelect}>
             Select none
           </span>
-          <span className="button is-small" onClick={this.manuscriptsSelect}>
+          {/*<span className="button is-small" onClick={this.manuscriptsSelect}>
             Invert selection
-          </span>
+          </span>*/}
         </div>
         <div className={"select is-multiple"}>
           <ManuscriptsLoader

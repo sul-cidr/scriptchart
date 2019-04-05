@@ -11,6 +11,10 @@ import React from "react";
  * ChartAccordion. As such, it handles dragging and dropping
  * of rows and columns, as well as hiding/redisplaying them.
  *
+ * The component also keeps track of the IIIF manifests available
+ * for display via the Mirador viewer component, as well as the
+ * manifests that are currently "on display" in the viewer.
+ *
  * Conditional rendering: this component displays a text prompt
  * until the configuration form is submitted, at which time it
  * populates the letter and manuscript lists with data that the
@@ -115,8 +119,12 @@ class DashTabs extends React.Component {
     this.setState({ rowLetters });
   }
 
+  /* Note that this helper function can be called before the component
+   * state has been updated with manifest and window object data, so it
+   * always builds these lists from scratch based on the contents
+   * of the "manuscripts" prop.
+   */
   getMiradorParameters() {
-
     let manifestURIs = [];
     let windowObjects = [];
     let miradorLayout = "1x1";
@@ -143,32 +151,27 @@ class DashTabs extends React.Component {
         windowObjects.push(windowObject);
       }
     }
-    return [ manifestURIs, windowObjects, miradorLayout ];
+    return [manifestURIs, windowObjects, miradorLayout];
   }
 
   onManifestSelected(selectedManifestURI) {
-
-    console.log("selected URI is " + selectedManifestURI);
     let manifestURIs = [...this.state.manifestURIs];
     let windowObjects = [...this.state.windowObjects];
     let miradorLayout = this.state.miradorLayout;
 
-    if ((manifestURIs.length == 0) && (this.props.manuscripts)) {
-      console.log("calculating Mirador settings");
-
-      [ manifestURIs, windowObjects, miradorLayout ] = this.getMiradorParameters();
-
+    if (manifestURIs.length == 0 && this.props.manuscripts) {
+      [
+        manifestURIs,
+        windowObjects,
+        miradorLayout
+      ] = this.getMiradorParameters();
     }
 
-    // If the selected manifest is already being shown
-    // in the viewer, do nothing.
-    console.log(windowObjects);
-    console.log(windowObjects.findIndex(o => o.loadedManifest == selectedManifestURI));
-    if (windowObjects.findIndex(o => o.loadedManifest == selectedManifestURI) < 0) {
-      console.log("selected manifest URI is not in windowObjects list");
-
-      // Otherwise, treat the Mirador viewer windows as a LIFO queue
-      // of size 1-4
+    // If the selected manifest is already being shown in the viewer, do nothing.
+    if (
+      windowObjects.findIndex(o => o.loadedManifest == selectedManifestURI) < 0
+    ) {
+      // Otherwise, treat the Mirador viewer windows as a FIFO queue of size 1-4
       if (windowObjects.length == 4) {
         windowObjects.pop();
       }
@@ -179,25 +182,23 @@ class DashTabs extends React.Component {
       };
       windowObjects.unshift(windowObject);
 
-      for (let m=1, len=windowObjects.length; m<len; m++) {
+      for (let m = 1, len = windowObjects.length; m < len; m++) {
         if (m == 1) {
-          windowObjects[m]['targetSlot'] = 'row1.column2';
+          windowObjects[m]["targetSlot"] = "row1.column2";
         } else if (m == 2) {
-          windowObjects[m]['targetSlot'] = 'row2.column1';
+          windowObjects[m]["targetSlot"] = "row2.column1";
         } else if (m == 3) {
-          windowObjects[m]['targetSlot'] = 'row2.column2';
+          windowObjects[m]["targetSlot"] = "row2.column2";
         }
       }
 
-      let miradorLayout = '1x1';
+      let miradorLayout = "1x1";
       if (windowObjects.length == 2) {
-        miradorLayout = '1x2';
+        miradorLayout = "1x2";
       } else if (windowObjects.length >= 3) {
-        miradorLayout = '2x2';
+        miradorLayout = "2x2";
       }
     }
-    console.log("after Mirador LIFO");
-    console.log(windowObjects);
 
     this.setState({ manifestURIs, windowObjects, miradorLayout, tabIndex: 1 });
   }
@@ -285,21 +286,13 @@ class DashTabs extends React.Component {
     let windowObjects = [...this.state.windowObjects];
     let miradorLayout = this.state.miradorLayout;
 
-    console.log("checking preconditions for Mirador render");
-    console.log(manifestURIs.length);
-    console.log(this.props.manuscripts);
-
-    if ((manifestURIs.length == 0) && (this.props.manuscripts)) {
-      console.log("calculating Mirador settings");
-
-      [ manifestURIs, windowObjects, miradorLayout ] = this.getMiradorParameters();
-
+    if (manifestURIs.length == 0 && this.props.manuscripts) {
+      [
+        manifestURIs,
+        windowObjects,
+        miradorLayout
+      ] = this.getMiradorParameters();
     }
-    console.log("on DashTabs render:");
-    console.log(manifestURIs);
-    console.log(windowObjects);
-    console.log(miradorLayout);
-    //this.setState({ manifestURIs, windowObjects, miradorLayout });
 
     return (
       <section className="section no-padding">

@@ -6,12 +6,8 @@ import React, { Component } from "react";
 
 import "./MiradorViewer.css";
 
-export default class MiradorViewer extends Component {  
+export default class MiradorViewer extends Component {
   componentDidMount() {
-    console.log("Mounting Mirador viewer:");
-    console.log(this.props.manifestURIs);
-    console.log(this.props.windowObjects);
-    console.log(this.props.miradorLayout);
     Mirador({
       id: "mirador",
       layout: this.props.miradorLayout,

@@ -141,11 +141,10 @@ class App extends Component {
   }
 
   handleSubmit(formData) {
-    this.setState({
-      showTabs: false,
-      loadingMessage: "Table data is loading..."
-    });
 
+    this.setState({ showTabs: false,
+                    loadingMessage: "Loading manuscripts..." });
+    
     let manuscriptQueries = [];
     let manuscripts = [];
     for (let ms of this.state.allManuscripts) {
@@ -171,7 +170,11 @@ class App extends Component {
       )
     ).then(msResults => {
       let coordsQueries = [];
+
+      this.setState({ loadingMessage: "Loading manuscript pages..." });
+
       for (let pages of msResults) {
+
         for (let page of pages) {
           for (let letter of formData.letters) {
             let coordsQuery =
@@ -190,6 +193,7 @@ class App extends Component {
   }
 
   processCoords(coordsQueries, formData) {
+
     Promise.all(
       coordsQueries.map(url =>
         fetch(url)
@@ -202,7 +206,10 @@ class App extends Component {
     ).then(coordsResults => {
       let tableData = {};
 
+      this.setState({ loadingMessage: "Processing letters on manuscript pages..." });
+
       for (let coordsData of coordsResults) {
+        
         if (coordsData.length == 0) {
           continue;
         }

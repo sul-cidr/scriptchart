@@ -35,7 +35,9 @@ class DashTabs extends React.Component {
     this.state = {
       hiddenManuscripts: [],
       hiddenLetters: [],
-      manifestURL: null,
+      manifestURIs: [],
+      windowObjects: [],
+      miradorLayout: "1x1",
       tabIndex: 0,
       rowLetters: [],
       columnManuscripts: []
@@ -45,6 +47,7 @@ class DashTabs extends React.Component {
     this.onHiddenChange = this.onHiddenChange.bind(this);
     this.onColumnMove = this.onColumnMove.bind(this);
     this.onRowMove = this.onRowMove.bind(this);
+    this.getMiradorParameters = this.getMiradorParameters.bind(this);
   }
 
   onColumnMove(labels) {
@@ -112,8 +115,91 @@ class DashTabs extends React.Component {
     this.setState({ rowLetters });
   }
 
-  onManifestSelected(selectedURL) {
-    this.setState({ manifestURL: selectedURL, tabIndex: 1 });
+  getMiradorParameters() {
+
+    let manifestURIs = [];
+    let windowObjects = [];
+    let miradorLayout = "1x1";
+
+    for (let ms of this.props.manuscripts) {
+      manifestURIs.push({ manifestUri: ms.manifest });
+      if (manifestURIs.length <= 4) {
+        let targetSlot = "row1.column1";
+        if (manifestURIs.length == 2) {
+          miradorLayout = "1x2";
+          targetSlot = "row1.column2";
+        } else if (manifestURIs.length == 3) {
+          miradorLayout = "2x2";
+          targetSlot = "row2.column1";
+        } else if (manifestURIs.length == 4) {
+          miradorLayout = "2x2";
+          targetSlot = "row2.column2";
+        }
+        let windowObject = {
+          loadedManifest: ms.manifest,
+          targetSlot: targetSlot,
+          viewType: "ImageView"
+        };
+        windowObjects.push(windowObject);
+      }
+    }
+    return [ manifestURIs, windowObjects, miradorLayout ];
+  }
+
+  onManifestSelected(selectedManifestURI) {
+
+    console.log("selected URI is " + selectedManifestURI);
+    let manifestURIs = [...this.state.manifestURIs];
+    let windowObjects = [...this.state.windowObjects];
+    let miradorLayout = this.state.miradorLayout;
+
+    if ((manifestURIs.length == 0) && (this.props.manuscripts)) {
+      console.log("calculating Mirador settings");
+
+      [ manifestURIs, windowObjects, miradorLayout ] = this.getMiradorParameters();
+
+    }
+
+    // If the selected manifest is already being shown
+    // in the viewer, do nothing.
+    console.log(windowObjects);
+    console.log(windowObjects.findIndex(o => o.loadedManifest == selectedManifestURI));
+    if (windowObjects.findIndex(o => o.loadedManifest == selectedManifestURI) < 0) {
+      console.log("selected manifest URI is not in windowObjects list");
+
+      // Otherwise, treat the Mirador viewer windows as a LIFO queue
+      // of size 1-4
+      if (windowObjects.length == 4) {
+        windowObjects.pop();
+      }
+      let windowObject = {
+        loadedManifest: selectedManifestURI,
+        targetSlot: "row1.column1",
+        viewType: "ImageView"
+      };
+      windowObjects.unshift(windowObject);
+
+      for (let m=1, len=windowObjects.length; m<len; m++) {
+        if (m == 1) {
+          windowObjects[m]['targetSlot'] = 'row1.column2';
+        } else if (m == 2) {
+          windowObjects[m]['targetSlot'] = 'row2.column1';
+        } else if (m == 3) {
+          windowObjects[m]['targetSlot'] = 'row2.column2';
+        }
+      }
+
+      let miradorLayout = '1x1';
+      if (windowObjects.length == 2) {
+        miradorLayout = '1x2';
+      } else if (windowObjects.length >= 3) {
+        miradorLayout = '2x2';
+      }
+    }
+    console.log("after Mirador LIFO");
+    console.log(windowObjects);
+
+    this.setState({ manifestURIs, windowObjects, miradorLayout, tabIndex: 1 });
   }
 
   onHiddenChange(showOrHide, rowOrColumn, itemID) {
@@ -195,6 +281,26 @@ class DashTabs extends React.Component {
       columnManuscripts = this.state.columnManuscripts;
     }
 
+    let manifestURIs = [...this.state.manifestURIs];
+    let windowObjects = [...this.state.windowObjects];
+    let miradorLayout = this.state.miradorLayout;
+
+    console.log("checking preconditions for Mirador render");
+    console.log(manifestURIs.length);
+    console.log(this.props.manuscripts);
+
+    if ((manifestURIs.length == 0) && (this.props.manuscripts)) {
+      console.log("calculating Mirador settings");
+
+      [ manifestURIs, windowObjects, miradorLayout ] = this.getMiradorParameters();
+
+    }
+    console.log("on DashTabs render:");
+    console.log(manifestURIs);
+    console.log(windowObjects);
+    console.log(miradorLayout);
+    //this.setState({ manifestURIs, windowObjects, miradorLayout });
+
     return (
       <section className="section no-padding">
         <div className="container">
@@ -238,7 +344,11 @@ class DashTabs extends React.Component {
                   />
                 </TabPanel>
                 <TabPanel>
-                  <MiradorViewer manifestURL={this.state.manifestURL} />
+                  <MiradorViewer
+                    manifestURIs={manifestURIs}
+                    miradorLayout={miradorLayout}
+                    windowObjects={windowObjects}
+                  />
                 </TabPanel>
                 <TabPanel>
                   <ChartAccordion

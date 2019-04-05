@@ -92,12 +92,6 @@ exports[`App test App should match snapshot 1`] = `
                 >
                   Select none
                 </span>
-                <span
-                  className="button is-small"
-                  onClick={[Function]}
-                >
-                  Invert selection
-                </span>
               </div>
               <div
                 className="select is-multiple"
@@ -174,12 +168,6 @@ exports[`App test App should match snapshot 1`] = `
                   onClick={[Function]}
                 >
                   Select none
-                </span>
-                <span
-                  className="button is-small"
-                  onClick={[Function]}
-                >
-                  Invert selection
                 </span>
               </div>
               <div

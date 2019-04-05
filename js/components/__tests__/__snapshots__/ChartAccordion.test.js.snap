@@ -64,6 +64,7 @@ exports[`ChartAccordion test ChartAccordion should match snapshot 1`] = `
         className="buttons are-small"
       >
         <LetterButton
+          buttonClass="button is-outlined"
           key="2"
           letter={
             <SyriacLetter
@@ -73,6 +74,7 @@ exports[`ChartAccordion test ChartAccordion should match snapshot 1`] = `
           letterID={2}
         />
         <LetterButton
+          buttonClass="button is-outlined"
           key="4"
           letter={
             <SyriacLetter
@@ -82,6 +84,7 @@ exports[`ChartAccordion test ChartAccordion should match snapshot 1`] = `
           letterID={4}
         />
         <LetterButton
+          buttonClass="button is-outlined"
           key="9"
           letter={
             <SyriacLetter

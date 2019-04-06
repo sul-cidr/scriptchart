@@ -72,30 +72,34 @@ class ManuscriptForm extends React.Component {
     this.handleSelect("letters", selectedLetters);
   }
 
+  // Currently this is a simple all/none toggle
   lettersSelect(event) {
-    const which = event.target.textContent;
-    let selectedLetters = [];
-    if (which != "Select none") {
-      selectedLetters = [...this.state.letters];
-      for (let lt of letters) {
-        let ltid = lt.id;
-        if (
-          which == "Select all" &&
-          selectedLetters.findIndex(l => l.id == ltid) < 0
-        ) {
-          selectedLetters.push(lt);
-        } /*else if (which == "Invert selection") {
-          if (selectedLetters.findIndex(l => l.id == ltid) < 0) {
-            selectedLetters.push(lt);
-          } else {
-            selectedLetters.splice(
-              selectedLetters.findIndex(l => l.id == ltid),
-              1
-            );
-          }
-        }*/
+    //const which = event.target.textContent;
+    //let selectedLetters = [];
+    //if (which != "None") {
+    let selectedLetters = [...this.state.letters];
+    for (let lt of letters) {
+      let ltid = lt.id;
+      if (//which == "All" &&
+        selectedLetters.findIndex(l => l.id == ltid) < 0
+      ) {
+        selectedLetters.push(lt);
+      } else {
+        selectedLetters = [];
+        break;
       }
+      /*else if (which == "Invert selection") {
+        if (selectedLetters.findIndex(l => l.id == ltid) < 0) {
+          selectedLetters.push(lt);
+        } else {
+          selectedLetters.splice(
+            selectedLetters.findIndex(l => l.id == ltid),
+            1
+          );
+        }
+      }*/
     }
+    //}
     this.handleSelect("letters", selectedLetters);
   }
 
@@ -138,15 +142,15 @@ class ManuscriptForm extends React.Component {
           sortManuscripts={this.props.sortManuscripts}
         />
         <div className={"field"}>
-          <label className={"control"}>Select letters:</label>
           <div className={"control"} style={{ marginBottom: 5 }}>
+            <label className={"control"}>Select letters: </label>
             <span className="button is-small" onClick={this.lettersSelect}>
-              Select all
-            </span>
-            <span className="button is-small" onClick={this.lettersSelect}>
-              Select none
+              All/None
             </span>
             {/*<span className="button is-small" onClick={this.lettersSelect}>
+              None
+            </span>
+            <span className="button is-small" onClick={this.lettersSelect}>
               Invert selection
             </span>*/}
           </div>

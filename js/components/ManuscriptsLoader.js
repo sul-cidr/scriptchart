@@ -23,7 +23,7 @@ class ManuscriptsLoader extends React.Component {
     }
     
     return (
-      <select multiple size="8"
+      <select size="8"
         type="string"
         name="selectedShelfmarks"
         value={this.props.selectedShelfmarks}

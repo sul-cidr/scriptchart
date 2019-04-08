@@ -21,9 +21,10 @@ class ManuscriptForm extends React.Component {
     /* Most of the form defaults are set here */
     this.state = {
       showBinarized: true,
+      showCropped: true,
+      contextMode: "hover",
       letterExamples: 3,
       cropMargin: "Medium",
-      imageDisplay: "hover",
       imageSize: "Small",
       selectedShelfmarks: [],
       letters: []
@@ -35,13 +36,13 @@ class ManuscriptForm extends React.Component {
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
     this.changeCropMargin = this.changeCropMargin.bind(this);
-    this.changeImageDisplay = this.changeImageDisplay.bind(this);
+    this.changeContextMode = this.changeContextMode.bind(this);
   }
 
-  changeImageDisplay(event) {
-    const imageDisplay = event.target.value;
+  changeContextMode(event) {
+    const contextMode = event.target.value;
 
-    this.setState({ imageDisplay });
+    this.setState({ contextMode });
   }
 
   changeCropMargin(event) {
@@ -107,6 +108,8 @@ class ManuscriptForm extends React.Component {
     const target = event.target;
     const name = target.name;
     const value = target.type === "checkbox" ? target.checked : target.value;
+
+    console.log("setting " + name + " to " + value);
 
     this.setState({
       [name]: value
@@ -184,6 +187,33 @@ class ManuscriptForm extends React.Component {
             </div>
           </div>
         </div>
+        <div className={"control"}>
+          <p>Letter image options:</p>
+          <ul>
+            <li>
+              <label className={"checkbox"}>
+                <input
+                  type="checkbox"
+                  name="showBinarized"
+                  onChange={this.handleChange}
+                  checked={this.state.showBinarized}
+                />{" "}
+                Show trimmed images
+              </label>
+            </li>
+            <li>
+              <label className={"checkbox"}>
+                <input
+                  type="checkbox"
+                  name="showCropped"
+                  onChange={this.handleChange}
+                  checked={this.state.showCropped}
+                />{" "}
+                Show untrimmed images
+              </label>
+            </li>
+          </ul>
+        </div>
         <div className={"field is-horizontal"}>
           <div className={"field-label is-normal"}>
             <div style={{ whiteSpace: "nowrap" }}>Select image size:</div>
@@ -197,7 +227,6 @@ class ManuscriptForm extends React.Component {
                     type="string"
                     name="imageSize"
                     onChange={this.handleChange}
-                    disabled={this.state.imageDisplay == "cropped"}
                   >
                     <option>Small</option>
                     <option>Medium</option>
@@ -209,46 +238,35 @@ class ManuscriptForm extends React.Component {
           </div>
         </div>
         <div className={"control"}>
-          <p>Letter image options:</p>
+          <p>Letter in context:</p>
           <ul>
             <li>
               <label className={"radio"}>
                 <input
                   type="radio"
-                  value="binarized"
-                  onChange={this.changeImageDisplay}
-                  checked={this.state.imageDisplay == "binarized"}
-                />{" "}
-                Show binarized only
-              </label>
-            </li>
-            <li>
-              <label className={"radio"}>
-                <input
-                  type="radio"
                   value="hover"
-                  onChange={this.changeImageDisplay}
-                  checked={this.state.imageDisplay == "hover"}
+                  onChange={this.changeContextMode}
+                  checked={this.state.contextMode == "hover"}
                 />{" "}
-                Show cropped images on hover
+                Show on hover (mouseover)
               </label>
             </li>
             <li>
               <label className={"radio"}>
                 <input
                   type="radio"
-                  value="cropped"
-                  onChange={this.changeImageDisplay}
-                  checked={this.state.imageDisplay == "cropped"}
+                  value="click"
+                  onChange={this.changeContextMode}
+                  checked={this.state.contextMode == "click"}
                 />{" "}
-                Show cropped images only
+                Show on click
               </label>
             </li>
           </ul>
         </div>
         <div className={"field is-horizontal"}>
           <div className={"field-label is-normal"}>
-            <div style={{ whiteSpace: "nowrap" }}>Cropped margin size:</div>
+            <div style={{ whiteSpace: "nowrap" }}>Contextual margin size:</div>
           </div>
           <div className={"field-body"}>
             <div className={"field is-narrow"}>
@@ -259,9 +277,9 @@ class ManuscriptForm extends React.Component {
                     type="string"
                     name="cropMargin"
                     onChange={this.changeCropMargin}
-                    disabled={this.state.imageDisplay == "binarized"}
+                    //disabled={this.state.contextMode == "off"}
                   >
-                    <option>None</option>
+                    <option>Small</option>
                     <option>Medium</option>
                     <option>Large</option>
                   </select>

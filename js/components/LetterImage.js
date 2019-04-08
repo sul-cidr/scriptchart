@@ -20,8 +20,8 @@ const SMALL_DIM = 25;
 const MEDIUM_DIM = 50;
 const LARGE_DIM = 100;
 
-const MEDIUM_CROP_MARGIN = 10;
-const LARGE_CROP_MARGIN = 20;
+const MEDIUM_CROP_MARGIN = 20;
+const LARGE_CROP_MARGIN = 40;
 
 class LetterImage extends React.Component {
   constructor(props) {

@@ -20,6 +20,7 @@ const SMALL_DIM = 25;
 const MEDIUM_DIM = 50;
 const LARGE_DIM = 100;
 
+const SMALL_CROP_MARGIN = 10;
 const MEDIUM_CROP_MARGIN = 20;
 const LARGE_CROP_MARGIN = 40;
 
@@ -45,7 +46,7 @@ class LetterImage extends React.Component {
      * user-specified contextual margin around it, and construct a URL
      * to request this image from the backend.
      */
-    let marginSize = 0;
+    let marginSize = SMALL_CROP_MARGIN;
     if (this.props.cropMargin == "Medium") {
       marginSize = MEDIUM_CROP_MARGIN;
     } else if (this.props.cropMargin == "Large") {

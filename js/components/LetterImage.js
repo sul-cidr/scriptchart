@@ -55,6 +55,10 @@ class LetterImage extends React.Component {
     );
     let heightExpanded = bottomExpanded - topExpanded;
 
+    if (isNaN(leftExpanded) || isNaN(topExpanded) || isNaN(widthExpanded) || isNaN(heightExpanded)) {
+      console.log("NaN in getCropURL, marginSize is ")
+    }
+
     let cropURL = API_ROOT +
       "crop?page_url=" +
       this.props.coords.pageurl +
@@ -79,8 +83,12 @@ class LetterImage extends React.Component {
       croppedImage.src = this.getCropURL().url;
     }
     let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
-    let resizeRatio = (parseFloat(this.props.coords.width) * parseFloat(this.props.coords.height)) / ((cropMargin + parseFloat(this.props.coordsWidth)) * (cropMargin + parseFloat(this.props.coordsHeight)));
+    let resizeRatio = (parseFloat(this.props.coords.width) * parseFloat(this.props.coords.height)) / ((cropMargin + parseFloat(this.props.coords.width)) * (cropMargin + parseFloat(this.props.coords.height)));
     let contextCropMargin = Math.round(cropMargin * resizeRatio);
+    if (isNaN(contextCropMargin)) {
+      console.log("contextCropMargin isNaN in componentDidMount");
+      console.log(this.props.coords);
+    }
     const contextImage = new Image();
     contextImage.src = this.getCropURL(contextCropMargin).url;
   }
@@ -103,6 +111,9 @@ class LetterImage extends React.Component {
     let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
     let resizeRatio = (parseFloat(coordsWidth) * parseFloat(coordsHeight)) / ((cropMargin + parseFloat(coordsWidth)) * (cropMargin + parseFloat(coordsHeight)));
     let contextCropMargin = Math.round(cropMargin * resizeRatio);
+    if (isNaN(contextCropMargin)) {
+      console.log("contextCropMargin isNaN in render");
+    }
 
     let contextURL = this.getCropURL(contextCropMargin).url;
 

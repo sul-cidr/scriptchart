@@ -25,7 +25,7 @@ class ManuscriptForm extends React.Component {
       contextMode: "hover",
       letterExamples: 3,
       cropMargin: "Medium",
-      imageSize: "Small",
+      imageSize: "Medium",
       selectedShelfmarks: [],
       letters: []
     };
@@ -107,7 +107,15 @@ class ManuscriptForm extends React.Component {
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+
+    /* Don't allow deselecting of both letter image options (one must always be selected) */
+    if ((name == "showBinarized") && (value == false) && (this.state.showCropped == false)) {
+      value = true;
+    }
+    if ((name == "showCropped") && (value == false) && (this.state.showBinarized == false)) {
+      value = true;
+    }
 
     console.log("setting " + name + " to " + value);
 
@@ -165,7 +173,7 @@ class ManuscriptForm extends React.Component {
         <div className={"field is-horizontal"}>
           <div className={"field-label is-normal"}>
             <div style={{ whiteSpace: "nowrap" }}>
-              Number of letter examples:
+              Number of examples:
             </div>
           </div>
           <div className={"field-body"}>
@@ -188,35 +196,27 @@ class ManuscriptForm extends React.Component {
           </div>
         </div>
         <div className={"control"}>
-          <p>Letter image options:</p>
-          <ul>
-            <li>
-              <label className={"checkbox"}>
-                <input
-                  type="checkbox"
-                  name="showBinarized"
-                  onChange={this.handleChange}
-                  checked={this.state.showBinarized}
-                />{" "}
-                Show trimmed images
-              </label>
-            </li>
-            <li>
-              <label className={"checkbox"}>
-                <input
-                  type="checkbox"
-                  name="showCropped"
-                  onChange={this.handleChange}
-                  checked={this.state.showCropped}
-                />{" "}
-                Show untrimmed images
-              </label>
-            </li>
-          </ul>
+          <p>Show letter images:</p>
+            <label className={"checkbox"}>
+              <input
+                type="checkbox"
+                name="showBinarized"
+                onChange={this.handleChange}
+                checked={this.state.showBinarized}
+              />{" Trimmed |"}
+            </label>
+            <label className={"checkbox"} style={{marginLeft: 8}}>
+              <input
+                type="checkbox"
+                name="showCropped"
+                onChange={this.handleChange}
+                checked={this.state.showCropped}
+              />{" Untrimmed"}
+            </label>
         </div>
         <div className={"field is-horizontal"}>
           <div className={"field-label is-normal"}>
-            <div style={{ whiteSpace: "nowrap" }}>Select image size:</div>
+            <div style={{ whiteSpace: "nowrap" }}>Image size:</div>
           </div>
           <div className={"field-body"}>
             <div className={"field is-narrow"}>
@@ -266,7 +266,7 @@ class ManuscriptForm extends React.Component {
         </div>
         <div className={"field is-horizontal"}>
           <div className={"field-label is-normal"}>
-            <div style={{ whiteSpace: "nowrap" }}>Contextual margin size:</div>
+            <div style={{ whiteSpace: "nowrap" }}>Context size:</div>
           </div>
           <div className={"field-body"}>
             <div className={"field is-narrow"}>

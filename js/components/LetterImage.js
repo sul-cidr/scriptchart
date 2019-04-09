@@ -16,13 +16,8 @@ import { API_ROOT } from "./App";
 
 import "./index.css";
 
-const SMALL_DIM = 25;
-const MEDIUM_DIM = 50;
-const LARGE_DIM = 100;
-
-const SMALL_CROP_MARGIN = 10;
-const MEDIUM_CROP_MARGIN = 20;
-const LARGE_CROP_MARGIN = 40;
+const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
+const CROP_MARGINS = { Small: 25, Medium: 50, Large: 100 };
 
 class LetterImage extends React.Component {
   constructor(props) {
@@ -41,17 +36,11 @@ class LetterImage extends React.Component {
     }
   }
 
-  getCropURL() {
+  getCropURL(marginSize=0) {
     /* Compute dimensions of the cropped manuscript image, including any
      * user-specified contextual margin around it, and construct a URL
      * to request this image from the backend.
      */
-    let marginSize = SMALL_CROP_MARGIN;
-    if (this.props.cropMargin == "Medium") {
-      marginSize = MEDIUM_CROP_MARGIN;
-    } else if (this.props.cropMargin == "Large") {
-      marginSize = LARGE_CROP_MARGIN;
-    }
 
     let leftExpanded = Math.max(0, this.props.coords.left - marginSize);
     let topExpanded = Math.max(0, this.props.coords.top - marginSize);
@@ -66,8 +55,7 @@ class LetterImage extends React.Component {
     );
     let heightExpanded = bottomExpanded - topExpanded;
 
-    return (
-      API_ROOT +
+    let cropURL = API_ROOT +
       "crop?page_url=" +
       this.props.coords.pageurl +
       "&x=" +
@@ -77,86 +65,107 @@ class LetterImage extends React.Component {
       "&w=" +
       widthExpanded +
       "&h=" +
-      heightExpanded
-    );
+      heightExpanded;
+
+    return { url: cropURL, width: widthExpanded, height: heightExpanded };
   }
 
   componentDidMount() {
     /* This forces the browser to preload the image so it's ready to be
      * shown in the popup -- no state management needed!
      */
-    if (this.props.imageDisplay == "hover") {
+    if (this.props.showCropped) {
       const croppedImage = new Image();
-      croppedImage.src = this.getCropURL();
+      croppedImage.src = this.getCropURL().url;
     }
+    let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
+    let resizeRatio = (parseFloat(this.props.coords.width) * parseFloat(this.props.coords.height)) / ((cropMargin + parseFloat(this.props.coordsWidth)) * (cropMargin + parseFloat(this.props.coordsHeight)));
+    let contextCropMargin = Math.round(cropMargin * resizeRatio);
+    const contextImage = new Image();
+    contextImage.src = this.getCropURL(contextCropMargin).url;
   }
 
   render() {
     let coordsWidth = this.props.coords.width;
     let coordsHeight = this.props.coords.height;
 
-    /* Rather than conditionally define the HTML elements for the binarized
-     * and/or cropped images, it's less complicated just to compute the
-     * details of both and then use them when needed -- after all, the real
-     * overhead is incurred when they load, which only happens for the
-     * image(s) involved in the final render.
-     */
+    let maxDim = IMAGE_DIMS[this.props.imageSize];
+    let dims = this.resizeKeepAspect(coordsWidth, coordsHeight, maxDim);
 
-    /* Dimensions of the displayed binarized image */
-    let dims = { coordsWidth, coordsHeight };
-    let maxDim = Math.max(coordsWidth, coordsHeight);
-    if (this.props.imageSize == "Small") {
-      maxDim = SMALL_DIM;
-      dims = this.resizeKeepAspect(coordsWidth, coordsHeight, maxDim);
-    } else if (this.props.imageSize == "Medium") {
-      maxDim = MEDIUM_DIM;
-      dims = this.resizeKeepAspect(coordsWidth, coordsHeight, maxDim);
-    } else {
-      maxDim = LARGE_DIM;
-      dims = this.resizeKeepAspect(coordsWidth, coordsHeight, maxDim);
-    }
-    let binarizedImage = (
-      <img
-        alt={this.props.letter}
-        ref="binarized"
-        width={dims.width}
-        height={dims.height}
-        src={this.props.coords.binaryurl}
-      />
-    );
+    let binarizedDiv = '';
+    let croppedDiv = '';
 
-    let cropURL = this.getCropURL();
+    // note that for the central, non-context portion of the popup image
+    // to be exactly the same size as the cropped/binarized images, it
+    // needs to be scaled at the same factor as the cropped/binarized
+    // images themselves
 
-    let croppedImage = (
-      <img alt={this.props.letter} ref="cropped" src={cropURL} />
-    );
+    let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
+    let resizeRatio = (parseFloat(coordsWidth) * parseFloat(coordsHeight)) / ((cropMargin + parseFloat(coordsWidth)) * (cropMargin + parseFloat(coordsHeight)));
+    let contextCropMargin = Math.round(cropMargin * resizeRatio);
 
-    let imageSpan = <span />;
+    let contextURL = this.getCropURL(contextCropMargin).url;
 
-    if (this.props.imageDisplay == "binarized") {
-      imageSpan = (
-        <span className={"letter-row"}>
-          {binarizedImage}
-        </span>
-      );
-    } else if (this.props.imageDisplay == "cropped") {
-      imageSpan = (
-        <span className={"letter-row"}>
-          {croppedImage}
-        </span>
-      );
-    } else {
-      // this.props.imageDisplay == "hover"
-      imageSpan = (
-        <span className={"letter-row"}>
-          <Popup trigger={binarizedImage} position="top center" on="hover">
-            {croppedImage}
+    let contextImage = <img
+                         alt={this.props.letter}
+                         ref="context"
+                         width={dims.width + contextCropMargin}
+                         height={dims.height + contextCropMargin}
+                         src={contextURL}
+                       />
+
+    if (this.props.showBinarized) {
+
+      /* Dimensions of the displayed binarized image */
+      //let dims = { coordsWidth, coordsHeight };
+      //let maxDim = Math.max(coordsWidth, coordsHeight);
+
+      let binarizedImage =
+        <img
+          alt={this.props.letter}
+          ref="binarized"
+          width={dims.width}
+          height={dims.height}
+          src={this.props.coords.binaryurl}
+        />;
+
+      binarizedDiv =
+        <div className={"letter-item"}>
+          <Popup trigger={binarizedImage} position="top center" on={this.props.contextMode}>
+            {contextImage}
           </Popup>
-        </span>
-      );
+        </div>;
+
     }
 
-    return imageSpan;
+    if (this.props.showCropped) {
+
+      let cropURL = this.getCropURL().url;
+      //let cropDims = this.resizeKeepAspect(cropData.width, cropData.height, maxDim);
+
+      let croppedImage =
+        <img
+          alt={this.props.letter}
+          ref="cropped"
+          width={dims.width}
+          height={dims.height}
+          src={cropURL}
+        />
+        
+      croppedDiv =
+        <div className={"letter-item"}>
+          <Popup trigger={croppedImage} position="top center" on={this.props.contextMode}>
+            {contextImage}
+          </Popup>
+        </div>;
+    }
+
+    return (
+      <span className={"letter-row"}>
+        { binarizedDiv }
+        { croppedDiv }
+      </span>
+    )
   }
 }
 

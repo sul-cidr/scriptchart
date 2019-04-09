@@ -17,7 +17,7 @@ import { API_ROOT } from "./App";
 import "./index.css";
 
 const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
-const CROP_MARGINS = { Small: 25, Medium: 50, Large: 100 };
+const CROP_MARGINS = { Small: .25, Medium: .5, Large: 1 };
 
 class LetterImage extends React.Component {
   constructor(props) {
@@ -36,22 +36,25 @@ class LetterImage extends React.Component {
     }
   }
 
-  getCropURL(marginSize=0) {
+  getCropURL(marginRatio=0) {
     /* Compute dimensions of the cropped manuscript image, including any
      * user-specified contextual margin around it, and construct a URL
      * to request this image from the backend.
      */
 
-    let leftExpanded = Math.max(0, this.props.coords.left - marginSize);
-    let topExpanded = Math.max(0, this.props.coords.top - marginSize);
+    let xMarginSize = Math.round(this.props.coords.width * marginRatio);
+    let yMarginSize = Math.round(this.props.coords.height * marginRatio);
+
+    let leftExpanded = Math.max(0, this.props.coords.left - xMarginSize);
+    let topExpanded = Math.max(0, this.props.coords.top - yMarginSize);
     let rightExpanded = Math.min(
       this.props.coords.pagewidth,
-      this.props.coords.left + this.props.coords.width + marginSize
+      this.props.coords.left + this.props.coords.width + xMarginSize
     );
     let widthExpanded = rightExpanded - leftExpanded;
     let bottomExpanded = Math.min(
       this.props.coords.pageheight,
-      this.props.coords.top + this.props.coords.height + marginSize
+      this.props.coords.top + this.props.coords.height + yMarginSize
     );
     let heightExpanded = bottomExpanded - topExpanded;
 
@@ -82,15 +85,15 @@ class LetterImage extends React.Component {
       const croppedImage = new Image();
       croppedImage.src = this.getCropURL().url;
     }
-    let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
-    let resizeRatio = (parseFloat(this.props.coords.width) * parseFloat(this.props.coords.height)) / ((cropMargin + parseFloat(this.props.coords.width)) * (cropMargin + parseFloat(this.props.coords.height)));
-    let contextCropMargin = Math.round(cropMargin * resizeRatio);
-    if (isNaN(contextCropMargin)) {
-      console.log("contextCropMargin isNaN in componentDidMount");
-      console.log(this.props.coords);
-    }
+    //let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
+    //let resizeRatio = (parseFloat(this.props.coords.width) * parseFloat(this.props.coords.height)) / ((cropMargin + parseFloat(this.props.coords.width)) * (cropMargin + parseFloat(this.props.coords.height)));
+    //let contextCropMargin = Math.round(cropMargin * resizeRatio);
+    //if (isNaN(contextCropMargin)) {
+    //  console.log("contextCropMargin isNaN in componentDidMount");
+    //  console.log(this.props.coords);
+    //}
     const contextImage = new Image();
-    contextImage.src = this.getCropURL(contextCropMargin).url;
+    contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]).url;
   }
 
   render() {
@@ -109,19 +112,22 @@ class LetterImage extends React.Component {
     // images themselves
 
     let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
-    let resizeRatio = (parseFloat(coordsWidth) * parseFloat(coordsHeight)) / ((cropMargin + parseFloat(coordsWidth)) * (cropMargin + parseFloat(coordsHeight)));
-    let contextCropMargin = Math.round(cropMargin * resizeRatio);
-    if (isNaN(contextCropMargin)) {
-      console.log("contextCropMargin isNaN in render");
-    }
+    //let resizeRatio = (parseFloat(coordsWidth) * parseFloat(coordsHeight)) / ((cropMargin + parseFloat(coordsWidth)) * (cropMargin + parseFloat(coordsHeight)));
+    //let contextCropMargin = Math.round(cropMargin * resizeRatio);
+    //if (isNaN(contextCropMargin)) {
+    //  console.log("contextCropMargin isNaN in render");
+    //}
 
-    let contextURL = this.getCropURL(contextCropMargin).url;
+    let contextURL = this.getCropURL(cropMargin).url;
+
+    let contextWidth = dims.width + (2 * Math.round(dims.width * cropMargin));
+    let contextHeight = dims.height + (2 * Math.round(dims.height * cropMargin));
 
     let contextImage = <img
                          alt={this.props.letter}
                          ref="context"
-                         width={dims.width + contextCropMargin}
-                         height={dims.height + contextCropMargin}
+                         width={contextWidth}
+                         height={contextHeight}
                          src={contextURL}
                        />
 

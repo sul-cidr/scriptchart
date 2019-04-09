@@ -14,9 +14,14 @@ class ManuscriptsLoader extends React.Component {
 
     if ((this.props.manuscripts !== null) && (this.props.manuscripts.length > 0)) {
       manuscriptSelectors = this.props.manuscripts.map(ms => {
+        let msIcon = '';
+        // XXX Need to make sure basic FA font is loaded on all browsers
+        if (ms.manifest !== null) {
+          msIcon = "\uf02d";
+        }
         return (
           <option key={ms.id} value={ms.shelfmark}>
-            {ms.shelfmark} ({ms.date ? ms.date : 'NA'})
+            {ms.shelfmark} ({ms.date ? ms.date : 'NA'}) {msIcon}
           </option>
         );
       });
@@ -26,6 +31,7 @@ class ManuscriptsLoader extends React.Component {
       <select size="8"
         type="string"
         name="selectedShelfmarks"
+        style={{fontFamily: 'Helvetica Neue, FontAwesome'}}
         value={this.props.selectedShelfmarks}
         onChange={this.props.handleSelect}
         multiple={true}

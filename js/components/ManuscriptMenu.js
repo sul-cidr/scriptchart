@@ -34,25 +34,31 @@ class ManuscriptMenu extends React.Component {
     this.props.handleSelect(name, value);
   }
 
+  // Currently this is a simple all/none toggle
   manuscriptsSelect(event) {
-    const which = event.target.textContent;
-    let selectedShelfmarks = [];
-    if (which != "Select none") {
-      selectedShelfmarks = JSON.parse(
-        JSON.stringify(this.props.selectedShelfmarks)
-      );
-      for (let ms of this.props.manuscripts) {
-        let sm = ms.shelfmark;
-        if (which == "Select all" && selectedShelfmarks.indexOf(sm) < 0) {
-          selectedShelfmarks.push(sm);
-        } else if (which == "Invert selection") {
+    //const which = event.target.textContent;
+    //let selectedShelfmarks = [];
+    //if (which != "None") {
+    let selectedShelfmarks = JSON.parse(
+      JSON.stringify(this.props.selectedShelfmarks)
+    );
+    for (let ms of this.props.manuscripts) {
+      let sm = ms.shelfmark;
+      if (//which == "All" &&
+        selectedShelfmarks.indexOf(sm) < 0) {
+        selectedShelfmarks.push(sm);
+      } else {
+        selectedShelfmarks = [];
+        break;
+      }
+      /* else if (which == "Invert selection") {
           if (selectedShelfmarks.indexOf(sm) < 0) {
             selectedShelfmarks.push(sm);
           } else {
             selectedShelfmarks.splice(selectedShelfmarks.indexOf(sm), 1);
           }
-        }
-      }
+        }*/
+      //}
     }
     this.props.handleSelect("selectedShelfmarks", selectedShelfmarks);
   }
@@ -72,17 +78,17 @@ class ManuscriptMenu extends React.Component {
   render() {
     return (
       <div className={"field"}>
-        <label className={"control"}>Select manuscripts:</label>
         <div className={"control"} style={{ marginBottom: 5 }}>
+          <label className={"control"}>Select manuscripts: </label>
           <span className="button is-small" onClick={this.manuscriptsSelect}>
-            Select all
+            All/None
           </span>
-          <span className="button is-small" onClick={this.manuscriptsSelect}>
-            Select none
+          {/*<span className="button is-small" onClick={this.manuscriptsSelect}>
+            None
           </span>
           <span className="button is-small" onClick={this.manuscriptsSelect}>
             Invert selection
-          </span>
+          </span>*/}
         </div>
         <div className={"select is-multiple"}>
           <ManuscriptsLoader

@@ -11,113 +11,175 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     <label
       className="control"
     >
-      Select Manuscripts:
+      Select manuscripts:
     </label>
     <div
       className="control"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }
     >
-      <div
-        className="select is-multiple"
+      <span
+        className="button is-small"
+        onClick={[Function]}
       >
-        <select
-          multiple={true}
-          name="selectedShelfmarks"
-          onChange={[Function]}
-          type="string"
-          value={Array []}
-        >
-          <option
-            value="Vat. Syr. 092"
-          >
-            Vat. Syr. 092
-          </option>
-          <option
-            value="Vat. Syr. 112"
-          >
-            Vat. Syr. 112
-          </option>
-          <option
-            value="Vat. Syr. 140"
-          >
-            Vat. Syr. 140
-          </option>
-          <option
-            value="BL. Add. 17224"
-          >
-            BL. Add. 17224
-          </option>
-          <option
-            value="BL. Add. 12144"
-          >
-            BL. Add. 12144
-          </option>
-          <option
-            value="BL. Add. 12134"
-          >
-            BL. Add. 12134
-          </option>
-          <option
-            value="BL. Add. 14445"
-          >
-            BL. Add. 14445
-          </option>
-          <option
-            value="BL. Add. 12146"
-          >
-            BL. Add. 12146
-          </option>
-          <option
-            value="BL. Or. 8732"
-          >
-            BL. Or. 8732
-          </option>
-          <option
-            value="BL. Or. 8606"
-          >
-            BL. Or. 8606
-          </option>
-          <option
-            value="BL. Add. 17102"
-          >
-            BL. Add. 17102
-          </option>
-          <option
-            value="BL. Add. 17107"
-          >
-            BL. Add. 17107
-          </option>
-          <option
-            value="BL. Add. 12175"
-          >
-            BL. Add. 12175
-          </option>
-        </select>
-      </div>
+        Select all
+      </span>
+      <span
+        className="button is-small"
+        onClick={[Function]}
+      >
+        Select none
+      </span>
     </div>
     <div
-      className="control sort-option"
+      className="select is-multiple"
+    >
+      <select
+        multiple={true}
+        name="selectedShelfmarks"
+        onChange={[Function]}
+        size="8"
+        type="string"
+        value={Array []}
+      >
+        <option
+          value="Vat. Syr. 092"
+        >
+          Vat. Syr. 092
+           (
+          823
+          )
+        </option>
+        <option
+          value="Vat. Syr. 112"
+        >
+          Vat. Syr. 112
+           (
+          552
+          )
+        </option>
+        <option
+          value="Vat. Syr. 140"
+        >
+          Vat. Syr. 140
+           (
+          528
+          )
+        </option>
+        <option
+          value="BL. Add. 17224"
+        >
+          BL. Add. 17224
+           (
+          1173
+          )
+        </option>
+        <option
+          value="BL. Add. 12144"
+        >
+          BL. Add. 12144
+           (
+          1081
+          )
+        </option>
+        <option
+          value="BL. Add. 12134"
+        >
+          BL. Add. 12134
+           (
+          697
+          )
+        </option>
+        <option
+          value="BL. Add. 14445"
+        >
+          BL. Add. 14445
+           (
+          532
+          )
+        </option>
+        <option
+          value="BL. Add. 12146"
+        >
+          BL. Add. 12146
+           (
+          1007
+          )
+        </option>
+        <option
+          value="BL. Or. 8732"
+        >
+          BL. Or. 8732
+           (
+          770
+          )
+        </option>
+        <option
+          value="BL. Or. 8606"
+        >
+          BL. Or. 8606
+           (
+          723
+          )
+        </option>
+        <option
+          value="BL. Add. 17102"
+        >
+          BL. Add. 17102
+           (
+          598-599
+          )
+        </option>
+        <option
+          value="BL. Add. 17107"
+        >
+          BL. Add. 17107
+           (
+          540-541
+          )
+        </option>
+        <option
+          value="BL. Add. 12175"
+        >
+          BL. Add. 12175
+           (
+          533-534
+          )
+        </option>
+      </select>
+    </div>
+    <div
+      className="control"
     >
       <p>
-        Order manuscripts by:
+        Order manuscripts by
       </p>
       <label
         className="radio"
       >
-        Shelfmark:
         <input
-          defaultChecked={true}
-          name="Shelfmark"
+          checked={true}
+          onChange={[Function]}
           type="radio"
+          value="shelfmark"
         />
+         
+        Shelfmark |
       </label>
       <label
         className="radio"
       >
-        Date:
         <input
-          name="Date"
+          checked={false}
+          onChange={[Function]}
           type="radio"
+          value="date"
         />
+         
+        Date
       </label>
     </div>
   </div>
@@ -127,8 +189,29 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     <label
       className="control"
     >
-      Select Letters:
+      Select letters:
     </label>
+    <div
+      className="control"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }
+    >
+      <span
+        className="button is-small"
+        onClick={[Function]}
+      >
+        Select all
+      </span>
+      <span
+        className="button is-small"
+        onClick={[Function]}
+      >
+        Select none
+      </span>
+    </div>
     <div
       className="buttons are-small"
     >
@@ -864,83 +947,202 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="field"
+    className="field is-horizontal"
   >
-    <label
-      className="control"
-    >
-      Select number of letter examples:
-    </label>
     <div
-      className="control"
+      className="field-label is-normal"
     >
       <div
-        className="select"
+        style={
+          Object {
+            "whiteSpace": "nowrap",
+          }
+        }
       >
-        <select
-          name="letterExamples"
-          onChange={[Function]}
-          type="number"
-          value={3}
+        Number of letter examples:
+      </div>
+    </div>
+    <div
+      className="field-body"
+    >
+      <div
+        className="field is-narrow"
+      >
+        <div
+          className="control"
         >
-          <option>
-            1
-          </option>
-          <option>
-            3
-          </option>
-          <option>
-            5
-          </option>
-        </select>
+          <div
+            className="select is-small is-fullwidth"
+          >
+            <select
+              name="letterExamples"
+              onChange={[Function]}
+              type="number"
+              value={3}
+            >
+              <option>
+                1
+              </option>
+              <option>
+                3
+              </option>
+              <option>
+                5
+              </option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div
-    className="field"
+    className="field is-horizontal"
   >
-    <label
-      className="checkbox"
-    >
-      Show binarized images?
-      <input
-        checked={true}
-        name="showBinarized"
-        onChange={[Function]}
-        type="checkbox"
-      />
-    </label>
-  </div>
-  <div
-    className="field"
-  >
-    <label
-      className="control"
-    >
-      Select image size:
-    </label>
     <div
-      className="control"
+      className="field-label is-normal"
     >
       <div
-        className="select"
+        style={
+          Object {
+            "whiteSpace": "nowrap",
+          }
+        }
       >
-        <select
-          name="imageSize"
-          onChange={[Function]}
-          type="string"
-          value="Small"
+        Select image size:
+      </div>
+    </div>
+    <div
+      className="field-body"
+    >
+      <div
+        className="field is-narrow"
+      >
+        <div
+          className="control"
         >
-          <option>
-            Small
-          </option>
-          <option>
-            Medium
-          </option>
-          <option>
-            Large
-          </option>
-        </select>
+          <div
+            className="select is-small is-fullwidth"
+          >
+            <select
+              disabled={false}
+              name="imageSize"
+              onChange={[Function]}
+              type="string"
+              value="Small"
+            >
+              <option>
+                Small
+              </option>
+              <option>
+                Medium
+              </option>
+              <option>
+                Large
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="control"
+  >
+    <p>
+      Letter image options:
+    </p>
+    <ul>
+      <li>
+        <label
+          className="radio"
+        >
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="radio"
+            value="binarized"
+          />
+           
+          Show binarized only
+        </label>
+      </li>
+      <li>
+        <label
+          className="radio"
+        >
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="radio"
+            value="hover"
+          />
+           
+          Show cropped images on hover
+        </label>
+      </li>
+      <li>
+        <label
+          className="radio"
+        >
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="radio"
+            value="cropped"
+          />
+           
+          Show cropped images only
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="field is-horizontal"
+  >
+    <div
+      className="field-label is-normal"
+    >
+      <div
+        style={
+          Object {
+            "whiteSpace": "nowrap",
+          }
+        }
+      >
+        Cropped margin size:
+      </div>
+    </div>
+    <div
+      className="field-body"
+    >
+      <div
+        className="field is-narrow"
+      >
+        <div
+          className="control"
+        >
+          <div
+            className="select is-small is-fullwidth"
+          >
+            <select
+              disabled={false}
+              name="cropMargin"
+              onChange={[Function]}
+              type="string"
+              value="Medium"
+            >
+              <option>
+                None
+              </option>
+              <option>
+                Medium
+              </option>
+              <option>
+                Large
+              </option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </div>

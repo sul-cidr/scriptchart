@@ -5,7 +5,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
   className="buttons are-small"
 >
   <span
-    className="button is-outlined"
+    className="button is-success"
     onClick={[Function]}
   >
     <span
@@ -24,7 +24,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     </span>
   </span>
   <span
-    className="button is-outlined"
+    className="button is-success"
     onClick={[Function]}
   >
     <span

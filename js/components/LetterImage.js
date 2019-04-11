@@ -66,15 +66,6 @@ class LetterImage extends React.Component {
     );
     let heightExpanded = bottomExpanded - topExpanded;
 
-    if (
-      isNaN(leftExpanded) ||
-      isNaN(topExpanded) ||
-      isNaN(widthExpanded) ||
-      isNaN(heightExpanded)
-    ) {
-      console.log("NaN in getCropURL, marginSize is ");
-    }
-
     return (
       API_ROOT +
       "crop?page_url=" +

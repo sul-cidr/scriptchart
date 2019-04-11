@@ -15,6 +15,8 @@ class ManuscriptsLoader extends React.Component {
     if ((this.props.manuscripts !== null) && (this.props.manuscripts.length > 0)) {
       manuscriptSelectors = this.props.manuscripts.map(ms => {
         let msIcon = '';
+        // This is a hopefully temporary indicator that the MS has a IIIF
+        // manifest available (they all *should* have one eventually).
         // XXX Need to make sure basic FA font is loaded on all browsers
         if (ms.manifest !== null) {
           msIcon = "\uf02d";

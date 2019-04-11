@@ -31,6 +31,7 @@ import "react-tabs/style/react-tabs.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./index.css";
+import { componentFromProp } from "recompose";
 
 class DashTabs extends React.Component {
   constructor(props) {
@@ -130,6 +131,9 @@ class DashTabs extends React.Component {
     let miradorLayout = "1x1";
 
     for (let ms of this.props.manuscripts) {
+      if (ms.manifest === null) {
+        continue;
+      }
       manifestURIs.push({ manifestUri: ms.manifest });
       if (manifestURIs.length <= 4) {
         let targetSlot = "row1.column1";
@@ -143,10 +147,16 @@ class DashTabs extends React.Component {
           miradorLayout = "2x2";
           targetSlot = "row2.column2";
         }
+        // XXX Theoretically, could use the canvasID attrib to display a
+        // specific canvas within the manifest, instead of just the
+        // first page (which is usually a bland cover image). But we'd
+        // need to parse the manifest and then apply some selection,
+        // heuristic, like "show canvas N/2 of N".
         let windowObject = {
           loadedManifest: ms.manifest,
           targetSlot: targetSlot,
-          viewType: "ImageView"
+          viewType: "ImageView",
+          sidePanel: false
         };
         windowObjects.push(windowObject);
       }
@@ -178,7 +188,8 @@ class DashTabs extends React.Component {
       let windowObject = {
         loadedManifest: selectedManifestURI,
         targetSlot: "row1.column1",
-        viewType: "ImageView"
+        viewType: "ImageView",
+        sidePanel: false
       };
       windowObjects.unshift(windowObject);
 

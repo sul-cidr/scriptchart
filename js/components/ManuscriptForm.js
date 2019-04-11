@@ -75,9 +75,6 @@ class ManuscriptForm extends React.Component {
 
   // Currently this is a simple all/none toggle
   lettersSelect(event) {
-    //const which = event.target.textContent;
-    //let selectedLetters = [];
-    //if (which != "None") {
     let selectedLetters = [...this.state.letters];
     for (let lt of letters) {
       let ltid = lt.id;
@@ -89,18 +86,7 @@ class ManuscriptForm extends React.Component {
         selectedLetters = [];
         break;
       }
-      /*else if (which == "Invert selection") {
-        if (selectedLetters.findIndex(l => l.id == ltid) < 0) {
-          selectedLetters.push(lt);
-        } else {
-          selectedLetters.splice(
-            selectedLetters.findIndex(l => l.id == ltid),
-            1
-          );
-        }
-      }*/
     }
-    //}
     this.handleSelect("letters", selectedLetters);
   }
 
@@ -158,12 +144,6 @@ class ManuscriptForm extends React.Component {
             <span className="button is-small" onClick={this.lettersSelect}>
               All/None
             </span>
-            {/*<span className="button is-small" onClick={this.lettersSelect}>
-              None
-            </span>
-            <span className="button is-small" onClick={this.lettersSelect}>
-              Invert selection
-            </span>*/}
           </div>
           <LettersLoader
             selectedLetters={this.state.letters}
@@ -277,7 +257,6 @@ class ManuscriptForm extends React.Component {
                     type="string"
                     name="cropMargin"
                     onChange={this.changeCropMargin}
-                    //disabled={this.state.contextMode == "off"}
                   >
                     <option>Small</option>
                     <option>Medium</option>

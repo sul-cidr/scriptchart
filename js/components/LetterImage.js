@@ -62,7 +62,7 @@ class LetterImage extends React.Component {
       console.log("NaN in getCropURL, marginSize is ")
     }
 
-    let cropURL = API_ROOT +
+    return (API_ROOT +
       "crop?page_url=" +
       this.props.coords.pageurl +
       "&x=" +
@@ -72,9 +72,8 @@ class LetterImage extends React.Component {
       "&w=" +
       widthExpanded +
       "&h=" +
-      heightExpanded;
+      heightExpanded);
 
-    return { url: cropURL, width: widthExpanded, height: heightExpanded };
   }
 
   componentDidMount() {
@@ -83,7 +82,7 @@ class LetterImage extends React.Component {
      */
     if (this.props.showCropped) {
       const croppedImage = new Image();
-      croppedImage.src = this.getCropURL().url;
+      croppedImage.src = this.getCropURL();
     }
     //let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
     //let resizeRatio = (parseFloat(this.props.coords.width) * parseFloat(this.props.coords.height)) / ((cropMargin + parseFloat(this.props.coords.width)) * (cropMargin + parseFloat(this.props.coords.height)));
@@ -93,7 +92,7 @@ class LetterImage extends React.Component {
     //  console.log(this.props.coords);
     //}
     const contextImage = new Image();
-    contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]).url;
+    contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]);
   }
 
   render() {
@@ -118,7 +117,7 @@ class LetterImage extends React.Component {
     //  console.log("contextCropMargin isNaN in render");
     //}
 
-    let contextURL = this.getCropURL(cropMargin).url;
+    let contextURL = this.getCropURL(cropMargin);
 
     let contextWidth = dims.width + (2 * Math.round(dims.width * cropMargin));
     let contextHeight = dims.height + (2 * Math.round(dims.height * cropMargin));
@@ -157,7 +156,7 @@ class LetterImage extends React.Component {
 
     if (this.props.showCropped) {
 
-      let cropURL = this.getCropURL().url;
+      let cropURL = this.getCropURL();
       //let cropDims = this.resizeKeepAspect(cropData.width, cropData.height, maxDim);
 
       let croppedImage =

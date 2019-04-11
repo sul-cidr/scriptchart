@@ -4,11 +4,7 @@ exports[`LetterImage test LetterImage should match snapshot 1`] = `
 <span
   className="letter-row"
 >
-  <img
-    height={100}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    width={55}
-  />
+  
+  
 </span>
 `;

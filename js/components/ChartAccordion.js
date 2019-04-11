@@ -42,7 +42,7 @@ class ChartAccordion extends React.Component {
           </AccordionItemTitle>
           <AccordionItemBody>
             <ul>
-              {this.props.hiddenManuscripts.map(msid =>
+              {this.props.hiddenManuscripts.map(msid => (
                 <ManuscriptItem
                   key={msid}
                   manuscriptID={msid}
@@ -52,7 +52,7 @@ class ChartAccordion extends React.Component {
                       .shelfmark
                   }
                 />
-              )}
+              ))}
             </ul>
           </AccordionItemBody>
         </AccordionItem>
@@ -65,15 +65,15 @@ class ChartAccordion extends React.Component {
           </AccordionItemTitle>
           <AccordionItemBody>
             <div className={"buttons are-small"}>
-              {this.props.hiddenLetters.map(ltid =>
-                  <LetterButton
-                    key={ltid}
-                    letterID={ltid}
-                    buttonClass="button is-outlined"
-                    onHiddenChange={this.props.onHiddenChange}
-                    letter={<SyriacLetter id={ltid} />}
-                  />
-              )}
+              {this.props.hiddenLetters.map(ltid => (
+                <LetterButton
+                  key={ltid}
+                  letterID={ltid}
+                  buttonClass="button is-outlined"
+                  onHiddenChange={this.props.onHiddenChange}
+                  letter={<SyriacLetter id={ltid} />}
+                />
+              ))}
             </div>
           </AccordionItemBody>
         </AccordionItem>

@@ -41,8 +41,10 @@ class ManuscriptMenu extends React.Component {
     );
     for (let ms of this.props.manuscripts) {
       let sm = ms.shelfmark;
-      if (//which == "All" &&
-        selectedShelfmarks.indexOf(sm) < 0) {
+      if (
+        //which == "All" &&
+        selectedShelfmarks.indexOf(sm) < 0
+      ) {
         selectedShelfmarks.push(sm);
       } else {
         selectedShelfmarks = [];

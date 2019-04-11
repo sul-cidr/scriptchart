@@ -78,7 +78,8 @@ class ManuscriptForm extends React.Component {
     let selectedLetters = [...this.state.letters];
     for (let lt of letters) {
       let ltid = lt.id;
-      if (//which == "All" &&
+      if (
+        //which == "All" &&
         selectedLetters.findIndex(l => l.id == ltid) < 0
       ) {
         selectedLetters.push(lt);
@@ -96,10 +97,18 @@ class ManuscriptForm extends React.Component {
     let value = target.type === "checkbox" ? target.checked : target.value;
 
     /* Don't allow deselecting of both letter image options (one must always be selected) */
-    if ((name == "showBinarized") && (value == false) && (this.state.showCropped == false)) {
+    if (
+      name == "showBinarized" &&
+      value == false &&
+      this.state.showCropped == false
+    ) {
       value = true;
     }
-    if ((name == "showCropped") && (value == false) && (this.state.showBinarized == false)) {
+    if (
+      name == "showCropped" &&
+      value == false &&
+      this.state.showBinarized == false
+    ) {
       value = true;
     }
 
@@ -152,9 +161,7 @@ class ManuscriptForm extends React.Component {
         </div>
         <div className={"field is-horizontal"}>
           <div className={"field-label is-normal"}>
-            <div style={{ whiteSpace: "nowrap" }}>
-              Number of examples:
-            </div>
+            <div style={{ whiteSpace: "nowrap" }}>Number of examples:</div>
           </div>
           <div className={"field-body"}>
             <div className={"field is-narrow"}>
@@ -177,22 +184,24 @@ class ManuscriptForm extends React.Component {
         </div>
         <div className={"control"}>
           <p>Show letter images:</p>
-            <label className={"checkbox"}>
-              <input
-                type="checkbox"
-                name="showBinarized"
-                onChange={this.handleChange}
-                checked={this.state.showBinarized}
-              />{" Trimmed |"}
-            </label>
-            <label className={"checkbox"} style={{marginLeft: 8}}>
-              <input
-                type="checkbox"
-                name="showCropped"
-                onChange={this.handleChange}
-                checked={this.state.showCropped}
-              />{" Untrimmed"}
-            </label>
+          <label className={"checkbox"}>
+            <input
+              type="checkbox"
+              name="showBinarized"
+              onChange={this.handleChange}
+              checked={this.state.showBinarized}
+            />
+            {" Trimmed |"}
+          </label>
+          <label className={"checkbox"} style={{ marginLeft: 8 }}>
+            <input
+              type="checkbox"
+              name="showCropped"
+              onChange={this.handleChange}
+              checked={this.state.showCropped}
+            />
+            {" Untrimmed"}
+          </label>
         </div>
         <div className={"field is-horizontal"}>
           <div className={"field-label is-normal"}>

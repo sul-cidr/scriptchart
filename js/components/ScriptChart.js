@@ -7,7 +7,7 @@ import React from "react";
  * the scriptchart.
  * It instantiates the rows and columns via props passed down from
  * submission of the selection/configuration form (columnManuscripts,
- * rowLetters), and populates them -- filling in the rows -- 
+ * rowLetters), and populates them -- filling in the rows --
  * with data queried from the API.
  * It also passes up requests to move and hide rows and columns
  * and to display manuscripts in the viewer, and is re-rendered
@@ -81,7 +81,6 @@ class ScriptChart extends React.Component {
 
     /* Load the letters data into the rows array */
     for (let i = 0, len = this.props.rowLetters.length; i < len; i++) {
-
       let ltID = this.props.rowLetters[i].id;
       let row = {
         id: i + 2,

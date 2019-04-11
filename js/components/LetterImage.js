@@ -1,13 +1,17 @@
 import React from "react";
 
-/* LetterImage - displays a letter image retrieved from a URL that points
- * to the image on the backend server.
- * May show 1) a binarized letter image that has been resized to a given max
- * width or height (maintaining original aspect ration), or 2) a cropped
- * manuscript image of the letter with a variably sized contextual margin
- * around it that is generated dynmaically via the backend API, or
- * 3) a binarized letter image that pops up the cropped manuscript image
- * when hovered.
+/* LetterImage - manages the display of all versions of a letter instance
+ * in the scriptchart. These are all loaded from the backend server and
+ * are either static images or extracted on demand from larger page images.
+ * Depending on the options specified in the scriptchart options menu,
+ * the letter image display may consist of one or two size-normalized
+ * versions of the letter image its default margins: a binarized, "trimmed"
+ * version of the image or an "untrimmed" version extracted directly from
+ * the page image.
+ * Upon mouseover or click (as specified in the form) of either letter
+ * image type mentioned above, a size-normalized image of the letter with a
+ * contextual margin around it (its general size also specified in the form)
+ * will be displayed in a popover.
  */
 
 import Popup from "reactjs-popup";
@@ -16,8 +20,12 @@ import { API_ROOT } from "./App";
 
 import "./index.css";
 
+// Size of the largest dimension of the non-contextual letter images
 const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
-const CROP_MARGINS = { Small: .25, Medium: .5, Large: 1 };
+// Ratio of the contextual margin size to the dimensions of the non-contextual
+// image (Small = resulting image is 1.5 times as long and wide;
+// Medium = resulting image is twice as long/wide, Large = 3 times)
+const CROP_MARGINS = { Small: 0.25, Medium: 0.5, Large: 1 };
 
 class LetterImage extends React.Component {
   constructor(props) {
@@ -36,7 +44,7 @@ class LetterImage extends React.Component {
     }
   }
 
-  getCropURL(marginRatio=0) {
+  getCropURL(marginRatio = 0) {
     /* Compute dimensions of the cropped manuscript image, including any
      * user-specified contextual margin around it, and construct a URL
      * to request this image from the backend.
@@ -58,11 +66,17 @@ class LetterImage extends React.Component {
     );
     let heightExpanded = bottomExpanded - topExpanded;
 
-    if (isNaN(leftExpanded) || isNaN(topExpanded) || isNaN(widthExpanded) || isNaN(heightExpanded)) {
-      console.log("NaN in getCropURL, marginSize is ")
+    if (
+      isNaN(leftExpanded) ||
+      isNaN(topExpanded) ||
+      isNaN(widthExpanded) ||
+      isNaN(heightExpanded)
+    ) {
+      console.log("NaN in getCropURL, marginSize is ");
     }
 
-    return (API_ROOT +
+    return (
+      API_ROOT +
       "crop?page_url=" +
       this.props.coords.pageurl +
       "&x=" +
@@ -72,25 +86,22 @@ class LetterImage extends React.Component {
       "&w=" +
       widthExpanded +
       "&h=" +
-      heightExpanded);
-
+      heightExpanded
+    );
   }
 
   componentDidMount() {
-    /* This forces the browser to preload the image so it's ready to be
-     * shown in the popup -- no state management needed!
+    /* The two versions of the non-binarized letter images -- basic
+     * "untrimmed" and "untrimmed with context" need to be generated
+     * on demand by the backend (cut out from the full-page images),
+     * so they are preloaded here in the browser. Note that preloading
+     * the binarized images in this way isn't really necessary because
+     * they're just static images.
      */
     if (this.props.showCropped) {
       const croppedImage = new Image();
       croppedImage.src = this.getCropURL();
     }
-    //let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
-    //let resizeRatio = (parseFloat(this.props.coords.width) * parseFloat(this.props.coords.height)) / ((cropMargin + parseFloat(this.props.coords.width)) * (cropMargin + parseFloat(this.props.coords.height)));
-    //let contextCropMargin = Math.round(cropMargin * resizeRatio);
-    //if (isNaN(contextCropMargin)) {
-    //  console.log("contextCropMargin isNaN in componentDidMount");
-    //  console.log(this.props.coords);
-    //}
     const contextImage = new Image();
     contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]);
   }
@@ -99,67 +110,65 @@ class LetterImage extends React.Component {
     let coordsWidth = this.props.coords.width;
     let coordsHeight = this.props.coords.height;
 
+    /* Compute the dimensions of the binarized and non-context-having
+     * letter image versions.
+     */
     let maxDim = IMAGE_DIMS[this.props.imageSize];
     let dims = this.resizeKeepAspect(coordsWidth, coordsHeight, maxDim);
 
-    let binarizedDiv = '';
-    let croppedDiv = '';
+    let binarizedDiv = "";
+    let croppedDiv = "";
 
-    // note that for the central, non-context portion of the popup image
-    // to be exactly the same size as the cropped/binarized images, it
-    // needs to be scaled at the same factor as the cropped/binarized
-    // images themselves
-
+    /* Compute the size of the context-inclusive image */
     let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
-    //let resizeRatio = (parseFloat(coordsWidth) * parseFloat(coordsHeight)) / ((cropMargin + parseFloat(coordsWidth)) * (cropMargin + parseFloat(coordsHeight)));
-    //let contextCropMargin = Math.round(cropMargin * resizeRatio);
-    //if (isNaN(contextCropMargin)) {
-    //  console.log("contextCropMargin isNaN in render");
-    //}
 
     let contextURL = this.getCropURL(cropMargin);
 
-    let contextWidth = dims.width + (2 * Math.round(dims.width * cropMargin));
-    let contextHeight = dims.height + (2 * Math.round(dims.height * cropMargin));
+    let contextWidth = dims.width + 2 * Math.round(dims.width * cropMargin);
+    let contextHeight = dims.height + 2 * Math.round(dims.height * cropMargin);
 
-    let contextImage = <img
-                         alt={this.props.letter}
-                         ref="context"
-                         width={contextWidth}
-                         height={contextHeight}
-                         src={contextURL}
-                       />
+    /* The context-inclusive image should always be loaded -- it will always
+     * be displayed as a popup of the binarized or "untrimmed" image on click
+     * or hover.
+     */
+    let contextImage = (
+      <img
+        alt={this.props.letter}
+        ref="context"
+        width={contextWidth}
+        height={contextHeight}
+        src={contextURL}
+      />
+    );
 
     if (this.props.showBinarized) {
-
-      /* Dimensions of the displayed binarized image */
-      //let dims = { coordsWidth, coordsHeight };
-      //let maxDim = Math.max(coordsWidth, coordsHeight);
-
-      let binarizedImage =
+      let binarizedImage = (
         <img
           alt={this.props.letter}
           ref="binarized"
           width={dims.width}
           height={dims.height}
           src={this.props.coords.binaryurl}
-        />;
+        />
+      );
 
-      binarizedDiv =
+      binarizedDiv = (
         <div className={"letter-item"}>
-          <Popup trigger={binarizedImage} position="top center" on={this.props.contextMode}>
+          <Popup
+            trigger={binarizedImage}
+            position="top center"
+            on={this.props.contextMode}
+          >
             {contextImage}
           </Popup>
-        </div>;
-
+        </div>
+      );
     }
 
     if (this.props.showCropped) {
-
       let cropURL = this.getCropURL();
-      //let cropDims = this.resizeKeepAspect(cropData.width, cropData.height, maxDim);
 
-      let croppedImage =
+      let croppedImage = (
         <img
           alt={this.props.letter}
           ref="cropped"
@@ -167,21 +176,27 @@ class LetterImage extends React.Component {
           height={dims.height}
           src={cropURL}
         />
-        
-      croppedDiv =
+      );
+
+      croppedDiv = (
         <div className={"letter-item"}>
-          <Popup trigger={croppedImage} position="top center" on={this.props.contextMode}>
+          <Popup
+            trigger={croppedImage}
+            position="top center"
+            on={this.props.contextMode}
+          >
             {contextImage}
           </Popup>
-        </div>;
+        </div>
+      );
     }
 
     return (
       <span className={"letter-row"}>
-        { binarizedDiv }
-        { croppedDiv }
+        {binarizedDiv}
+        {croppedDiv}
       </span>
-    )
+    );
   }
 }
 

@@ -36,29 +36,20 @@ class ManuscriptMenu extends React.Component {
 
   // Currently this is a simple all/none toggle
   manuscriptsSelect(event) {
-    //const which = event.target.textContent;
-    //let selectedShelfmarks = [];
-    //if (which != "None") {
     let selectedShelfmarks = JSON.parse(
       JSON.stringify(this.props.selectedShelfmarks)
     );
     for (let ms of this.props.manuscripts) {
       let sm = ms.shelfmark;
-      if (//which == "All" &&
-        selectedShelfmarks.indexOf(sm) < 0) {
+      if (
+        //which == "All" &&
+        selectedShelfmarks.indexOf(sm) < 0
+      ) {
         selectedShelfmarks.push(sm);
       } else {
         selectedShelfmarks = [];
         break;
       }
-      /* else if (which == "Invert selection") {
-          if (selectedShelfmarks.indexOf(sm) < 0) {
-            selectedShelfmarks.push(sm);
-          } else {
-            selectedShelfmarks.splice(selectedShelfmarks.indexOf(sm), 1);
-          }
-        }*/
-      //}
     }
     this.props.handleSelect("selectedShelfmarks", selectedShelfmarks);
   }
@@ -83,12 +74,6 @@ class ManuscriptMenu extends React.Component {
           <span className="button is-small" onClick={this.manuscriptsSelect}>
             All/None
           </span>
-          {/*<span className="button is-small" onClick={this.manuscriptsSelect}>
-            None
-          </span>
-          <span className="button is-small" onClick={this.manuscriptsSelect}>
-            Invert selection
-          </span>*/}
         </div>
         <div className={"select is-multiple"}>
           <ManuscriptsLoader

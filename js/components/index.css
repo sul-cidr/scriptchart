@@ -22,8 +22,11 @@ code {
 }
 
 .letter-row {
-  margin: 5px;
   display: inline-block
+}
+
+.letter-item {
+  margin: 5px;
 }
 
 table th {

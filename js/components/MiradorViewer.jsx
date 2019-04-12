@@ -18,18 +18,7 @@ export default class MiradorViewer extends Component {
         name: "Local Storage",
         module: "LocalStorageEndpoint"
       },
-      openManifestPage: false,
-      sidePanel: false
-      /*windowSettings: {
-        canvasControls: {
-          imageManipulation: {
-            manipulationLayer: true,
-            controls: {
-              mirror: true
-            }
-          }
-        }
-      }*/
+      openManifestPage: false
     });
   }
 

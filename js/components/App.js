@@ -40,7 +40,7 @@ import DashTabs from "./DashTabs";
 const MAX_EXAMPLES = 5;
 
 export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
-//const API_ROOT = "http://localhost:8000/api/";
+//export const API_ROOT = "http://localhost:8000/api/";
 
 class App extends Component {
   constructor(props) {

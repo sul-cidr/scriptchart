@@ -2,6 +2,7 @@
 layout: page
 title: Publications
 permalink: /publications/
+include: true
 ---
 
 “The 'Emergency' Olaph: How Big Data About Little Things Changes Our View of Ancient Scribes” (in process). Michael Penn, Shuangxia Wu, Kristina Bush, R. Jordan Crouser, and Nicholas Howe.

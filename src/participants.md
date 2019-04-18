@@ -2,6 +2,7 @@
 layout: page
 title: Participants
 permalink: /participants/
+include: true
 ---
 
 ## Principal Investigators:

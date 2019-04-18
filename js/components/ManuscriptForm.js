@@ -270,6 +270,7 @@ class ManuscriptForm extends React.Component {
                     <option>Small</option>
                     <option>Medium</option>
                     <option>Large</option>
+                    <option>X-Large</option>
                   </select>
                 </div>
               </div>

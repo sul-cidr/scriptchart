@@ -25,7 +25,7 @@ const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
 // Ratio of the contextual margin size to the dimensions of the non-contextual
 // image (Small = resulting image is 1.5 times as long and wide;
 // Medium = resulting image is twice as long/wide, Large = 3 times)
-const CROP_MARGINS = { Small: 0.25, Medium: 0.5, Large: 1 };
+const CROP_MARGINS = { Small: 0.25, Medium: 0.5, Large: 1, 'X-Large': 2 };
 
 class LetterImage extends React.Component {
   constructor(props) {
@@ -85,10 +85,15 @@ class LetterImage extends React.Component {
     /* The two versions of the non-binarized letter images -- basic
      * "untrimmed" and "untrimmed with context" need to be generated
      * on demand by the backend (cut out from the full-page images),
-     * so they are preloaded here in the browser. Note that preloading
-     * the binarized images in this way isn't really necessary because
-     * they're just static images.
+     * so they are preloaded here in the browser. We also preload the
+     * binarized images even though they're just static images, because
+     * otherwise they may get stuck behind the slower-loading dynamic
+     * images in the browser's download queue.
      */
+    if (this.props.showBinarized) {
+      const binarizedImage = new Image();
+      binarizedImage.src = this.props.coords.binaryurl;
+    }
     if (this.props.showCropped) {
       const croppedImage = new Image();
       croppedImage.src = this.getCropURL();
@@ -96,6 +101,8 @@ class LetterImage extends React.Component {
     const contextImage = new Image();
     contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]);
   }
+
+  compon
 
   render() {
     let coordsWidth = this.props.coords.width;
@@ -144,10 +151,11 @@ class LetterImage extends React.Component {
       );
 
       binarizedDiv = (
-        <div className={"letter-item"}>
+        <div className={"letter-image"}>
           <Popup
             trigger={binarizedImage}
             position="top center"
+            contentStyle={{ width: contextWidth + 10, height: contextHeight + 10 }}
             on={this.props.contextMode}
           >
             {contextImage}
@@ -170,10 +178,11 @@ class LetterImage extends React.Component {
       );
 
       croppedDiv = (
-        <div className={"letter-item"}>
+        <div className={"letter-image"}>
           <Popup
             trigger={croppedImage}
             position="top center"
+            contentStyle={{ width: contextWidth + 10, height: contextHeight + 10 }}
             on={this.props.contextMode}
           >
             {contextImage}
@@ -183,10 +192,12 @@ class LetterImage extends React.Component {
     }
 
     return (
-      <span className={"letter-row"}>
-        {binarizedDiv}
-        {croppedDiv}
-      </span>
+      <div className={"letter-row"}>
+        <div className={"letter-column"}>
+          {binarizedDiv}
+          {croppedDiv}
+        </div>
+      </div>
     );
   }
 }

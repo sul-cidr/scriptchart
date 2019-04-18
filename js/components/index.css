@@ -22,10 +22,15 @@ code {
 }
 
 .letter-row {
-  display: inline-block
+  display: inline-block;
 }
 
-.letter-item {
+.letter-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.letter-image {
   margin: 5px;
 }
 

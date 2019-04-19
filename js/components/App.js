@@ -18,6 +18,7 @@ import React, { Component } from "react";
 
 import "../../src/assets/syriac_fonts.css";
 import "./app.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /* Loading fontawesome icons via React seems easier than doing
  * it via site-wide CSS */
@@ -26,9 +27,18 @@ import {
   faBookOpen,
   faTable,
   faImage,
-  faInfoCircle
+  faInfoCircle,
+  faArrowRight,
+  faArrowLeft
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faBookOpen, faTable, faImage, faInfoCircle);
+library.add(
+  faBookOpen,
+  faTable,
+  faImage,
+  faInfoCircle,
+  faArrowRight,
+  faArrowLeft
+);
 
 /* The entire app needs to be wrapped in the drag-and-drop context */
 import HTML5Backend from "react-dnd-html5-backend";
@@ -292,13 +302,12 @@ class App extends Component {
             onClick={this.toggleSidebar}
           >
             Menu{" "}
-            <span className={"icon arrow-button"} onClick={this.toggleSidebar}>
-              <i
-                className={"fa fa-arrow-right"}
-                aria-hidden="true"
-                title="Open the script form."
-              />
-            </span>
+            <FontAwesomeIcon
+              title="Open the script form."
+              icon="arrow-right"
+              onClick={this.toggleSidebar}
+              style={{ cursor: "pointer" }}
+            />
           </div>
           <div
             className={
@@ -316,10 +325,11 @@ class App extends Component {
                     className={"icon arrow-button"}
                     onClick={this.toggleSidebar}
                   >
-                    <i
-                      className={"fa fa-arrow-left"}
-                      aria-hidden="true"
+                    <FontAwesomeIcon
                       title="Close the script form."
+                      icon="arrow-left"
+                      onClick={this.toggleSidebar}
+                      style={{ cursor: "pointer" }}
                     />
                   </span>
                 </div>

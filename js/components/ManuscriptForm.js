@@ -147,6 +147,7 @@ class ManuscriptForm extends React.Component {
           selectedShelfmarks={this.state.selectedShelfmarks}
           sortManuscripts={this.props.sortManuscripts}
         />
+        
         <div className={"field"}>
           <div className={"control"} style={{ marginBottom: 5 }}>
             <label className={"control"}>Select letters: </label>
@@ -159,6 +160,7 @@ class ManuscriptForm extends React.Component {
             handleSelect={this.buttonChange}
           />
         </div>
+
         <div className={"field is-horizontal flex-row"}>
           <div className={"control"}>Number of examples: </div>
             <div className={"select is-small"} style={{ marginLeft: "5px" }}>
@@ -174,6 +176,7 @@ class ManuscriptForm extends React.Component {
               </select>
           </div>
         </div>
+
         <div className={"control"}>
           <p>Show letter images:</p>
           <label className={"checkbox"}>
@@ -185,7 +188,7 @@ class ManuscriptForm extends React.Component {
             />
             {" Trimmed |"}
           </label>
-          <label className={"checkbox"} style={{ marginLeft: 8 }}>
+          <label className={"checkbox"} style={{ marginLeft: "8px" }}>
             <input
               type="checkbox"
               name="showCropped"
@@ -195,6 +198,7 @@ class ManuscriptForm extends React.Component {
             {" Untrimmed"}
           </label>
         </div>
+
         <div className={"field is-horizontal flex-row"}>
           <div className={"control"}>Image size: </div>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
@@ -210,6 +214,7 @@ class ManuscriptForm extends React.Component {
             </select>
           </div>
         </div>
+
         <div className={"control"}>
           Letter in context:
           <ul>
@@ -270,6 +275,7 @@ class ManuscriptForm extends React.Component {
             </select>
           </div>
         </div>
+
         <div className={"field"}>
           <div className={"control"}>
             <button className={"button is-link"}>Submit</button>

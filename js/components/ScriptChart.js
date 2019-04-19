@@ -160,7 +160,7 @@ class ScriptChart extends React.Component {
                 onClick={() => this.onHideRow(rowData.ltid)}
                 style={{ cursor: "pointer" }}
               >
-                &#10007;
+                <b>&#10007;</b>
               </span>
             ) : (
               <span />

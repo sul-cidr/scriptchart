@@ -159,27 +159,19 @@ class ManuscriptForm extends React.Component {
             handleSelect={this.buttonChange}
           />
         </div>
-        <div className={"field is-horizontal"}>
-          <div className={"field-label is-normal"}>
-            <div style={{ whiteSpace: "nowrap" }}>Number of examples:</div>
-          </div>
-          <div className={"field-body"}>
-            <div className={"field is-narrow"}>
-              <div className={"control"}>
-                <div className={"select is-small is-fullwidth"}>
-                  <select
-                    value={this.state.letterExamples}
-                    type="number"
-                    name="letterExamples"
-                    onChange={this.handleChange}
-                  >
-                    <option>1</option>
-                    <option>3</option>
-                    <option>5</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+        <div className={"field is-horizontal flex-row"}>
+          <div className={"control"}>Number of examples: </div>
+            <div className={"select is-small"} style={{ marginLeft: "5px" }}>
+              <select
+                value={this.state.letterExamples}
+                type="number"
+                name="letterExamples"
+                onChange={this.handleChange}
+              >
+                <option>1</option>
+                <option>3</option>
+                <option>5</option>
+              </select>
           </div>
         </div>
         <div className={"control"}>
@@ -203,31 +195,23 @@ class ManuscriptForm extends React.Component {
             {" Untrimmed"}
           </label>
         </div>
-        <div className={"field is-horizontal"}>
-          <div className={"field-label is-normal"}>
-            <div style={{ whiteSpace: "nowrap" }}>Image size:</div>
-          </div>
-          <div className={"field-body"}>
-            <div className={"field is-narrow"}>
-              <div className={"control"}>
-                <div className={"select is-small is-fullwidth"}>
-                  <select
-                    value={this.state.imageSize}
-                    type="string"
-                    name="imageSize"
-                    onChange={this.handleChange}
-                  >
-                    <option>Small</option>
-                    <option>Medium</option>
-                    <option>Large</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+        <div className={"field is-horizontal flex-row"}>
+          <div className={"control"}>Image size: </div>
+          <div className={"select is-small"} style={{ marginLeft: "5px" }}>
+            <select
+              value={this.state.imageSize}
+              type="string"
+              name="imageSize"
+              onChange={this.handleChange}
+            >
+              <option>Small</option>
+              <option>Medium</option>
+              <option>Large</option>
+            </select>
           </div>
         </div>
         <div className={"control"}>
-          <p>Letter in context:</p>
+          Letter in context:
           <ul>
             <li>
               <label className={"radio"}>
@@ -253,28 +237,37 @@ class ManuscriptForm extends React.Component {
             </li>
           </ul>
         </div>
-        <div className={"field is-horizontal"}>
-          <div className={"field-label is-normal"}>
-            <div style={{ whiteSpace: "nowrap" }}>Context size:</div>
+
+        <div className={"field is-horizontal flex-row"}>
+          <div className={"control"}>Number of examples: </div>
+            <div className={"select is-small"} style={{ marginLeft: "5px" }}>
+              <select
+                value={this.state.letterExamples}
+                type="number"
+                name="letterExamples"
+                onChange={this.handleChange}
+              >
+                <option>1</option>
+                <option>3</option>
+                <option>5</option>
+              </select>
           </div>
-          <div className={"field-body"}>
-            <div className={"field is-narrow"}>
-              <div className={"control"}>
-                <div className={"select is-small is-fullwidth"}>
-                  <select
-                    value={this.state.cropMargin}
-                    type="string"
-                    name="cropMargin"
-                    onChange={this.changeCropMargin}
-                  >
-                    <option>Small</option>
-                    <option>Medium</option>
-                    <option>Large</option>
-                    <option>X-Large</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+        </div>
+
+        <div className={"field is-horizontal flex-row"}>
+          <div className={"control"}>Context size: </div>
+          <div className={"select is-small"} style={{ marginLeft: "5px" }}>
+            <select
+              value={this.state.cropMargin}
+              type="string"
+              name="cropMargin"
+              onChange={this.changeCropMargin}
+            >
+              <option>Small</option>
+              <option>Medium</option>
+              <option>Large</option>
+              <option>X-Large</option>
+            </select>
           </div>
         </div>
         <div className={"field"}>

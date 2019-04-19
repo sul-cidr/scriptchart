@@ -87,7 +87,7 @@ class LetterImage extends React.Component {
      * on demand by the backend (cut out from the full-page images),
      * so they are preloaded here in the browser. We also preload the
      * binarized images even though they're just static images, because
-     * otherwise they may get stuck behind the slower-loading dynamic
+     * otherwise they tend to get stuck behind the slower-loading dynamic
      * images in the browser's download queue.
      */
     if (this.props.showBinarized) {
@@ -101,8 +101,6 @@ class LetterImage extends React.Component {
     const contextImage = new Image();
     contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]);
   }
-
-  compon
 
   render() {
     let coordsWidth = this.props.coords.width;
@@ -192,7 +190,7 @@ class LetterImage extends React.Component {
     }
 
     return (
-      <div className={"letter-row"}>
+      <div className={"letter-block"}>
         <div className={"letter-column"}>
           {binarizedDiv}
           {croppedDiv}

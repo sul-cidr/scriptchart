@@ -17,97 +17,20 @@
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/scriptchart/assets/main.css">
   <link rel="stylesheet" href="/scriptchart/mirador/css/mirador-combined.min.css"><link type="application/atom+xml" rel="alternate" href="https://sul-cidr.github.io/scriptchart/feed.xml" title="Digital Analysis of Syriac Handwriting" /></head>
-<body><header class="site-header" role="banner">
+<body>
 
-  <nav class="navbar" role="navigation">
-    <div class="navbar-brand">
-      <h1 class="title">
-        <a class="navbar-item" href=/scriptchart/>
-           Digital Analysis of Syriac Handwriting 
-        </a>
-      </h1>
-      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div><div class="navbar-menu" id="navMenu">
-      <div class="navbar-start"><a class="navbar-item" href="/scriptchart/about/">About</a><a class="navbar-item" href="/scriptchart/participants/">Participants</a><a class="navbar-item" href="/scriptchart/publications/">Publications</a><a class="navbar-item" href="/scriptchart/results/">Results</a></div>
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <a class="button" href=/scriptchart/>
-            Viewer
-          </a>
+  <main aria-label="Content">
+      <section class="hero is-fullheight has-bg-img">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">Digital Analysis of Syriac Handwriting</h1>
+            <a class="button is-danger is-outlined" href="/scriptchart/viewer/"><h2 class="subtitle">Get Started</h2></a>
         </div>
-      </div>
     </div>
-  </nav>
+</section>
 
-</header>
+  </main>
 
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <div class="home">
-
-
-  <div id="app"></div>
-  <script type="text/javascript" src="assets/bundle.js"></script>
-</div>
-
-      </div>
-    </main>
-
-    <!--<footer class="site-footer h-card">
-  <data class="u-url" href="/scriptchart/"></data>
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Digital Analysis of Syriac Handwriting</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Digital Analysis of Syriac Handwriting</li></ul>
-      </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>DASH: Digital Analysis of Syriac Handwriting </p>
-      </div>
-    </div>
-
-  </div>
-
-</footer>
--->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-
-        // Get all "navbar-burger" elements
-        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-        // Check if there are any navbar burgers
-        if ($navbarBurgers.length > 0) {
-
-          // Add a click event on each of them
-          $navbarBurgers.forEach(el => {
-            el.addEventListener('click', () => {
-
-              // Get the target from the "data-target" attribute
-              const target = el.dataset.target;
-              const $target = document.getElementById(target);
-
-              // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-              el.classList.toggle('is-active');
-              $target.classList.toggle('is-active');
-
-            });
-          });
-        }
-      });
-    </script>
-  </body>
+</body>
 
 </html>

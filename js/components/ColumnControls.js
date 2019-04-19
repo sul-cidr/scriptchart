@@ -31,30 +31,37 @@ class ColumnControls extends React.Component {
     let manifestSpan = "";
     if (this.props.manifestURL != null) {
       manifestSpan = (
-        <span style={{ float: "right" }}>
+        <div className={"header-icon"}>
           <FontAwesomeIcon
-            title="Show this manuscript in the Mirador viewer"
+            title="Show this manuscript in the manuscripts tab"
             color="#0000FF"
             icon="book-open"
             onClick={this.showManifest}
             style={{ cursor: "pointer" }}
           />
-        </span>
+        </div>
       );
     }
     return (
-      <p>
-        <span
-          style={{ float: "left" }}
+      <div className={"flex-row"}>
+        <div className={"header-icon"}
           title="Hide this column"
           className="remove"
           onClick={this.hideColumn}
           style={{ cursor: "pointer" }}
         >
-          &#10007;
-        </span>
+          <b>&#10007;</b>
+        </div>
+        <div className={"header-icon"}>
+          <FontAwesomeIcon
+            title="Information about this manuscript"
+            color="#0000FF"
+            icon="info-circle"
+            style={{ cursor: "pointer" }}
+          />
+        </div>
         {manifestSpan}
-      </p>
+      </div>
     );
   }
 }

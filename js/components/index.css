@@ -21,7 +21,7 @@ code {
   color: #0000FF;
 }
 
-.letter-row {
+.letter-block {
   display: inline-block;
 }
 
@@ -32,6 +32,16 @@ code {
 
 .letter-image {
   margin: 5px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-icon {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 table th {

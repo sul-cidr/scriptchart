@@ -25,9 +25,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faBookOpen,
   faTable,
-  faImage
+  faImage,
+  faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faBookOpen, faTable, faImage);
+library.add(faBookOpen, faTable, faImage, faInfoCircle);
 
 /* The entire app needs to be wrapped in the drag-and-drop context */
 import HTML5Backend from "react-dnd-html5-backend";
@@ -39,8 +40,8 @@ import DashTabs from "./DashTabs";
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
-export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
-//export const API_ROOT = "http://localhost:8000/api/";
+//export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+export const API_ROOT = "http://localhost:8000/api/";
 
 class App extends Component {
   constructor(props) {
@@ -308,7 +309,7 @@ class App extends Component {
             <div className={"box"}>
               <div className={"box-header columns"}>
                 <div className={"column is-three-quarters"}>
-                  <h4 className={"title is-5"}>Scriptchart options </h4>
+                  <h4 className={"title is-5"}>Viewer options</h4>
                 </div>
                 <div className={"column is-one-quarter"}>
                   <span

@@ -321,7 +321,7 @@ class DashTabs extends React.Component {
                   </Tab>
                   <Tab>
                     <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
-                    Manuscript Viewer
+                    Manuscripts
                   </Tab>
                   <Tab
                     disabled={

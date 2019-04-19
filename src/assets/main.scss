@@ -30,6 +30,8 @@ $navbar-item-color: $off-white;
 $navbar-item-hover-color: lighten($off-white, 20%);
 $navbar-item-hover-background-color: darken(#990000, 5%);
 
+$danger: $navbar-background-color;
+
 @import "../../node_modules/bulma/bulma.sass";
 
 .wrapper {
@@ -48,4 +50,33 @@ $navbar-item-hover-background-color: darken(#990000, 5%);
 
 .page-content {
   margin-top: 1em;
+}
+
+.has-bg-img {
+  background: rgba(0, 0, 0, 0.6); 
+
+  .title {
+    color: $navbar-item-color;
+  }
+
+  .subtitle {
+    color: $navbar-item-color;
+  }
+
+  .subtitle:hover {
+    color: $navbar-item-hover-color;
+  }
+}
+
+.has-bg-img:after {
+  content: "";
+  position: absolute;
+  background: url('./img/HMML-background-image_JPG.jpg') no-repeat;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0.5; 
 }

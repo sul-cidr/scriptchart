@@ -4,3 +4,12 @@
 
 layout: home
 ---
+
+<section class="hero is-fullheight has-bg-img">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">Digital Analysis of Syriac Handwriting</h1>
+            <a class="button is-danger is-outlined" href="/scriptchart/viewer/"><h2 class="subtitle">Get Started</h2></a>
+        </div>
+    </div>
+</section>

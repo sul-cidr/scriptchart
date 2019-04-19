@@ -13,20 +13,17 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.header_pages | default: default_paths -%}
     <div class="navbar-menu" id="navMenu">
       <div class="navbar-start">
-        {%- for path in page_paths -%}
-          {%- assign my_page = site.pages | where: "path", path | first -%}
-          {%- if my_page.title -%}
-            <a class="navbar-item" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
-          {%- endif -%}
-        {%- endfor -%}
+        {% for page in site.pages %}
+          {% if page.include == true %}
+            <a class="navbar-item" href="{{ page.url | relative_url }}">{{ page.title | escape }}</a>
+          {% endif %}
+        {% endfor %}
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
-          <a class="button" href={{" "/" | relative_url "}}>
+          <a class="button" href={{ "viewer" | relative_url }}>
             Viewer
           </a>
         </div>

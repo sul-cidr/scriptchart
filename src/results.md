@@ -2,6 +2,7 @@
 layout: page
 title: Results
 permalink: /results/
+include: true
 ---
 Having the world’s largest database of Syriac letter forms allows one to both describe and quantify important developments in Syriac manuscript culture. In some cases, this results in computer assisted paleography. That is, automated results provide data that help human paleographers better localize Syriac manuscripts. In other cases, our data challenges long held assumptions in the field (e.g. the traditional way of categorizing Syriac script) or opens up new fields of inquiry (e.g. the relationship between script and genre). Although more details appear in project publications, the following provide several quick case examples for how large data sets, digital analysis, and visual analytics can help researchers address key philological and historical problems.
 

@@ -147,7 +147,7 @@ class ManuscriptForm extends React.Component {
           selectedShelfmarks={this.state.selectedShelfmarks}
           sortManuscripts={this.props.sortManuscripts}
         />
-        
+
         <div className={"field"}>
           <div className={"control"} style={{ marginBottom: 5 }}>
             <label className={"control"}>Select letters: </label>
@@ -163,17 +163,17 @@ class ManuscriptForm extends React.Component {
 
         <div className={"field is-horizontal flex-row"}>
           <div className={"control"}>Number of examples: </div>
-            <div className={"select is-small"} style={{ marginLeft: "5px" }}>
-              <select
-                value={this.state.letterExamples}
-                type="number"
-                name="letterExamples"
-                onChange={this.handleChange}
-              >
-                <option>1</option>
-                <option>3</option>
-                <option>5</option>
-              </select>
+          <div className={"select is-small"} style={{ marginLeft: "5px" }}>
+            <select
+              value={this.state.letterExamples}
+              type="number"
+              name="letterExamples"
+              onChange={this.handleChange}
+            >
+              <option>1</option>
+              <option>3</option>
+              <option>5</option>
+            </select>
           </div>
         </div>
 
@@ -245,17 +245,17 @@ class ManuscriptForm extends React.Component {
 
         <div className={"field is-horizontal flex-row"}>
           <div className={"control"}>Number of examples: </div>
-            <div className={"select is-small"} style={{ marginLeft: "5px" }}>
-              <select
-                value={this.state.letterExamples}
-                type="number"
-                name="letterExamples"
-                onChange={this.handleChange}
-              >
-                <option>1</option>
-                <option>3</option>
-                <option>5</option>
-              </select>
+          <div className={"select is-small"} style={{ marginLeft: "5px" }}>
+            <select
+              value={this.state.letterExamples}
+              type="number"
+              name="letterExamples"
+              onChange={this.handleChange}
+            >
+              <option>1</option>
+              <option>3</option>
+              <option>5</option>
+            </select>
           </div>
         </div>
 

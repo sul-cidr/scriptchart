@@ -14,7 +14,7 @@ import React from "react";
  * will be displayed in a popover.
  */
 
-import Popup from "reactjs-popup";
+import PopupImage from "./PopupImage";
 
 import { API_ROOT } from "./App";
 
@@ -24,8 +24,8 @@ import "./index.css";
 const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
 // Ratio of the contextual margin size to the dimensions of the non-contextual
 // image (Small = resulting image is 1.5 times as long and wide;
-// Medium = resulting image is twice as long/wide, Large = 3 times)
-const CROP_MARGINS = { Small: 0.25, Medium: 0.5, Large: 1, 'X-Large': 2 };
+// Medium = resulting image is twice as long/wide, Large = 3X, X-Large = 5X)
+const CROP_MARGINS = { Small: 0.25, Medium: 0.5, Large: 1, "X-Large": 2 };
 
 class LetterImage extends React.Component {
   constructor(props) {
@@ -148,18 +148,13 @@ class LetterImage extends React.Component {
         />
       );
 
-      binarizedDiv = (
-        <div className={"letter-image"}>
-          <Popup
-            trigger={binarizedImage}
-            position="top center"
-            contentStyle={{ width: contextWidth + 10, height: contextHeight + 10 }}
-            on={this.props.contextMode}
-          >
-            {contextImage}
-          </Popup>
-        </div>
-      );
+      binarizedDiv = <PopupImage
+                       triggerImage={binarizedImage}
+                       contextMode={this.props.contextMode}
+                       contextImage={contextImage}
+                       contextWidth={contextWidth}
+                       contextHeight={contextHeight}
+                     />;
     }
 
     if (this.props.showCropped) {
@@ -175,18 +170,13 @@ class LetterImage extends React.Component {
         />
       );
 
-      croppedDiv = (
-        <div className={"letter-image"}>
-          <Popup
-            trigger={croppedImage}
-            position="top center"
-            contentStyle={{ width: contextWidth + 10, height: contextHeight + 10 }}
-            on={this.props.contextMode}
-          >
-            {contextImage}
-          </Popup>
-        </div>
-      );
+      croppedDiv = <PopupImage
+                     triggerImage={croppedImage}
+                     contextMode={this.props.contextMode}
+                     contextImage={contextImage}
+                     contextWidth={contextWidth}
+                     contextHeight={contextHeight}
+                   />;
     }
 
     return (

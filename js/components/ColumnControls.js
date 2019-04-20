@@ -44,7 +44,8 @@ class ColumnControls extends React.Component {
     }
     return (
       <div className={"flex-row"}>
-        <div className={"header-icon"}
+        <div
+          className={"header-icon"}
           title="Hide this column"
           className="remove"
           onClick={this.hideColumn}

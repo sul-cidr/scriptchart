@@ -19,6 +19,18 @@ import * as Sticky from "reactabular-sticky";
 class DragTable extends React.Component {
   constructor(props) {
     super(props);
+
+    this.onScrollFromNative = this.onScrollFromNative.bind(this);
+  }
+
+  onScrollFromNative(e) {
+    // just demo to reproduce issue of native horizontal scrollbar
+    // We should not intercept the native onScroll event actually
+    console.log(
+      "onScrollFromNative called => e.target.scrollLeft=",
+      e.target.scrollLeft
+    );
+    this.tableHeader.scrollLeft = e.target.scrollLeft;
   }
 
   render() {
@@ -33,19 +45,36 @@ class DragTable extends React.Component {
       }
     };
 
+    let columns = this.props.columns.filter(
+      column => !this.props.hiddenManuscripts.includes(column.props.msid)
+    );
+
+    const tableWidth = "95vw";
+    const tableHeight = "100vh";
+    const tableStyle = {
+      width: tableWidth,
+      clear: "none"
+    };
+    const tableHeaderStyle = {
+      maxWidth: tableWidth,
+      overflow: "hidden"
+    };
+    const tableBodyStyle = {
+      maxWidth: tableWidth,
+      maxHeight: tableHeight,
+      overflow: "auto"
+    };
+
     return (
       <Table.Provider
         className="pure-table pure-table-striped"
         style={{ overflowX: "auto" }}
         renderers={renderers}
-        columns={this.props.columns.filter(
-          column => !this.props.hiddenManuscripts.includes(column.props.msid)
-        )}
+        columns={columns}
+        style={tableStyle}
       >
         <Sticky.Header
-          style={{
-            maxWidth: "100vw"
-          }}
+          style={tableHeaderStyle}
           ref={tableHeader => {
             this.tableHeader = tableHeader && tableHeader.getRef();
           }}
@@ -57,14 +86,12 @@ class DragTable extends React.Component {
           )}
           rowKey="id"
           onRow={this.props.onRow}
-          style={{
-            maxWidth: "100vw",
-            maxHeight: "100%"
-          }}
+          style={tableBodyStyle}
           ref={tableBody => {
             this.tableBody = tableBody && tableBody.getRef();
           }}
           tableHeader={this.tableHeader}
+          onScroll={this.onScrollFromNative}
         />
       </Table.Provider>
     );

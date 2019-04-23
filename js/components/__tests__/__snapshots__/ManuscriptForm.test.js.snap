@@ -953,52 +953,37 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="field is-horizontal"
+    className="field is-horizontal flex-row"
   >
     <div
-      className="field-label is-normal"
+      className="control"
     >
-      <div
-        style={
-          Object {
-            "whiteSpace": "nowrap",
-          }
-        }
-      >
-        Number of examples:
-      </div>
+      Number of examples: 
     </div>
     <div
-      className="field-body"
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
+        }
+      }
     >
-      <div
-        className="field is-narrow"
+      <select
+        name="letterExamples"
+        onChange={[Function]}
+        type="number"
+        value={3}
       >
-        <div
-          className="control"
-        >
-          <div
-            className="select is-small is-fullwidth"
-          >
-            <select
-              name="letterExamples"
-              onChange={[Function]}
-              type="number"
-              value={3}
-            >
-              <option>
-                1
-              </option>
-              <option>
-                3
-              </option>
-              <option>
-                5
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+        <option>
+          1
+        </option>
+        <option>
+          3
+        </option>
+        <option>
+          5
+        </option>
+      </select>
     </div>
   </div>
   <div
@@ -1022,7 +1007,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       className="checkbox"
       style={
         Object {
-          "marginLeft": 8,
+          "marginLeft": "8px",
         }
       }
     >
@@ -1036,60 +1021,43 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </label>
   </div>
   <div
-    className="field is-horizontal"
+    className="field is-horizontal flex-row"
   >
     <div
-      className="field-label is-normal"
+      className="control"
     >
-      <div
-        style={
-          Object {
-            "whiteSpace": "nowrap",
-          }
-        }
-      >
-        Image size:
-      </div>
+      Image size: 
     </div>
     <div
-      className="field-body"
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
+        }
+      }
     >
-      <div
-        className="field is-narrow"
+      <select
+        name="imageSize"
+        onChange={[Function]}
+        type="string"
+        value="Medium"
       >
-        <div
-          className="control"
-        >
-          <div
-            className="select is-small is-fullwidth"
-          >
-            <select
-              name="imageSize"
-              onChange={[Function]}
-              type="string"
-              value="Medium"
-            >
-              <option>
-                Small
-              </option>
-              <option>
-                Medium
-              </option>
-              <option>
-                Large
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+        <option>
+          Small
+        </option>
+        <option>
+          Medium
+        </option>
+        <option>
+          Large
+        </option>
+      </select>
     </div>
   </div>
   <div
     className="control"
   >
-    <p>
-      Letter in context:
-    </p>
+    Letter in context:
     <ul>
       <li>
         <label
@@ -1122,52 +1090,74 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </ul>
   </div>
   <div
-    className="field is-horizontal"
+    className="field is-horizontal flex-row"
   >
     <div
-      className="field-label is-normal"
+      className="control"
     >
-      <div
-        style={
-          Object {
-            "whiteSpace": "nowrap",
-          }
-        }
-      >
-        Context size:
-      </div>
+      Number of examples: 
     </div>
     <div
-      className="field-body"
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
+        }
+      }
     >
-      <div
-        className="field is-narrow"
+      <select
+        name="letterExamples"
+        onChange={[Function]}
+        type="number"
+        value={3}
       >
-        <div
-          className="control"
-        >
-          <div
-            className="select is-small is-fullwidth"
-          >
-            <select
-              name="cropMargin"
-              onChange={[Function]}
-              type="string"
-              value="Medium"
-            >
-              <option>
-                Small
-              </option>
-              <option>
-                Medium
-              </option>
-              <option>
-                Large
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+        <option>
+          1
+        </option>
+        <option>
+          3
+        </option>
+        <option>
+          5
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="field is-horizontal flex-row"
+  >
+    <div
+      className="control"
+    >
+      Context size: 
+    </div>
+    <div
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
+        }
+      }
+    >
+      <select
+        name="cropMargin"
+        onChange={[Function]}
+        type="string"
+        value="Medium"
+      >
+        <option>
+          Small
+        </option>
+        <option>
+          Medium
+        </option>
+        <option>
+          Large
+        </option>
+        <option>
+          X-Large
+        </option>
+      </select>
     </div>
   </div>
   <div

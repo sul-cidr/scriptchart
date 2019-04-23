@@ -50,8 +50,8 @@ import DashTabs from "./DashTabs";
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
-//export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
-export const API_ROOT = "http://localhost:8000/api/";
+export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+//export const API_ROOT = "http://localhost:8000/api/";
 
 class App extends Component {
   constructor(props) {
@@ -301,9 +301,9 @@ class App extends Component {
             }
             onClick={this.toggleSidebar}
           >
-            Menu{" "}
+            {/* Menu{" "} */}
             <FontAwesomeIcon
-              title="Open the script form."
+              title="Open the viewer options form."
               icon="arrow-right"
               onClick={this.toggleSidebar}
               style={{ cursor: "pointer" }}
@@ -311,7 +311,7 @@ class App extends Component {
           </div>
           <div
             className={
-              "column is-one-quarter " +
+              "column is-one-fifth " +
               (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
             }
           >
@@ -326,7 +326,7 @@ class App extends Component {
                     onClick={this.toggleSidebar}
                   >
                     <FontAwesomeIcon
-                      title="Close the script form."
+                      title="Close the viewer options form."
                       icon="arrow-left"
                       onClick={this.toggleSidebar}
                       style={{ cursor: "pointer" }}

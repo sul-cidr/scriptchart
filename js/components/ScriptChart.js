@@ -128,27 +128,19 @@ class ScriptChart extends React.Component {
   getColumns() {
     /* First two columns are the images of the letters and the "X" to hide
      * each row.
-     * XXX The transparent header labels are being used to wedge the column
-     * widths to a uniform setting -- need to find a better way to do this.
      */
     let cols = [
       {
         property: "letter",
-        header: {
-          label: <span style={{ color: "transparent" }}>Letter</span>
-        },
         props: {
-          style: { width: 80 }
+          style: { minWidth: 80, overflow: "hidden" }
         }
       }
     ];
     let rowRemoverColumn = {
       property: "row_remover",
-      header: {
-        label: <span style={{ color: "transparent" }}>X</span>
-      },
       props: {
-        style: { width: 45 }
+        style: { minWidth: 45, overflow: "hidden" }
       },
       cell: {
         formatters: [
@@ -179,7 +171,6 @@ class ScriptChart extends React.Component {
           label: this.props.columnManuscripts[i].shelfmark,
           props: {
             label: this.props.columnManuscripts[i].shelfmark,
-            style: { width: 200 },
             onMove: o => this.props.onColumnMove(o)
           }
         },
@@ -188,7 +179,7 @@ class ScriptChart extends React.Component {
         ),
         props: {
           msid: this.props.columnManuscripts[i].id,
-          style: { width: 200 }
+          style: { minWidth: 200 }
         }
       };
       cols.push(column);

@@ -244,22 +244,6 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <div className={"control"}>Number of examples: </div>
-          <div className={"select is-small"} style={{ marginLeft: "5px" }}>
-            <select
-              value={this.state.letterExamples}
-              type="number"
-              name="letterExamples"
-              onChange={this.handleChange}
-            >
-              <option>1</option>
-              <option>3</option>
-              <option>5</option>
-            </select>
-          </div>
-        </div>
-
-        <div className={"field is-horizontal flex-row"}>
           <div className={"control"}>Context size: </div>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select

@@ -11,21 +11,36 @@ exports[`App test App should match snapshot 1`] = `
       className="button column is-narrow closed-menu sidebar-closed"
       onClick={[Function]}
     >
-      Menu
-       
-      <span
-        className="icon arrow-button"
+      <svg
+        aria-labelledby="svg-inline--fa-title-7QsCX1TVyItx"
+        className="svg-inline--fa fa-arrow-right fa-w-14 "
+        data-icon="arrow-right"
+        data-prefix="fas"
         onClick={[Function]}
+        role="img"
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
+        viewBox="0 0 448 512"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <i
-          aria-hidden="true"
-          className="fa fa-arrow-right"
-          title="Open the script form."
+        <title
+          id="svg-inline--fa-title-7QsCX1TVyItx"
+          style={Object {}}
+        >
+          Open the viewer options form.
+        </title>
+        <path
+          d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"
+          fill="currentColor"
+          style={Object {}}
         />
-      </span>
+      </svg>
     </div>
     <div
-      className="column is-one-quarter sidebar-open"
+      className="column is-one-fifth sidebar-open"
     >
       <div
         className="box"
@@ -39,7 +54,7 @@ exports[`App test App should match snapshot 1`] = `
             <h4
               className="title is-5"
             >
-              Scriptchart options 
+              Viewer options
             </h4>
           </div>
           <div
@@ -49,11 +64,33 @@ exports[`App test App should match snapshot 1`] = `
               className="icon arrow-button"
               onClick={[Function]}
             >
-              <i
-                aria-hidden="true"
-                className="fa fa-arrow-left"
-                title="Close the script form."
-              />
+              <svg
+                aria-labelledby="svg-inline--fa-title-ujQt5Zd0XayJ"
+                className="svg-inline--fa fa-arrow-left fa-w-14 "
+                data-icon="arrow-left"
+                data-prefix="fas"
+                onClick={[Function]}
+                role="img"
+                style={
+                  Object {
+                    "cursor": "pointer",
+                  }
+                }
+                viewBox="0 0 448 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title
+                  id="svg-inline--fa-title-ujQt5Zd0XayJ"
+                  style={Object {}}
+                >
+                  Close the viewer options form.
+                </title>
+                <path
+                  d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"
+                  fill="currentColor"
+                  style={Object {}}
+                />
+              </svg>
             </span>
           </div>
         </div>
@@ -898,52 +935,37 @@ exports[`App test App should match snapshot 1`] = `
               </div>
             </div>
             <div
-              className="field is-horizontal"
+              className="field is-horizontal flex-row"
             >
               <div
-                className="field-label is-normal"
+                className="control"
               >
-                <div
-                  style={
-                    Object {
-                      "whiteSpace": "nowrap",
-                    }
-                  }
-                >
-                  Number of examples:
-                </div>
+                Number of examples: 
               </div>
               <div
-                className="field-body"
+                className="select is-small"
+                style={
+                  Object {
+                    "marginLeft": "5px",
+                  }
+                }
               >
-                <div
-                  className="field is-narrow"
+                <select
+                  name="letterExamples"
+                  onChange={[Function]}
+                  type="number"
+                  value={3}
                 >
-                  <div
-                    className="control"
-                  >
-                    <div
-                      className="select is-small is-fullwidth"
-                    >
-                      <select
-                        name="letterExamples"
-                        onChange={[Function]}
-                        type="number"
-                        value={3}
-                      >
-                        <option>
-                          1
-                        </option>
-                        <option>
-                          3
-                        </option>
-                        <option>
-                          5
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                  <option>
+                    1
+                  </option>
+                  <option>
+                    3
+                  </option>
+                  <option>
+                    5
+                  </option>
+                </select>
               </div>
             </div>
             <div
@@ -967,7 +989,7 @@ exports[`App test App should match snapshot 1`] = `
                 className="checkbox"
                 style={
                   Object {
-                    "marginLeft": 8,
+                    "marginLeft": "8px",
                   }
                 }
               >
@@ -981,60 +1003,43 @@ exports[`App test App should match snapshot 1`] = `
               </label>
             </div>
             <div
-              className="field is-horizontal"
+              className="field is-horizontal flex-row"
             >
               <div
-                className="field-label is-normal"
+                className="control"
               >
-                <div
-                  style={
-                    Object {
-                      "whiteSpace": "nowrap",
-                    }
-                  }
-                >
-                  Image size:
-                </div>
+                Image size: 
               </div>
               <div
-                className="field-body"
+                className="select is-small"
+                style={
+                  Object {
+                    "marginLeft": "5px",
+                  }
+                }
               >
-                <div
-                  className="field is-narrow"
+                <select
+                  name="imageSize"
+                  onChange={[Function]}
+                  type="string"
+                  value="Medium"
                 >
-                  <div
-                    className="control"
-                  >
-                    <div
-                      className="select is-small is-fullwidth"
-                    >
-                      <select
-                        name="imageSize"
-                        onChange={[Function]}
-                        type="string"
-                        value="Medium"
-                      >
-                        <option>
-                          Small
-                        </option>
-                        <option>
-                          Medium
-                        </option>
-                        <option>
-                          Large
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                  <option>
+                    Small
+                  </option>
+                  <option>
+                    Medium
+                  </option>
+                  <option>
+                    Large
+                  </option>
+                </select>
               </div>
             </div>
             <div
               className="control"
             >
-              <p>
-                Letter in context:
-              </p>
+              Letter in context:
               <ul>
                 <li>
                   <label
@@ -1067,52 +1072,74 @@ exports[`App test App should match snapshot 1`] = `
               </ul>
             </div>
             <div
-              className="field is-horizontal"
+              className="field is-horizontal flex-row"
             >
               <div
-                className="field-label is-normal"
+                className="control"
               >
-                <div
-                  style={
-                    Object {
-                      "whiteSpace": "nowrap",
-                    }
-                  }
-                >
-                  Context size:
-                </div>
+                Number of examples: 
               </div>
               <div
-                className="field-body"
+                className="select is-small"
+                style={
+                  Object {
+                    "marginLeft": "5px",
+                  }
+                }
               >
-                <div
-                  className="field is-narrow"
+                <select
+                  name="letterExamples"
+                  onChange={[Function]}
+                  type="number"
+                  value={3}
                 >
-                  <div
-                    className="control"
-                  >
-                    <div
-                      className="select is-small is-fullwidth"
-                    >
-                      <select
-                        name="cropMargin"
-                        onChange={[Function]}
-                        type="string"
-                        value="Medium"
-                      >
-                        <option>
-                          Small
-                        </option>
-                        <option>
-                          Medium
-                        </option>
-                        <option>
-                          Large
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                  <option>
+                    1
+                  </option>
+                  <option>
+                    3
+                  </option>
+                  <option>
+                    5
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div
+              className="field is-horizontal flex-row"
+            >
+              <div
+                className="control"
+              >
+                Context size: 
+              </div>
+              <div
+                className="select is-small"
+                style={
+                  Object {
+                    "marginLeft": "5px",
+                  }
+                }
+              >
+                <select
+                  name="cropMargin"
+                  onChange={[Function]}
+                  type="string"
+                  value="Medium"
+                >
+                  <option>
+                    Small
+                  </option>
+                  <option>
+                    Medium
+                  </option>
+                  <option>
+                    Large
+                  </option>
+                  <option>
+                    X-Large
+                  </option>
+                </select>
               </div>
             </div>
             <div

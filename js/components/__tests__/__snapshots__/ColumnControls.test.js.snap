@@ -1,8 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ColumnControls test ColumnControls should match snapshot 1`] = `
-<p>
-  <span
+<div
+  className="flex-row"
+>
+  <div
     className="remove"
     onClick={[Function]}
     style={
@@ -12,8 +14,13 @@ exports[`ColumnControls test ColumnControls should match snapshot 1`] = `
     }
     title="Hide this column"
   >
-    ✗
-  </span>
+    <b>
+      ✗
+    </b>
+  </div>
+  <div
+    className="header-icon"
+  />
   
-</p>
+</div>
 `;

@@ -1,13 +1,17 @@
 import React from "react";
 
+/* PopupImage - This class encapsulates the popup widget that appears when
+ * a binarized or untrimmed letter is clicked or hovered (depending on the
+ * setting from the options form).
+ */
+
 import Popup from "reactjs-popup";
 
-import "./index.css"
+import "./index.css";
 
 class PopupImage extends React.Component {
-
   render() {
-    return(
+    return (
       <div className={"letter-image"}>
         <Popup
           trigger={this.props.triggerImage}
@@ -20,9 +24,9 @@ class PopupImage extends React.Component {
         >
           {this.props.contextImage}
         </Popup>
-      </div>);
+      </div>
+    );
   }
-
 }
 
 export default PopupImage;

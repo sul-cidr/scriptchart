@@ -305,67 +305,63 @@ class DashTabs extends React.Component {
     }
 
     return (
-      <section className="section no-padding">
-        <div className="container">
-          <div className="columns">
-            <div className="column">
-              <Tabs
-                defaultFocus={true}
-                selectedIndex={this.state.tabIndex}
-                onSelect={tabIndex => this.setState({ tabIndex })}
+      <div className="columns">
+        <div className="column">
+          <Tabs
+            defaultFocus={true}
+            selectedIndex={this.state.tabIndex}
+            onSelect={tabIndex => this.setState({ tabIndex })}
+          >
+            <TabList>
+              <Tab>
+                <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
+                Scriptchart
+              </Tab>
+              <Tab>
+                <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
+                Manuscripts
+              </Tab>
+              <Tab
+                disabled={
+                  this.state.hiddenManuscripts.length == 0 &&
+                  this.state.hiddenLetters.length == 0
+                }
               >
-                <TabList>
-                  <Tab>
-                    <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
-                    Scriptchart
-                  </Tab>
-                  <Tab>
-                    <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
-                    Manuscripts
-                  </Tab>
-                  <Tab
-                    disabled={
-                      this.state.hiddenManuscripts.length == 0 &&
-                      this.state.hiddenLetters.length == 0
-                    }
-                  >
-                    Hidden Items
-                  </Tab>
-                </TabList>
-                <TabPanel>
-                  <ScriptChart
-                    onHiddenChange={this.onHiddenChange}
-                    hiddenManuscripts={this.state.hiddenManuscripts}
-                    hiddenLetters={this.state.hiddenLetters}
-                    onManifestSelected={this.onManifestSelected}
-                    formData={this.props.formData}
-                    tableData={this.props.tableData}
-                    columnManuscripts={columnManuscripts}
-                    rowLetters={rowLetters}
-                    onRowMove={this.onRowMove}
-                    onColumnMove={this.onColumnMove}
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <MiradorViewer
-                    manifestURIs={manifestURIs}
-                    miradorLayout={miradorLayout}
-                    windowObjects={windowObjects}
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <ChartAccordion
-                    onHiddenChange={this.onHiddenChange}
-                    columnManuscripts={columnManuscripts}
-                    hiddenManuscripts={this.state.hiddenManuscripts}
-                    hiddenLetters={this.state.hiddenLetters}
-                  />
-                </TabPanel>
-              </Tabs>
-            </div>
-          </div>
+                Hidden Items
+              </Tab>
+            </TabList>
+            <TabPanel>
+              <ScriptChart
+                onHiddenChange={this.onHiddenChange}
+                hiddenManuscripts={this.state.hiddenManuscripts}
+                hiddenLetters={this.state.hiddenLetters}
+                onManifestSelected={this.onManifestSelected}
+                formData={this.props.formData}
+                tableData={this.props.tableData}
+                columnManuscripts={columnManuscripts}
+                rowLetters={rowLetters}
+                onRowMove={this.onRowMove}
+                onColumnMove={this.onColumnMove}
+              />
+            </TabPanel>
+            <TabPanel>
+              <MiradorViewer
+                manifestURIs={manifestURIs}
+                miradorLayout={miradorLayout}
+                windowObjects={windowObjects}
+              />
+            </TabPanel>
+            <TabPanel>
+              <ChartAccordion
+                onHiddenChange={this.onHiddenChange}
+                columnManuscripts={columnManuscripts}
+                hiddenManuscripts={this.state.hiddenManuscripts}
+                hiddenLetters={this.state.hiddenLetters}
+              />
+            </TabPanel>
+          </Tabs>
         </div>
-      </section>
+      </div>
     );
   }
 }

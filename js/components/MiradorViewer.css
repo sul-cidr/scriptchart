@@ -1,4 +1,6 @@
 .mirador-container .mirador-viewer {
+    position: relative;
     height: 100vh;
-    margin-top: 55px;
+    width: 100%;
+    top: 0px;
 }

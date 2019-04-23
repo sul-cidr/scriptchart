@@ -21,6 +21,10 @@ import SyriacLetter from "./SyriacLetter";
 
 import "./index.css";
 
+const LETTER_WIDTH = 80;
+const X_WIDTH = 45;
+const CELL_WIDTH = 200;
+
 class ScriptChart extends React.Component {
   constructor(props) {
     super(props);
@@ -133,14 +137,14 @@ class ScriptChart extends React.Component {
       {
         property: "letter",
         props: {
-          style: { minWidth: 80, overflow: "hidden" }
+          style: { minWidth: LETTER_WIDTH, overflow: "hidden" }
         }
       }
     ];
     let rowRemoverColumn = {
       property: "row_remover",
       props: {
-        style: { minWidth: 45, overflow: "hidden" }
+        style: { minWidth: X_WIDTH, overflow: "hidden" }
       },
       cell: {
         formatters: [
@@ -179,7 +183,7 @@ class ScriptChart extends React.Component {
         ),
         props: {
           msid: this.props.columnManuscripts[i].id,
-          style: { minWidth: 200 }
+          style: { minWidth: CELL_WIDTH }
         }
       };
       cols.push(column);

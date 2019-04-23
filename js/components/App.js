@@ -315,7 +315,7 @@ class App extends Component {
               (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
             }
           >
-            <div className={"box"}>
+            <div className={"box small-padding"}>
               <div className={"box-header columns"}>
                 <div className={"column is-three-quarters"}>
                   <h4 className={"title is-5"}>Viewer options</h4>

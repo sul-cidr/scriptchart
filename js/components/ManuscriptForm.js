@@ -226,7 +226,7 @@ class ManuscriptForm extends React.Component {
                   onChange={this.changeContextMode}
                   checked={this.state.contextMode == "hover"}
                 />{" "}
-                Show on hover (mouseover)
+                Show on hover
               </label>
             </li>
             <li>

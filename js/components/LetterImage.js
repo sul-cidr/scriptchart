@@ -148,13 +148,15 @@ class LetterImage extends React.Component {
         />
       );
 
-      binarizedDiv = <PopupImage
-                       triggerImage={binarizedImage}
-                       contextMode={this.props.contextMode}
-                       contextImage={contextImage}
-                       contextWidth={contextWidth}
-                       contextHeight={contextHeight}
-                     />;
+      binarizedDiv = (
+        <PopupImage
+          triggerImage={binarizedImage}
+          contextMode={this.props.contextMode}
+          contextImage={contextImage}
+          contextWidth={contextWidth}
+          contextHeight={contextHeight}
+        />
+      );
     }
 
     if (this.props.showCropped) {
@@ -170,13 +172,15 @@ class LetterImage extends React.Component {
         />
       );
 
-      croppedDiv = <PopupImage
-                     triggerImage={croppedImage}
-                     contextMode={this.props.contextMode}
-                     contextImage={contextImage}
-                     contextWidth={contextWidth}
-                     contextHeight={contextHeight}
-                   />;
+      croppedDiv = (
+        <PopupImage
+          triggerImage={croppedImage}
+          contextMode={this.props.contextMode}
+          contextImage={contextImage}
+          contextWidth={contextWidth}
+          contextHeight={contextHeight}
+        />
+      );
     }
 
     return (

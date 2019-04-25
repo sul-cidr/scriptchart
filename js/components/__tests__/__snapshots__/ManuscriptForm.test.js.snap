@@ -1070,7 +1070,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
             value="hover"
           />
            
-          Show on hover (mouseover)
+          Show on hover
         </label>
       </li>
       <li>
@@ -1088,40 +1088,6 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         </label>
       </li>
     </ul>
-  </div>
-  <div
-    className="field is-horizontal flex-row"
-  >
-    <div
-      className="control"
-    >
-      Number of examples: 
-    </div>
-    <div
-      className="select is-small"
-      style={
-        Object {
-          "marginLeft": "5px",
-        }
-      }
-    >
-      <select
-        name="letterExamples"
-        onChange={[Function]}
-        type="number"
-        value={3}
-      >
-        <option>
-          1
-        </option>
-        <option>
-          3
-        </option>
-        <option>
-          5
-        </option>
-      </select>
-    </div>
   </div>
   <div
     className="field is-horizontal flex-row"

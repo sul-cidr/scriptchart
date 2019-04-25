@@ -12,7 +12,7 @@ exports[`App test App should match snapshot 1`] = `
       onClick={[Function]}
     >
       <svg
-        aria-labelledby="svg-inline--fa-title-7QsCX1TVyItx"
+        aria-labelledby="svg-inline--fa-title-SFTLA1quuetn"
         className="svg-inline--fa fa-arrow-right fa-w-14 "
         data-icon="arrow-right"
         data-prefix="fas"
@@ -27,7 +27,7 @@ exports[`App test App should match snapshot 1`] = `
         xmlns="http://www.w3.org/2000/svg"
       >
         <title
-          id="svg-inline--fa-title-7QsCX1TVyItx"
+          id="svg-inline--fa-title-SFTLA1quuetn"
           style={Object {}}
         >
           Open the viewer options form.
@@ -43,7 +43,7 @@ exports[`App test App should match snapshot 1`] = `
       className="column is-one-fifth sidebar-open"
     >
       <div
-        className="box"
+        className="box small-padding"
       >
         <div
           className="box-header columns"
@@ -65,7 +65,7 @@ exports[`App test App should match snapshot 1`] = `
               onClick={[Function]}
             >
               <svg
-                aria-labelledby="svg-inline--fa-title-ujQt5Zd0XayJ"
+                aria-labelledby="svg-inline--fa-title-tGZHGKlp4n7X"
                 className="svg-inline--fa fa-arrow-left fa-w-14 "
                 data-icon="arrow-left"
                 data-prefix="fas"
@@ -80,7 +80,7 @@ exports[`App test App should match snapshot 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <title
-                  id="svg-inline--fa-title-ujQt5Zd0XayJ"
+                  id="svg-inline--fa-title-tGZHGKlp4n7X"
                   style={Object {}}
                 >
                   Close the viewer options form.
@@ -1052,7 +1052,7 @@ exports[`App test App should match snapshot 1`] = `
                       value="hover"
                     />
                      
-                    Show on hover (mouseover)
+                    Show on hover
                   </label>
                 </li>
                 <li>
@@ -1070,40 +1070,6 @@ exports[`App test App should match snapshot 1`] = `
                   </label>
                 </li>
               </ul>
-            </div>
-            <div
-              className="field is-horizontal flex-row"
-            >
-              <div
-                className="control"
-              >
-                Number of examples: 
-              </div>
-              <div
-                className="select is-small"
-                style={
-                  Object {
-                    "marginLeft": "5px",
-                  }
-                }
-              >
-                <select
-                  name="letterExamples"
-                  onChange={[Function]}
-                  type="number"
-                  value={3}
-                >
-                  <option>
-                    1
-                  </option>
-                  <option>
-                    3
-                  </option>
-                  <option>
-                    5
-                  </option>
-                </select>
-              </div>
             </div>
             <div
               className="field is-horizontal flex-row"

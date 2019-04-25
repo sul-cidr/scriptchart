@@ -7,7 +7,7 @@ import React from "react";
  * it to the ChartAccordion list.
  */
 
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class ColumnControls extends React.Component {
   constructor(props) {
@@ -29,19 +29,19 @@ class ColumnControls extends React.Component {
 
   render() {
     /* Using the FontAwesomeIcon component causes a warning in the test
-     * output for the fa-info-circle. No idea why, but for consistency we
-     * might as well use the basic <i> elements for all of the FA icons
-     * in this component until we know what the problem is.
+     * output for the fa-info-circle. No idea why, but using the basic <i>
+     * elements until we know what the problem is.
      */
-    let manifestSpan = "";
+    let manifestDiv = "";
     if (this.props.manifestURL != null) {
-      manifestSpan = (
+      manifestDiv = (
         <div className={"header-icon"}>
-          <i
-            class="fa fa-book-open"
-            title="Show this manuscript in the manuscripts tab"
-            style={{ cursor: "pointer", color: "#0000FF" }}
+          <FontAwesomeIcon
+            title="Show this manuscript in the Mirador viewer"
+            color="#0000FF"
+            icon="book-open"
             onClick={this.showManifest}
+            style={{ cursor: "pointer" }}
           />
         </div>
       );
@@ -59,12 +59,12 @@ class ColumnControls extends React.Component {
         </div>
         <div className={"header-icon"}>
           <i
-            class="fa fa-info-circle"
+            className="fa fa-info-circle"
             title="Information about this manuscript"
             style={{ cursor: "pointer", color: "#0000FF" }}
           />
         </div>
-        {manifestSpan}
+        {manifestDiv}
       </div>
     );
   }

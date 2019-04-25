@@ -28,16 +28,17 @@ class ColumnControls extends React.Component {
   }
 
   render() {
-   /* Using the FontAwesomeIcon component  causes a warning in the test
-    * output for the fa-info-circle. No idea why, but for consistency we
-    * might as well use the basic <i> element for all of them until we
-    * know what the problem is.
-    */
+    /* Using the FontAwesomeIcon component causes a warning in the test
+     * output for the fa-info-circle. No idea why, but for consistency we
+     * might as well use the basic <i> elements for all of the FA icons
+     * in this component until we know what the problem is.
+     */
     let manifestSpan = "";
     if (this.props.manifestURL != null) {
       manifestSpan = (
         <div className={"header-icon"}>
-          <i class="fa fa-book-open"
+          <i
+            class="fa fa-book-open"
             title="Show this manuscript in the manuscripts tab"
             style={{ cursor: "pointer", color: "#0000FF" }}
             onClick={this.showManifest}
@@ -57,7 +58,8 @@ class ColumnControls extends React.Component {
           <b>&#10007;</b>
         </div>
         <div className={"header-icon"}>
-          <i class="fa fa-info-circle"
+          <i
+            class="fa fa-info-circle"
             title="Information about this manuscript"
             style={{ cursor: "pointer", color: "#0000FF" }}
           />

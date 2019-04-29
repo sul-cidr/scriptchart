@@ -19,7 +19,7 @@ class PopupImage extends React.Component {
           contentStyle={{
             width: this.props.contextWidth + 10,
             height: this.props.contextHeight + 10,
-            zIndex: 31 // Needs to occult header, which is 30
+            zIndex: 31 // Needs to occlude header, which is 30
           }}
           on={this.props.contextMode}
         >

@@ -12,7 +12,7 @@ exports[`App test App should match snapshot 1`] = `
       onClick={[Function]}
     >
       <svg
-        aria-labelledby="svg-inline--fa-title-ccf3o3PJv5qE"
+        aria-labelledby="svg-inline--fa-title-pqh4Aj3oyLlp"
         className="svg-inline--fa fa-arrow-right fa-w-14 "
         data-icon="arrow-right"
         data-prefix="fas"
@@ -27,7 +27,7 @@ exports[`App test App should match snapshot 1`] = `
         xmlns="http://www.w3.org/2000/svg"
       >
         <title
-          id="svg-inline--fa-title-ccf3o3PJv5qE"
+          id="svg-inline--fa-title-pqh4Aj3oyLlp"
           style={Object {}}
         >
           Open the viewer options form.
@@ -65,7 +65,7 @@ exports[`App test App should match snapshot 1`] = `
               onClick={[Function]}
             >
               <svg
-                aria-labelledby="svg-inline--fa-title-f48SOkkXWxgS"
+                aria-labelledby="svg-inline--fa-title-9uvxbPWoG07A"
                 className="svg-inline--fa fa-arrow-left fa-w-14 "
                 data-icon="arrow-left"
                 data-prefix="fas"
@@ -80,7 +80,7 @@ exports[`App test App should match snapshot 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <title
-                  id="svg-inline--fa-title-f48SOkkXWxgS"
+                  id="svg-inline--fa-title-9uvxbPWoG07A"
                   style={Object {}}
                 >
                   Close the viewer options form.

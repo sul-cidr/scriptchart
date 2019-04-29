@@ -26,18 +26,18 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faBookOpen,
   faTable,
-  faImage,
-  faInfoCircle,
-  faArrowRight,
-  faArrowLeft
+  faImage
+  //faInfoCircle,
+  //faArrowRight,
+  //faArrowLeft
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faBookOpen,
   faTable,
-  faImage,
-  faInfoCircle,
-  faArrowRight,
-  faArrowLeft
+  faImage
+  //faInfoCircle,
+  //faArrowRight,
+  //faArrowLeft
 );
 
 /* The entire app needs to be wrapped in the drag-and-drop context */
@@ -301,11 +301,9 @@ class App extends Component {
             }
             onClick={this.toggleSidebar}
           >
-            {/* Menu{" "} */}
-            <FontAwesomeIcon
+            <i
+              className="fa fa-arrow-right"
               title="Open the viewer options form."
-              icon="arrow-right"
-              onClick={this.toggleSidebar}
               style={{ cursor: "pointer" }}
             />
           </div>
@@ -321,13 +319,10 @@ class App extends Component {
                   <h4 className={"title is-5"}>Viewer options</h4>
                 </div>
                 <div className={"column is-one-quarter"}>
-                  <span
-                    className={"icon arrow-button"}
-                    onClick={this.toggleSidebar}
-                  >
-                    <FontAwesomeIcon
+                  <span className={"icon arrow-button"}>
+                    <i
+                      className="fa fa-arrow-left"
                       title="Close the viewer options form."
-                      icon="arrow-left"
                       onClick={this.toggleSidebar}
                       style={{ cursor: "pointer" }}
                     />

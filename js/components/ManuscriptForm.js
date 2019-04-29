@@ -162,12 +162,15 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <div className={"control"}>Number of examples: </div>
+          <label for="letterExamples" className={"control"}>
+            Number of examples:{" "}
+          </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
               value={this.state.letterExamples}
               type="number"
               name="letterExamples"
+              id="letterExamples"
               onChange={this.handleChange}
             >
               <option>1</option>
@@ -179,19 +182,25 @@ class ManuscriptForm extends React.Component {
 
         <div className={"control"}>
           <p>Show letter images:</p>
-          <label className={"checkbox"}>
+          <label for="showBinarized" className={"checkbox"}>
             <input
               type="checkbox"
               name="showBinarized"
+              id="showBinarized"
               onChange={this.handleChange}
               checked={this.state.showBinarized}
             />
             {" Trimmed |"}
           </label>
-          <label className={"checkbox"} style={{ marginLeft: "8px" }}>
+          <label
+            for="showCropped"
+            className={"checkbox"}
+            style={{ marginLeft: "8px" }}
+          >
             <input
               type="checkbox"
               name="showCropped"
+              id="showCropped"
               onChange={this.handleChange}
               checked={this.state.showCropped}
             />
@@ -200,12 +209,15 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <div className={"control"}>Image size: </div>
+          <label for="imageSize" className={"control"}>
+            Image size:{" "}
+          </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
               value={this.state.imageSize}
               type="string"
               name="imageSize"
+              id="imageSize"
               onChange={this.handleChange}
             >
               <option>Small</option>
@@ -219,10 +231,11 @@ class ManuscriptForm extends React.Component {
           Letter in context:
           <ul>
             <li>
-              <label className={"radio"}>
+              <label for="hoverContext" className={"radio"}>
                 <input
                   type="radio"
                   value="hover"
+                  id="hoverContext"
                   onChange={this.changeContextMode}
                   checked={this.state.contextMode == "hover"}
                 />{" "}
@@ -230,10 +243,11 @@ class ManuscriptForm extends React.Component {
               </label>
             </li>
             <li>
-              <label className={"radio"}>
+              <label for="clickContext" className={"radio"}>
                 <input
                   type="radio"
                   value="click"
+                  id="clickContext"
                   onChange={this.changeContextMode}
                   checked={this.state.contextMode == "click"}
                 />{" "}
@@ -244,12 +258,15 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <div className={"control"}>Context size: </div>
+          <label for="cropMargin" className={"control"}>
+            Context size:{" "}
+          </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
               value={this.state.cropMargin}
               type="string"
               name="cropMargin"
+              id="cropMargin"
               onChange={this.changeCropMargin}
             >
               <option>Small</option>

@@ -12,7 +12,7 @@ exports[`App test App should match snapshot 1`] = `
       onClick={[Function]}
     >
       <svg
-        aria-labelledby="svg-inline--fa-title-ZeHCUQVkgCbJ"
+        aria-labelledby="svg-inline--fa-title-ccf3o3PJv5qE"
         className="svg-inline--fa fa-arrow-right fa-w-14 "
         data-icon="arrow-right"
         data-prefix="fas"
@@ -27,7 +27,7 @@ exports[`App test App should match snapshot 1`] = `
         xmlns="http://www.w3.org/2000/svg"
       >
         <title
-          id="svg-inline--fa-title-ZeHCUQVkgCbJ"
+          id="svg-inline--fa-title-ccf3o3PJv5qE"
           style={Object {}}
         >
           Open the viewer options form.
@@ -65,7 +65,7 @@ exports[`App test App should match snapshot 1`] = `
               onClick={[Function]}
             >
               <svg
-                aria-labelledby="svg-inline--fa-title-OZdY2mjsNigM"
+                aria-labelledby="svg-inline--fa-title-f48SOkkXWxgS"
                 className="svg-inline--fa fa-arrow-left fa-w-14 "
                 data-icon="arrow-left"
                 data-prefix="fas"
@@ -80,7 +80,7 @@ exports[`App test App should match snapshot 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <title
-                  id="svg-inline--fa-title-OZdY2mjsNigM"
+                  id="svg-inline--fa-title-f48SOkkXWxgS"
                   style={Object {}}
                 >
                   Close the viewer options form.
@@ -114,8 +114,10 @@ exports[`App test App should match snapshot 1`] = `
               >
                 <label
                   className="control"
+                  for="selectedShelfmarks"
                 >
-                  Select manuscripts: 
+                  Select manuscripts:
+                   
                 </label>
                 <span
                   className="button is-small"
@@ -128,6 +130,7 @@ exports[`App test App should match snapshot 1`] = `
                 className="select is-multiple"
               >
                 <select
+                  id="selectedShelfmarks"
                   multiple={true}
                   name="selectedShelfmarks"
                   onChange={[Function]}
@@ -153,9 +156,11 @@ exports[`App test App should match snapshot 1`] = `
                 </p>
                 <label
                   className="radio"
+                  for="shelfmarkSort"
                 >
                   <input
                     checked={true}
+                    id="shelfmarkSort"
                     onChange={[Function]}
                     type="radio"
                     value="shelfmark"
@@ -165,9 +170,11 @@ exports[`App test App should match snapshot 1`] = `
                 </label>
                 <label
                   className="radio"
+                  for="dateSort"
                 >
                   <input
                     checked={false}
+                    id="dateSort"
                     onChange={[Function]}
                     type="radio"
                     value="date"
@@ -937,11 +944,13 @@ exports[`App test App should match snapshot 1`] = `
             <div
               className="field is-horizontal flex-row"
             >
-              <div
+              <label
                 className="control"
+                for="letterExamples"
               >
-                Number of examples: 
-              </div>
+                Number of examples:
+                 
+              </label>
               <div
                 className="select is-small"
                 style={
@@ -951,6 +960,7 @@ exports[`App test App should match snapshot 1`] = `
                 }
               >
                 <select
+                  id="letterExamples"
                   name="letterExamples"
                   onChange={[Function]}
                   type="number"
@@ -976,9 +986,11 @@ exports[`App test App should match snapshot 1`] = `
               </p>
               <label
                 className="checkbox"
+                for="showBinarized"
               >
                 <input
                   checked={true}
+                  id="showBinarized"
                   name="showBinarized"
                   onChange={[Function]}
                   type="checkbox"
@@ -987,6 +999,7 @@ exports[`App test App should match snapshot 1`] = `
               </label>
               <label
                 className="checkbox"
+                for="showCropped"
                 style={
                   Object {
                     "marginLeft": "8px",
@@ -995,6 +1008,7 @@ exports[`App test App should match snapshot 1`] = `
               >
                 <input
                   checked={true}
+                  id="showCropped"
                   name="showCropped"
                   onChange={[Function]}
                   type="checkbox"
@@ -1005,11 +1019,13 @@ exports[`App test App should match snapshot 1`] = `
             <div
               className="field is-horizontal flex-row"
             >
-              <div
+              <label
                 className="control"
+                for="imageSize"
               >
-                Image size: 
-              </div>
+                Image size:
+                 
+              </label>
               <div
                 className="select is-small"
                 style={
@@ -1019,6 +1035,7 @@ exports[`App test App should match snapshot 1`] = `
                 }
               >
                 <select
+                  id="imageSize"
                   name="imageSize"
                   onChange={[Function]}
                   type="string"
@@ -1044,9 +1061,11 @@ exports[`App test App should match snapshot 1`] = `
                 <li>
                   <label
                     className="radio"
+                    for="hoverContext"
                   >
                     <input
                       checked={true}
+                      id="hoverContext"
                       onChange={[Function]}
                       type="radio"
                       value="hover"
@@ -1058,9 +1077,11 @@ exports[`App test App should match snapshot 1`] = `
                 <li>
                   <label
                     className="radio"
+                    for="clickContext"
                   >
                     <input
                       checked={false}
+                      id="clickContext"
                       onChange={[Function]}
                       type="radio"
                       value="click"
@@ -1074,11 +1095,13 @@ exports[`App test App should match snapshot 1`] = `
             <div
               className="field is-horizontal flex-row"
             >
-              <div
+              <label
                 className="control"
+                for="cropMargin"
               >
-                Context size: 
-              </div>
+                Context size:
+                 
+              </label>
               <div
                 className="select is-small"
                 style={
@@ -1088,6 +1111,7 @@ exports[`App test App should match snapshot 1`] = `
                 }
               >
                 <select
+                  id="cropMargin"
                   name="cropMargin"
                   onChange={[Function]}
                   type="string"

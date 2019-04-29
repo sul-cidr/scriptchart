@@ -18,7 +18,8 @@ class PopupImage extends React.Component {
           position="top center"
           contentStyle={{
             width: this.props.contextWidth + 10,
-            height: this.props.contextHeight + 10
+            height: this.props.contextHeight + 10,
+            zIndex: 31 // Needs to occult header, which is 30
           }}
           on={this.props.contextMode}
         >

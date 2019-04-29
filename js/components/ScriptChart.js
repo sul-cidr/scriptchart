@@ -151,7 +151,7 @@ class ScriptChart extends React.Component {
           (value, { rowData }) =>
             rowData.id > 0 ? (
               <span
-                title="Hidden row"
+                title="Hide this row"
                 className="remove"
                 onClick={() => this.onHideRow(rowData.ltid)}
                 style={{ cursor: "pointer" }}
@@ -183,7 +183,7 @@ class ScriptChart extends React.Component {
         ),
         props: {
           msid: this.props.columnManuscripts[i].id,
-          style: { minWidth: CELL_WIDTH }
+          style: { minWidth: CELL_WIDTH, maxWidth: CELL_WIDTH }
         }
       };
       cols.push(column);

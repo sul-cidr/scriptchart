@@ -2,6 +2,7 @@
 
 exports[`ManuscriptsLoader test ManuscriptsLoader should match snapshot 1`] = `
 <select
+  id="selectedShelfmarks"
   multiple={true}
   name="selectedShelfmarks"
   size="8"

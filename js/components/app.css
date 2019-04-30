@@ -18,3 +18,7 @@
 .closed-menu:hover {
     color: hsl(217, 71%, 53%);
 }
+
+.small-padding {
+    padding: 10px 10px 10px 10px;
+  }

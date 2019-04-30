@@ -18,6 +18,7 @@ import React, { Component } from "react";
 
 import "../../src/assets/syriac_fonts.css";
 import "./app.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /* Loading fontawesome icons via React seems easier than doing
  * it via site-wide CSS */
@@ -26,8 +27,18 @@ import {
   faBookOpen,
   faTable,
   faImage
+  //faInfoCircle,
+  //faArrowRight,
+  //faArrowLeft
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faBookOpen, faTable, faImage);
+library.add(
+  faBookOpen,
+  faTable,
+  faImage
+  //faInfoCircle,
+  //faArrowRight,
+  //faArrowLeft
+);
 
 /* The entire app needs to be wrapped in the drag-and-drop context */
 import HTML5Backend from "react-dnd-html5-backend";
@@ -290,35 +301,30 @@ class App extends Component {
             }
             onClick={this.toggleSidebar}
           >
-            Menu{" "}
-            <span className={"icon arrow-button"} onClick={this.toggleSidebar}>
-              <i
-                className={"fa fa-arrow-right"}
-                aria-hidden="true"
-                title="Open the script form."
-              />
-            </span>
+            <i
+              className="fa fa-arrow-right"
+              title="Open the viewer options form."
+              style={{ cursor: "pointer" }}
+            />
           </div>
           <div
             className={
-              "column is-one-quarter " +
+              "column is-one-fifth " +
               (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
             }
           >
-            <div className={"box"}>
+            <div className={"box small-padding"}>
               <div className={"box-header columns"}>
                 <div className={"column is-three-quarters"}>
-                  <h4 className={"title is-5"}>Scriptchart options </h4>
+                  <h4 className={"title is-5"}>Viewer options</h4>
                 </div>
                 <div className={"column is-one-quarter"}>
-                  <span
-                    className={"icon arrow-button"}
-                    onClick={this.toggleSidebar}
-                  >
+                  <span className={"icon arrow-button"}>
                     <i
-                      className={"fa fa-arrow-left"}
-                      aria-hidden="true"
-                      title="Close the script form."
+                      className="fa fa-arrow-left"
+                      title="Close the viewer options form."
+                      onClick={this.toggleSidebar}
+                      style={{ cursor: "pointer" }}
                     />
                   </span>
                 </div>

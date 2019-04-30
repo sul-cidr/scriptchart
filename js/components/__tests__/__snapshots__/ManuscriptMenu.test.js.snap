@@ -14,8 +14,10 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
   >
     <label
       className="control"
+      for="selectedShelfmarks"
     >
-      Select manuscripts: 
+      Select manuscripts:
+       
     </label>
     <span
       className="button is-small"
@@ -28,6 +30,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
     className="select is-multiple"
   >
     <select
+      id="selectedShelfmarks"
       multiple={true}
       name="selectedShelfmarks"
       onChange={[Function]}
@@ -166,9 +169,11 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
     </p>
     <label
       className="radio"
+      for="shelfmarkSort"
     >
       <input
         checked={true}
+        id="shelfmarkSort"
         onChange={[Function]}
         type="radio"
         value="shelfmark"
@@ -178,9 +183,11 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
     </label>
     <label
       className="radio"
+      for="dateSort"
     >
       <input
         checked={false}
+        id="dateSort"
         onChange={[Function]}
         type="radio"
         value="date"

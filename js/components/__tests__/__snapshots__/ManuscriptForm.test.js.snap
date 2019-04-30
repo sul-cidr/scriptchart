@@ -18,8 +18,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     >
       <label
         className="control"
+        for="selectedShelfmarks"
       >
-        Select manuscripts: 
+        Select manuscripts:
+         
       </label>
       <span
         className="button is-small"
@@ -32,6 +34,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       className="select is-multiple"
     >
       <select
+        id="selectedShelfmarks"
         multiple={true}
         name="selectedShelfmarks"
         onChange={[Function]}
@@ -171,9 +174,11 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       </p>
       <label
         className="radio"
+        for="shelfmarkSort"
       >
         <input
           checked={true}
+          id="shelfmarkSort"
           onChange={[Function]}
           type="radio"
           value="shelfmark"
@@ -183,9 +188,11 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       </label>
       <label
         className="radio"
+        for="dateSort"
       >
         <input
           checked={false}
+          id="dateSort"
           onChange={[Function]}
           type="radio"
           value="date"
@@ -953,52 +960,40 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="field is-horizontal"
+    className="field is-horizontal flex-row"
   >
-    <div
-      className="field-label is-normal"
+    <label
+      className="control"
+      for="letterExamples"
     >
-      <div
-        style={
-          Object {
-            "whiteSpace": "nowrap",
-          }
+      Number of examples:
+       
+    </label>
+    <div
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
         }
-      >
-        Number of examples:
-      </div>
-    </div>
-    <div
-      className="field-body"
+      }
     >
-      <div
-        className="field is-narrow"
+      <select
+        id="letterExamples"
+        name="letterExamples"
+        onChange={[Function]}
+        type="number"
+        value={3}
       >
-        <div
-          className="control"
-        >
-          <div
-            className="select is-small is-fullwidth"
-          >
-            <select
-              name="letterExamples"
-              onChange={[Function]}
-              type="number"
-              value={3}
-            >
-              <option>
-                1
-              </option>
-              <option>
-                3
-              </option>
-              <option>
-                5
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+        <option>
+          1
+        </option>
+        <option>
+          3
+        </option>
+        <option>
+          5
+        </option>
+      </select>
     </div>
   </div>
   <div
@@ -1009,9 +1004,11 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </p>
     <label
       className="checkbox"
+      for="showBinarized"
     >
       <input
         checked={true}
+        id="showBinarized"
         name="showBinarized"
         onChange={[Function]}
         type="checkbox"
@@ -1020,14 +1017,16 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </label>
     <label
       className="checkbox"
+      for="showCropped"
       style={
         Object {
-          "marginLeft": 8,
+          "marginLeft": "8px",
         }
       }
     >
       <input
         checked={true}
+        id="showCropped"
         name="showCropped"
         onChange={[Function]}
         type="checkbox"
@@ -1036,81 +1035,71 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </label>
   </div>
   <div
-    className="field is-horizontal"
+    className="field is-horizontal flex-row"
   >
-    <div
-      className="field-label is-normal"
+    <label
+      className="control"
+      for="imageSize"
     >
-      <div
-        style={
-          Object {
-            "whiteSpace": "nowrap",
-          }
+      Image size:
+       
+    </label>
+    <div
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
         }
-      >
-        Image size:
-      </div>
-    </div>
-    <div
-      className="field-body"
+      }
     >
-      <div
-        className="field is-narrow"
+      <select
+        id="imageSize"
+        name="imageSize"
+        onChange={[Function]}
+        type="string"
+        value="Medium"
       >
-        <div
-          className="control"
-        >
-          <div
-            className="select is-small is-fullwidth"
-          >
-            <select
-              name="imageSize"
-              onChange={[Function]}
-              type="string"
-              value="Medium"
-            >
-              <option>
-                Small
-              </option>
-              <option>
-                Medium
-              </option>
-              <option>
-                Large
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+        <option>
+          Small
+        </option>
+        <option>
+          Medium
+        </option>
+        <option>
+          Large
+        </option>
+      </select>
     </div>
   </div>
   <div
     className="control"
   >
-    <p>
-      Letter in context:
-    </p>
+    Letter in context:
     <ul>
       <li>
         <label
           className="radio"
+          for="hoverContext"
         >
           <input
             checked={true}
+            id="hoverContext"
             onChange={[Function]}
             type="radio"
             value="hover"
           />
            
-          Show on hover (mouseover)
+          Show on hover
         </label>
       </li>
       <li>
         <label
           className="radio"
+          for="clickContext"
         >
           <input
             checked={false}
+            id="clickContext"
             onChange={[Function]}
             type="radio"
             value="click"
@@ -1122,52 +1111,43 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </ul>
   </div>
   <div
-    className="field is-horizontal"
+    className="field is-horizontal flex-row"
   >
-    <div
-      className="field-label is-normal"
+    <label
+      className="control"
+      for="cropMargin"
     >
-      <div
-        style={
-          Object {
-            "whiteSpace": "nowrap",
-          }
+      Context size:
+       
+    </label>
+    <div
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
         }
-      >
-        Context size:
-      </div>
-    </div>
-    <div
-      className="field-body"
+      }
     >
-      <div
-        className="field is-narrow"
+      <select
+        id="cropMargin"
+        name="cropMargin"
+        onChange={[Function]}
+        type="string"
+        value="Medium"
       >
-        <div
-          className="control"
-        >
-          <div
-            className="select is-small is-fullwidth"
-          >
-            <select
-              name="cropMargin"
-              onChange={[Function]}
-              type="string"
-              value="Medium"
-            >
-              <option>
-                Small
-              </option>
-              <option>
-                Medium
-              </option>
-              <option>
-                Large
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+        <option>
+          Small
+        </option>
+        <option>
+          Medium
+        </option>
+        <option>
+          Large
+        </option>
+        <option>
+          X-Large
+        </option>
+      </select>
     </div>
   </div>
   <div

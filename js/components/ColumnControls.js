@@ -28,10 +28,14 @@ class ColumnControls extends React.Component {
   }
 
   render() {
-    let manifestSpan = "";
+    /* Using the FontAwesomeIcon component causes a warning in the test
+     * output for the fa-info-circle. No idea why, but using the basic <i>
+     * elements until we know what the problem is.
+     */
+    let manifestDiv = "";
     if (this.props.manifestURL != null) {
-      manifestSpan = (
-        <span style={{ float: "right" }}>
+      manifestDiv = (
+        <div className={"header-icon"}>
           <FontAwesomeIcon
             title="Show this manuscript in the Mirador viewer"
             color="#0000FF"
@@ -39,22 +43,29 @@ class ColumnControls extends React.Component {
             onClick={this.showManifest}
             style={{ cursor: "pointer" }}
           />
-        </span>
+        </div>
       );
     }
     return (
-      <p>
-        <span
-          style={{ float: "left" }}
+      <div className={"flex-row"}>
+        <div
+          className={"header-icon"}
           title="Hide this column"
           className="remove"
           onClick={this.hideColumn}
           style={{ cursor: "pointer" }}
         >
-          &#10007;
-        </span>
-        {manifestSpan}
-      </p>
+          <b>&#10007;</b>
+        </div>
+        <div className={"header-icon"}>
+          <i
+            className="fa fa-info-circle"
+            title="Information about this manuscript"
+            style={{ cursor: "pointer", color: "#0000FF" }}
+          />
+        </div>
+        {manifestDiv}
+      </div>
     );
   }
 }

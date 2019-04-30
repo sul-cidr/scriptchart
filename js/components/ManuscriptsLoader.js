@@ -33,6 +33,7 @@ class ManuscriptsLoader extends React.Component {
         size="8"
         type="string"
         name="selectedShelfmarks"
+        id="selectedShelfmarks"
         style={{ fontFamily: "Helvetica Neue, FontAwesome" }}
         value={this.props.selectedShelfmarks}
         onChange={this.props.handleSelect}

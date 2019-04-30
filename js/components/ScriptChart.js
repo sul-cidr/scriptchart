@@ -21,6 +21,10 @@ import SyriacLetter from "./SyriacLetter";
 
 import "./index.css";
 
+const LETTER_WIDTH = 80;
+const X_WIDTH = 45;
+const CELL_WIDTH = 200;
+
 class ScriptChart extends React.Component {
   constructor(props) {
     super(props);
@@ -128,39 +132,31 @@ class ScriptChart extends React.Component {
   getColumns() {
     /* First two columns are the images of the letters and the "X" to hide
      * each row.
-     * XXX The transparent header labels are being used to wedge the column
-     * widths to a uniform setting -- need to find a better way to do this.
      */
     let cols = [
       {
         property: "letter",
-        header: {
-          label: <span style={{ color: "transparent" }}>Letter</span>
-        },
         props: {
-          style: { width: 80 }
+          style: { minWidth: LETTER_WIDTH, overflow: "hidden" }
         }
       }
     ];
     let rowRemoverColumn = {
       property: "row_remover",
-      header: {
-        label: <span style={{ color: "transparent" }}>X</span>
-      },
       props: {
-        style: { width: 45 }
+        style: { minWidth: X_WIDTH, overflow: "hidden" }
       },
       cell: {
         formatters: [
           (value, { rowData }) =>
             rowData.id > 0 ? (
               <span
-                title="Hidden row"
+                title="Hide this row"
                 className="remove"
                 onClick={() => this.onHideRow(rowData.ltid)}
                 style={{ cursor: "pointer" }}
               >
-                &#10007;
+                <b>&#10007;</b>
               </span>
             ) : (
               <span />
@@ -179,7 +175,6 @@ class ScriptChart extends React.Component {
           label: this.props.columnManuscripts[i].shelfmark,
           props: {
             label: this.props.columnManuscripts[i].shelfmark,
-            style: { width: 200 },
             onMove: o => this.props.onColumnMove(o)
           }
         },
@@ -188,7 +183,7 @@ class ScriptChart extends React.Component {
         ),
         props: {
           msid: this.props.columnManuscripts[i].id,
-          style: { width: 200 }
+          style: { minWidth: CELL_WIDTH, maxWidth: CELL_WIDTH }
         }
       };
       cols.push(column);

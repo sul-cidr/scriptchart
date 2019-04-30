@@ -33,18 +33,10 @@ class SyriacLetter extends React.Component {
        * XXX This trick may only work in Firefox :-(
        * */
       if (this.letter.hasOwnProperty("trailing_letter")) {
-        this.trailing = (
-          <span style={{ color: "transparent" }}>
-            {this.letter.trailing_letter}
-          </span>
-        );
+        this.trailing = this.letter.trailing_letter;
       }
       if (this.letter.hasOwnProperty("leading_letter")) {
-        this.leading = (
-          <span style={{ color: "transparent" }}>
-            {this.letter.leading_letter}
-          </span>
-        );
+        this.leading = this.letter.leading_letter;
       }
     } else {
       if (this.props.hasOwnProperty("letter")) {

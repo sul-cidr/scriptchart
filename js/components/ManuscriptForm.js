@@ -162,7 +162,7 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <label for="letterExamples" className={"control"}>
+          <label htmlFor="letterExamples" className={"control"}>
             Number of examples:{" "}
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
@@ -182,7 +182,7 @@ class ManuscriptForm extends React.Component {
 
         <div className={"control"}>
           <p>Show letter images:</p>
-          <label for="showBinarized" className={"checkbox"}>
+          <label htmlFor="showBinarized" className={"checkbox"}>
             <input
               type="checkbox"
               name="showBinarized"
@@ -193,7 +193,7 @@ class ManuscriptForm extends React.Component {
             {" Trimmed |"}
           </label>
           <label
-            for="showCropped"
+            htmlFor="showCropped"
             className={"checkbox"}
             style={{ marginLeft: "8px" }}
           >
@@ -209,7 +209,7 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <label for="imageSize" className={"control"}>
+          <label htmlFor="imageSize" className={"control"}>
             Image size:{" "}
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
@@ -231,7 +231,7 @@ class ManuscriptForm extends React.Component {
           Letter in context:
           <ul>
             <li>
-              <label for="hoverContext" className={"radio"}>
+              <label htmlFor="hoverContext" className={"radio"}>
                 <input
                   type="radio"
                   value="hover"
@@ -243,7 +243,7 @@ class ManuscriptForm extends React.Component {
               </label>
             </li>
             <li>
-              <label for="clickContext" className={"radio"}>
+              <label htmlFor="clickContext" className={"radio"}>
                 <input
                   type="radio"
                   value="click"
@@ -258,7 +258,7 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <label for="cropMargin" className={"control"}>
+          <label htmlFor="cropMargin" className={"control"}>
             Context size:{" "}
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>

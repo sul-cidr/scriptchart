@@ -14,7 +14,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
   >
     <label
       className="control"
-      for="selectedShelfmarks"
+      htmlFor="selectedShelfmarks"
     >
       Select manuscripts:
        
@@ -169,7 +169,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
     </p>
     <label
       className="radio"
-      for="shelfmarkSort"
+      htmlFor="shelfmarkSort"
     >
       <input
         checked={true}
@@ -183,7 +183,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
     </label>
     <label
       className="radio"
-      for="dateSort"
+      htmlFor="dateSort"
     >
       <input
         checked={false}

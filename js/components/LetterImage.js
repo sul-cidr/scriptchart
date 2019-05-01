@@ -26,6 +26,7 @@ const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
 // image (Small = resulting image is 1.5 times as long and wide;
 // Medium = resulting image is twice as long/wide, Large = 3X, X-Large = 5X)
 const CROP_MARGINS = { Small: 0.25, Medium: 0.5, Large: 1, "X-Large": 2 };
+const TARGET_CONTEXT_RATIO = 16/9;
 
 class LetterImage extends React.Component {
   constructor(props) {
@@ -53,6 +54,13 @@ class LetterImage extends React.Component {
     let xMarginSize = Math.round(this.props.coords.width * marginRatio);
     let yMarginSize = Math.round(this.props.coords.height * marginRatio);
 
+    if ((marginRatio != 0) && ((parseFloat(xMarginSize) / parseFloat(yMarginSize) < TARGET_CONTEXT_RATIO))) {
+      xMarginSize = Math.round(yMarginSize * TARGET_CONTEXT_RATIO);
+    }
+    
+    let xMarginRatio = xMarginSize / this.props.coords.width;
+    let yMarginRatio = yMarginSize / this.props.coords.height;
+
     let leftExpanded = Math.max(0, this.props.coords.left - xMarginSize);
     let topExpanded = Math.max(0, this.props.coords.top - yMarginSize);
     let rightExpanded = Math.min(
@@ -66,7 +74,7 @@ class LetterImage extends React.Component {
     );
     let heightExpanded = bottomExpanded - topExpanded;
 
-    return (
+    return { url: 
       API_ROOT +
       "crop?page_url=" +
       this.props.coords.pageurl +
@@ -77,8 +85,10 @@ class LetterImage extends React.Component {
       "&w=" +
       widthExpanded +
       "&h=" +
-      heightExpanded
-    );
+      heightExpanded,
+      xMarginRatio: xMarginRatio,
+      yMarginRatio: yMarginRatio
+    }
   }
 
   componentDidMount() {
@@ -96,10 +106,10 @@ class LetterImage extends React.Component {
     }
     if (this.props.showCropped) {
       const croppedImage = new Image();
-      croppedImage.src = this.getCropURL();
+      croppedImage.src = this.getCropURL().url;
     }
     const contextImage = new Image();
-    contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]);
+    contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]).url;
   }
 
   render() {
@@ -118,10 +128,11 @@ class LetterImage extends React.Component {
     /* Compute the size of the context-inclusive image */
     let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
 
-    let contextURL = this.getCropURL(cropMargin);
+    let contextData = this.getCropURL(cropMargin);
 
-    let contextWidth = dims.width + 2 * Math.round(dims.width * cropMargin);
-    let contextHeight = dims.height + 2 * Math.round(dims.height * cropMargin);
+    let contextURL = contextData.url;
+    let contextWidth = dims.width + 2 * Math.round(dims.width * contextData.xMarginRatio);
+    let contextHeight = dims.height + 2 * Math.round(dims.height * contextData.yMarginRatio);
 
     /* The context-inclusive image should always be loaded -- it will always
      * be displayed as a popup of the binarized or "untrimmed" image on click
@@ -160,7 +171,7 @@ class LetterImage extends React.Component {
     }
 
     if (this.props.showCropped) {
-      let cropURL = this.getCropURL();
+      let cropURL = this.getCropURL().url;
 
       let croppedImage = (
         <img

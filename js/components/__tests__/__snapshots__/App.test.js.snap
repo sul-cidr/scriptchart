@@ -78,7 +78,7 @@ exports[`App test App should match snapshot 1`] = `
               >
                 <label
                   className="control"
-                  for="selectedShelfmarks"
+                  htmlFor="selectedShelfmarks"
                 >
                   Select manuscripts:
                    
@@ -120,7 +120,7 @@ exports[`App test App should match snapshot 1`] = `
                 </p>
                 <label
                   className="radio"
-                  for="shelfmarkSort"
+                  htmlFor="shelfmarkSort"
                 >
                   <input
                     checked={true}
@@ -134,7 +134,7 @@ exports[`App test App should match snapshot 1`] = `
                 </label>
                 <label
                   className="radio"
-                  for="dateSort"
+                  htmlFor="dateSort"
                 >
                   <input
                     checked={false}
@@ -910,7 +910,7 @@ exports[`App test App should match snapshot 1`] = `
             >
               <label
                 className="control"
-                for="letterExamples"
+                htmlFor="letterExamples"
               >
                 Number of examples:
                  
@@ -950,7 +950,7 @@ exports[`App test App should match snapshot 1`] = `
               </p>
               <label
                 className="checkbox"
-                for="showBinarized"
+                htmlFor="showBinarized"
               >
                 <input
                   checked={true}
@@ -963,7 +963,7 @@ exports[`App test App should match snapshot 1`] = `
               </label>
               <label
                 className="checkbox"
-                for="showCropped"
+                htmlFor="showCropped"
                 style={
                   Object {
                     "marginLeft": "8px",
@@ -985,7 +985,7 @@ exports[`App test App should match snapshot 1`] = `
             >
               <label
                 className="control"
-                for="imageSize"
+                htmlFor="imageSize"
               >
                 Image size:
                  
@@ -1025,7 +1025,7 @@ exports[`App test App should match snapshot 1`] = `
                 <li>
                   <label
                     className="radio"
-                    for="hoverContext"
+                    htmlFor="hoverContext"
                   >
                     <input
                       checked={true}
@@ -1041,7 +1041,7 @@ exports[`App test App should match snapshot 1`] = `
                 <li>
                   <label
                     className="radio"
-                    for="clickContext"
+                    htmlFor="clickContext"
                   >
                     <input
                       checked={false}
@@ -1061,7 +1061,7 @@ exports[`App test App should match snapshot 1`] = `
             >
               <label
                 className="control"
-                for="cropMargin"
+                htmlFor="cropMargin"
               >
                 Context size:
                  

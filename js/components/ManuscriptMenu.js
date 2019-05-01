@@ -70,7 +70,7 @@ class ManuscriptMenu extends React.Component {
     return (
       <div className={"field"}>
         <div className={"control"} style={{ marginBottom: 5 }}>
-          <label for="selectedShelfmarks" className={"control"}>
+          <label htmlFor="selectedShelfmarks" className={"control"}>
             Select manuscripts:{" "}
           </label>
           <span className="button is-small" onClick={this.manuscriptsSelect}>
@@ -86,7 +86,7 @@ class ManuscriptMenu extends React.Component {
         </div>
         <div className={"control"}>
           <p>Order manuscripts by</p>
-          <label for="shelfmarkSort" className={"radio"}>
+          <label htmlFor="shelfmarkSort" className={"radio"}>
             <input
               type="radio"
               value="shelfmark"
@@ -96,7 +96,7 @@ class ManuscriptMenu extends React.Component {
             />{" "}
             Shelfmark |
           </label>
-          <label for="dateSort" className={"radio"}>
+          <label htmlFor="dateSort" className={"radio"}>
             <input
               type="radio"
               value="date"

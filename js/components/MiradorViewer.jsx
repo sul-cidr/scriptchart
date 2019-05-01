@@ -4,7 +4,7 @@ import React, { Component } from "react";
  * which is a Javascript app loaded as an NPM module.
  */
 
-//import "./MiradorViewer.css";
+import "./MiradorViewer.css";
 
 import { Provider } from 'react-redux'
 import MiradorApp from 'mirador/dist/es/src/containers/App'

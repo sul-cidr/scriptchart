@@ -2315,9 +2315,11 @@ a.panel-block:hover, label.panel-block:hover { background-color: whitesmoke; }
 
 .navbar-brand .title { color: #e6e6e6; }
 
-.navbar-burger { margin-top: 1.75em; }
-
 .page-content { margin-top: 1em; }
+
+.navbar-title { margin: initial; }
+
+.navbar-burger { margin-top: 0em; height: inherit; }
 
 .has-bg-img { background: rgba(0, 0, 0, 0.6); }
 .has-bg-img .title { color: #e6e6e6; }

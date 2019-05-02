@@ -416,25 +416,9 @@ exports[`App test App should match snapshot 1`] = `
                     }
                     title="ܝ"
                   >
-                    <span
-                      style={
-                        Object {
-                          "color": "transparent",
-                        }
-                      }
-                    >
-                      ܝ
-                    </span>
+                    ‍
                     ܝ
-                    <span
-                      style={
-                        Object {
-                          "color": "transparent",
-                        }
-                      }
-                    >
-                      ܝ
-                    </span>
+                    ‍
                   </span>
                 </span>
                 <span
@@ -472,15 +456,7 @@ exports[`App test App should match snapshot 1`] = `
                   >
                     
                     ܟ
-                    <span
-                      style={
-                        Object {
-                          "color": "transparent",
-                        }
-                      }
-                    >
-                      ܝ
-                    </span>
+                    ‍
                   </span>
                 </span>
                 <span
@@ -535,15 +511,7 @@ exports[`App test App should match snapshot 1`] = `
                     }
                     title="ܠ"
                   >
-                    <span
-                      style={
-                        Object {
-                          "color": "transparent",
-                        }
-                      }
-                    >
-                      ܝ
-                    </span>
+                    ‍
                     ܠ
                     
                   </span>
@@ -583,15 +551,7 @@ exports[`App test App should match snapshot 1`] = `
                   >
                     
                     ܡ
-                    <span
-                      style={
-                        Object {
-                          "color": "transparent",
-                        }
-                      }
-                    >
-                      ܝ
-                    </span>
+                    ‍
                   </span>
                 </span>
                 <span
@@ -629,15 +589,7 @@ exports[`App test App should match snapshot 1`] = `
                   >
                     
                     ܢ
-                    <span
-                      style={
-                        Object {
-                          "color": "transparent",
-                        }
-                      }
-                    >
-                      ܝ
-                    </span>
+                    ‍
                   </span>
                 </span>
                 <span
@@ -654,15 +606,7 @@ exports[`App test App should match snapshot 1`] = `
                     }
                     title="ܢ"
                   >
-                    <span
-                      style={
-                        Object {
-                          "color": "transparent",
-                        }
-                      }
-                    >
-                      ܝ
-                    </span>
+                    ‍
                     ܢ
                     
                   </span>
@@ -871,15 +815,7 @@ exports[`App test App should match snapshot 1`] = `
                     }
                     title="ܬ"
                   >
-                    <span
-                      style={
-                        Object {
-                          "color": "transparent",
-                        }
-                      }
-                    >
-                      ܝ
-                    </span>
+                    ‍
                     ܬ
                     
                   </span>

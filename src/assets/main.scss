@@ -44,12 +44,17 @@ $danger: $navbar-background-color;
   color: $off-white;
 }
 
-.navbar-burger {
-  margin-top: 1.75em;
-}
-
 .page-content {
   margin-top: 1em;
+}
+
+.navbar-title {
+  margin: initial;
+}
+
+.navbar-burger {
+  margin-top: 0em;
+  height: inherit;
 }
 
 .has-bg-img {

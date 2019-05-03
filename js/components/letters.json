@@ -90,7 +90,8 @@
     "display": "ܝ",
     "script": "estrangela",
     "leading_letter": "‍",
-    "trailing_letter": "‍"
+    "trailing_letter": "‍",
+    "glyph_file": "yudh_connected.svg"
   },
   {
     "id": 49,

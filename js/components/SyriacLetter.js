@@ -6,6 +6,8 @@ import React from "react";
  * and not available via the backend REST API.
  */
 
+import "./index.css";
+
 import letters from "./letters.json";
 
 class SyriacLetter extends React.Component {
@@ -13,11 +15,20 @@ class SyriacLetter extends React.Component {
     super(props);
 
     this.letter = letters.find(lt => lt.id == this.props.id);
-    this.trailing = "";
-    this.leading = "";
+    this.lettertext = this.letter.display;
 
-    if (this.letter !== undefined) {
-      this.display = this.letter.display;
+    if (this.letter.hasOwnProperty("glyph_file")) {
+      // XXX Consider setting style {filter: "invert(1)"} when selected
+      this.display = (
+        <div title={this.display} style={{ verticalAlign: "center" }}>
+          <img
+            className={"button-image"}
+            src={"/scriptchart/assets/font_glyphs/" + this.letter.glyph_file}
+            style={{ height: "2rem" }}
+          />
+        </div>
+      );
+    } else {
       this.script = this.letter.script;
       /* Fonts provided by https://sedra.bethmardutho.org/about/fonts */
       if (this.script == "serto") {
@@ -27,37 +38,24 @@ class SyriacLetter extends React.Component {
       } else {
         this.font = "sans-serif";
       }
-      /* Prefix final forms (and wrap medial forms) via transparent
-       * "spacer" letters to make them display properly. Note that
-       * positions are read from right to left.
-       * XXX This trick may only work in Firefox :-(
-       * */
-      if (this.letter.hasOwnProperty("trailing_letter")) {
-        this.trailing = this.letter.trailing_letter;
-      }
-      if (this.letter.hasOwnProperty("leading_letter")) {
-        this.leading = this.letter.leading_letter;
-      }
-    } else {
-      if (this.props.hasOwnProperty("letter")) {
-        this.display = this.props.letter;
-      } else {
-        this.display = this.props.id;
-      }
+      this.display = (
+        <div
+          title={this.display}
+          style={{
+            direction: "rtl",
+            fontSize: "2em",
+            fontFamily: this.font,
+            verticalAlign: "center"
+          }}
+        >
+          {this.lettertext}
+        </div>
+      );
     }
   }
 
   render() {
-    return (
-      <span
-        title={this.display}
-        style={{ direction: "rtl", fontSize: "2em", fontFamily: this.font }}
-      >
-        {this.trailing}
-        {this.display}
-        {this.leading}
-      </span>
-    );
+    return this.display;
   }
 }
 

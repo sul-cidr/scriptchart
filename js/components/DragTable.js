@@ -20,18 +20,12 @@ class DragTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onScrollFromNative = this.onScrollFromNative.bind(this);
+    //this.onScrollFromNative = this.onScrollFromNative.bind(this);
   }
 
-  onScrollFromNative(e) {
-    // just demo to reproduce issue of native horizontal scrollbar
-    // We should not intercept the native onScroll event actually
-    console.log(
-      "onScrollFromNative called => e.target.scrollLeft=",
-      e.target.scrollLeft
-    );
+  /*onScrollFromNative(e) {
     this.tableHeader.scrollLeft = e.target.scrollLeft;
-  }
+  }*/
 
   render() {
     console.log("Rendering DragTable");

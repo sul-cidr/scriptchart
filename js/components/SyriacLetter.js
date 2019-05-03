@@ -13,49 +13,55 @@ import letters from "./letters.json";
 class SyriacLetter extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    this.letter = letters.find(lt => lt.id == this.props.id);
-    this.lettertext = this.letter.display;
+  render() {
+    let letter = letters.find(lt => lt.id == this.props.id);
 
-    if (this.letter.hasOwnProperty("glyph_file")) {
-      // XXX Consider setting style {filter: "invert(1)"} when selected
-      this.display = (
-        <div title={this.display} style={{ verticalAlign: "center" }}>
+    if (letter === undefined) {
+      return <div />;
+    }
+
+    let lettertext = letter.display;
+
+    let letter_display = <div>lettertext</div>;
+
+    if (letter.hasOwnProperty("glyph_file")) {
+      letter_display = (
+        <div title={letter.letter} style={{ verticalAlign: "center" }}>
           <img
-            className={"button-image"}
-            src={"/scriptchart/assets/font_glyphs/" + this.letter.glyph_file}
-            style={{ height: "2em", verticalAlign: "bottom" }}
+            className={
+              "button-image " + (this.props.clicked ? "button-clicked" : "")
+            }
+            src={"/scriptchart/assets/font_glyphs/" + letter.glyph_file}
           />
         </div>
       );
     } else {
-      this.script = this.letter.script;
+      let script = letter.script;
       /* Fonts provided by https://sedra.bethmardutho.org/about/fonts */
-      if (this.script == "serto") {
-        this.font = "SertoJerusalem";
-      } else if (this.script == "estrangela") {
-        this.font = "EstrangeloEdessa";
-      } else {
-        this.font = "sans-serif";
+      let font = "sans-serif";
+      if (script == "serto") {
+        font = "SertoJerusalem";
+      } else if (script == "estrangela") {
+        font = "EstrangeloEdessa";
       }
-      this.display = (
+      letter_display = (
         <div
-          title={this.display}
+          title={letter.letter}
           style={{
             direction: "rtl",
             fontSize: "2em",
-            fontFamily: this.font,
+            fontFamily: font,
             verticalAlign: "center"
           }}
         >
-          {this.lettertext}
+          {lettertext}
         </div>
       );
     }
-  }
 
-  render() {
-    return this.display;
+    return letter_display;
   }
 }
 

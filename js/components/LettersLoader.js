@@ -10,8 +10,6 @@ import React from "react";
 
 import LetterButton from "./LetterButton";
 
-import SyriacLetter from "./SyriacLetter";
-
 import letters from "./letters.json";
 
 class LettersLoader extends React.Component {
@@ -30,8 +28,10 @@ class LettersLoader extends React.Component {
 
     let buttons = letters.map(lt => {
       let letterClass = "button is-outlined";
+      let isClicked = false;
       if (this.props.selectedLetters.findIndex(l => l.id == lt.id) >= 0) {
         letterClass = "button is-success";
+        isClicked = true;
       }
       return (
         <LetterButton
@@ -39,7 +39,7 @@ class LettersLoader extends React.Component {
           letterID={lt.id}
           onLetterClick={this.buttonClick}
           buttonClass={letterClass}
-          letter={<SyriacLetter id={lt.id} />}
+          clicked={isClicked}
         />
       );
     });

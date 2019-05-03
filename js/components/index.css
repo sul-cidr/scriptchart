@@ -76,6 +76,12 @@ tr:nth-child(even) {
   background-color: #f2f2f2
 }
 
-td .button-image {
-  margin-left: 0;
+.button-image {
+  margin-left: 0px;
+  height: 2em;
+  vertical-align: bottom
+}
+
+.button-clicked {
+  filter: invert(1)
 }

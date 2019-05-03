@@ -233,12 +233,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Alaph (Angular)"
@@ -251,12 +249,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Alaph (Round)"
@@ -269,12 +265,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Beth"
@@ -287,12 +281,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Gamal"
@@ -305,12 +297,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Dalath (Angular)"
@@ -323,12 +313,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Dalath (Round)"
@@ -341,12 +329,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="He (Angular)"
@@ -359,12 +345,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="He (Round)"
@@ -377,12 +361,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Waw"
@@ -395,12 +377,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Zain"
@@ -413,12 +393,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Heth"
@@ -431,12 +409,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Teth"
@@ -457,7 +433,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           title="Yudh (Connected)"
         >
           <img
-            className="button-image "
+            className="button-svg "
             src="/scriptchart/assets/font_glyphs/yudh_connected.svg"
           />
         </div>
@@ -467,12 +443,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Yudh (Stand-alone)"
@@ -493,7 +467,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           title="Kaph"
         >
           <img
-            className="button-image "
+            className="button-svg "
             src="/scriptchart/assets/font_glyphs/kaph.svg"
           />
         </div>
@@ -503,12 +477,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Kaph (Final)"
@@ -521,12 +493,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Lamadh (Final, open)"
@@ -547,7 +517,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           title="Lamadh"
         >
           <img
-            className="button-image "
+            className="button-svg "
             src="/scriptchart/assets/font_glyphs/lamadh.svg"
           />
         </div>
@@ -557,12 +527,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Lamadh (Final, closed)"
@@ -583,7 +551,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           title="Mim"
         >
           <img
-            className="button-image "
+            className="button-svg "
             src="/scriptchart/assets/font_glyphs/mim.svg"
           />
         </div>
@@ -593,12 +561,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Mim (Final)"
@@ -619,7 +585,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           title="Nun"
         >
           <img
-            className="button-image "
+            className="button-svg "
             src="/scriptchart/assets/font_glyphs/nun.svg"
           />
         </div>
@@ -637,7 +603,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           title="Nun (Final, connected)"
         >
           <img
-            className="button-image "
+            className="button-svg "
             src="/scriptchart/assets/font_glyphs/nun_final.svg"
           />
         </div>
@@ -647,12 +613,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Nun (Final, unconnected)"
@@ -665,12 +629,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Semkath"
@@ -683,12 +645,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Ayin"
@@ -701,12 +661,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Pe"
@@ -719,12 +677,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Sadhe"
@@ -737,12 +693,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Qaph"
@@ -755,12 +709,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Rish (Angular)"
@@ -773,12 +725,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Rish (Round)"
@@ -791,12 +741,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Shin"
@@ -809,12 +757,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Taw (Looped)"
@@ -835,7 +781,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           title="Taw (Triangular)"
         >
           <img
-            className="button-image "
+            className="button-svg "
             src="/scriptchart/assets/font_glyphs/taw_triangular.svg"
           />
         </div>
@@ -845,12 +791,10 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onClick={[Function]}
       >
         <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
-              "verticalAlign": "center",
             }
           }
           title="Taw (L-shaped)"

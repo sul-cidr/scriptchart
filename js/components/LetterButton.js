@@ -32,7 +32,11 @@ class LetterButton extends React.Component {
   render() {
     return (
       <span className={this.props.buttonClass} onClick={this.onLetterClicked}>
-        <SyriacLetter id={this.props.letterID} clicked={this.props.clicked} />
+        <SyriacLetter
+          id={this.props.letterID}
+          clicked={this.props.clicked}
+          isButton={this.props.isButton}
+        />
       </span>
     );
   }

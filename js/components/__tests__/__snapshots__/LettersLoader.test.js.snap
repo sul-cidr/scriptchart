@@ -9,12 +9,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Alaph (Angular)"
@@ -27,12 +25,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "SertoJerusalem",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Alaph (Round)"
@@ -45,12 +41,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Beth"
@@ -63,12 +57,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Gamal"
@@ -81,12 +73,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Dalath (Angular)"
@@ -99,12 +89,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "SertoJerusalem",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Dalath (Round)"
@@ -117,12 +105,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="He (Angular)"
@@ -135,12 +121,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "SertoJerusalem",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="He (Round)"
@@ -153,12 +137,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Waw"
@@ -171,12 +153,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Zain"
@@ -189,12 +169,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Heth"
@@ -207,12 +185,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Teth"
@@ -233,7 +209,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
       title="Yudh (Connected)"
     >
       <img
-        className="button-image "
+        className="button-svg "
         src="/scriptchart/assets/font_glyphs/yudh_connected.svg"
       />
     </div>
@@ -243,12 +219,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Yudh (Stand-alone)"
@@ -269,7 +243,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
       title="Kaph"
     >
       <img
-        className="button-image "
+        className="button-svg "
         src="/scriptchart/assets/font_glyphs/kaph.svg"
       />
     </div>
@@ -279,12 +253,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Kaph (Final)"
@@ -297,12 +269,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Lamadh (Final, open)"
@@ -323,7 +293,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
       title="Lamadh"
     >
       <img
-        className="button-image "
+        className="button-svg "
         src="/scriptchart/assets/font_glyphs/lamadh.svg"
       />
     </div>
@@ -333,12 +303,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "SertoJerusalem",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Lamadh (Final, closed)"
@@ -359,7 +327,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
       title="Mim"
     >
       <img
-        className="button-image "
+        className="button-svg "
         src="/scriptchart/assets/font_glyphs/mim.svg"
       />
     </div>
@@ -369,12 +337,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Mim (Final)"
@@ -395,7 +361,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
       title="Nun"
     >
       <img
-        className="button-image "
+        className="button-svg "
         src="/scriptchart/assets/font_glyphs/nun.svg"
       />
     </div>
@@ -413,7 +379,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
       title="Nun (Final, connected)"
     >
       <img
-        className="button-image "
+        className="button-svg "
         src="/scriptchart/assets/font_glyphs/nun_final.svg"
       />
     </div>
@@ -423,12 +389,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Nun (Final, unconnected)"
@@ -441,12 +405,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Semkath"
@@ -459,12 +421,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Ayin"
@@ -477,12 +437,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Pe"
@@ -495,12 +453,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Sadhe"
@@ -513,12 +469,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Qaph"
@@ -531,12 +485,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Rish (Angular)"
@@ -549,12 +501,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "SertoJerusalem",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Rish (Round)"
@@ -567,12 +517,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Shin"
@@ -585,12 +533,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "EstrangeloEdessa",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Taw (Looped)"
@@ -611,7 +557,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
       title="Taw (Triangular)"
     >
       <img
-        className="button-image "
+        className="button-svg "
         src="/scriptchart/assets/font_glyphs/taw_triangular.svg"
       />
     </div>
@@ -621,12 +567,10 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     onClick={[Function]}
   >
     <div
+      className="button-letter"
       style={
         Object {
-          "direction": "rtl",
           "fontFamily": "SertoJerusalem",
-          "fontSize": "2em",
-          "verticalAlign": "center",
         }
       }
       title="Taw (L-shaped)"

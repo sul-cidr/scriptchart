@@ -40,6 +40,7 @@ class LettersLoader extends React.Component {
           onLetterClick={this.buttonClick}
           buttonClass={letterClass}
           clicked={isClicked}
+          isButton={true}
         />
       );
     });

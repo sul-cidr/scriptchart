@@ -31,7 +31,8 @@ class SyriacLetter extends React.Component {
         <div title={letter.letter} style={{ verticalAlign: "center" }}>
           <img
             className={
-              "button-image " + (this.props.clicked ? "button-clicked" : "")
+              (this.props.isButton ? "button-svg " : "chart-svg ") +
+              (this.props.clicked ? "button-clicked" : "")
             }
             src={"/scriptchart/assets/font_glyphs/" + letter.glyph_file}
           />
@@ -49,11 +50,11 @@ class SyriacLetter extends React.Component {
       letter_display = (
         <div
           title={letter.letter}
+          className={
+            (this.props.isButton ? "button-letter" : "chart-letter")
+          }
           style={{
-            direction: "rtl",
-            fontSize: "2em",
-            fontFamily: font,
-            verticalAlign: "center"
+            fontFamily: font
           }}
         >
           {lettertext}

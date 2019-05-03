@@ -72,6 +72,7 @@ class ChartAccordion extends React.Component {
                   buttonClass="button is-outlined"
                   onHiddenChange={this.props.onHiddenChange}
                   letter={<SyriacLetter id={ltid} />}
+                  isButton={true}
                 />
               ))}
             </div>

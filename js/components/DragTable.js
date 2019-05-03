@@ -19,13 +19,7 @@ import * as Sticky from "reactabular-sticky";
 class DragTable extends React.Component {
   constructor(props) {
     super(props);
-
-    //this.onScrollFromNative = this.onScrollFromNative.bind(this);
   }
-
-  /*onScrollFromNative(e) {
-    this.tableHeader.scrollLeft = e.target.scrollLeft;
-  }*/
 
   render() {
     console.log("Rendering DragTable");

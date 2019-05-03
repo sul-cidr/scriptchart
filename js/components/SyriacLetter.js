@@ -24,7 +24,7 @@ class SyriacLetter extends React.Component {
           <img
             className={"button-image"}
             src={"/scriptchart/assets/font_glyphs/" + this.letter.glyph_file}
-            style={{ height: "2rem" }}
+            style={{ height: "2em", verticalAlign: "bottom" }}
           />
         </div>
       );

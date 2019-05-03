@@ -106,7 +106,8 @@
     "is_script": true,
     "display": "ܟ",
     "script": "estrangela",
-    "leading_letter": "‍"
+    "leading_letter": "‍",
+    "glyph_file": "kaph.svg"
   },
   {
     "id": 20,
@@ -128,7 +129,8 @@
     "is_script": true,
     "display": "ܠ",
     "script": "estrangela",
-    "trailing_letter": "‍"
+    "trailing_letter": "‍",
+    "glyph_file": "lamadh.svg"
   },
   {
     "id": 23,
@@ -143,7 +145,8 @@
     "is_script": true,
     "display": "ܡ",
     "script": "estrangela",
-    "leading_letter": "‍"
+    "leading_letter": "‍",
+    "glyph_file": "mim.svg"
   },
   {
     "id": 27,
@@ -158,7 +161,8 @@
     "is_script": true,
     "display": "ܢ",
     "script": "estrangela",
-    "leading_letter": "‍"
+    "leading_letter": "‍",
+    "glyph_file": "nun.svg"
   },
   {
     "id": 30,
@@ -166,7 +170,8 @@
     "is_script": true,
     "display": "ܢ",
     "script": "estrangela",
-    "trailing_letter": "‍"
+    "trailing_letter": "‍",
+    "glyph_file": "nun_final.svg"
   },
   {
     "id": 31,
@@ -244,7 +249,8 @@
     "is_script": true,
     "display": "ܬ",
     "script": "serto",
-    "trailing_letter": "‍"
+    "trailing_letter": "‍",
+    "glyph_file": "taw_triangular.svg"
   },
   {
     "id": 42,

@@ -144,6 +144,14 @@ class ManuscriptForm extends React.Component {
 
   render() {
     console.log("Rendering ManuscriptForm");
+
+    let bookmarkButton = "";
+    if (this.props.showBookmarkButton) {
+      bookmarkButton = <span className="button is-primary" onClick={this.handleBookmark} visible={this.state.showBookmarkButton}>
+                         Bookmark
+                       </span>;
+    }
+
     return (
       <form className={"manuscript-form"} onSubmit={this.handleSubmit}>
         <ManuscriptMenu
@@ -286,9 +294,7 @@ class ManuscriptForm extends React.Component {
         <div className={"field"}>
           <div className={"control flex-row"} style={{justifyContent: "space-between"}}>
             <button className={"button is-link"}>Submit</button>
-            <span className="button is-primary" onClick={this.handleBookmark}>
-              Bookmark
-            </span>
+            {bookmarkButton}
           </div>
         </div>
       </form>

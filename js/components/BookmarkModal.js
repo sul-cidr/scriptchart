@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 
+import "./modal.css";
+
 // (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#app')
 
@@ -15,14 +17,14 @@ class BookmarkModal extends React.Component {
     return (
       <Modal
         isOpen={this.props.isOpen}
-        //onAfterOpen={this.afterOpenModal}
         onRequestClose={this.props.closeModal}
-        //style={customStyles}
+        shouldCloseOnOverlayClick={true}
+        className="Modal"
+        overlayClassName="Overlay"
         contentLabel="Example Modal"
       >
-        <h2>Hello</h2>
-          <button onClick={this.props.closeModal}>close</button>
-          <div>I am a modal</div>
+        <div>{this.props.bookmarkURL}</div>
+        <button onClick={this.props.closeModal}>close</button>
       </Modal>
     );
   }

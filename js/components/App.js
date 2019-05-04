@@ -46,6 +46,7 @@ import { DragDropContext } from "react-dnd";
 
 import ManuscriptForm from "./ManuscriptForm";
 import DashTabs from "./DashTabs";
+import BookmarkModal from "./BookmarkModal";
 
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
@@ -64,6 +65,7 @@ class App extends Component {
       formData: {},
       tableData: {},
       sidebarOpen: true,
+      bookmarkIsOpen: false,
       loadingMessage:
         'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
     };
@@ -71,6 +73,8 @@ class App extends Component {
     //this.queryCache = {}; // XXX Just let the browser cache handle this?
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBookmark = this.handleBookmark.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.queryManuscripts = this.queryManuscripts.bind(this);
     this.processCoords = this.processCoords.bind(this);
     this.getYearFromDate = this.getYearFromDate.bind(this);
@@ -148,6 +152,16 @@ class App extends Component {
         return [];
       })
       .then(data => this.sortManuscripts("shelfmark", data));
+  }
+
+  handleBookmark(formData) {
+    console.log("Bookmark requested");
+    this.setState( { bookmarkIsOpen: true });
+  }
+
+  closeModal() {
+    console.log("Closing modal!");
+    this.setState( { bookmarkIsOpen: false });
   }
 
   handleSubmit(formData) {
@@ -293,6 +307,11 @@ class App extends Component {
 
     return (
       <div className="App">
+        <BookmarkModal 
+          linkText={this.state.bookmarkLink}
+          isOpen={this.state.bookmarkIsOpen}
+          closeModal={this.closeModal}
+        />
         <div className={"columns main-content"}>
           <div
             className={
@@ -332,6 +351,7 @@ class App extends Component {
               <div className={"box-content"}>
                 <ManuscriptForm
                   formSubmit={this.handleSubmit}
+                  handleBookmark={this.handleBookmark}
                   manuscripts={this.state.allManuscripts}
                   sortManuscripts={this.sortManuscripts}
                 />

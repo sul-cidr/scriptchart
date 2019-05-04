@@ -60,6 +60,7 @@ class App extends Component {
       tableData: {},
       sidebarOpen: true,
       bookmarkIsOpen: false,
+      showBookmarkButton: false,
       bookmarkURL: VIEWER_ROOT,
       loadingMessage:
         'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
@@ -151,7 +152,8 @@ class App extends Component {
 
   handleBookmark() {
     console.log("Bookmark requested");
-    let formDataLink = JSON.stringify(this.state.formData);
+    let letterIDs = this.state.formData.letters.map(obj => obj.letter);
+    let formDataLink = JSON.stringify({"letters": letterIDs, "mss": this.state.formData.selectedShelfmarks});
     this.setState( { bookmarkIsOpen: true, bookmarkURL: VIEWER_ROOT + formDataLink });
   }
 
@@ -163,7 +165,8 @@ class App extends Component {
   handleSubmit(formData) {
     this.setState({
       showTabs: false,
-      loadingMessage: "Loading manuscripts..."
+      loadingMessage: "Loading manuscripts...",
+      showBookmarkButton: true
     });
 
     let manuscriptQueries = [];
@@ -350,6 +353,7 @@ class App extends Component {
                   handleBookmark={this.handleBookmark}
                   manuscripts={this.state.allManuscripts}
                   sortManuscripts={this.sortManuscripts}
+                  showBookmarkButton={this.state.showBookmarkButton}
                 />
               </div>
             </div>

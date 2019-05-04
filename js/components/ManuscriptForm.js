@@ -33,6 +33,7 @@ class ManuscriptForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBookmark = this.handleBookmark.bind(this);
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
     this.changeCropMargin = this.changeCropMargin.bind(this);
@@ -134,6 +135,11 @@ class ManuscriptForm extends React.Component {
     event.preventDefault();
     // Pass all of the form's state to the handler (which is in App)
     this.props.formSubmit(this.state);
+  }
+
+  handleBookmark(event) {
+    event.preventDefault();
+    this.props.handleBookmark(this.state);
   }
 
   render() {
@@ -278,8 +284,11 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field"}>
-          <div className={"control"}>
+          <div className={"control flex-row"} style={{justifyContent: "space-between"}}>
             <button className={"button is-link"}>Submit</button>
+            <span className="button is-link" onClick={this.handleBookmark}>
+              Bookmark
+            </span>
           </div>
         </div>
       </form>

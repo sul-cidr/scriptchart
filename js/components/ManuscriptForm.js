@@ -286,7 +286,7 @@ class ManuscriptForm extends React.Component {
         <div className={"field"}>
           <div className={"control flex-row"} style={{justifyContent: "space-between"}}>
             <button className={"button is-link"}>Submit</button>
-            <span className="button is-link" onClick={this.handleBookmark}>
+            <span className="button is-primary" onClick={this.handleBookmark}>
               Bookmark
             </span>
           </div>

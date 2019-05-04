@@ -18,7 +18,6 @@ import React, { Component } from "react";
 
 import "../../src/assets/syriac_fonts.css";
 import "./app.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /* Loading fontawesome icons via React seems easier than doing
  * it via site-wide CSS */
@@ -27,17 +26,11 @@ import {
   faBookOpen,
   faTable,
   faImage
-  //faInfoCircle,
-  //faArrowRight,
-  //faArrowLeft
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faBookOpen,
   faTable,
   faImage
-  //faInfoCircle,
-  //faArrowRight,
-  //faArrowLeft
 );
 
 /* The entire app needs to be wrapped in the drag-and-drop context */
@@ -52,6 +45,7 @@ import BookmarkModal from "./BookmarkModal";
 const MAX_EXAMPLES = 5;
 
 export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
 //export const API_ROOT = "http://localhost:8000/api/";
 
 class App extends Component {
@@ -66,6 +60,7 @@ class App extends Component {
       tableData: {},
       sidebarOpen: true,
       bookmarkIsOpen: false,
+      bookmarkURL: VIEWER_ROOT,
       loadingMessage:
         'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
     };
@@ -154,9 +149,10 @@ class App extends Component {
       .then(data => this.sortManuscripts("shelfmark", data));
   }
 
-  handleBookmark(formData) {
+  handleBookmark() {
     console.log("Bookmark requested");
-    this.setState( { bookmarkIsOpen: true });
+    let formDataLink = JSON.stringify(this.state.formData);
+    this.setState( { bookmarkIsOpen: true, bookmarkURL: VIEWER_ROOT + formDataLink });
   }
 
   closeModal() {
@@ -308,9 +304,9 @@ class App extends Component {
     return (
       <div className="App">
         <BookmarkModal 
-          linkText={this.state.bookmarkLink}
           isOpen={this.state.bookmarkIsOpen}
           closeModal={this.closeModal}
+          bookmarkURL={this.state.bookmarkURL}
         />
         <div className={"columns main-content"}>
           <div

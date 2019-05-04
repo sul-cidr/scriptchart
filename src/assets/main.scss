@@ -85,3 +85,22 @@ $danger: $navbar-background-color;
   z-index: -1;
   opacity: 0.5; 
 }
+
+.hero-head .navbar-menu {
+  background: rgba(153, 0, 0, 0.6); 
+  box-shadow: none;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .navbar-item:hover {
+    background-color: darken(rgba(153, 0, 0, 0.6), 5%);
+  }
+}
+
+#start-button {
+  background-color: rgba(153, 0, 0, 0.6);
+}
+
+#start-button:hover {
+  background-color: darken(rgba(153, 0, 0, 0.6), 5%);
+}

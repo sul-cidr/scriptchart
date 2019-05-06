@@ -43,8 +43,10 @@ import BookmarkModal from "./BookmarkModal";
 const MAX_EXAMPLES = 5;
 
 export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
-export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
 //export const API_ROOT = "http://localhost:8000/api/";
+
+export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
+//export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
 
 class App extends Component {
   constructor(props) {

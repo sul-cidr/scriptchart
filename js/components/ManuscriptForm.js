@@ -26,14 +26,14 @@ class ManuscriptForm extends React.Component {
       letterExamples: 3,
       cropMargin: "Medium",
       imageSize: "Medium",
-      selectedShelfmarks: [],
-      letters: []
+      //selectedShelfmarks: [],
+      //letters: []
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
+    //this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleBookmark = this.handleBookmark.bind(this);
+    this.getBookmark = this.getBookmark.bind(this);
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
     this.changeCropMargin = this.changeCropMargin.bind(this);
@@ -53,7 +53,7 @@ class ManuscriptForm extends React.Component {
   }
 
   buttonChange(letterID, operation) {
-    let selectedLetters = [...this.state.letters];
+    let selectedLetters = [...this.props.selectedLetters];
     if (operation == "select") {
       /* The list of selected letters should be in "aphabetical" order */
       let newLetter = letters.find(lt => lt.id == letterID);
@@ -71,12 +71,19 @@ class ManuscriptForm extends React.Component {
         1
       );
     }
-    this.handleSelect("letters", selectedLetters);
+    this.props.handleSelect("selectedLetters", selectedLetters);
   }
 
   // Currently this is a simple all/none toggle
   lettersSelect(event) {
-    let selectedLetters = [...this.state.letters];
+    if (this.props.selectedLetters.length == letters.length) {
+      this.props.handleSelect("selectedLetters", []);
+    }
+    else {
+      this.props.handleSelect("selectedLetters", [...letters]);
+    }
+  }
+/*
     for (let lt of letters) {
       let ltid = lt.id;
       if (
@@ -89,8 +96,9 @@ class ManuscriptForm extends React.Component {
         break;
       }
     }
-    this.handleSelect("letters", selectedLetters);
+    this.props.handleSelect("selectedLetters", selectedLetters);
   }
+  */
 
   handleChange(event) {
     const target = event.target;
@@ -113,18 +121,6 @@ class ManuscriptForm extends React.Component {
       value = true;
     }
 
-    console.log("setting " + name + " to " + value);
-
-    this.setState({
-      [name]: value
-    });
-  }
-
-  /* This is the handler for the multi-select items (manuscript list and letter
-   * button grid). It would be nice to integrate this with handleChange(),
-   * but that hasn't been workable so far.
-   */
-  handleSelect(name, value) {
     this.setState({
       [name]: value
     });
@@ -137,9 +133,9 @@ class ManuscriptForm extends React.Component {
     this.props.formSubmit(this.state);
   }
 
-  handleBookmark(event) {
+  getBookmark(event) {
     event.preventDefault();
-    this.props.handleBookmark(this.state);
+    this.props.getBookmark(this.state);
   }
 
   render() {
@@ -147,18 +143,24 @@ class ManuscriptForm extends React.Component {
 
     let bookmarkButton = "";
     if (this.props.showBookmarkButton) {
-      bookmarkButton = <span className="button is-primary" onClick={this.handleBookmark} visible={this.state.showBookmarkButton}>
-                         Bookmark
-                       </span>;
+      bookmarkButton = (
+        <span
+          className="button is-primary"
+          onClick={this.getBookmark}
+          visible={this.state.showBookmarkButton}
+        >
+          Bookmark
+        </span>
+      );
     }
 
     return (
       <form className={"manuscript-form"} onSubmit={this.handleSubmit}>
         <ManuscriptMenu
           handleChange={this.handleChange}
-          handleSelect={this.handleSelect}
+          handleSelect={this.props.handleSelect}
           manuscripts={this.props.manuscripts}
-          selectedShelfmarks={this.state.selectedShelfmarks}
+          selectedShelfmarks={this.props.selectedShelfmarks}
           sortManuscripts={this.props.sortManuscripts}
         />
 
@@ -170,7 +172,7 @@ class ManuscriptForm extends React.Component {
             </span>
           </div>
           <LettersLoader
-            selectedLetters={this.state.letters}
+            selectedLetters={this.props.selectedLetters}
             handleSelect={this.buttonChange}
           />
         </div>
@@ -292,7 +294,10 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field"}>
-          <div className={"control flex-row"} style={{justifyContent: "space-between"}}>
+          <div
+            className={"control flex-row"}
+            style={{ justifyContent: "space-between" }}
+          >
             <button className={"button is-link"}>Submit</button>
             {bookmarkButton}
           </div>

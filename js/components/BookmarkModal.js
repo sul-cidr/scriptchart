@@ -1,30 +1,58 @@
-import React from 'react';
-import Modal from 'react-modal';
+import React from "react";
+import Modal from "react-modal";
+
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import "./modal.css";
 
-// (http://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('#app')
+Modal.setAppElement("#app");
 
 class BookmarkModal extends React.Component {
   constructor(props) {
     super(props);
-  }
-  
-  render() {
-    console.log("Rendering bookmark modal, open set to " + this.props.modalIsOpen);
 
+    this.state = {
+      copied: false
+    };
+  }
+
+  render() {
     return (
       <Modal
         isOpen={this.props.isOpen}
         onRequestClose={this.props.closeModal}
-        shouldCloseOnOverlayClick={true}
+        shouldCloseOnOverlayClick={false}
         className="Modal"
         overlayClassName="Overlay"
-        contentLabel="Example Modal"
+        contentLabel="Bookmark URL"
       >
-        <div>{this.props.bookmarkURL}</div>
-        <button onClick={this.props.closeModal}>close</button>
+        <div className={"field"}>
+          <div className={"control"}>
+            <input
+              className={"input"}
+              type="text"
+              value={this.props.bookmarkURL}
+              size="40"
+              readOnly
+            />
+            <CopyToClipboard
+              text={this.props.bookmarkURL}
+              onCopy={() => this.setState({ copied: true })}
+            >
+              <button className={"button"}>Copy to clipboard</button>
+            </CopyToClipboard>
+          </div>
+
+          {this.state.copied ? (
+            <p className={"help is-success"}>Copied.</p>
+          ) : null}
+
+          <div>
+            <button className={"button"} onClick={this.props.closeModal}>
+              Close
+            </button>
+          </div>
+        </div>
       </Modal>
     );
   }

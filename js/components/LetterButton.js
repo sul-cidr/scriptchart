@@ -10,9 +10,12 @@ import React from "react";
  * letters grid).
  */
 
+import SyriacLetter from "./SyriacLetter";
+
 class LetterButton extends React.Component {
   constructor(props) {
     super(props);
+
     this.onLetterClicked = this.onLetterClicked.bind(this);
   }
   onLetterClicked() {
@@ -29,7 +32,11 @@ class LetterButton extends React.Component {
   render() {
     return (
       <span className={this.props.buttonClass} onClick={this.onLetterClicked}>
-        {this.props.letter}
+        <SyriacLetter
+          id={this.props.letterID}
+          clicked={this.props.clicked}
+          isButton={this.props.isButton}
+        />
       </span>
     );
   }

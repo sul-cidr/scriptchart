@@ -1,9 +1,9 @@
 .Modal {
     position: absolute;
-    top: 30vh;
-    left: 30vw;
-    right: 30vw;
-    bottom: 30vh;
+    top: 20vh;
+    left: 20vw;
+    right: 20vw;
+    bottom: 20vh;
     background-color: whitesmoke;
     z-index: 100;
 }

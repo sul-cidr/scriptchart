@@ -19,6 +19,8 @@ import React, { Component } from "react";
 import "../../src/assets/syriac_fonts.css";
 import "./app.css";
 
+import letters from "./letters.json";
+
 /* Loading fontawesome icons via React seems easier than doing
  * it via site-wide CSS */
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -27,11 +29,7 @@ import {
   faTable,
   faImage
 } from "@fortawesome/free-solid-svg-icons";
-library.add(
-  faBookOpen,
-  faTable,
-  faImage
-);
+library.add(faBookOpen, faTable, faImage);
 
 /* The entire app needs to be wrapped in the drag-and-drop context */
 import HTML5Backend from "react-dnd-html5-backend";
@@ -62,6 +60,8 @@ class App extends Component {
       bookmarkIsOpen: false,
       showBookmarkButton: false,
       bookmarkURL: VIEWER_ROOT,
+      selectedLetters: [],
+      selectedShelfmarks: [],
       loadingMessage:
         'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
     };
@@ -69,13 +69,15 @@ class App extends Component {
     //this.queryCache = {}; // XXX Just let the browser cache handle this?
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleBookmark = this.handleBookmark.bind(this);
+    this.getBookmark = this.getBookmark.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.queryManuscripts = this.queryManuscripts.bind(this);
     this.processCoords = this.processCoords.bind(this);
     this.getYearFromDate = this.getYearFromDate.bind(this);
     this.sortManuscripts = this.sortManuscripts.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
+    this.handleQueryParams = this.handleQueryParams.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   /* The ms date field in the DB is a bit unruly. We'll do our best
@@ -108,6 +110,52 @@ class App extends Component {
     }
   }
 
+  /* This is the handler for the multi-select items (manuscript list and letter
+   * button grid).
+   */
+  handleSelect(name, value) {
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleQueryParams() {
+    let params = new URLSearchParams(window.location.search);
+    let queryLetters = JSON.parse(params.get("letters"));
+    let queryMss = JSON.parse(params.get("mss"));
+
+    if (queryLetters === null || queryMss === null) {
+      return;
+    }
+
+    let formLetters = [];
+    for (let letter of queryLetters) {
+      formLetters.push(letters.find(lt => lt.letter == letter));
+    }
+
+    this.setState({
+      selectedLetters: formLetters,
+      selectedShelfmarks: queryMss,
+      showBookmarkButton: false
+    });
+
+    // XXX This is not the best way to do this, but will suffice for a demo
+
+    let formData = {
+      showBinarized: true,
+      showCropped: true,
+      contextMode: "hover",
+      letterExamples: 3,
+      cropMargin: "Medium",
+      imageSize: "Medium",
+      selectedShelfmarks: queryMss,
+      letters: formLetters,
+      showBookmarkButton: false
+    };
+
+    this.handleSubmit(formData);
+  }
+
   sortManuscripts(orderBy, allManuscripts) {
     // If the manuscripts list in the component state has not been set,
     // use the optional function argument instead.
@@ -138,6 +186,8 @@ class App extends Component {
     );
 
     this.setState({ allManuscripts });
+
+    this.handleQueryParams();
   }
 
   queryManuscripts() {
@@ -150,23 +200,37 @@ class App extends Component {
       .then(data => this.sortManuscripts("shelfmark", data));
   }
 
-  handleBookmark() {
-    console.log("Bookmark requested");
-    let letterIDs = this.state.formData.letters.map(obj => obj.letter);
-    let formDataLink = JSON.stringify({"letters": letterIDs, "mss": this.state.formData.selectedShelfmarks});
-    this.setState( { bookmarkIsOpen: true, bookmarkURL: VIEWER_ROOT + formDataLink });
+  getBookmark() {
+    let letterNames = this.state.formData.letters.map(obj => obj.letter);
+    let formDataLink =
+      "?mss=" +
+      JSON.stringify(this.state.formData.selectedShelfmarks) +
+      "&letters=" +
+      JSON.stringify(letterNames);
+    this.setState({
+      bookmarkIsOpen: true,
+      bookmarkURL: VIEWER_ROOT + formDataLink
+    });
   }
 
   closeModal() {
-    console.log("Closing modal!");
-    this.setState( { bookmarkIsOpen: false });
+    this.setState({ bookmarkIsOpen: false });
   }
 
   handleSubmit(formData) {
+
+    let showBookmarkButton = true;
+    if (formData.showBookmarkButton == false) {
+      showBookmarkButton = false;
+    }
+
+    formData.letters = this.state.selectedLetters;
+    formData.selectedShelfmarks = this.state.selectedShelfmarks;
+
     this.setState({
       showTabs: false,
       loadingMessage: "Loading manuscripts...",
-      showBookmarkButton: true
+      showBookmarkButton
     });
 
     let manuscriptQueries = [];
@@ -306,7 +370,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <BookmarkModal 
+        <BookmarkModal
           isOpen={this.state.bookmarkIsOpen}
           closeModal={this.closeModal}
           bookmarkURL={this.state.bookmarkURL}
@@ -350,10 +414,13 @@ class App extends Component {
               <div className={"box-content"}>
                 <ManuscriptForm
                   formSubmit={this.handleSubmit}
-                  handleBookmark={this.handleBookmark}
+                  getBookmark={this.getBookmark}
                   manuscripts={this.state.allManuscripts}
                   sortManuscripts={this.sortManuscripts}
                   showBookmarkButton={this.state.showBookmarkButton}
+                  selectedLetters={this.state.selectedLetters}
+                  selectedShelfmarks={this.state.selectedShelfmarks}
+                  handleSelect={this.handleSelect}
                 />
               </div>
             </div>

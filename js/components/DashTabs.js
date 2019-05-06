@@ -257,6 +257,7 @@ class DashTabs extends React.Component {
   }
 
   render() {
+
     if (this.props.showTabs == false) {
       return (
         <div>

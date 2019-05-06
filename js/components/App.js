@@ -62,7 +62,6 @@ class App extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.queryManuscripts = this.queryManuscripts.bind(this);
-    this.processCoords = this.processCoords.bind(this);
     this.getYearFromDate = this.getYearFromDate.bind(this);
     this.sortManuscripts = this.sortManuscripts.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
@@ -146,116 +145,29 @@ class App extends Component {
       loadingMessage: "Loading manuscripts..."
     });
 
-    let manuscriptQueries = [];
-    let manuscripts = [];
-    for (let ms of this.state.allManuscripts) {
-      if (formData.selectedShelfmarks.indexOf(ms.shelfmark) < 0) {
-        continue;
-      }
-
-      manuscripts.push(ms);
-      let msQuery = API_ROOT + "pages?manuscript_id=" + ms.id + "&format=json";
-      manuscriptQueries.push(msQuery);
-    }
+    let manuscripts = this.state.allManuscripts.filter(ms =>
+      formData.selectedShelfmarks.includes(ms.shelfmark)
+    );
+    let letter_ids = formData.letters.map(letter => letter.id);
 
     this.setState({ manuscripts });
 
-    Promise.all(
-      manuscriptQueries.map(url =>
-        fetch(url)
-          .then(resp => resp.json())
-          .catch(function(error) {
-            console.log("URL fetch failed for " + url);
-            return [];
-          })
+    let url =
+      `${API_ROOT}letters?count=3&letter_ids=${letter_ids.join("|")}` +
+      `&ms_ids=${manuscripts.map(ms => ms.id).join("|")}`;
+
+    fetch(url)
+      .then(resp => resp.json())
+      .then(json =>
+        this.setState({
+          tableData: json.mss,
+          formData: formData,
+          showTabs: true
+        })
       )
-    ).then(msResults => {
-      let coordsQueries = [];
-
-      this.setState({ loadingMessage: "Loading manuscript pages..." });
-
-      for (let pages of msResults) {
-        for (let page of pages) {
-          for (let letter of formData.letters) {
-            let coordsQuery =
-              API_ROOT +
-              "coordinates?page_id=" +
-              page.id +
-              "&letter_id=" +
-              letter.id +
-              "&format=json";
-            coordsQueries.push(coordsQuery);
-          }
-        }
-      }
-      this.processCoords(coordsQueries, formData);
-    });
-  }
-
-  processCoords(coordsQueries, formData) {
-    Promise.all(
-      coordsQueries.map(url =>
-        fetch(url)
-          .then(resp => resp.json())
-          .catch(function(error) {
-            console.log("URL fetch failed for " + url);
-            return [];
-          })
-      )
-    ).then(coordsResults => {
-      let tableData = {};
-
-      this.setState({
-        loadingMessage: "Processing letters on manuscript pages..."
+      .catch(function(error) {
+        console.log("URL fetch failed for " + url);
       });
-
-      for (let coordsData of coordsResults) {
-        if (coordsData.length == 0) {
-          continue;
-        }
-
-        for (let coords of coordsData) {
-          let msID = coords.page.manuscript;
-          let pageID = coords.page.id;
-          let pageURL = coords.page.url;
-
-          let ltID = coords.letter;
-
-          if (!(msID in tableData)) {
-            tableData[msID] = {};
-          }
-          if (!(ltID in tableData[msID])) {
-            tableData[msID][ltID] = [];
-          }
-
-          if (tableData[msID][ltID].length >= MAX_EXAMPLES) {
-            continue;
-          }
-
-          if (coords.binary_url !== null) {
-            let letterInstance = {
-              page: pageID,
-              pageurl: pageURL,
-              letter: ltID,
-              pagewidth: coords.page.width,
-              pageheight: coords.page.height,
-              binaryurl: coords.binary_url,
-              id: coords.id,
-              top: coords.top,
-              left: coords.left,
-              width: coords.width,
-              height: coords.height
-            };
-            tableData[msID][ltID].push(letterInstance);
-          }
-        }
-      }
-      this.setState({
-        tableData: tableData,
-        formData: formData,
-        showTabs: true
-      });
-    });
   }
 
   toggleSidebar() {

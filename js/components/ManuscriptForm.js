@@ -26,12 +26,9 @@ class ManuscriptForm extends React.Component {
       letterExamples: 3,
       cropMargin: "Medium",
       imageSize: "Medium",
-      //selectedShelfmarks: [],
-      //letters: []
     };
 
     this.handleChange = this.handleChange.bind(this);
-    //this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getBookmark = this.getBookmark.bind(this);
     this.buttonChange = this.buttonChange.bind(this);
@@ -83,22 +80,6 @@ class ManuscriptForm extends React.Component {
       this.props.handleSelect("selectedLetters", [...letters]);
     }
   }
-/*
-    for (let lt of letters) {
-      let ltid = lt.id;
-      if (
-        //which == "All" &&
-        selectedLetters.findIndex(l => l.id == ltid) < 0
-      ) {
-        selectedLetters.push(lt);
-      } else {
-        selectedLetters = [];
-        break;
-      }
-    }
-    this.props.handleSelect("selectedLetters", selectedLetters);
-  }
-  */
 
   handleChange(event) {
     const target = event.target;

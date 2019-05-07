@@ -3,5 +3,7 @@
 exports[`LetterButton test LetterButton should match snapshot 1`] = `
 <span
   onClick={[Function]}
-/>
+>
+  <div />
+</span>
 `;

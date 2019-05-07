@@ -89,7 +89,7 @@ class ScriptChart extends React.Component {
       let row = {
         id: i + 2,
         ltid: ltID,
-        letter: <SyriacLetter key={ltID} id={ltID} />,
+        letter: <SyriacLetter key={ltID} id={ltID} isButton={false}/>,
         visible: !this.props.hiddenLetters.includes(ltID)
       };
 

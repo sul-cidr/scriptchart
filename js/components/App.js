@@ -37,16 +37,12 @@ import { DragDropContext } from "react-dnd";
 
 import ManuscriptForm from "./ManuscriptForm";
 import DashTabs from "./DashTabs";
-import BookmarkModal from "./BookmarkModal";
 
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
 export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
 //export const API_ROOT = "http://localhost:8000/api/";
-
-export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
-//export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
 
 class App extends Component {
   constructor(props) {
@@ -59,11 +55,6 @@ class App extends Component {
       formData: {},
       tableData: {},
       sidebarOpen: true,
-      bookmarkIsOpen: false,
-      showBookmarkButton: false,
-      bookmarkURL: VIEWER_ROOT,
-      selectedLetters: [],
-      selectedShelfmarks: [],
       loadingMessage:
         'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
     };
@@ -71,15 +62,12 @@ class App extends Component {
     //this.queryCache = {}; // XXX Just let the browser cache handle this?
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getBookmark = this.getBookmark.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.queryManuscripts = this.queryManuscripts.bind(this);
     this.processCoords = this.processCoords.bind(this);
     this.getYearFromDate = this.getYearFromDate.bind(this);
     this.sortManuscripts = this.sortManuscripts.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.handleQueryParams = this.handleQueryParams.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   /* The ms date field in the DB is a bit unruly. We'll do our best
@@ -112,15 +100,6 @@ class App extends Component {
     }
   }
 
-  /* This is the handler for the multi-select items (manuscript list and letter
-   * button grid).
-   */
-  handleSelect(name, value) {
-    this.setState({
-      [name]: value
-    });
-  }
-
   handleQueryParams() {
     let params = new URLSearchParams(window.location.search);
     let queryLetters = JSON.parse(params.get("letters"));
@@ -135,12 +114,6 @@ class App extends Component {
       formLetters.push(letters.find(lt => lt.letter == letter));
     }
 
-    this.setState({
-      selectedLetters: formLetters,
-      selectedShelfmarks: queryMss,
-      showBookmarkButton: false
-    });
-
     // XXX This is not the best way to do this, but will suffice for a demo
 
     let formData = {
@@ -151,8 +124,7 @@ class App extends Component {
       cropMargin: "Medium",
       imageSize: "Medium",
       selectedShelfmarks: queryMss,
-      letters: formLetters,
-      showBookmarkButton: false
+      selectedLetters: formLetters
     };
 
     this.handleSubmit(formData);
@@ -190,6 +162,7 @@ class App extends Component {
     this.setState({ allManuscripts });
 
     this.handleQueryParams();
+
   }
 
   queryManuscripts() {
@@ -202,46 +175,21 @@ class App extends Component {
       .then(data => this.sortManuscripts("shelfmark", data));
   }
 
-  getBookmark() {
-    let letterNames = this.state.formData.letters.map(obj => obj.letter);
-    let formDataLink =
-      "?mss=" +
-      JSON.stringify(this.state.formData.selectedShelfmarks) +
-      "&letters=" +
-      JSON.stringify(letterNames);
-    this.setState({
-      bookmarkIsOpen: true,
-      bookmarkURL: VIEWER_ROOT + formDataLink
-    });
-  }
-
-  closeModal() {
-    this.setState({ bookmarkIsOpen: false });
-  }
-
   handleSubmit(formData) {
 
-    let showBookmarkButton = true;
-    if (formData.showBookmarkButton == false) {
-      showBookmarkButton = false;
-    }
-
-    formData.letters = this.state.selectedLetters;
-    formData.selectedShelfmarks = this.state.selectedShelfmarks;
+    console.log("Form data submitted is");
+    console.log(formData);
 
     this.setState({
       showTabs: false,
-      loadingMessage: "Loading manuscripts...",
-      showBookmarkButton
+      loadingMessage: "Loading manuscripts..."
     });
 
     let manuscriptQueries = [];
     let manuscripts = [];
-    for (let ms of this.state.allManuscripts) {
-      if (formData.selectedShelfmarks.indexOf(ms.shelfmark) < 0) {
-        continue;
-      }
 
+    for (let shelfmark of formData.selectedShelfmarks) {
+      let ms = this.state.allManuscripts.find(obj => obj.shelfmark == shelfmark);
       manuscripts.push(ms);
       let msQuery = API_ROOT + "pages?manuscript_id=" + ms.id + "&format=json";
       manuscriptQueries.push(msQuery);
@@ -265,7 +213,7 @@ class App extends Component {
 
       for (let pages of msResults) {
         for (let page of pages) {
-          for (let letter of formData.letters) {
+          for (let letter of formData.selectedLetters) {
             let coordsQuery =
               API_ROOT +
               "coordinates?page_id=" +
@@ -372,11 +320,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        <BookmarkModal
-          isOpen={this.state.bookmarkIsOpen}
-          closeModal={this.closeModal}
-          bookmarkURL={this.state.bookmarkURL}
-        />
         <div className={"columns main-content"}>
           <div
             className={
@@ -416,13 +359,9 @@ class App extends Component {
               <div className={"box-content"}>
                 <ManuscriptForm
                   formSubmit={this.handleSubmit}
-                  getBookmark={this.getBookmark}
                   manuscripts={this.state.allManuscripts}
                   sortManuscripts={this.sortManuscripts}
-                  showBookmarkButton={this.state.showBookmarkButton}
-                  selectedLetters={this.state.selectedLetters}
-                  selectedShelfmarks={this.state.selectedShelfmarks}
-                  handleSelect={this.handleSelect}
+                  formData={this.state.formData}
                 />
               </div>
             </div>

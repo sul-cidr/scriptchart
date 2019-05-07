@@ -31,6 +31,9 @@ class ManuscriptMenu extends React.Component {
       }
     }
 
+    console.log("Manuscript calling handleSelect with name: " + name + ", value: ");
+    console.log(value);
+
     this.props.handleSelect(name, value);
   }
 

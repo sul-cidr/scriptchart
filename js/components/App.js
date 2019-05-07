@@ -177,9 +177,6 @@ class App extends Component {
 
   handleSubmit(formData) {
 
-    console.log("Form data submitted is");
-    console.log(formData);
-
     this.setState({
       showTabs: false,
       loadingMessage: "Loading manuscripts..."

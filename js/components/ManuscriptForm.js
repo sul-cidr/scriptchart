@@ -76,8 +76,6 @@ class ManuscriptForm extends React.Component {
         1
       );
     }
-    console.log("updating selectedLetters to ");
-    console.log(selectedLetters);
     this.handleSelect("selectedLetters", selectedLetters);
   }
 
@@ -129,8 +127,6 @@ class ManuscriptForm extends React.Component {
   handleSubmit(event) {
     // Stop the whole darn page from reloading on form submit
     event.preventDefault();
-    console.log("Running handleSubmit with state");
-    console.log(this.state);
     // Pass all of the form's state to the handler (which is in App)
     this.props.formSubmit(this.state);
   }

@@ -16,3 +16,11 @@
     background-color: rgba(54, 54, 54, 0.6);
     z-index: 32;
 }
+
+.bookmarktext {
+    border: ridge 1px;
+    padding: 5px;
+    width: 100%;
+    min-height: 5em;
+    overflow: auto;
+}

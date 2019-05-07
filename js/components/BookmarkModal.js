@@ -35,15 +35,9 @@ class BookmarkModal extends React.Component {
         </div>
         <div className={"field box"}>
           <div className={"control"}>
-            <textarea
-              className={"input"}
-              type="text"
-              value={this.props.bookmarkURL}
-              //size="40"
-              cols="40"
-              rows="3"
-              readOnly
-            ></textarea>
+            <div className="bookmarktext">
+              {this.props.bookmarkURL}
+            </div>
             <CopyToClipboard
               text={this.props.bookmarkURL}
               onCopy={() => this.setState({ copied: true })}

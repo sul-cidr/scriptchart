@@ -22,12 +22,12 @@ class ManuscriptForm extends React.Component {
     this.state = {
       showBinarized: true,
       showCropped: true,
-      contextMode: "hover",
-      letterExamples: 3,
+      contextMode: "unset",
+      letterExamples: "unset", // 3
       cropMargin: "Medium",
       imageSize: "Medium",
       selectedLetters: "unset",
-      selectedShelfmarks: "unset"
+      selectedShelfmarks: "unset",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -128,7 +128,23 @@ class ManuscriptForm extends React.Component {
     // Stop the whole darn page from reloading on form submit
     event.preventDefault();
     // Pass all of the form's state to the handler (which is in App)
-    this.props.formSubmit(this.state);
+    let formData = this.state;
+    if (formData.selectedLetters == "unset") {
+       formData.selectedLetters = this.props.formData.selectedLetters;
+    }
+
+    /* XXX TODO: Find a way to avoid repeating all of this code for every form item */
+
+    if (formData.selectedShelfmarks == "unset") {
+      formData.selectedShelfmarks = this.props.formData.selectedShelfmarks;
+    }
+    if (formData.letterExamples == "unset") {
+      formData.letterExamples = this.props.formData.letterExamples;
+    }
+    if (formData.contextMode == "unset") {
+      formData.contextMode = this.props.formData.contextMode;
+    }
+    this.props.formSubmit(formData);
   }
 
   getBookmark(event) {
@@ -147,6 +163,26 @@ class ManuscriptForm extends React.Component {
     let selectedLetters = [...this.state.selectedLetters];
     if ((this.state.selectedLetters == "unset") && (this.props.formData.hasOwnProperty("selectedLetters"))) {
       selectedLetters = this.props.formData.selectedLetters;
+    }
+
+    /* XXX TODO: Find a way to avoid repeating all of this code for every form item */
+
+    let letterExamples = this.state.letterExamples;
+    if (letterExamples == "unset") {
+      if (this.props.formData.hasOwnProperty("letterExamples")) {
+        letterExamples = this.props.formData.letterExamples;
+      } else {
+        letterExamples = 3;
+      }
+    }
+
+    let contextMode = this.state.contextMode;
+    if (contextMode == "unset") {
+      if (this.props.formData.hasOwnProperty("contextMode")) {
+        contextMode = this.props.formData.contextMode;
+      } else {
+        contextMode = "hover";
+      }
     }
 
     return (
@@ -178,7 +214,7 @@ class ManuscriptForm extends React.Component {
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={this.state.letterExamples}
+              value={letterExamples}
               type="number"
               name="letterExamples"
               id="letterExamples"
@@ -248,7 +284,7 @@ class ManuscriptForm extends React.Component {
                   value="hover"
                   id="hoverContext"
                   onChange={this.changeContextMode}
-                  checked={this.state.contextMode == "hover"}
+                  checked={contextMode == "hover"}
                 />{" "}
                 Show on hover
               </label>
@@ -260,7 +296,7 @@ class ManuscriptForm extends React.Component {
                   value="click"
                   id="clickContext"
                   onChange={this.changeContextMode}
-                  checked={this.state.contextMode == "click"}
+                  checked={contextMode == "click"}
                 />{" "}
                 Show on click
               </label>

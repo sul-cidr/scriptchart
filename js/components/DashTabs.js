@@ -33,8 +33,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./index.css";
 
-export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
-//export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
+//export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
+export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
 
 class DashTabs extends React.Component {
   constructor(props) {
@@ -66,17 +66,11 @@ class DashTabs extends React.Component {
     let sourceShelfmark = labels.sourceLabel;
     let targetShelfmark = labels.targetLabel;
 
-    //let columnManuscripts = [];
 
     let columnManuscripts = [...this.props.manuscripts];
     if (this.state.columnManuscripts.length > 0) {
       columnManuscripts = [...this.state.columnManuscripts];
     }
-    //if (this.state.columnManuscripts.length == 0) {
-    //let columnManuscripts = [...this.props.manuscripts];
-    //} else {
-    //let columnManuscripts = [...this.state.columnManuscripts];
-    //}
 
     let sourceIndex = columnManuscripts.findIndex(
       ms => ms.shelfmark == sourceShelfmark
@@ -100,7 +94,6 @@ class DashTabs extends React.Component {
     )[0];
 
     this.setState({ columnManuscripts });
-    //this.props.handleSelect("manuscripts", columnManuscripts);
   }
 
   onRowMove({ sourceRowId, targetRowId }) {
@@ -128,7 +121,6 @@ class DashTabs extends React.Component {
     )[0];
 
     this.setState({ rowLetters });
-    //this.props.handleSelect("selectedLetters", rowLetters);
   }
 
   closeModal() {
@@ -147,11 +139,47 @@ class DashTabs extends React.Component {
       msNames = this.state.columnManuscripts.map(obj => obj.shelfmark);
     }
 
+    // Chart display options are formatted <binarized, cropped, all><imagesize><hover, click><marginsize>
+    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l|x]
+    let binarizedAndOrCropped = "b";
+    if (this.props.formData.showBinarized && this.props.formData.showCropped) {
+      binarizedAndOrCropped = 'a';
+    } else if (this.props.formData.showCropped) {
+      binarizedAndOrCropped = 'c';
+    } 
+
+    let imageSize = "m";
+    if (this.props.formData.imageSize == "Large") {
+      imageSize = 'l';
+    } else if (this.props.formData.imageSize == "Small") {
+      imageSize = 's';
+    }
+
+    let hoverOrClick = 'h';
+    if (this.props.formData.contextMode == "click") {
+      hoverOrClick = 'c';
+    }
+
+    let marginSize = 'm';
+    if (this.props.formData.cropMargin == "Small") {
+      marginSize = 's';
+    } else if (this.props.formData.cropMargin == "Large") {
+      marginSize = 'l';
+    } else if (this.props.formData.cropMargin == "X-Large") {
+      marginSize = 'x';
+    }
+
+    let optionsString = binarizedAndOrCropped + imageSize + hoverOrClick + marginSize;
+
     let formDataLink =
       "?mss=" +
-      JSON.stringify(msNames) +
+      msNames.join('|') +
       "&letters=" +
-      JSON.stringify(letterNames);
+      letterNames.join('|') +
+      "&examples=" +
+      this.props.formData.letterExamples +
+      "&opts=" + optionsString;
+
     this.setState({
       bookmarkIsOpen: true,
       bookmarkURL: VIEWER_ROOT + formDataLink
@@ -306,8 +334,6 @@ class DashTabs extends React.Component {
         </div>
       );
     }
-
-    console.log("Rendering DashTabs");
 
     let columnManuscripts = [];
     let rowLetters = [];

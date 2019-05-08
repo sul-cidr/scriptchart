@@ -41,8 +41,8 @@ import DashTabs from "./DashTabs";
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
-export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
-//export const API_ROOT = "http://localhost:8000/api/";
+//export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+export const API_ROOT = "http://localhost:8000/api/";
 
 class App extends Component {
   constructor(props) {
@@ -102,30 +102,75 @@ class App extends Component {
 
   handleQueryParams() {
     let params = new URLSearchParams(window.location.search);
-    let queryLetters = JSON.parse(params.get("letters"));
-    let queryMss = JSON.parse(params.get("mss"));
+    let queryShelfmarks = params.get("mss");
+    let queryLetters = params.get("letters");
+    let letterExamples = params.get("examples");
+    let optionsString = params.get("opts");
 
-    if (queryLetters === null || queryMss === null) {
+    if (queryLetters === null || queryShelfmarks === null) {
       return;
     }
 
-    let formLetters = [];
-    for (let letter of queryLetters) {
-      formLetters.push(letters.find(lt => lt.letter == letter));
+    let selectedShelfmarks = [];
+    if (queryShelfmarks != null) {
+      selectedShelfmarks = queryShelfmarks.split('|');
     }
 
-    // XXX This is not the best way to do this, but will suffice for a demo
+    let splitLetters = [];
+    if (queryLetters != null) {
+      splitLetters = queryLetters.split('|');
+    }
+    let selectedLetters = [];
+    for (let letter of splitLetters) {
+      selectedLetters.push(letters.find(lt => lt.letter == letter));
+    }
+
+    if (letterExamples == null) {
+      letterExamples = 3;
+    }
+
+    // Chart display options are formatted <binarized, cropped, all><imagesize><hover, click><marginsize>
+    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l|x]
+    let showBinarized = true;
+    let showCropped = true;
+    let contextMode = "hover";
+    let imageSize = "Medium";
+    let cropMargin = "Medium";
+    if ((optionsString != null) && (optionsString.length == 4)) {
+      if (optionsString[0] == 'b') {
+        showCropped = false;
+      } else if (optionsString[0] == 'c') {
+        showBinarized = false;
+      }
+      if (optionsString[1] == 's') {
+        imageSize = "Small";
+      } else if (optionsString[1] == 'l') {
+        imageSize = "Large";
+      }
+      if (optionsString[2] == 'c') {
+        contextMode = "click";
+      }
+      if (optionsString[3] == 's') {
+        cropMargin = "Small";
+      } else if (optionsString[3] == 'l') {
+        cropMargin = "Large";
+      } else if (optionsString[3] == 'x') {
+        cropMargin = "X-Large";
+      }
+    }
 
     let formData = {
-      showBinarized: true,
-      showCropped: true,
-      contextMode: "hover",
-      letterExamples: 3,
-      cropMargin: "Medium",
-      imageSize: "Medium",
-      selectedShelfmarks: queryMss,
-      selectedLetters: formLetters
+      showBinarized,
+      showCropped,
+      contextMode,
+      letterExamples,
+      cropMargin,
+      imageSize,
+      selectedShelfmarks,
+      selectedLetters
     };
+
+    formData.isBookmark = true;
 
     this.handleSubmit(formData);
   }
@@ -309,9 +354,7 @@ class App extends Component {
      * get around the challenges of clearing local state on all of the
      * child components. On the other hand, the specification is that
      * submitting a new query via the form SHOULD completely reset the
-     * chart, and that's what this does. Also, the key could eventually
-     * be used as an external 'bookmark' for any specific set of
-     * letters, manuscripts, and display options.
+     * chart, and that's what this does.
      */
     let chartKey = JSON.stringify(this.state.formData) + Date.now();
 

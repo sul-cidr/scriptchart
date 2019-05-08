@@ -1,7 +1,7 @@
 .Modal {
     position: absolute;
     top: 30vh;
-    left: 20vw;
+    left: 30vw;
     right: 30vw;
     background-color: whitesmoke;
     z-index: 100;

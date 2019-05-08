@@ -232,666 +232,575 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܐ"
+          title="Alaph (Angular)"
         >
-          
           ܐ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
             }
           }
-          title="ܐ"
+          title="Alaph (Round)"
         >
-          
           ܐ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܒ"
+          title="Beth"
         >
-          
           ܒ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܓ"
+          title="Gamal"
         >
-          
           ܓ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܕ"
+          title="Dalath (Angular)"
         >
-          
           ܕ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
             }
           }
-          title="ܕ"
+          title="Dalath (Round)"
         >
-          
           ܕ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܗ"
+          title="He (Angular)"
         >
-          
           ܗ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
             }
           }
-          title="ܗ"
+          title="He (Round)"
         >
-          
           ܗ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܘ"
+          title="Waw"
         >
-          
           ܘ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܙ"
+          title="Zain"
         >
-          
           ܙ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܚ"
+          title="Heth"
         >
-          
           ܚ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܛ"
+          title="Teth"
         >
-          
           ܛ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
           style={
             Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
+              "verticalAlign": "center",
             }
           }
-          title="ܝ"
+          title="Yudh (Connected)"
         >
-          ‍
+          <img
+            className="button-svg "
+            src="/scriptchart/assets/font_glyphs/yudh_connected.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Yudh (Stand-alone)"
+        >
           ܝ
-          ‍
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
           style={
             Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
+              "verticalAlign": "center",
             }
           }
-          title="ܝ"
+          title="Kaph"
         >
-          
-          ܝ
-          
-        </span>
+          <img
+            className="button-svg "
+            src="/scriptchart/assets/font_glyphs/kaph.svg"
+          />
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܟ"
+          title="Kaph (Final)"
         >
-          
           ܟ
-          ‍
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܟ"
+          title="Lamadh (Final, open)"
         >
-          
-          ܟ
-          
-        </span>
-      </span>
-      <span
-        className="button is-outlined"
-        onClick={[Function]}
-      >
-        <span
-          style={
-            Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-            }
-          }
-          title="ܠ"
-        >
-          
           ܠ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
           style={
             Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
+              "verticalAlign": "center",
             }
           }
-          title="ܠ"
+          title="Lamadh"
         >
-          ‍
-          ܠ
-          
-        </span>
+          <img
+            className="button-svg "
+            src="/scriptchart/assets/font_glyphs/lamadh.svg"
+          />
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
             }
           }
-          title="ܠ"
+          title="Lamadh (Final, closed)"
         >
-          
           ܠ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
           style={
             Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
+              "verticalAlign": "center",
             }
           }
-          title="ܡ"
+          title="Mim"
         >
-          
+          <img
+            className="button-svg "
+            src="/scriptchart/assets/font_glyphs/mim.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Mim (Final)"
+        >
           ܡ
-          ‍
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
           style={
             Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
+              "verticalAlign": "center",
             }
           }
-          title="ܡ"
+          title="Nun"
         >
-          
-          ܡ
-          
-        </span>
+          <img
+            className="button-svg "
+            src="/scriptchart/assets/font_glyphs/nun.svg"
+          />
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
           style={
             Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
+              "verticalAlign": "center",
             }
           }
-          title="ܢ"
+          title="Nun (Final, connected)"
         >
-          
+          <img
+            className="button-svg "
+            src="/scriptchart/assets/font_glyphs/nun_final.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Nun (Final, unconnected)"
+        >
           ܢ
-          ‍
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܢ"
+          title="Semkath"
         >
-          ‍
-          ܢ
-          
-        </span>
-      </span>
-      <span
-        className="button is-outlined"
-        onClick={[Function]}
-      >
-        <span
-          style={
-            Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-            }
-          }
-          title="ܢ"
-        >
-          
-          ܢ
-          
-        </span>
-      </span>
-      <span
-        className="button is-outlined"
-        onClick={[Function]}
-      >
-        <span
-          style={
-            Object {
-              "direction": "rtl",
-              "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
-            }
-          }
-          title="ܣ"
-        >
-          
           ܣ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܥ"
+          title="Ayin"
         >
-          
           ܥ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܦ"
+          title="Pe"
         >
-          
           ܦ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܨ"
+          title="Sadhe"
         >
-          
           ܨ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܩ"
+          title="Qaph"
         >
-          
           ܩ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܪ"
+          title="Rish (Angular)"
         >
-          
           ܪ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
             }
           }
-          title="ܪ"
+          title="Rish (Round)"
         >
-          
           ܪ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܫ"
+          title="Shin"
         >
-          
           ܫ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "EstrangeloEdessa",
-              "fontSize": "2em",
             }
           }
-          title="ܬ"
+          title="Taw (Looped)"
         >
-          
           ܬ
-          
-        </span>
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
           style={
             Object {
-              "direction": "rtl",
-              "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
+              "verticalAlign": "center",
             }
           }
-          title="ܬ"
+          title="Taw (Triangular)"
         >
-          ‍
-          ܬ
-          
-        </span>
+          <img
+            className="button-svg "
+            src="/scriptchart/assets/font_glyphs/taw_triangular.svg"
+          />
+        </div>
       </span>
       <span
         className="button is-outlined"
         onClick={[Function]}
       >
-        <span
+        <div
+          className="button-letter"
           style={
             Object {
-              "direction": "rtl",
               "fontFamily": "SertoJerusalem",
-              "fontSize": "2em",
             }
           }
-          title="ܬ"
+          title="Taw (L-shaped)"
         >
-          
           ܬ
-          
-        </span>
+        </div>
       </span>
     </div>
   </div>

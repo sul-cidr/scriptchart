@@ -18,7 +18,6 @@ import React, { Component } from "react";
 
 import "../../src/assets/syriac_fonts.css";
 import "./app.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /* Loading fontawesome icons via React seems easier than doing
  * it via site-wide CSS */
@@ -27,18 +26,8 @@ import {
   faBookOpen,
   faTable,
   faImage
-  //faInfoCircle,
-  //faArrowRight,
-  //faArrowLeft
 } from "@fortawesome/free-solid-svg-icons";
-library.add(
-  faBookOpen,
-  faTable,
-  faImage
-  //faInfoCircle,
-  //faArrowRight,
-  //faArrowLeft
-);
+library.add(faBookOpen, faTable, faImage);
 
 /* The entire app needs to be wrapped in the drag-and-drop context */
 import HTML5Backend from "react-dnd-html5-backend";

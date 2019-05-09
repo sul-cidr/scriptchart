@@ -15,6 +15,17 @@ import LettersLoader from "./LettersLoader";
 import letters from "./letters.json";
 
 /* Form default values */
+const FORM_DEFAULTS = {
+  showBinarized: true,
+  showCropped: true,
+  contextMode: "hover",
+  letterExamples: 3,
+  cropMargin: "Medium",
+  imageSize: "Medium",
+  selectedLetters: [],
+  selectedShelfmarks: []
+};
+
 const SHOW_BINARIZED = true;
 const SHOW_CROPPED = true;
 const CONTEXT_MODE = "hover";
@@ -118,6 +129,21 @@ class ManuscriptForm extends React.Component {
       [name]: value
     });
   }
+  reconcileFormField(fieldName, defaultValue = null) {
+    if (this.state[fieldName] == "unset") {
+      if (this.props.formData.hasOwnProperty(fieldName)) {
+        return this.props.formData[fieldName];
+      } else {
+        if (defaultValue === null) {
+          return FORM_DEFAULTS[fieldName];
+        } else {
+          return defaultValue;
+        }
+      }
+    } else {
+      return this.state[fieldName];
+    }
+  }
 
   handleSubmit(event) {
     // Stop the whole darn page from reloading on form submit
@@ -125,25 +151,8 @@ class ManuscriptForm extends React.Component {
     // Pass all of the form's state to the handler (which is in App)
     let formData = this.state;
 
-    let defaultFormData = {
-      selectedLetters: [],
-      selectedShelfmarks: [],
-      showBinarized: SHOW_BINARIZED,
-      showCropped: SHOW_CROPPED,
-      contextMode: CONTEXT_MODE,
-      letterExamples: LETTER_EXAMPLES,
-      cropMargin: CROP_MARGIN,
-      imageSize: IMAGE_SIZE
-    }
-
     for (let fieldName in this.state) {
-      if (formData[fieldName] == "unset") {
-        if (this.props.formData.hasOwnProperty(fieldName)) {
-          formData[fieldName] = this.props.formData[fieldName];
-        } else {
-          formData[fieldName] = defaultFormData[fieldName];
-        }
-      }
+      formData[fieldName] = this.reconcileFormField(fieldName);
     }
 
     // Clear out the query string from the address bar (only matters
@@ -153,40 +162,33 @@ class ManuscriptForm extends React.Component {
     this.props.formSubmit(formData);
   }
 
-  reconcileFormField(fieldName, defaultValue = null) {
-    if (this.state[fieldName] == "unset") {
-      if (this.props.formData.hasOwnProperty(fieldName)) {
-        return this.props.formData[fieldName];
-      } else {
-        if (defaultValue != null) {
-          return defaultValue;
-        } else {
-          return "unset";
-        }
-      }
-    } else {
-      return this.state[fieldName];
-    }
-  }
-
   render() {
     console.log("Rendering ManuscriptForm");
 
-    let selectedShelfmarks = this.reconcileFormField("selectedShelfmarks", [
+    let formData = {};
+
+    for (let fieldName in this.state) {
+      formData[fieldName] = this.reconcileFormField(fieldName);
+    }
+
+    formData.selectedShelfmarks = this.reconcileFormField("selectedShelfmarks", [
       ...this.state.selectedShelfmarks
     ]);
-    let selectedLetters = this.reconcileFormField("selectedLetters", [
+    formData.selectedLetters = this.reconcileFormField("selectedLetters", [
       ...this.state.selectedLetters
     ]);
-    let letterExamples = this.reconcileFormField(
+    
+    /*
+    formData.letterExamples = this.reconcileFormField(
       "letterExamples",
       LETTER_EXAMPLES
     );
-    let showBinarized = this.reconcileFormField("showBinarized", SHOW_BINARIZED);
-    let showCropped = this.reconcileFormField("showCropped", SHOW_CROPPED);
-    let contextMode = this.reconcileFormField("contextMode", CONTEXT_MODE);
-    let imageSize = this.reconcileFormField("imageSize", IMAGE_SIZE);
-    let cropMargin = this.reconcileFormField("cropMargin", CROP_MARGIN);
+    formData.showBinarized = this.reconcileFormField("showBinarized", SHOW_BINARIZED);
+    formData.showCropped = this.reconcileFormField("showCropped", SHOW_CROPPED);
+    formData.contextMode = this.reconcileFormField("contextMode", CONTEXT_MODE);
+    formData.imageSize = this.reconcileFormField("imageSize", IMAGE_SIZE);
+    formData.cropMargin = this.reconcileFormField("cropMargin", CROP_MARGIN);
+    */
 
     return (
       <form className={"manuscript-form"} onSubmit={this.handleSubmit}>
@@ -194,7 +196,7 @@ class ManuscriptForm extends React.Component {
           handleChange={this.handleChange}
           handleSelect={this.handleSelect}
           manuscripts={this.props.manuscripts}
-          selectedShelfmarks={selectedShelfmarks}
+          selectedShelfmarks={formData.selectedShelfmarks}
           sortManuscripts={this.props.sortManuscripts}
         />
 
@@ -206,7 +208,7 @@ class ManuscriptForm extends React.Component {
             </span>
           </div>
           <LettersLoader
-            selectedLetters={selectedLetters}
+            selectedLetters={formData.selectedLetters}
             handleSelect={this.buttonChange}
           />
         </div>
@@ -217,7 +219,7 @@ class ManuscriptForm extends React.Component {
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={letterExamples}
+              value={formData.letterExamples}
               type="number"
               name="letterExamples"
               id="letterExamples"
@@ -238,7 +240,7 @@ class ManuscriptForm extends React.Component {
               name="showBinarized"
               id="showBinarized"
               onChange={this.handleChange}
-              checked={showBinarized}
+              checked={formData.showBinarized}
             />
             {" Trimmed |"}
           </label>
@@ -252,7 +254,7 @@ class ManuscriptForm extends React.Component {
               name="showCropped"
               id="showCropped"
               onChange={this.handleChange}
-              checked={showCropped}
+              checked={formData.showCropped}
             />
             {" Untrimmed"}
           </label>
@@ -264,7 +266,7 @@ class ManuscriptForm extends React.Component {
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={imageSize}
+              value={formData.imageSize}
               type="string"
               name="imageSize"
               id="imageSize"
@@ -288,7 +290,7 @@ class ManuscriptForm extends React.Component {
                   id="hoverContext"
                   name="contextMode"
                   onChange={this.handleChange}
-                  checked={contextMode == "hover"}
+                  checked={formData.contextMode == "hover"}
                 />{" "}
                 Show on hover
               </label>
@@ -301,7 +303,7 @@ class ManuscriptForm extends React.Component {
                   id="clickContext"
                   name="contextMode"
                   onChange={this.handleChange}
-                  checked={contextMode == "click"}
+                  checked={formData.contextMode == "click"}
                 />{" "}
                 Show on click
               </label>
@@ -315,7 +317,7 @@ class ManuscriptForm extends React.Component {
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={cropMargin}
+              value={formData.cropMargin}
               type="string"
               name="cropMargin"
               id="cropMargin"

@@ -15,7 +15,7 @@ import LettersLoader from "./LettersLoader";
 import letters from "./letters.json";
 
 /* Form default values */
-const SHOW_BINARZIED = true;
+const SHOW_BINARIZED = true;
 const SHOW_CROPPED = true;
 const CONTEXT_MODE = "hover";
 const LETTER_EXAMPLES = 3;
@@ -28,8 +28,8 @@ class ManuscriptForm extends React.Component {
 
     /* Most of the form defaults are set here */
     this.state = {
-      showBinarized: true,
-      showCropped: true,
+      showBinarized: "unset",
+      showCropped: "unset",
       contextMode: "unset",
       letterExamples: "unset",
       cropMargin: "unset",
@@ -125,11 +125,30 @@ class ManuscriptForm extends React.Component {
     // Pass all of the form's state to the handler (which is in App)
     let formData = this.state;
 
+    let defaultFormData = {
+      selectedLetters: [],
+      selectedShelfmarks: [],
+      showBinarized: SHOW_BINARIZED,
+      showCropped: SHOW_CROPPED,
+      contextMode: CONTEXT_MODE,
+      letterExamples: LETTER_EXAMPLES,
+      cropMargin: CROP_MARGIN,
+      imageSize: IMAGE_SIZE
+    }
+
     for (let fieldName in this.state) {
       if (formData[fieldName] == "unset") {
-        formData[fieldName] = this.props.formData[fieldName];
+        if (this.props.formData.hasOwnProperty(fieldName)) {
+          formData[fieldName] = this.props.formData[fieldName];
+        } else {
+          formData[fieldName] = defaultFormData[fieldName];
+        }
       }
     }
+
+    // Clear out the query string from the address bar (only matters
+    // if the page was previously loaded from a bookmark)
+    history.pushState(null, "", location.href.split("?")[0]);
 
     this.props.formSubmit(formData);
   }
@@ -156,20 +175,17 @@ class ManuscriptForm extends React.Component {
     let selectedShelfmarks = this.reconcileFormField("selectedShelfmarks", [
       ...this.state.selectedShelfmarks
     ]);
-
     let selectedLetters = this.reconcileFormField("selectedLetters", [
       ...this.state.selectedLetters
     ]);
-
     let letterExamples = this.reconcileFormField(
       "letterExamples",
       LETTER_EXAMPLES
     );
-
+    let showBinarized = this.reconcileFormField("showBinarized", SHOW_BINARIZED);
+    let showCropped = this.reconcileFormField("showCropped", SHOW_CROPPED);
     let contextMode = this.reconcileFormField("contextMode", CONTEXT_MODE);
-
     let imageSize = this.reconcileFormField("imageSize", IMAGE_SIZE);
-
     let cropMargin = this.reconcileFormField("cropMargin", CROP_MARGIN);
 
     return (
@@ -222,7 +238,7 @@ class ManuscriptForm extends React.Component {
               name="showBinarized"
               id="showBinarized"
               onChange={this.handleChange}
-              checked={this.state.showBinarized}
+              checked={showBinarized}
             />
             {" Trimmed |"}
           </label>
@@ -236,7 +252,7 @@ class ManuscriptForm extends React.Component {
               name="showCropped"
               id="showCropped"
               onChange={this.handleChange}
-              checked={this.state.showCropped}
+              checked={showCropped}
             />
             {" Untrimmed"}
           </label>

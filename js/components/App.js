@@ -170,10 +170,6 @@ class App extends Component {
       selectedLetters
     };
 
-    //formData.isBookmark = true;
-
-    console.log(formData);
-
     this.handleSubmit(formData);
   }
 

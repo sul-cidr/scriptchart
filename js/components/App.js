@@ -153,7 +153,8 @@ class App extends Component {
     this.setState({ manuscripts });
 
     let url =
-      `${API_ROOT}letters?count=3&letter_ids=${letter_ids.join("|")}` +
+      `${API_ROOT}letters?count=${formData.letterExamples}` +
+      `&letter_ids=${letter_ids.join("|")}` +
       `&ms_ids=${manuscripts.map(ms => ms.id).join("|")}`;
 
     fetch(url)

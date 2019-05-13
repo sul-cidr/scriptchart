@@ -81,27 +81,6 @@ class LetterImage extends React.Component {
     );
   }
 
-  componentDidMount() {
-    /* The two versions of the non-binarized letter images -- basic
-     * "untrimmed" and "untrimmed with context" need to be generated
-     * on demand by the backend (cut out from the full-page images),
-     * so they are preloaded here in the browser. We also preload the
-     * binarized images even though they're just static images, because
-     * otherwise they tend to get stuck behind the slower-loading dynamic
-     * images in the browser's download queue.
-     */
-    if (this.props.showBinarized) {
-      const binarizedImage = new Image();
-      binarizedImage.src = this.props.coords.binaryurl;
-    }
-    if (this.props.showCropped) {
-      const croppedImage = new Image();
-      croppedImage.src = this.getCropURL();
-    }
-    const contextImage = new Image();
-    contextImage.src = this.getCropURL(CROP_MARGINS[this.props.cropMargin]);
-  }
-
   render() {
     let coordsWidth = this.props.coords.width;
     let coordsHeight = this.props.coords.height;

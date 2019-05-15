@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: ["script-loader!mirador/dist/mirador.min", "./js/index.jsx"],
@@ -78,6 +79,7 @@ module.exports = {
         }
       ],
       { copyUnmodified: true }
-    )
+    ),
+    new Dotenv()
   ]
 };

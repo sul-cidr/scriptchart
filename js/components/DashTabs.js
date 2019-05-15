@@ -24,6 +24,7 @@ import React from "react";
 import ScriptChart from "./ScriptChart";
 import MiradorViewer from "./MiradorViewer";
 import ChartAccordion from "./ChartAccordion";
+import BookmarkModal from "./BookmarkModal";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -31,6 +32,10 @@ import "react-tabs/style/react-tabs.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./index.css";
+
+//export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
+//export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
+export const VIEWER_ROOT = process.env.VIEWER_ROOT;
 
 class DashTabs extends React.Component {
   constructor(props) {
@@ -44,7 +49,9 @@ class DashTabs extends React.Component {
       miradorLayout: "1x1",
       tabIndex: 0,
       rowLetters: [],
-      columnManuscripts: []
+      columnManuscripts: [],
+      bookmarkURL: VIEWER_ROOT,
+      bookmarkIsOpen: false
     };
 
     this.onManifestSelected = this.onManifestSelected.bind(this);
@@ -52,17 +59,17 @@ class DashTabs extends React.Component {
     this.onColumnMove = this.onColumnMove.bind(this);
     this.onRowMove = this.onRowMove.bind(this);
     this.getMiradorParameters = this.getMiradorParameters.bind(this);
+    this.getBookmark = this.getBookmark.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   onColumnMove(labels) {
     let sourceShelfmark = labels.sourceLabel;
     let targetShelfmark = labels.targetLabel;
 
-    let columnManuscripts = [];
 
-    if (this.state.columnManuscripts.length == 0) {
-      columnManuscripts = [...this.props.manuscripts];
-    } else {
+    let columnManuscripts = [...this.props.manuscripts];
+    if (this.state.columnManuscripts.length > 0) {
       columnManuscripts = [...this.state.columnManuscripts];
     }
 
@@ -100,10 +107,8 @@ class DashTabs extends React.Component {
       return;
     }
 
-    let rowLetters = [];
-    if (this.state.rowLetters.length == 0) {
-      rowLetters = [...this.props.formData.letters];
-    } else {
+    let rowLetters = [...this.props.formData.selectedLetters];
+    if (this.state.rowLetters.length > 0) {
       rowLetters = [...this.state.rowLetters];
     }
 
@@ -117,6 +122,69 @@ class DashTabs extends React.Component {
     )[0];
 
     this.setState({ rowLetters });
+  }
+
+  closeModal() {
+    this.setState({ bookmarkIsOpen: false });
+  }
+
+  getBookmark() {
+
+    let letterNames = this.props.formData.selectedLetters.map(obj => obj.letter);
+    if (this.state.rowLetters.length > 0) {
+      letterNames = this.state.rowLetters.map(obj => obj.letter);
+    }
+
+    let msNames = this.props.formData.selectedShelfmarks;
+    if (this.state.columnManuscripts.length > 0) {
+      msNames = this.state.columnManuscripts.map(obj => obj.shelfmark);
+    }
+
+    // Chart display options are formatted <binarized, cropped, all><imagesize><hover, click><marginsize>
+    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l|x]
+    let binarizedAndOrCropped = "b";
+    if (this.props.formData.showBinarized && this.props.formData.showCropped) {
+      binarizedAndOrCropped = 'a';
+    } else if (this.props.formData.showCropped) {
+      binarizedAndOrCropped = 'c';
+    } 
+
+    let imageSize = "m";
+    if (this.props.formData.imageSize == "Large") {
+      imageSize = 'l';
+    } else if (this.props.formData.imageSize == "Small") {
+      imageSize = 's';
+    }
+
+    let hoverOrClick = 'h';
+    if (this.props.formData.contextMode == "click") {
+      hoverOrClick = 'c';
+    }
+
+    let marginSize = 'm';
+    if (this.props.formData.cropMargin == "Small") {
+      marginSize = 's';
+    } else if (this.props.formData.cropMargin == "Large") {
+      marginSize = 'l';
+    } else if (this.props.formData.cropMargin == "X-Large") {
+      marginSize = 'x';
+    }
+
+    let optionsString = binarizedAndOrCropped + imageSize + hoverOrClick + marginSize;
+
+    let formDataLink =
+      "?mss=" +
+      msNames.join('|') +
+      "&letters=" +
+      letterNames.join('|') +
+      "&examples=" +
+      this.props.formData.letterExamples +
+      "&opts=" + optionsString;
+
+    this.setState({
+      bookmarkIsOpen: true,
+      bookmarkURL: VIEWER_ROOT + formDataLink
+    });
   }
 
   /* Note that this helper function can be called before the component
@@ -257,6 +325,7 @@ class DashTabs extends React.Component {
   }
 
   render() {
+
     if (this.props.showTabs == false) {
       return (
         <div>
@@ -267,18 +336,16 @@ class DashTabs extends React.Component {
       );
     }
 
-    console.log("Rendering DashTabs");
-
     let columnManuscripts = [];
     let rowLetters = [];
 
     if (this.state.rowLetters.length == 0) {
       for (
-        let j = 0, llen = this.props.formData.letters.length;
+        let j = 0, llen = this.props.formData.selectedLetters.length;
         j < llen;
         j++
       ) {
-        rowLetters.push(this.props.formData.letters[j]);
+      rowLetters.push(this.props.formData.selectedLetters[j]);
       }
     } else {
       rowLetters = this.state.rowLetters;
@@ -306,6 +373,11 @@ class DashTabs extends React.Component {
 
     return (
       <div className="columns">
+        <BookmarkModal
+          isOpen={this.state.bookmarkIsOpen}
+          closeModal={this.closeModal}
+          bookmarkURL={this.state.bookmarkURL}
+        />
         <div className="column">
           <Tabs
             defaultFocus={true}
@@ -329,6 +401,13 @@ class DashTabs extends React.Component {
               >
                 Hidden Items
               </Tab>
+              <span>
+                <button className={"button is-info is-outlined"}
+                        style={{verticalAlign: "bottom"}}
+                        onClick={this.getBookmark}>
+                  Bookmark
+                </button>
+              </span>
             </TabList>
             <TabPanel>
               <ScriptChart

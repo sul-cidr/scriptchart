@@ -6,6 +6,7 @@ Based on [the Minimal React Webpack Babel Setup](https://www.robinwieruch.de/min
 
 - Run `bundle install`
 - Run `yarn`
+- Configure a `.env` file (see `.env_template` for details)
 
 ## Features
 

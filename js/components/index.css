@@ -73,5 +73,31 @@ td:hover {
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2
+  background-color: #f2f2f2;
+}
+
+.button-letter {
+  direction: rtl;
+  font-size: 2em;
+  vertical-align: center;
+}
+
+.chart-letter {
+  direction: rtl;
+  font-size: 3em;
+}
+
+.button-svg {
+  margin-left: 0px;
+  height: 2em;
+  vertical-align: bottom;
+}
+
+.chart-svg {
+  margin-left: 0px;
+  height: 3em;
+}
+
+.button-clicked {
+  filter: invert(1);
 }

@@ -18,7 +18,8 @@ import React, { Component } from "react";
 
 import "../../src/assets/syriac_fonts.css";
 import "./app.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import letters from "./letters.json";
 
 /* Loading fontawesome icons via React seems easier than doing
  * it via site-wide CSS */
@@ -27,18 +28,8 @@ import {
   faBookOpen,
   faTable,
   faImage
-  //faInfoCircle,
-  //faArrowRight,
-  //faArrowLeft
 } from "@fortawesome/free-solid-svg-icons";
-library.add(
-  faBookOpen,
-  faTable,
-  faImage
-  //faInfoCircle,
-  //faArrowRight,
-  //faArrowLeft
-);
+library.add(faBookOpen, faTable, faImage);
 
 /* The entire app needs to be wrapped in the drag-and-drop context */
 import HTML5Backend from "react-dnd-html5-backend";
@@ -50,8 +41,9 @@ import DashTabs from "./DashTabs";
 /* The maximum number of letter examples to load (and possibly show) */
 const MAX_EXAMPLES = 5;
 
-export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
-//export const API_ROOT = "http://localhost:8000/api/";
+// export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+// export const API_ROOT = "http://localhost:8000/api/";
+export const API_ROOT = process.env.API_ROOT;
 
 class App extends Component {
   constructor(props) {
@@ -76,6 +68,7 @@ class App extends Component {
     this.getYearFromDate = this.getYearFromDate.bind(this);
     this.sortManuscripts = this.sortManuscripts.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
+    this.handleQueryParams = this.handleQueryParams.bind(this);
   }
 
   /* The ms date field in the DB is a bit unruly. We'll do our best
@@ -108,6 +101,79 @@ class App extends Component {
     }
   }
 
+  handleQueryParams() {
+    let params = new URLSearchParams(window.location.search);
+    let queryShelfmarks = params.get("mss");
+    let queryLetters = params.get("letters");
+    let letterExamples = params.get("examples");
+    let optionsString = params.get("opts");
+
+    if (queryLetters === null || queryShelfmarks === null) {
+      return;
+    }
+
+    let selectedShelfmarks = [];
+    if (queryShelfmarks != null) {
+      selectedShelfmarks = queryShelfmarks.split('|');
+    }
+
+    let splitLetters = [];
+    if (queryLetters != null) {
+      splitLetters = queryLetters.split('|');
+    }
+    let selectedLetters = [];
+    for (let letter of splitLetters) {
+      selectedLetters.push(letters.find(lt => lt.letter == letter));
+    }
+
+    if (letterExamples == null) {
+      letterExamples = 3;
+    }
+
+    // Chart display options are formatted <binarized, cropped, all><imagesize><hover, click><marginsize>
+    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l|x]
+    let showBinarized = true;
+    let showCropped = true;
+    let contextMode = "hover";
+    let imageSize = "Medium";
+    let cropMargin = "Medium";
+    if ((optionsString != null) && (optionsString.length == 4)) {
+      if (optionsString[0] == 'b') {
+        showCropped = false;
+      } else if (optionsString[0] == 'c') {
+        showBinarized = false;
+      }
+      if (optionsString[1] == 's') {
+        imageSize = "Small";
+      } else if (optionsString[1] == 'l') {
+        imageSize = "Large";
+      }
+      if (optionsString[2] == 'c') {
+        contextMode = "click";
+      }
+      if (optionsString[3] == 's') {
+        cropMargin = "Small";
+      } else if (optionsString[3] == 'l') {
+        cropMargin = "Large";
+      } else if (optionsString[3] == 'x') {
+        cropMargin = "X-Large";
+      }
+    }
+
+    let formData = {
+      showBinarized,
+      showCropped,
+      contextMode,
+      letterExamples,
+      cropMargin,
+      imageSize,
+      selectedShelfmarks,
+      selectedLetters
+    };
+
+    this.handleSubmit(formData);
+  }
+
   sortManuscripts(orderBy, allManuscripts) {
     // If the manuscripts list in the component state has not been set,
     // use the optional function argument instead.
@@ -138,6 +204,9 @@ class App extends Component {
     );
 
     this.setState({ allManuscripts });
+
+    this.handleQueryParams();
+
   }
 
   queryManuscripts() {
@@ -151,6 +220,7 @@ class App extends Component {
   }
 
   handleSubmit(formData) {
+
     this.setState({
       showTabs: false,
       loadingMessage: "Loading manuscripts..."
@@ -158,11 +228,9 @@ class App extends Component {
 
     let manuscriptQueries = [];
     let manuscripts = [];
-    for (let ms of this.state.allManuscripts) {
-      if (formData.selectedShelfmarks.indexOf(ms.shelfmark) < 0) {
-        continue;
-      }
 
+    for (let shelfmark of formData.selectedShelfmarks) {
+      let ms = this.state.allManuscripts.find(obj => obj.shelfmark == shelfmark);
       manuscripts.push(ms);
       let msQuery = API_ROOT + "pages?manuscript_id=" + ms.id + "&format=json";
       manuscriptQueries.push(msQuery);
@@ -186,7 +254,7 @@ class App extends Component {
 
       for (let pages of msResults) {
         for (let page of pages) {
-          for (let letter of formData.letters) {
+          for (let letter of formData.selectedLetters) {
             let coordsQuery =
               API_ROOT +
               "coordinates?page_id=" +
@@ -285,9 +353,7 @@ class App extends Component {
      * get around the challenges of clearing local state on all of the
      * child components. On the other hand, the specification is that
      * submitting a new query via the form SHOULD completely reset the
-     * chart, and that's what this does. Also, the key could eventually
-     * be used as an external 'bookmark' for any specific set of
-     * letters, manuscripts, and display options.
+     * chart, and that's what this does.
      */
     let chartKey = JSON.stringify(this.state.formData) + Date.now();
 
@@ -334,6 +400,7 @@ class App extends Component {
                   formSubmit={this.handleSubmit}
                   manuscripts={this.state.allManuscripts}
                   sortManuscripts={this.sortManuscripts}
+                  formData={this.state.formData}
                 />
               </div>
             </div>

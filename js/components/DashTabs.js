@@ -34,7 +34,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 
 //export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
-export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
+//export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
+export const VIEWER_ROOT = process.env.VIEWER_ROOT;
 
 class DashTabs extends React.Component {
   constructor(props) {

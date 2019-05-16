@@ -1,13 +1,6 @@
-.mirador-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+.mirador-viewer {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    top: 0px;
 }
-
-.mirador-container .mirador-viewer {
-  position: relative;
-  width: 100%;
-  top: 0;
-  flex-grow: 1;
-}
-

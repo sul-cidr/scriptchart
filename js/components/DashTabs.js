@@ -31,6 +31,13 @@ import "react-tabs/style/react-tabs.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import "./index.css";
+import { md } from "node-forge";
+
+//export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
+//export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
+export const VIEWER_ROOT = process.env.VIEWER_ROOT;
+
 class DashTabs extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +45,7 @@ class DashTabs extends React.Component {
     this.state = {
       hiddenManuscripts: [],
       hiddenLetters: [],
-      manifestURIs: [],
+      manifestURIs: {},
       windowObjects: [],
       miradorLayout: "1x1",
       tabIndex: 0,
@@ -198,7 +205,7 @@ class DashTabs extends React.Component {
    * of the "manuscripts" prop.
    */
   getMiradorParameters() {
-    let manifestURIs = [];
+    let manifestURIs = {};
     let windowObjects = [];
     let miradorLayout = "1x1";
 
@@ -206,37 +213,33 @@ class DashTabs extends React.Component {
       if (ms.manifest === null) {
         continue;
       }
-      manifestURIs.push({ manifestUri: ms.manifest });
-      if (manifestURIs.length <= 4) {
+      manifestURIs[ms.manifest] = { provider: "DASH", id: ms.manifest };
+      //manifestURIs.push({ manifestUri: ms.manifest });
+      const manifestsLength = Object.keys(manifestURIs).length;
+      if (manifestsLength <= 4) {
         let targetSlot = "row1.column1";
-        if (manifestURIs.length == 2) {
+        if (manifestsLength == 2) {
           miradorLayout = "1x2";
           targetSlot = "row1.column2";
-        } else if (manifestURIs.length == 3) {
+        } else if (manifestsLength == 3) {
           miradorLayout = "2x2";
           targetSlot = "row2.column1";
-        } else if (manifestURIs.length == 4) {
+        } else if (manifestsLength == 4) {
           miradorLayout = "2x2";
           targetSlot = "row2.column2";
         }
-        // XXX Theoretically, could use the canvasID attrib to display a
+        // XXX Theoretically, could use the canvasIndex attrib to display a
         // specific canvas within the manifest, instead of just the
         // first page (which is usually a bland cover image). But we'd
         // need to parse the manifest and then apply some selection,
         // heuristic, like "show canvas N/2 of N".
         let windowObject = {
           loadedManifest: ms.manifest,
-          targetSlot: targetSlot,
-          viewType: "ImageView",
-          sidePanel: false,
-          displayLayout: false,
-          bottomPanel: false,
-          canvasControls: {
-            annotations: {
-              annotationLayer: false,
-              annotationCreation: false
-            }
-          }
+          thumbnailNavigationPosition: "far-bottom",
+          canvasIndex: manifestsLength
+          //targetSlot: targetSlot,
+          //viewType: "ImageView",
+          //sidePanel: false
         };
         windowObjects.push(windowObject);
       }
@@ -245,11 +248,11 @@ class DashTabs extends React.Component {
   }
 
   onManifestSelected(selectedManifestURI) {
-    let manifestURIs = [...this.state.manifestURIs];
+    let manifestURIs = this.state.manifestURIs;
     let windowObjects = [...this.state.windowObjects];
     let miradorLayout = this.state.miradorLayout;
 
-    if (manifestURIs.length == 0 && this.props.manuscripts) {
+    if (Object.keys(manifestURIs).length == 0 && this.props.manuscripts) {
       [
         manifestURIs,
         windowObjects,
@@ -289,17 +292,22 @@ class DashTabs extends React.Component {
       }
 
       let windowObject = {
-        loadedManifest: windowManifests[m],
-        targetSlot: targetSlot,
-        viewType: "ImageView",
-        sidePanel: false,
-        displayLayout: false,
-        bottomPanel: false,
-        canvasControls: {
-          annotations: {
-            annotationLayer: false,
-            annotationCreation: false
-          }
+        loadedManifest: selectedManifestURI,
+        thumbnailNavigationPosition: "far-bottom",
+        canvasIndex: manifestsLength
+        //targetSlot: "row1.column1"
+        //viewType: "ImageView",
+        //sidePanel: false
+      };
+      windowObjects.unshift(windowObject);
+
+      for (let m = 1, len = windowObjects.length; m < len; m++) {
+        if (m == 1) {
+          windowObjects[m]["targetSlot"] = "row1.column2";
+        } else if (m == 2) {
+          windowObjects[m]["targetSlot"] = "row2.column1";
+        } else if (m == 3) {
+          windowObjects[m]["targetSlot"] = "row2.column2";
         }
       };
 
@@ -420,11 +428,11 @@ class DashTabs extends React.Component {
       columnManuscripts = this.state.columnManuscripts;
     }
 
-    let manifestURIs = [...this.state.manifestURIs];
+    let manifestURIs = this.state.manifestURIs;
     let windowObjects = [...this.state.windowObjects];
     let miradorLayout = this.state.miradorLayout;
 
-    if (manifestURIs.length == 0 && this.props.manuscripts) {
+    if (Object.keys(manifestURIs).length == 0 && this.props.manuscripts) {
       [
         manifestURIs,
         windowObjects,
@@ -443,66 +451,61 @@ class DashTabs extends React.Component {
           bookmarkURL={this.state.bookmarkURL}
           closeModal={this.closeModal}
         />
-        <TabList>
-          <Tab>
-            <FontAwesomeIcon className={"tab-icon"} icon="table" /> Scriptchart
-          </Tab>
-          <Tab>
-            <FontAwesomeIcon className={"tab-icon"} icon="image" /> Manuscripts
-          </Tab>
-          <Tab
-            disabled={
-              this.state.hiddenManuscripts.length == 0 &&
-              this.state.hiddenLetters.length == 0
-            }
-          >
-            Hidden Items
-          </Tab>
-          <span>
-            <button
-              className={"button is-info is-outlined"}
-              style={{ verticalAlign: "bottom" }}
-              onClick={() =>
-                this.setState({
-                  bookmarkIsOpen: true,
-                  bookmarkURL: this.getBookmark()
-                })
-              }
-            >
-              Bookmark
-            </button>
-          </span>
-        </TabList>
-        <TabPanel>
-          <ScriptChart
-            onHiddenChange={this.onHiddenChange}
-            hiddenManuscripts={this.state.hiddenManuscripts}
-            hiddenLetters={this.state.hiddenLetters}
-            onManifestSelected={this.onManifestSelected}
-            formData={this.props.formData}
-            tableData={this.props.tableData}
-            columnManuscripts={columnManuscripts}
-            rowLetters={rowLetters}
-            onRowMove={this.onRowMove}
-            onColumnMove={this.onColumnMove}
-          />
-        </TabPanel>
-        <TabPanel>
-          <MiradorViewer
-            manifestURIs={manifestURIs}
-            miradorLayout={miradorLayout}
-            windowObjects={windowObjects}
-          />
-        </TabPanel>
-        <TabPanel>
-          <ChartAccordion
-            onHiddenChange={this.onHiddenChange}
-            columnManuscripts={columnManuscripts}
-            hiddenManuscripts={this.state.hiddenManuscripts}
-            hiddenLetters={this.state.hiddenLetters}
-          />
-        </TabPanel>
-      </Tabs>
+            <TabList>
+              <Tab>
+                <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
+                Scriptchart
+              </Tab>
+              <Tab>
+                <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
+                Manuscripts
+              </Tab>
+              <Tab
+                disabled={
+                  this.state.hiddenManuscripts.length == 0 &&
+                  this.state.hiddenLetters.length == 0
+                }
+              >
+                Hidden Items
+              </Tab>
+              <span>
+                <button className={"button is-info is-outlined"}
+                        style={{verticalAlign: "bottom"}}
+                        onClick={this.getBookmark}>
+                  Bookmark
+                </button>
+              </span>
+            </TabList>
+            <TabPanel>
+              <ScriptChart
+                onHiddenChange={this.onHiddenChange}
+                hiddenManuscripts={this.state.hiddenManuscripts}
+                hiddenLetters={this.state.hiddenLetters}
+                onManifestSelected={this.onManifestSelected}
+                formData={this.props.formData}
+                tableData={this.props.tableData}
+                columnManuscripts={columnManuscripts}
+                rowLetters={rowLetters}
+                onRowMove={this.onRowMove}
+                onColumnMove={this.onColumnMove}
+              />
+            </TabPanel>
+            <TabPanel>
+              <MiradorViewer
+                manifests={manifestURIs}
+                miradorLayout={miradorLayout}
+                windowObjects={windowObjects}
+              />
+            </TabPanel>
+            <TabPanel>
+              <ChartAccordion
+                onHiddenChange={this.onHiddenChange}
+                columnManuscripts={columnManuscripts}
+                hiddenManuscripts={this.state.hiddenManuscripts}
+                hiddenLetters={this.state.hiddenLetters}
+              />
+            </TabPanel>
+          </Tabs>
     );
   }
 }

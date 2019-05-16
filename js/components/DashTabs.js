@@ -32,6 +32,7 @@ import "react-tabs/style/react-tabs.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./index.css";
+import { md } from "node-forge";
 
 //export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
 //export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
@@ -44,7 +45,7 @@ class DashTabs extends React.Component {
     this.state = {
       hiddenManuscripts: [],
       hiddenLetters: [],
-      manifestURIs: [],
+      manifestURIs: {},
       windowObjects: [],
       miradorLayout: "1x1",
       tabIndex: 0,
@@ -193,7 +194,7 @@ class DashTabs extends React.Component {
    * of the "manuscripts" prop.
    */
   getMiradorParameters() {
-    let manifestURIs = [];
+    let manifestURIs = {};
     let windowObjects = [];
     let miradorLayout = "1x1";
 
@@ -201,29 +202,33 @@ class DashTabs extends React.Component {
       if (ms.manifest === null) {
         continue;
       }
-      manifestURIs.push({ manifestUri: ms.manifest });
-      if (manifestURIs.length <= 4) {
+      manifestURIs[ms.manifest] = { provider: "DASH", id: ms.manifest };
+      //manifestURIs.push({ manifestUri: ms.manifest });
+      const manifestsLength = Object.keys(manifestURIs).length;
+      if (manifestsLength <= 4) {
         let targetSlot = "row1.column1";
-        if (manifestURIs.length == 2) {
+        if (manifestsLength == 2) {
           miradorLayout = "1x2";
           targetSlot = "row1.column2";
-        } else if (manifestURIs.length == 3) {
+        } else if (manifestsLength == 3) {
           miradorLayout = "2x2";
           targetSlot = "row2.column1";
-        } else if (manifestURIs.length == 4) {
+        } else if (manifestsLength == 4) {
           miradorLayout = "2x2";
           targetSlot = "row2.column2";
         }
-        // XXX Theoretically, could use the canvasID attrib to display a
+        // XXX Theoretically, could use the canvasIndex attrib to display a
         // specific canvas within the manifest, instead of just the
         // first page (which is usually a bland cover image). But we'd
         // need to parse the manifest and then apply some selection,
         // heuristic, like "show canvas N/2 of N".
         let windowObject = {
           loadedManifest: ms.manifest,
-          targetSlot: targetSlot,
-          viewType: "ImageView",
-          sidePanel: false
+          thumbnailNavigationPosition: "far-bottom",
+          canvasIndex: manifestsLength
+          //targetSlot: targetSlot,
+          //viewType: "ImageView",
+          //sidePanel: false
         };
         windowObjects.push(windowObject);
       }
@@ -232,11 +237,11 @@ class DashTabs extends React.Component {
   }
 
   onManifestSelected(selectedManifestURI) {
-    let manifestURIs = [...this.state.manifestURIs];
+    let manifestURIs = this.state.manifestURIs;
     let windowObjects = [...this.state.windowObjects];
     let miradorLayout = this.state.miradorLayout;
 
-    if (manifestURIs.length == 0 && this.props.manuscripts) {
+    if (Object.keys(manifestURIs).length == 0 && this.props.manuscripts) {
       [
         manifestURIs,
         windowObjects,
@@ -254,9 +259,11 @@ class DashTabs extends React.Component {
       }
       let windowObject = {
         loadedManifest: selectedManifestURI,
-        targetSlot: "row1.column1",
-        viewType: "ImageView",
-        sidePanel: false
+        thumbnailNavigationPosition: "far-bottom",
+        canvasIndex: manifestsLength
+        //targetSlot: "row1.column1"
+        //viewType: "ImageView",
+        //sidePanel: false
       };
       windowObjects.unshift(windowObject);
 
@@ -359,11 +366,11 @@ class DashTabs extends React.Component {
       columnManuscripts = this.state.columnManuscripts;
     }
 
-    let manifestURIs = [...this.state.manifestURIs];
+    let manifestURIs = this.state.manifestURIs;
     let windowObjects = [...this.state.windowObjects];
     let miradorLayout = this.state.miradorLayout;
 
-    if (manifestURIs.length == 0 && this.props.manuscripts) {
+    if (Object.keys(manifestURIs).length == 0 && this.props.manuscripts) {
       [
         manifestURIs,
         windowObjects,
@@ -425,7 +432,7 @@ class DashTabs extends React.Component {
             </TabPanel>
             <TabPanel>
               <MiradorViewer
-                manifestURIs={manifestURIs}
+                manifests={manifestURIs}
                 miradorLayout={miradorLayout}
                 windowObjects={windowObjects}
               />

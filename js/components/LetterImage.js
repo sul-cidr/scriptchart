@@ -16,7 +16,7 @@ import React from "react";
 
 import PopupImage from "./PopupImage";
 
-import { API_ROOT } from "./App";
+import { API_ROOT, IMAGE_SERVER_ROOT } from "./App";
 
 import "./index.css";
 
@@ -81,6 +81,22 @@ class LetterImage extends React.Component {
     );
   }
 
+  composeImageURL(imageType) {
+    return `${IMAGE_SERVER_ROOT}${imageType}/` +
+      `${this.props.msSlug}/${this.props.coords.page}_` +
+      `${this.props.letter}_${this.props.coords.left}_` +
+      `${this.props.coords.top}_${this.props.coords.width}_` +
+      `${this.props.coords.height}.png`;
+  }
+
+  composeTrimmedImageURL() {
+    return this.composeImageURL("trimmed");
+  }
+
+  composeUntrimmedImageURL() {
+    return this.composeImageURL("untrimmed");
+  }
+
   render() {
     let coordsWidth = this.props.coords.width;
     let coordsHeight = this.props.coords.height;
@@ -117,13 +133,14 @@ class LetterImage extends React.Component {
     );
 
     if (this.props.showBinarized) {
+      let trimmedImageURL = this.composeTrimmedImageURL();
       let binarizedImage = (
         <img
           alt={this.props.letter}
           ref="binarized"
           width={dims.width}
           height={dims.height}
-          src={this.props.coords.binaryurl}
+          src={trimmedImageURL}
         />
       );
 
@@ -139,7 +156,7 @@ class LetterImage extends React.Component {
     }
 
     if (this.props.showCropped) {
-      let cropURL = this.getCropURL();
+      let untrimmedImageURL = this.composeUntrimmedImageURL();
 
       let croppedImage = (
         <img
@@ -147,7 +164,7 @@ class LetterImage extends React.Component {
           ref="cropped"
           width={dims.width}
           height={dims.height}
-          src={cropURL}
+          src={untrimmedImageURL}
         />
       );
 

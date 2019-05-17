@@ -58,8 +58,6 @@ class App extends Component {
         'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
     };
 
-    //this.queryCache = {}; // XXX Just let the browser cache handle this?
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.queryManuscripts = this.queryManuscripts.bind(this);
     this.getYearFromDate = this.getYearFromDate.bind(this);

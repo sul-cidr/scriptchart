@@ -109,9 +109,9 @@ class ScriptChart extends React.Component {
             .map(coords => {
               return (
                 <LetterImage
-                  key={coords.id}
                   letter={this.props.rowLetters[i].letter}
                   coords={coords}
+                  msSlug={this.props.columnManuscripts[j].slug}
                   imageSize={this.props.formData.imageSize}
                   showBinarized={this.props.formData.showBinarized}
                   showCropped={this.props.formData.showCropped}

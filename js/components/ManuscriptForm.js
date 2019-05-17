@@ -24,7 +24,7 @@ class ManuscriptForm extends React.Component {
       showCropped: true,
       contextMode: "hover",
       letterExamples: 3,
-      cropMargin: "Medium",
+      contextSize: "med",
       imageSize: "Medium",
       selectedShelfmarks: [],
       letters: []
@@ -35,7 +35,7 @@ class ManuscriptForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
-    this.changeCropMargin = this.changeCropMargin.bind(this);
+    this.changeContextSize = this.changeContextSize.bind(this);
     this.changeContextMode = this.changeContextMode.bind(this);
   }
 
@@ -45,10 +45,10 @@ class ManuscriptForm extends React.Component {
     this.setState({ contextMode });
   }
 
-  changeCropMargin(event) {
-    const cropMargin = event.target.value;
+  changeContextSize(event) {
+    const contextSize = event.target.value;
 
-    this.setState({ cropMargin });
+    this.setState({ contextSize });
   }
 
   buttonChange(letterID, operation) {
@@ -258,21 +258,21 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <label htmlFor="cropMargin" className={"control"}>
+          <label htmlFor="contextSize" className={"control"}>
             Context size:{" "}
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={this.state.cropMargin}
+              value={this.state.contextSize}
               type="string"
-              name="cropMargin"
-              id="cropMargin"
-              onChange={this.changeCropMargin}
+              name="contextSize"
+              id="contextSize"
+              onChange={this.changeContextSize}
             >
-              <option>Small</option>
-              <option>Medium</option>
-              <option>Large</option>
-              <option>X-Large</option>
+              <option value="small">Small</option>
+              <option value="med">Medium</option>
+              <option value="large">Large</option>
+              <option value="xl">X-Large</option>
             </select>
           </div>
         </div>

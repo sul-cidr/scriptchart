@@ -16,23 +16,17 @@ import React from "react";
 
 import PopupImage from "./PopupImage";
 
-import { API_ROOT, IMAGE_SERVER_ROOT } from "./App";
+import { IMAGE_SERVER_ROOT } from "./App";
 
 import "./index.css";
 
 // Size of the largest dimension of the non-contextual letter images
 const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
-// Ratio of the contextual margin size to the dimensions of the non-contextual
-// image (Small = resulting image is 1.5 times as long and wide;
-// Medium = resulting image is twice as long/wide, Large = 3X, X-Large = 5X)
-const CROP_MARGINS = { Small: 0.25, Medium: 0.5, Large: 1, "X-Large": 2 };
 
 class LetterImage extends React.Component {
   constructor(props) {
     super(props);
-
     this.resizeKeepAspect = this.resizeKeepAspect.bind(this);
-    this.getCropURL = this.getCropURL.bind(this);
   }
 
   resizeKeepAspect(inWidth, inHeight, maxDim) {
@@ -42,43 +36,6 @@ class LetterImage extends React.Component {
     } else {
       return { height: maxDim, width: Math.round(maxDim / hwRatio) };
     }
-  }
-
-  getCropURL(marginRatio = 0) {
-    /* Compute dimensions of the cropped manuscript image, including any
-     * user-specified contextual margin around it, and construct a URL
-     * to request this image from the backend.
-     */
-
-    let xMarginSize = Math.round(this.props.coords.width * marginRatio);
-    let yMarginSize = Math.round(this.props.coords.height * marginRatio);
-
-    let leftExpanded = Math.max(0, this.props.coords.left - xMarginSize);
-    let topExpanded = Math.max(0, this.props.coords.top - yMarginSize);
-    let rightExpanded = Math.min(
-      this.props.coords.pagewidth,
-      this.props.coords.left + this.props.coords.width + xMarginSize
-    );
-    let widthExpanded = rightExpanded - leftExpanded;
-    let bottomExpanded = Math.min(
-      this.props.coords.pageheight,
-      this.props.coords.top + this.props.coords.height + yMarginSize
-    );
-    let heightExpanded = bottomExpanded - topExpanded;
-
-    return (
-      API_ROOT +
-      "crop?page_url=" +
-      this.props.coords.pageurl +
-      "&x=" +
-      leftExpanded +
-      "&y=" +
-      topExpanded +
-      "&w=" +
-      widthExpanded +
-      "&h=" +
-      heightExpanded
-    );
   }
 
   composeImageURL(imageType) {
@@ -97,6 +54,10 @@ class LetterImage extends React.Component {
     return this.composeImageURL("untrimmed");
   }
 
+  composeContextImageURL(contextSize) {
+    return this.composeImageURL(`context/${contextSize}`);
+  }
+
   render() {
     let coordsWidth = this.props.coords.width;
     let coordsHeight = this.props.coords.height;
@@ -110,24 +71,17 @@ class LetterImage extends React.Component {
     let binarizedDiv = "";
     let croppedDiv = "";
 
-    /* Compute the size of the context-inclusive image */
-    let cropMargin = parseFloat(CROP_MARGINS[this.props.cropMargin]);
-
-    let contextURL = this.getCropURL(cropMargin);
-
-    let contextWidth = dims.width + 2 * Math.round(dims.width * cropMargin);
-    let contextHeight = dims.height + 2 * Math.round(dims.height * cropMargin);
-
     /* The context-inclusive image should always be loaded -- it will always
      * be displayed as a popup of the binarized or "untrimmed" image on click
      * or hover.
      */
+
+    let contextURL = this.composeContextImageURL(this.props.contextSize);
+
     let contextImage = (
       <img
         alt={this.props.letter}
         ref="context"
-        width={contextWidth}
-        height={contextHeight}
         src={contextURL}
       />
     );
@@ -149,8 +103,6 @@ class LetterImage extends React.Component {
           triggerImage={binarizedImage}
           contextMode={this.props.contextMode}
           contextImage={contextImage}
-          contextWidth={contextWidth}
-          contextHeight={contextHeight}
         />
       );
     }
@@ -173,8 +125,6 @@ class LetterImage extends React.Component {
           triggerImage={croppedImage}
           contextMode={this.props.contextMode}
           contextImage={contextImage}
-          contextWidth={contextWidth}
-          contextHeight={contextHeight}
         />
       );
     }

@@ -5,12 +5,12 @@ permalink: /participants/
 include: true
 ---
 
-### Principle Investigator:
+### Principal Investigator:
 
 - Michael Penn, Department Religious Studies, Stanford University
 
 
-### Associate Principle Investigators:
+### Associate Principal Investigators:
 - Nicholas Howe, Department of Computer Science, Smith College
 - R. Jordan Crouser, Department of Computer Science, Smith College
 
@@ -23,7 +23,7 @@ include: true
 - Simon Jon Wiles
 
 
-### Stanford Libraries, Stanford Digital Depository:
+### Stanford Libraries, Stanford Digital Repository:
 - Benjamin Albritton
 
 
@@ -50,13 +50,13 @@ include: true
 ### Research Assistants:
 - Hanna Baptist
 - Christine Barney
-- Minyue Dai
 - Alexandra Brennan
 - Rachyl Carey
-- Cass Fernandez-Dieguez
 - Kaylynn Crawford
+- Minyue Dai
 - Emma Dalton
 - Giovanna Diaz
+- Cass Fernandez-Dieguez
 - Robin Graney
 - Elizabeth Knoll
 - Gabrielle Lachtrup

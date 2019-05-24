@@ -18,9 +18,9 @@ include: true
 ### Stanford Libraries, CIDR Development Team:
 - Vijoy Abraham
 - Scott Bailey
-- Peter Broadwell 
+- Peter Broadwell
 - Javier de la Rosa
-- Simon Jon Wiles
+- Simon Wiles
 
 
 ### Stanford Libraries, Stanford Digital Repository:
@@ -73,9 +73,9 @@ include: true
 - Sara Therrien
 - Renee Wah
 - Stephanie Xie
-- Alice Yang 
+- Alice Yang
 - Kira Yates
 
 
 
-We are particularly grateful for funding support from the American Council of Learned Societies (through an ACLS Digital Extension Grant), the Andrew W. Mellon Foundation (through a Five College Digital Humanities Grant), the American Academy of Religion (through an AAR Research Grant), a Roberta Bowman Denning Grant in the Digital Humanities, Mount Holyoke College, Smith College, Stanford University, and for development support from the Stanford Libraries. 
+We are particularly grateful for funding support from the American Council of Learned Societies (through an ACLS Digital Extension Grant), the Andrew W. Mellon Foundation (through a Five College Digital Humanities Grant), the American Academy of Religion (through an AAR Research Grant), a Roberta Bowman Denning Grant in the Digital Humanities, Mount Holyoke College, Smith College, Stanford University, and for development support from the Stanford Libraries.

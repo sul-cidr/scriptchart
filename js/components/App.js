@@ -189,62 +189,58 @@ class App extends Component {
     let chartKey = JSON.stringify(this.state.formData) + Date.now();
 
     return (
-      <div className="App">
-        <div className={"columns main-content"}>
-          <div
-            className={
-              "button column is-narrow closed-menu " +
-              (!this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
-            }
-            onClick={this.toggleSidebar}
-          >
-            <i
-              className="fa fa-arrow-right"
-              title="Open the viewer options form."
-              style={{ cursor: "pointer" }}
-            />
-          </div>
-          <div
-            className={
-              "column is-one-fifth " +
-              (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
-            }
-          >
-            <div className={"box small-padding"}>
-              <div className={"box-header columns"}>
-                <div className={"column is-three-quarters"}>
-                  <h4 className={"title is-5"}>Viewer options</h4>
-                </div>
-                <div className={"column is-one-quarter"}>
-                  <span className={"icon arrow-button"}>
-                    <i
-                      className="fa fa-arrow-left"
-                      title="Close the viewer options form."
-                      onClick={this.toggleSidebar}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </span>
-                </div>
-              </div>
-              <div className={"box-content"}>
-                <ManuscriptForm
-                  formSubmit={this.handleSubmit}
-                  manuscripts={this.state.allManuscripts}
-                  sortManuscripts={this.sortManuscripts}
+      <div className="scriptchart-app">
+        <div
+          className={
+            "button " +
+            (!this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
+          }
+          onClick={this.toggleSidebar}
+        >
+          <i
+            className="fa fa-arrow-right"
+            title="Open the viewer options form."
+            style={{ cursor: "pointer" }}
+          />
+        </div>
+        <div
+          className={
+            "sidebar box small-padding " +
+            (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
+          }
+        >
+          <div className={"box-header columns"}>
+            <div className={"column is-three-quarters"}>
+              <h4 className={"title is-5"}>Viewer options</h4>
+            </div>
+            <div className={"column is-one-quarter"}>
+              <span className={"icon arrow-button"}>
+                <i
+                  className="fa fa-arrow-left"
+                  title="Close the viewer options form."
+                  onClick={this.toggleSidebar}
+                  style={{ cursor: "pointer" }}
                 />
-              </div>
+              </span>
             </div>
           </div>
-          <div className={"column"}>
-            <DashTabs
-              key={chartKey}
-              showTabs={this.state.showTabs}
-              formData={this.state.formData}
-              tableData={this.state.tableData}
-              manuscripts={this.state.manuscripts}
-              loadingMessage={this.state.loadingMessage}
+          <div className={"box-content"}>
+            <ManuscriptForm
+              formSubmit={this.handleSubmit}
+              manuscripts={this.state.allManuscripts}
+              sortManuscripts={this.sortManuscripts}
             />
           </div>
+        </div>
+        <div className="scriptchart">
+          <DashTabs
+            key={chartKey}
+            showTabs={this.state.showTabs}
+            formData={this.state.formData}
+            tableData={this.state.tableData}
+            manuscripts={this.state.manuscripts}
+            loadingMessage={this.state.loadingMessage}
+          />
         </div>
       </div>
     );

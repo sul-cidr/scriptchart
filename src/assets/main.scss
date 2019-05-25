@@ -10,24 +10,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-// Colors
-
-$off-white: darken(white, 10%);
-
-// custom variables used by Bulma; have to be set before importing bulma
-$navbar-background-color: #990000;
-$navbar-item-color: $off-white;
-$navbar-item-hover-color: lighten($off-white, 20%);
-$navbar-item-hover-background-color: darken(#990000, 5%);
-$navbar-color-transparent: rgba(153, 0, 0, 0.6);
-$navbar-dropdown-arrow: $off-white;
-$navbar-dropdown-background-color: $navbar-background-color;
-$navbar-dropdown-item-hover-background-color: $navbar-item-hover-background-color;
-$navbar-dropdown-item-hover-color: $navbar-item-hover-color;
-$navbar-dropdown-offset: 10px;
-
-$primary: $navbar-background-color;
-
+@import "../_sass/colors.scss";
 @import "../../node_modules/bulma/bulma.sass";
 @import "../_sass/layout.scss";
 @import "../_sass/app.scss";

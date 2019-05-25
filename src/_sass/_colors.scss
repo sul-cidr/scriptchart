@@ -1,0 +1,44 @@
+
+// standards
+$white: #fff;
+$black: #000;
+$gray: #909090;
+
+// stanford colours -- https://identity.stanford.edu/color.html#digital-color
+$cardinal: #8c1515;
+$sandstone: #d2c295;
+$light-sandstone: #f9f6ef;
+$sandhill: #b3995d;
+$stone: #544948;
+$cloud: #dad7cb;
+$light-sage: #c7d1c5;
+$fog: #f4f4f4;
+$driftwood: #b6b1a9;
+$cool-grey: #4d4f53;
+$clay: #5f574f;
+
+// project local colors
+$off-white: darken($white, 10%);
+
+// specify some bulma colors
+$primary: $cardinal;
+
+// add a secondary color
+$secondary: $clay;
+$secondary-invert: findColorInvert($secondary) !default;
+
+$custom-colors: (
+  "secondary":($secondary, $secondary-invert),
+);
+
+// more custom variables used by Bulma; have to be set before importing bulma
+$navbar-background-color: $cardinal;
+$navbar-item-color: $off-white;
+$navbar-item-hover-color: lighten($off-white, 20%);
+$navbar-item-hover-background-color: darken($cardinal, 5%);
+$navbar-color-transparent: rgba(153, 0, 0, 0.6);
+$navbar-dropdown-arrow: $off-white;
+$navbar-dropdown-background-color: $navbar-background-color;
+$navbar-dropdown-item-hover-background-color: $navbar-item-hover-background-color;
+$navbar-dropdown-item-hover-color: $navbar-item-hover-color;
+$navbar-dropdown-offset: 10px;

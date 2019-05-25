@@ -16,6 +16,8 @@ import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
 import * as Sticky from "reactabular-sticky";
 
+//import withDragDropContext from './withDragDropContext';
+
 class DragTable extends React.Component {
   constructor(props) {
     super(props);
@@ -91,3 +93,5 @@ class DragTable extends React.Component {
 }
 
 export default DragTable;
+//export default DragDropContext(HTML5Backend)(DragTable);
+//export default withDragDropContext(DragTable);

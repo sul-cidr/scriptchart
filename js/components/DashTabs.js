@@ -22,9 +22,13 @@ import React from "react";
  */
 
 import ScriptChart from "./ScriptChart";
-import MiradorViewer from "./MiradorViewer";
 import ChartAccordion from "./ChartAccordion";
 import BookmarkModal from "./BookmarkModal";
+
+// Alternative way to embed Mirador, see
+// https://github.com/ProjectMirador/mirador/issues/2627
+import MiradorViewer from "./MiradorViewer";
+//import Mirador from "./Mirador";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -32,7 +36,6 @@ import "react-tabs/style/react-tabs.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./index.css";
-import { md } from "node-forge";
 
 //export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
 //export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
@@ -436,6 +439,10 @@ class DashTabs extends React.Component {
                 miradorLayout={miradorLayout}
                 windowObjects={windowObjects}
               />
+              {/*<Mirador config={{ id: "mirador",
+                                 manifests: manifestURIs,
+                                 windows=this.props.windowObjects
+             }} />*/}
             </TabPanel>
             <TabPanel>
               <ChartAccordion

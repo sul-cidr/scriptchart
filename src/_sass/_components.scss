@@ -2,10 +2,6 @@
   padding: 0px 0px;
 }
 
-.tab-icon {
-  color: #0000FF;
-}
-
 .letter-block {
   display: inline-block;
 }
@@ -137,4 +133,8 @@ tr:nth-child(even) {
 
     .button { margin: 2px !important; }
   }
+}
+
+.tab-icon, .header-icon {
+  color: $primary;
 }

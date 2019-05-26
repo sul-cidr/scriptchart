@@ -38,7 +38,6 @@ class ColumnControls extends React.Component {
         <div className="header-icon">
           <FontAwesomeIcon
             title="Show this manuscript in the Mirador viewer"
-            color="#0000FF"
             icon="book-open"
             onClick={this.showManifest}
           />

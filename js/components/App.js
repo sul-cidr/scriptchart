@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactTooltip from "react-tooltip";
 
 /* App - The root application component, rendered by index.jsx.
  * Contains the scriptchart configuration form and main tabs
@@ -268,6 +269,7 @@ class App extends Component {
 
     return (
       <div className="scriptchart-app">
+        <ReactTooltip place="top" type="dark" effect="solid" />
         <div
           className={
             "button " +

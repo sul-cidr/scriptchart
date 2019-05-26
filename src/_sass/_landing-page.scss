@@ -1,0 +1,86 @@
+.has-bg-img {
+  background: rgba(0, 0, 0, 0.6);
+
+  .title {
+    color: $navbar-item-color;
+  }
+
+  .subtitle {
+    color: $navbar-item-color;
+  }
+
+  .subtitle:hover {
+    color: $navbar-item-hover-color;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    background: url('./img/HMML-background-image_JPG.jpg') no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
+  }
+}
+
+.hero {
+  flex-grow: 1;
+
+  .navbar-brand, .site-footer {
+    background-color: $navbar-color-transparent;
+  }
+}
+
+.hero-body {
+  align-items: center;
+  display: flex;
+
+  .title {
+    color: $navbar-item-color;
+    font-family: $family-primary;
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    color: $navbar-item-color;
+
+    &:hover {
+      color: $navbar-item-hover-color;
+    }
+  }
+}
+
+.button.get-started {
+  background-color: $header-and-footer-bg;
+
+  &:hover {
+    background-color: darken($header-and-footer-bg, 5%);
+  }
+}
+
+
+.hero-head .navbar-menu {
+  background: $navbar-color-transparent;
+  box-shadow: none;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .navbar-item:hover {
+    background-color: darken($navbar-color-transparent, 5%);
+  }
+
+  @include desktop {
+    .navbar-dropdown {
+      background-color: $navbar-color-transparent;
+      border-top: 2px solid $navbar-color-transparent;
+
+      .navbar-item:hover {
+        background-color: darken($navbar-color-transparent, 5%);
+      }
+    }
+  }
+}

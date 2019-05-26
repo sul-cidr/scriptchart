@@ -1,0 +1,28 @@
+.navbar {
+  background: none;
+}
+.navbar-brand, .navbar-menu, .site-footer {
+  background: $header-and-footer-bg;
+}
+.navbar-menu {
+  box-shadow: none;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .navbar-item:hover {
+    background-color: darken($header-and-footer-bg, 5%);
+  }
+}
+
+.navbar-brand .title {
+  color: $off-white;
+}
+
+.navbar-title {
+  margin: initial;
+}
+
+.navbar-burger {
+  margin-top: 0;
+  height: inherit;
+}

@@ -1,106 +1,17 @@
-body {
-  -webkit-font-smoothing: antialiased;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import "./fonts/syriac_fonts.css";
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-@import "../_sass/colors.scss";
+@import "../_sass/definitions.scss";
 @import "../../node_modules/bulma/bulma.sass";
-@import "../_sass/layout.scss";
+
+@import "../_sass/animations.scss";
 @import "../_sass/app.scss";
 @import "../_sass/components.scss";
+@import "../_sass/contact-page.scss";
+@import "../_sass/help-page.scss";
+@import "../_sass/landing-page.scss";
+@import "../_sass/layout.scss";
+@import "../_sass/navbar.scss";
+@import "../_sass/scriptchart-sidebar.scss";
 @import "../_sass/scriptchart-table.scss";
-@import "./fonts/syriac_fonts.css";
-@import "../_sass/animations.scss";
-
-.navbar-brand .title {
-  color: $off-white;
-}
-
-.navbar-title {
-  margin: initial;
-}
-
-.navbar-burger {
-  margin-top: 0em;
-  height: inherit;
-}
-
-.has-bg-img {
-  background: rgba(0, 0, 0, 0.6);
-
-  .title {
-    color: $navbar-item-color;
-  }
-
-  .subtitle {
-    color: $navbar-item-color;
-  }
-
-  .subtitle:hover {
-    color: $navbar-item-hover-color;
-  }
-}
-
-.has-bg-img:after {
-  content: "";
-  position: absolute;
-  background: url('./img/HMML-background-image_JPG.jpg') no-repeat;
-  background-size: cover;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  opacity: 0.5;
-}
-
-.hero-head .navbar-menu {
-  background: $navbar-color-transparent;
-  box-shadow: none;
-  padding-top: 0;
-  padding-bottom: 0;
-
-  .navbar-item:hover {
-    background-color: darken($navbar-color-transparent, 5%);
-  }
-
-  @include desktop {
-    .navbar-dropdown {
-      background-color: $navbar-color-transparent;
-      border-top: 2px solid $navbar-color-transparent;
-
-      .navbar-item:hover {
-        background-color: darken($navbar-color-transparent, 5%);
-      }
-    }
-  }
-}
-
-#start-button {
-  background-color: $navbar-color-transparent;
-}
-
-#start-button:hover {
-  background-color: darken($navbar-color-transparent, 5%);
-}
-
-#contact-embed {
-  display: flex;
-  flex: 1;
-  width: 100%;
-}
-
-.help-image-sm {
-  max-height: 40vh;
-}
-
-.help-image-lg {
-  max-height: 60vh;
-}
+@import "../_sass/syriac-spinner.scss";
+@import "../_sass/viewer.scss";

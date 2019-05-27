@@ -27,6 +27,18 @@ class ScriptChart extends React.Component {
   constructor(props) {
     super(props);
 
+    /* This component cannot be allowed to render until it is mounted,
+     * because this is the only way to know for sure that the Mirador
+     * component (in the adjacent tab) has been fully unmounted.
+     * If the components exist at the same time, the app will crash with
+     * a 'Cannot have two HTM5 backends at the same time' error because
+     * both the scripchart and the Mirador 3 Mosaic view using a react-dnd
+     * contenxt, and none of the packages is designed correctly to allow
+     * easy sharing of the context. See
+     * https://github.com/facebook/react/issues/11106#issuecomment-418591660
+     */
+    this.state = { mounted: false };
+
     this.getRows = this.getRows.bind(this);
     this.getColumns = this.getColumns.bind(this);
     this.onRow = this.onRow.bind(this);
@@ -187,8 +199,17 @@ class ScriptChart extends React.Component {
     this.props.onHiddenChange("hide", "row", letterID);
   }
 
+  componentDidMount() {
+    console.log("script chart mounted");
+    this.setState({mounted: true});
+  }
+
   render() {
     console.log("Rendering ScriptChart");
+
+    if (this.state.mounted == false) {
+      return (<div></div>);
+    }
 
     let rows = this.getRows();
     let columns = this.getColumns();

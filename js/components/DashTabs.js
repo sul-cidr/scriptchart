@@ -264,9 +264,8 @@ class DashTabs extends React.Component {
         layoutOrder: windowLayoutOrder
       }
       this.state.miradorState.dispatch(actions.addWindow(windowProps));
-
-      this.setState({ tabIndex: 1 });
     }
+    this.setState({ tabIndex: 1 });
   }
 
   onHiddenChange(showOrHide, rowOrColumn, itemID) {

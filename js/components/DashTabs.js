@@ -45,7 +45,6 @@ class DashTabs extends React.Component {
       tabIndex: 0,
       rowLetters: [],
       columnManuscripts: [],
-      bookmarkURL: null,
       bookmarkIsOpen: false
     };
 
@@ -54,7 +53,6 @@ class DashTabs extends React.Component {
     this.onColumnMove = this.onColumnMove.bind(this);
     this.onRowMove = this.onRowMove.bind(this);
     this.getMiradorParameters = this.getMiradorParameters.bind(this);
-    this.getBookmark = this.getBookmark.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
@@ -62,8 +60,11 @@ class DashTabs extends React.Component {
     let sourceShelfmark = labels.sourceLabel;
     let targetShelfmark = labels.targetLabel;
 
-    let columnManuscripts = [...this.props.manuscripts];
-    if (this.state.columnManuscripts.length > 0) {
+    let columnManuscripts = [];
+
+    if (this.state.columnManuscripts.length == 0) {
+      columnManuscripts = [...this.props.submittedFormState.selectedManuscripts];
+    } else {
       columnManuscripts = [...this.state.columnManuscripts];
     }
 
@@ -101,8 +102,10 @@ class DashTabs extends React.Component {
       return;
     }
 
-    let rowLetters = [...this.props.formData.letters];
-    if (this.state.rowLetters.length > 0) {
+    let rowLetters = [];
+    if (this.state.rowLetters.length == 0) {
+      rowLetters = [...this.props.submittedFormState.letters];
+    } else {
       rowLetters = [...this.state.rowLetters];
     }
 
@@ -122,77 +125,6 @@ class DashTabs extends React.Component {
     this.setState({ bookmarkIsOpen: false });
   }
 
-  getBookmark() {
-    let letterNames = this.props.formData.letters.map(obj => obj.letter);
-    if (this.state.rowLetters.length > 0) {
-      letterNames = this.state.rowLetters.map(obj => obj.letter);
-    }
-
-    let msNames = this.props.formData.selectedShelfmarks;
-    if (this.state.columnManuscripts.length > 0) {
-      msNames = this.state.columnManuscripts.map(obj => obj.shelfmark);
-    }
-
-    /* Chart display options are formatted <#examples><binarized, cropped, all><imagesize><hover, click><marginsize>
-     * with each option represented by a single number or letter: [1-5] + [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
-     */
-    let letterExamples = 3;
-    if (
-      this.props.formData.LetterExamples >= 1 &&
-      this.props.formData.letterExamples <= 5
-    ) {
-      letterExamples = this.props.formData.letterExamples;
-    }
-    let binarizedAndOrCropped = "b";
-    if (this.props.formData.showBinarized && this.props.formData.showCropped) {
-      binarizedAndOrCropped = "a";
-    } else if (this.props.formData.showCropped) {
-      binarizedAndOrCropped = "c";
-    }
-
-    let imageSize = "m";
-    if (this.props.formData.imageSize == "Large") {
-      imageSize = "l";
-    } else if (this.props.formData.imageSize == "Small") {
-      imageSize = "s";
-    }
-
-    let hoverOrClick = "h";
-    if (this.props.formData.contextMode == "click") {
-      hoverOrClick = "c";
-    }
-
-    let contextSize = "l";
-    if (this.props.formData.contextSize == "small") {
-      contextSize = "s";
-    } else if (this.props.formData.contextSize == "med") {
-      contextSize = "m";
-    }
-
-    let optionsString =
-      letterExamples +
-      binarizedAndOrCropped +
-      imageSize +
-      hoverOrClick +
-      contextSize;
-
-    let formDataLink =
-      "?mss=" +
-      msNames.join("|") +
-      "&letters=" +
-      letterNames.join("|") +
-      "&opts=" +
-      optionsString;
-
-    return [
-      window.location.protocol,
-      "//",
-      window.location.host,
-      window.location.pathname,
-      formDataLink
-    ].join("");
-  }
-
   /* Note that this helper function can be called before the component
    * state has been updated with manifest and window object data, so it
    * always builds these lists from scratch based on the contents
@@ -203,7 +135,7 @@ class DashTabs extends React.Component {
     let windowObjects = [];
     let miradorLayout = "1x1";
 
-    for (let ms of this.props.manuscripts) {
+    for (let ms of this.props.submittedFormState.selectedManuscripts) {
       if (ms.manifest === null) {
         continue;
       }
@@ -250,7 +182,7 @@ class DashTabs extends React.Component {
     let windowObjects = [...this.state.windowObjects];
     let miradorLayout = this.state.miradorLayout;
 
-    if (manifestURIs.length == 0 && this.props.manuscripts) {
+    if (manifestURIs.length == 0 && this.props.submittedFormState.selectedManuscripts) {
       [
         manifestURIs,
         windowObjects,
@@ -396,19 +328,19 @@ class DashTabs extends React.Component {
 
     if (this.state.rowLetters.length == 0) {
       for (
-        let j = 0, llen = this.props.formData.letters.length;
+        let j = 0, llen = this.props.submittedFormState.letters.length;
         j < llen;
         j++
       ) {
-        rowLetters.push(this.props.formData.letters[j]);
+        rowLetters.push(this.props.submittedFormState.letters[j]);
       }
     } else {
       rowLetters = this.state.rowLetters;
     }
 
     if (this.state.columnManuscripts.length == 0) {
-      for (let i = 0, len = this.props.manuscripts.length; i < len; i++) {
-        columnManuscripts.push(this.props.manuscripts[i]);
+      for (let i = 0, len = this.props.submittedFormState.selectedManuscripts.length; i < len; i++) {
+        columnManuscripts.push(this.props.submittedFormState.selectedManuscripts[i]);
       }
     } else {
       columnManuscripts = this.state.columnManuscripts;
@@ -418,7 +350,7 @@ class DashTabs extends React.Component {
     let windowObjects = [...this.state.windowObjects];
     let miradorLayout = this.state.miradorLayout;
 
-    if (manifestURIs.length == 0 && this.props.manuscripts) {
+    if (manifestURIs.length == 0 && this.props.submittedFormState.selectedManuscripts) {
       [
         manifestURIs,
         windowObjects,
@@ -434,8 +366,8 @@ class DashTabs extends React.Component {
       >
         <BookmarkModal
           isOpen={this.state.bookmarkIsOpen}
-          bookmarkURL={this.state.bookmarkURL}
           closeModal={this.closeModal}
+          submittedFormState={this.props.submittedFormState}
         />
         <TabList>
           <Tab>
@@ -458,8 +390,7 @@ class DashTabs extends React.Component {
               style={{ verticalAlign: "bottom" }}
               onClick={() =>
                 this.setState({
-                  bookmarkIsOpen: true,
-                  bookmarkURL: this.getBookmark()
+                  bookmarkIsOpen: true
                 })
               }
             >
@@ -473,7 +404,7 @@ class DashTabs extends React.Component {
             hiddenManuscripts={this.state.hiddenManuscripts}
             hiddenLetters={this.state.hiddenLetters}
             onManifestSelected={this.onManifestSelected}
-            formData={this.props.formData}
+            formData={this.props.submittedFormState}
             tableData={this.props.tableData}
             columnManuscripts={columnManuscripts}
             rowLetters={rowLetters}

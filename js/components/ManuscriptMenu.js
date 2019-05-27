@@ -1,121 +1,106 @@
 import React from "react";
 
 /* ManuscriptMenu - A sub-component of the ManuscriptForm; provides
- * a multi-select list of the available manuscripts (encased in
- * the ManuscriptsLoader component) and options for sorting and
- * multi-selecting the list elements.
+ * a multi-select list of the available manuscripts and options for
+ * sorting and multi-selecting the list elements.
  */
-
-import ManuscriptsLoader from "./ManuscriptsLoader";
 
 class ManuscriptMenu extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { orderByShelfmark: true };
-
-    this.changeSort = this.changeSort.bind(this);
-    this.manuscriptsSelect = this.manuscriptsSelect.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
+    this.state = { orderBy: "shelfmark" };
   }
 
-  handleSelect(event) {
-    let options = event.target.options;
-    let name = event.target.name;
-    let value = [];
-    let selectedShelfmarks = [];
-    for (let i = 0, l = options.length; i < l; i++) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-        selectedShelfmarks.push(options[i].value);
+  /* The ms date field in the DB is a bit unruly. We'll do our best
+   * to parse it to a sortable 4-digit year, or else return 'NA'.
+   */
+  getYearFromDate(date) {
+    if (date == null) {
+      return "NA";
+    }
+    try {
+      // Remove qualifiers from the date
+      date = date.replace("?", "").replace("ca.", "");
+      // Get the YYYY if the date is formatted M/D/YYYY
+      if (date.indexOf("/") >= 0) {
+        date = date.split("/").pop();
       }
-    }
-
-    this.props.handleSelect(name, value);
-  }
-
-  // Currently this is a simple all/none toggle
-  manuscriptsSelect(event) {
-    let selectedShelfmarks = JSON.parse(
-      JSON.stringify(this.props.selectedShelfmarks)
-    );
-    for (let ms of this.props.manuscripts) {
-      let sm = ms.shelfmark;
-      if (
-        //which == "All" &&
-        selectedShelfmarks.indexOf(sm) < 0
-      ) {
-        selectedShelfmarks.push(sm);
-      } else {
-        selectedShelfmarks = [];
-        break;
+      // If the date is a range (766-767), use the first year
+      if (date.indexOf("-") >= 0) {
+        date = date.split("-").shift();
       }
+      // Otherwise, the year is usually the first word
+      if (date.indexOf(" ") >= 0) {
+        date = date.split(" ").shift();
+      }
+      // Round years with decimals (832.5) to the nearest int, then trim any
+      // remaining whitespace and pad to 4 digits to facilitate sorting.
+      return String(parseInt(date.trim())).padStart(4, "0");
+    } catch (err) {
+      return "NA";
     }
-    this.props.handleSelect("selectedShelfmarks", selectedShelfmarks);
   }
 
-  changeSort(event) {
-    const value = event.target.value;
+  buildManuscriptOptions() {
+    let msObjs = Object.values(this.props.manuscripts);
 
-    if (value == "shelfmark") {
-      this.setState({ orderByShelfmark: true });
-    } else {
-      // value == "date"
-      this.setState({ orderByShelfmark: false });
+    if (this.state.orderBy === "shelfmark") {
+      msObjs = msObjs.sort((a, b) => (a.shelfmark > b.shelfmark) ? 1 : -1)
+    } else if (this.state.orderBy === "date") {
+      msObjs = msObjs.sort((a, b) => (this.getYearFromDate(a.date) > this.getYearFromDate(b.date)) ? 1 : -1)
     }
-    this.props.sortManuscripts(value);
+
+    return msObjs.map((ms) =>
+      <option key={ms.id} value={ms.id}>
+        {ms.shelfmark} ({ms.date ? ms.date : "NA"})
+      </option>
+    )
   }
 
   render() {
     return (
-      <div className={"field"}>
-        <div className={"control"} style={{ marginBottom: 5 }}>
-          <label htmlFor="selectedShelfmarks" className={"control"}>
-            Select manuscripts:{" "}
-          </label>
+      <>
+        <label className="label">Select manuscripts:</label>
+        <div className="field manuscripts-select">
+          <div className={
+            "select is-multiple is-fullwidth" +
+            (this.props.markInvalid ? " is-danger invalid-shake" : "")
+          }>
+            <select
+              name="manuscripts"
+              multiple={true}
+              value={this.props.selectedManuscripts.map(ms => ms.id)}
+              onChange={this.props.onManuscriptsSelected}
+            >
+              {this.buildManuscriptOptions()}
+            </select>
+          </div>
+        </div>
+
+        <label className="label">Order manuscripts by:</label>
+        <div className="buttons has-addons">
           <span
-            className="button is-small"
-            onClick={this.manuscriptsSelect}
+            className={`button is-small${
+              this.state.orderBy === "shelfmark"
+                ? " is-selected is-secondary"
+                : ""
+            }`}
+            onClick={() => this.setState({ orderBy: "shelfmark" })}
           >
-            All/None
+            Shelfmark
+          </span>
+          <span
+            className={`button is-small${
+              this.state.orderBy === "date"
+                ? " is-selected is-secondary"
+                : ""
+            }`}
+            onClick={() => this.setState({ orderBy: "date" })}
+          >
+            Date
           </span>
         </div>
-        <div
-          className={
-            "select is-multiple" +
-            (this.props.markInvalid ? " is-danger invalid-shake" : "")
-          }
-        >
-          <ManuscriptsLoader
-            handleSelect={this.handleSelect}
-            manuscripts={this.props.manuscripts}
-            selectedShelfmarks={this.props.selectedShelfmarks}
-          />
-        </div>
-        <div className={"control"}>
-          <p>Order manuscripts by</p>
-          <label htmlFor="shelfmarkSort" className={"radio"}>
-            <input
-              type="radio"
-              value="shelfmark"
-              id="shelfmarkSort"
-              onChange={this.changeSort}
-              checked={this.state.orderByShelfmark}
-            />{" "}
-            Shelfmark |
-          </label>
-          <label htmlFor="dateSort" className={"radio"}>
-            <input
-              type="radio"
-              value="date"
-              id="dateSort"
-              onChange={this.changeSort}
-              checked={!this.state.orderByShelfmark}
-            />{" "}
-            Date
-          </label>
-        </div>
-      </div>
+      </>
     );
   }
 }

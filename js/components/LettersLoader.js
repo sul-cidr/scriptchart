@@ -30,7 +30,7 @@ class LettersLoader extends React.Component {
       let letterClass = "button is-outlined";
       let isClicked = false;
       if (this.props.selectedLetters.findIndex(l => l.id == lt.id) >= 0) {
-        letterClass = "button is-success";
+        letterClass = "button is-secondary";
         isClicked = true;
       }
       return (

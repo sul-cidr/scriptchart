@@ -15,18 +15,13 @@ class ScriptchartSidebar extends React.Component {
             <i className="fa fa-arrow-right"></i>
           </span>
 
-          <div className="box-header columns">
-            <div className="column">
-              <h4 className="title is-5">Viewer options</h4>
-            </div>
+          <div className="box-header">
+            <h4 className="title is-5">Scriptchart Options</h4>
           </div>
-          <div className="box-content">
-            <ManuscriptForm
-              formSubmit={this.props.formSubmit}
-              manuscripts={this.props.allManuscripts}
-              sortManuscripts={this.props.sortManuscripts}
-            />
-          </div>
+          <ManuscriptForm
+            onFormSubmitted={this.props.onFormSubmitted}
+            manuscripts={this.props.manuscripts}
+          />
         </div>
     );
   }

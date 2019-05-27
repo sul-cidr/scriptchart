@@ -14,14 +14,21 @@
     "coverage": "node_modules/.bin/jest --coverage"
   },
   "lint-staged": {
-    "*.{js,jsx,json,css}": ["prettier --write", "git add"]
+    "*.{js,jsx,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "keywords": [],
   "author": "Scott Bailey, Peter Broadwell, Javier de la Rosa",
   "license": "MIT",
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
-    "setupFiles": ["./js/config/setupTests.js"],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "./js/config/setupTests.js"
+    ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/js/components/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/js/components/__mocks__/styleMock.js"
@@ -92,5 +99,10 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

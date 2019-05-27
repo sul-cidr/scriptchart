@@ -6,9 +6,10 @@ $sidebar-width: 25rem;
   flex-shrink: 0;
   margin: 10px;
   margin-bottom: 10px !important;  // higher specificity of .box:not(:last-child) applies bigger bottom margin otherwise
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 
   &.box {
     background: $panel-bg;
@@ -48,4 +49,46 @@ $sidebar-width: 25rem;
     width: 1rem;
     color: $white;
   }
+}
+
+.manuscript-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 1rem;
+  overflow-y: auto;
+}
+
+.manuscript-form-wrapper {
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.manuscripts-select {
+  flex-grow: 1;
+
+  .select, select {
+    height: 100% !important;
+    transition: border-color .1s ease;
+  }
+}
+
+.letters-select {
+  .buttons {
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    &.is-danger {
+      border-color: $danger;
+    }
+
+    .button { margin: 2px !important; }
+  }
+}
+
+.manuscript-form-submit {
+  margin-top: auto;
 }

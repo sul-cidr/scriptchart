@@ -7,9 +7,6 @@ import React from "react";
  * Its state is sent back to the App as the form data, to be
  * processed by the DashTabs and ScriptChart components when the
  * form is submited.
- * This component also detects when the viewer has been loaded from
- * a bookmark and fills in the form options accordingly, while allowing
- * the options to be changed and resubmitted subsequently.
  */
 
 import ManuscriptMenu from "./ManuscriptMenu";
@@ -17,51 +14,28 @@ import LettersLoader from "./LettersLoader";
 
 import allLetters from "./letters.json";
 
-/* Form default values */
-const FORM_DEFAULTS = {
-  showBinarized: true,
-  showCropped: false,
-  contextMode: "hover",
-  letterExamples: 3,
-  contextSize: "large",
-  imageSize: "Medium",
-  selectedShelfmarks: [],
-  letters: []
-};
-
 class ManuscriptForm extends React.Component {
   constructor(props) {
     super(props);
 
-    /* The form options are initialized to "unset" because when the viewer
-     * is loaded from a bookmark, the "bookmarked" form state is parsed
-     * by the parent App component from the URL query string and then
-     * sent here via the formData prop, and checking for a value in formData
-     * and an "unset" value here for a form option so far has been the
-     * least bad way of detecting when bookmark settings are available.
-     * If no bookmark settings are provided, then the values are set via the
-     * reconcileFormField function to their defaults (see above).
-     */
     this.state = {
-      showBinarized: "unset",
-      showCropped: "unset",
-      contextMode: "unset",
-      letterExamples: "unset",
-      contextSize: "unset",
-      imageSize: "unset",
-      selectedShelfmarks: "unset",
-      letters: "unset",
+      showBinarized: true,
+      showCropped: false,
+      contextMode: "hover",
+      letterExamples: 3,
+      contextSize: "large",
+      imageSize: "Medium",
+      selectedManuscripts: [],
+      letters: [],
       markMssSelectInvalid: false,
       markLettersSelectInvalid: false,
       markImageTypesInvalid: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
+    // this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   buttonChange(letterID, operation) {
@@ -90,6 +64,7 @@ class ManuscriptForm extends React.Component {
       );
     }
     this.handleSelect("letters", selectedLetters);
+    this.setState({ markLettersSelectInvalid: selectedLetters.length === 0 });
   }
 
   // Currently this is a simple all/none toggle
@@ -112,8 +87,8 @@ class ManuscriptForm extends React.Component {
         if (["showBinarized", "showCropped"].includes(name)) {
           // TODO: don't like this -- do something about it in connection with
           //       a broader review of state and data-flow.
-          let formData = this.reconcileFormFields();
-          if (formData.showBinarized || formData.showCropped) {
+          // let formData = this.reconcileFormFields();
+          if (this.state.showBinarized || this.state.showCropped) {
             this.setState({ markImageTypesInvalid: false });
           }
         }
@@ -137,26 +112,26 @@ class ManuscriptForm extends React.Component {
     });
   }
 
-  reconcileFormFields() {
-    // return form values from current state, or passed in data
-    //  (from the URL), or from defaults, in that order of priority.
-    return Object.assign(
-      {},
-      FORM_DEFAULTS,
-      this.props.formData,
-      Object.keys(this.state).reduce((p, c) => {
-        if (this.state[c] !== "unset") p[c] = this.state[c];
-        return p;
-      }, {})
-    );
-  }
+  // reconcileFormFields() {
+  //   // return form values from current state, or passed in data
+  //   //  (from the URL), or from defaults, in that order of priority.
+  //   return Object.assign(
+  //     {},
+  //     FORM_DEFAULTS,
+  //     this.props.formData,
+  //     Object.keys(this.state).reduce((p, c) => {
+  //       if (this.state[c] !== "unset") p[c] = this.state[c];
+  //       return p;
+  //     }, {})
+  //   );
+  // }
 
   handleSubmit(event) {
     // Stop the whole darn page from reloading on form submit
     event.preventDefault();
 
     // Pass all of the form's state to the handler (which is in App)
-    let formData = this.reconcileFormFields();
+    // let formData = this.reconcileFormFields();
 
     // Clear out the query string from the address bar (only matters
     // if the page was previously loaded from a bookmark).
@@ -173,15 +148,15 @@ class ManuscriptForm extends React.Component {
     }
 
     let invalid = Array();
-    if (formData.selectedShelfmarks.length === 0) {
+    if (this.state.selectedManuscripts.length === 0) {
       invalid.push("markMssSelectInvalid");
     }
 
-    if (formData.letters.length === 0) {
+    if (this.state.letters.length === 0) {
       invalid.push("markLettersSelectInvalid");
     }
 
-    if (!(formData.showBinarized || formData.showCropped)) {
+    if (!(this.state.showBinarized || this.state.showCropped)) {
       invalid.push("markImageTypesInvalid");
     }
 
@@ -196,164 +171,166 @@ class ManuscriptForm extends React.Component {
     }
 
     // Pass all of the form's state to the handler (which is in App)
-    if (!invalid.length) { this.props.formSubmit(formData); }
+    if (!invalid.length) { this.props.onFormSubmitted(this.state); }
   }
 
   render() {
     console.log("Rendering ManuscriptForm");
 
-    let formData = this.reconcileFormFields();
+    // let formData = this.reconcileFormFields();
 
     return (
-      <form className={"manuscript-form"} onSubmit={this.handleSubmit}>
-        <ManuscriptMenu
-          handleChange={this.handleChange}
-          handleSelect={this.handleSelect}
-          manuscripts={this.props.manuscripts}
-          selectedShelfmarks={formData.selectedShelfmarks}
-          sortManuscripts={this.props.sortManuscripts}
-          markInvalid={this.state.markMssSelectInvalid}
-        />
-
-        <div className="field letters-select">
-          <div className={"control"} style={{ marginBottom: 5 }}>
-            <label className={"control"}>Select letters: </label>
-            <span className="button is-small" onClick={this.lettersSelect}>
-              All/None
-            </span>
-          </div>
-          <LettersLoader
-            selectedLetters={formData.letters}
-            handleSelect={this.buttonChange}
-            markInvalid={this.state.markLettersSelectInvalid}
+      <form className="manuscript-form" onSubmit={this.handleSubmit}>
+        <div className="manuscript-form-wrapper">
+          <ManuscriptMenu
+            manuscripts={this.props.manuscripts}
+            selectedManuscripts={this.state.selectedManuscripts}
+            markInvalid={this.state.markMssSelectInvalid}
+            onManuscriptsSelected={event =>
+              this.setState({
+                selectedManuscripts:
+                  Array.from(event.target.selectedOptions)
+                       .map(option => this.props.manuscripts[parseInt(option.value)]),
+                markMssSelectInvalid: event.target.selectedOptions.length === 0
+              })
+            }
+            markInvalid={this.state.markMssSelectInvalid}
           />
-        </div>
-
-        <div className={"field is-horizontal flex-row"}>
-          <label htmlFor="letterExamples" className={"control"}>
-            Number of examples:{" "}
-          </label>
-          <div className={"select is-small"} style={{ marginLeft: "5px" }}>
-            <select
-              value={formData.letterExamples}
-              type="number"
-              name="letterExamples"
-              id="letterExamples"
-              onChange={this.handleChange}
-            >
-              <option>1</option>
-              <option>3</option>
-              <option>5</option>
-            </select>
-          </div>
-        </div>
-
-        <div
-          className={
-            "control image-types" +
-            (this.state.markImageTypesInvalid ? " is-danger invalid-shake" : "")
-          }
-        >
-          <p>Show letter images:</p>
-          <label htmlFor="showBinarized" className={"checkbox"}>
-            <input
-              type="checkbox"
-              name="showBinarized"
-              id="showBinarized"
-              onChange={this.handleChange}
-              checked={formData.showBinarized}
+          <div className="field letters-select">
+            <div className="control" style={{ marginBottom: 5 }}>
+              <label className="control">Select letters: </label>
+              <span className="button is-small" onClick={this.lettersSelect}>
+                All/None
+              </span>
+            </div>
+            <LettersLoader
+              selectedLetters={this.state.letters}
+              handleSelect={this.buttonChange}
+              markInvalid={this.state.markLettersSelectInvalid}
             />
-            {" Trimmed |"}
-          </label>
-          <label
-            htmlFor="showCropped"
-            className={"checkbox"}
-            style={{ marginLeft: "8px" }}
-          >
-            <input
-              type="checkbox"
-              name="showCropped"
-              id="showCropped"
-              onChange={this.handleChange}
-              checked={formData.showCropped}
-            />
-            {" Untrimmed"}
-          </label>
-        </div>
+          </div>
 
-        <div className={"field is-horizontal flex-row"}>
-          <label htmlFor="imageSize" className={"control"}>
-            Image size:{" "}
-          </label>
-          <div className={"select is-small"} style={{ marginLeft: "5px" }}>
-            <select
-              value={formData.imageSize}
-              type="string"
-              name="imageSize"
-              id="imageSize"
-              onChange={this.handleChange}
+          <label className="label">Letter Example Images:</label>
+          <div className="field has-addons">
+            <div className="control" data-tip="# of Examples to show.">
+              <span className="select is-small">
+                <select
+                  value={this.state.letterExamples}
+                  type="number"
+                  name="letterExamples"
+                  id="letterExamples"
+                  onChange={event =>
+                    this.setState({ letterExamples: event.target.value })
+                  }
+                >
+                  <option>1</option>
+                  <option>3</option>
+                  <option>5</option>
+                </select>
+              </span>
+            </div>
+
+            <div className="control" data-tip="Show Trimmed Images.">
+              <span
+                className={`button is-small${
+                  this.state.showBinarized ? " is-selected is-secondary" : ""
+                }`}
+                onClick={() =>
+                  this.setState({ showBinarized: !this.state.showBinarized })
+                }
+              >
+                Trimmed
+              </span>
+            </div>
+            <div className="control" data-tip="Show Untrimmed Images.">
+              <span
+                className={`button is-small${
+                  this.state.showCropped ? " is-selected is-secondary" : ""
+                }`}
+                onClick={() =>
+                  this.setState({ showCropped: !this.state.showCropped })
+                }
+              >
+                Untrimmed
+              </span>
+            </div>
+            <div className="control" data-tip="Size of Example Images.">
+              <span className="select is-small">
+                <select
+                  value={this.state.imageSize}
+                  type="string"
+                  name="imageSize"
+                  id="imageSize"
+                  onChange={event =>
+                    this.setState({ imageSize: event.target.value })
+                  }
+                >
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                </select>
+              </span>
+            </div>
+          </div>
+
+          <label className="label">Letter-in-Context Images:</label>
+          <div className="field has-addons">
+            <div
+              className="control"
+              data-tip="Show Letter-in-Context images on hover."
             >
-              <option>Small</option>
-              <option>Medium</option>
-              <option>Large</option>
-            </select>
+              <span
+                className={`button is-small${
+                  this.state.contextMode == "hover"
+                    ? " is-selected is-secondary"
+                    : ""
+                }`}
+                onClick={() => this.setState({ contextMode: "hover" })}
+              >
+                on hover
+              </span>
+            </div>
+            <div
+              className="control"
+              data-tip="Show Letter-in-Context images on click."
+            >
+              <span
+                className={`button is-small${
+                  this.state.contextMode == "click"
+                    ? " is-selected is-secondary"
+                    : ""
+                }`}
+                onClick={() => this.setState({ contextMode: "click" })}
+              >
+                on click
+              </span>
+            </div>
+            <div
+              className="control"
+              data-tip="Size of Letter-in-Context images."
+            >
+              <span className="select is-small">
+                <select
+                  value={this.state.contextSize}
+                  type="string"
+                  name="contextSize"
+                  id="contextSize"
+                  onChange={event =>
+                    this.setState({ contextSize: event.target.value })
+                  }
+                >
+                  <option value="small">Small</option>
+                  <option value="med">Medium</option>
+                  <option value="large">Large</option>
+                </select>
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className={"control"}>
-          Letter in context:
-          <ul>
-            <li>
-              <label htmlFor="hoverContext" className={"radio"}>
-                <input
-                  type="radio"
-                  value="hover"
-                  id="hoverContext"
-                  name="contextMode"
-                  onChange={this.handleChange}
-                  checked={formData.contextMode == "hover"}
-                />{" "}
-                Show on hover
-              </label>
-            </li>
-            <li>
-              <label htmlFor="clickContext" className={"radio"}>
-                <input
-                  type="radio"
-                  value="click"
-                  id="clickContext"
-                  name="contextMode"
-                  onChange={this.handleChange}
-                  checked={formData.contextMode == "click"}
-                />{" "}
-                Show on click
-              </label>
-            </li>
-          </ul>
-        </div>
-
-        <div className={"field is-horizontal flex-row"}>
-          <label htmlFor="contextSize" className={"control"}>
-            Context size:{" "}
-          </label>
-          <div className={"select is-small"} style={{ marginLeft: "5px" }}>
-            <select
-              value={formData.contextSize}
-              type="string"
-              name="contextSize"
-              id="contextSize"
-              onChange={this.handleChange}
-            >
-              <option value="small">Small</option>
-              <option value="med">Medium</option>
-              <option value="large">Large</option>
-            </select>
-          </div>
-        </div>
-
-        <div className={"field"}>
-          <div className={"control"}>
-            <button className={"button is-link"}>Submit</button>
+        <div className="field manuscript-form-submit">
+          <div className="control">
+            <button className="button is-secondary is-fullwidth">Submit</button>
           </div>
         </div>
       </form>

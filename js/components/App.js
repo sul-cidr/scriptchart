@@ -45,208 +45,58 @@ class App extends Component {
     super(props);
 
     this.state = {
-      manuscripts: [], // Only the selected mss, sent to the table (sorted)
-      allManuscripts: [], // Populates the form list, to be sorted as needed
+      manuscripts: {}, //
       loading: false,
-      formData: {},
+      submittedFormState: {},
       tableData: {},
       sidebarOpen: true,
       loadingMessage: ""
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.queryManuscripts = this.queryManuscripts.bind(this);
-    this.getYearFromDate = this.getYearFromDate.bind(this);
-    this.sortManuscripts = this.sortManuscripts.bind(this);
-    this.toggleSidebar = this.toggleSidebar.bind(this);
-    this.handleQueryParams = this.handleQueryParams.bind(this);
-  }
-
-  /* The ms date field in the DB is a bit unruly. We'll do our best
-   * to parse it to a sortable 4-digit year, or else return 'NA'.
-   */
-  getYearFromDate(date) {
-    if (date == null) {
-      return "NA";
-    }
-    try {
-      // Remove qualifiers from the date
-      date = date.replace("?", "").replace("ca.", "");
-      // Get the YYYY if the date is formatted M/D/YYYY
-      if (date.indexOf("/") >= 0) {
-        date = date.split("/").pop();
-      }
-      // If the date is a range (766-767), use the first year
-      if (date.indexOf("-") >= 0) {
-        date = date.split("-").shift();
-      }
-      // Otherwise, the year is usually the first word
-      if (date.indexOf(" ") >= 0) {
-        date = date.split(" ").shift();
-      }
-      // Round years with decimals (832.5) to the nearest int, then trim any
-      // remaining whitespace and pad to 4 digits to facilitate sorting.
-      return String(parseInt(date.trim())).padStart(4, "0");
-    } catch (err) {
-      return "NA";
-    }
-  }
-
-  handleQueryParams() {
-    let params = new URLSearchParams(window.location.search);
-    let queryShelfmarks = params.get("mss");
-    let queryLetters = params.get("letters");
-    let optionsString = params.get("opts");
-
-    if (queryLetters === null || queryShelfmarks === null) {
-      return;
-    }
-
-    let selectedShelfmarks = [];
-    if (queryShelfmarks != null) {
-      selectedShelfmarks = queryShelfmarks.split("|");
-    }
-
-    let splitLetters = [];
-    if (queryLetters != null) {
-      splitLetters = queryLetters.split("|");
-    }
-    let letters = [];
-    for (let letter of splitLetters) {
-      letters.push(allLetters.find(lt => lt.letter == letter));
-    }
-
-    /* Chart display options are formatted <#examples><binarized, cropped, all><imagesize><hover, click><marginsize>
-     * with each option represented by a single number or letter: [1-5] + [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
-     */
-    let letterExamples = 3;
-    let showBinarized = true;
-    let showCropped = false;
-    let contextMode = "hover";
-    let imageSize = "Medium";
-    let contextSize = "large";
-    if (optionsString != null && optionsString.length == 5) {
-      if (optionsString[0] >= 1 && optionsString[0] <= 5) {
-        letterExamples = optionsString[0];
-      }
-      if (optionsString[1] == "a") {
-        showCropped = true;
-      } else if (optionsString[1] == "c") {
-        showBinarized = false;
-        showCropped = true;
-      }
-      if (optionsString[2] == "s") {
-        imageSize = "Small";
-      } else if (optionsString[2] == "l") {
-        imageSize = "Large";
-      }
-      if (optionsString[3] == "c") {
-        contextMode = "click";
-      }
-      if (optionsString[4] == "s") {
-        contextSize = "small";
-      } else if (optionsString[4] == "m") {
-        contextSize = "med";
-      }
-    }
-
-    let formData = {
-      showBinarized,
-      showCropped,
-      contextMode,
-      letterExamples,
-      contextSize,
-      imageSize,
-      selectedShelfmarks,
-      letters
-    };
-
-    this.handleSubmit(formData);
-  }
-
-  sortManuscripts(orderBy, allManuscripts) {
-    // If the manuscripts list in the component state has not been set,
-    // use the optional function argument instead.
-    if (
-      this.state.allManuscripts !== null &&
-      this.state.allManuscripts.length > 0
-    ) {
-      allManuscripts = [...this.state.allManuscripts];
-    }
-
-    allManuscripts.sort(
-      function(a, b) {
-        if (orderBy == "shelfmark") {
-          a = a.shelfmark.toLowerCase();
-          b = b.shelfmark.toLowerCase();
-        } else {
-          a = this.getYearFromDate(a.date);
-          b = this.getYearFromDate(b.date);
-        }
-        if (a < b) {
-          return -1;
-        } else if (a > b) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }.bind(this)
-    );
-
-    this.setState({ allManuscripts });
-
-    // This needs to run here, rather than in componentDidMount(), in order
-    // to be sure that allManuscripts will be updated by the time
-    // handleSubmit() is run with the query paramters.
-    // It should only be run if there aren't already options in formData
-    // (indicating that the form has already been submitted or a bookmark
-    // has already been loaded).
-    // Maybe there's a better way...
-    if (Object.keys(this.state.formData).length === 0) {
-      this.handleQueryParams(allManuscripts);
-    }
+    this.onFormSubmitted = this.onFormSubmitted.bind(this);
   }
 
   queryManuscripts() {
-    fetch(API_ROOT + "manuscripts?display=true&format=json")
+    fetch(`${API_ROOT}manuscripts?display=true&format=json`)
       .then(response => response.json())
+      .then(manuscripts =>
+        this.setState({
+          manuscripts: manuscripts.reduce(
+            (map, ms) => ((map[ms.id] = ms), map),
+            {}
+          )
+        })
+      )
       .catch(function(error) {
         console.log("fetch failed for manuscripts list");
         return [];
-      })
-      .then(data => this.sortManuscripts("shelfmark", data));
+      });
   }
 
-  handleSubmit(formData) {
+  onFormSubmitted(submittedFormState) {
     this.setState({
       loading: true,
       loadingMessage: "Loading manuscripts..."
     });
 
-    let manuscripts = this.state.allManuscripts.filter(ms =>
-      formData.selectedShelfmarks.includes(ms.shelfmark)
-    );
-
-    let letter_ids = formData.letters.map(letter => letter.id);
-
-    this.setState({ manuscripts });
-
+    let ms_ids = submittedFormState.selectedManuscripts.map(ms => ms.id);
+    let letter_ids = submittedFormState.letters.map(letter => letter.id);
     let url =
-      `${API_ROOT}letters?count=${formData.letterExamples}` +
+      `${API_ROOT}letters?count=${submittedFormState.letterExamples}` +
       `&letter_ids=${letter_ids.join("|")}` +
-      `&ms_ids=${manuscripts.map(ms => ms.id).join("|")}`;
+      `&ms_ids=${ms_ids.join("|")}`;
 
     fetch(url)
-      .then(resp => resp.json())
+      .then(response => response.json())
       .then(json =>
         this.setState({
           tableData: json.mss,
-          formData: formData,
+          submittedFormState: submittedFormState,
           loading: false
         })
       )
       .catch(function(error) {
-        console.log("URL fetch failed for " + url);
+        console.log(`URL fetch failed for ${url} (${error})`);
       });
   }
 
@@ -280,9 +130,8 @@ class App extends Component {
           <DashTabs
             key={chartKey}
             loading={this.state.loading}
-            formData={this.state.formData}
+            submittedFormState={this.state.submittedFormState}
             tableData={this.state.tableData}
-            manuscripts={this.state.manuscripts}
             loadingMessage={this.state.loadingMessage}
           />
         </div>

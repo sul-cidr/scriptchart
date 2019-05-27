@@ -5,18 +5,14 @@ import React from "react";
  * implementation of the reactabular "sticky headers"
  * and "draggable rows/columns" features (custom behavior
  * is handled by its parent ScriptChart).
- *
- * XXX Currently has some issues with formatting: column
- * headers don't always match the witdh of their content
- * cells below, and the chart size/scrollbar capabilities
- * could use refinement.
  */
 
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
 import * as Sticky from "reactabular-sticky";
 
-//import withDragDropContext from './withDragDropContext';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 class DragTable extends React.Component {
   constructor(props) {
@@ -92,6 +88,4 @@ class DragTable extends React.Component {
   }
 }
 
-export default DragTable;
-//export default DragDropContext(HTML5Backend)(DragTable);
-//export default withDragDropContext(DragTable);
+export default DragDropContext(HTML5Backend)(DragTable);

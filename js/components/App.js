@@ -31,7 +31,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 library.add(faBookOpen, faTable, faImage);
 
-/* The entire app needs to be wrapped in the drag-and-drop context */
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 
@@ -421,4 +420,4 @@ class App extends Component {
   }
 }
 
-export default DragDropContext(HTML5Backend)(App);
+export default App;

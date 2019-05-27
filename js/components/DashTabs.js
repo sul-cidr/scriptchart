@@ -25,9 +25,13 @@ import ScriptChart from "./ScriptChart";
 import ChartAccordion from "./ChartAccordion";
 import BookmarkModal from "./BookmarkModal";
 
-// Alternative way to embed Mirador, see
+// There are two ways to embed Mirador 3, see
 // https://github.com/ProjectMirador/mirador/issues/2627
 import MiradorViewer from "./MiradorViewer";
+import { Provider } from 'react-redux';
+import createStore from 'mirador/dist/es/src/state/createStore';
+import settings from 'mirador/dist/es/src/config/settings';
+import * as actions from 'mirador/dist/es/src/state/actions';
 //import Mirador from "./Mirador";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -41,6 +45,8 @@ import "./index.css";
 //export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
 export const VIEWER_ROOT = process.env.VIEWER_ROOT;
 
+const MAX_MIRADOR_WINDOWS = 4;
+
 class DashTabs extends React.Component {
   constructor(props) {
     super(props);
@@ -48,29 +54,69 @@ class DashTabs extends React.Component {
     this.state = {
       hiddenManuscripts: [],
       hiddenLetters: [],
-      manifestURIs: {},
-      windowObjects: [],
-      miradorLayout: "1x1",
       tabIndex: 0,
       rowLetters: [],
       columnManuscripts: [],
       bookmarkURL: VIEWER_ROOT,
-      bookmarkIsOpen: false
+      bookmarkIsOpen: false,
+      miradorState: {},
+      manifestMiddleCanvases: {},
+      allowUpdates: false
     };
 
     this.onManifestSelected = this.onManifestSelected.bind(this);
     this.onHiddenChange = this.onHiddenChange.bind(this);
     this.onColumnMove = this.onColumnMove.bind(this);
     this.onRowMove = this.onRowMove.bind(this);
-    this.getMiradorParameters = this.getMiradorParameters.bind(this);
     this.getBookmark = this.getBookmark.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.findWindowByManifestID = this.findWindowByManifestID.bind(this);
+    this.manifestListener = this.manifestListener.bind(this);
+  }
+
+  findWindowByManifestID(windows, msid) {
+    for (let windowID of Object.keys(windows)) {
+      if (windows[windowID].manifestId == msid) {
+        return windowID;
+      }
+    }
+    return null;
+  }
+
+  manifestListener() {
+    
+    function findMiddleCanvas(manifest) {
+      if (('sequences' in manifest.json) && ('canvases' in manifest.json.sequences[0])) {
+        return Math.floor(manifest.json.sequences[0].canvases.length / 2);
+      }
+      return 0;
+    }
+
+    let currentState = this.state.miradorState.getState();
+    let manifestMiddleCanvases = this.state.manifestMiddleCanvases;
+
+    for (let msID in currentState.manifests) {
+      if ((msID in this.state.manifestMiddleCanvases) || (currentState.manifests[msID].isFetching == true)) {
+        continue;
+      }
+      if ('json' in currentState.manifests[msID]) {
+        let middleCanvas = findMiddleCanvas(currentState.manifests[msID]);
+        let windowID = this.findWindowByManifestID(currentState.windows, msID);
+        let windowProps = currentState.windows[windowID];
+        if (windowProps != undefined) {
+          windowProps.canvasIndex = middleCanvas; // this is so easy
+        }
+      }
+    }
+
+    if (this.state.allowUpdates && (manifestMiddleCanvases.length > this.state.manifestMiddleCanvases.length)) {
+      this.setState({manifestMiddleCanvases});
+    }
   }
 
   onColumnMove(labels) {
     let sourceShelfmark = labels.sourceLabel;
     let targetShelfmark = labels.targetLabel;
-
 
     let columnManuscripts = [...this.props.manuscripts];
     if (this.state.columnManuscripts.length > 0) {
@@ -191,104 +237,36 @@ class DashTabs extends React.Component {
     });
   }
 
-  /* Note that this helper function can be called before the component
-   * state has been updated with manifest and window object data, so it
-   * always builds these lists from scratch based on the contents
-   * of the "manuscripts" prop.
-   */
-  getMiradorParameters() {
-    let manifestURIs = {};
-    let windowObjects = [];
-    let miradorLayout = "1x1";
-
-    for (let ms of this.props.manuscripts) {
-      if (ms.manifest === null) {
-        continue;
-      }
-      manifestURIs[ms.manifest] = { provider: "DASH", id: ms.manifest };
-      //manifestURIs.push({ manifestUri: ms.manifest });
-      const manifestsLength = Object.keys(manifestURIs).length;
-      if (manifestsLength <= 4) {
-        let targetSlot = "row1.column1";
-        if (manifestsLength == 2) {
-          miradorLayout = "1x2";
-          targetSlot = "row1.column2";
-        } else if (manifestsLength == 3) {
-          miradorLayout = "2x2";
-          targetSlot = "row2.column1";
-        } else if (manifestsLength == 4) {
-          miradorLayout = "2x2";
-          targetSlot = "row2.column2";
-        }
-        // XXX Theoretically, could use the canvasIndex attrib to display a
-        // specific canvas within the manifest, instead of just the
-        // first page (which is usually a bland cover image). But we'd
-        // need to parse the manifest and then apply some selection,
-        // heuristic, like "show canvas N/2 of N".
-        let windowObject = {
-          loadedManifest: ms.manifest,
-          thumbnailNavigationPosition: "far-bottom",
-          canvasIndex: manifestsLength
-          //targetSlot: targetSlot,
-          //viewType: "ImageView",
-          //sidePanel: false
-        };
-        windowObjects.push(windowObject);
-      }
-    }
-    return [manifestURIs, windowObjects, miradorLayout];
-  }
-
   onManifestSelected(selectedManifestURI) {
-    let manifestURIs = this.state.manifestURIs;
-    let windowObjects = [...this.state.windowObjects];
-    let miradorLayout = this.state.miradorLayout;
 
-    if (Object.keys(manifestURIs).length == 0 && this.props.manuscripts) {
-      [
-        manifestURIs,
-        windowObjects,
-        miradorLayout
-      ] = this.getMiradorParameters();
-    }
+    let miradorState = this.state.miradorState.getState();
 
-    // If the selected manifest is already being shown in the viewer, do nothing.
-    if (
-      windowObjects.findIndex(o => o.loadedManifest == selectedManifestURI) < 0
-    ) {
-      // Otherwise, treat the Mirador viewer windows as a FIFO queue of size 1-4
-      if (windowObjects.length == 4) {
-        windowObjects.pop();
+    let matchingWindow = this.findWindowByManifestID(miradorState.windows, selectedManifestURI);
+
+    if (matchingWindow === null) {
+      let windowsCount = Object.keys(miradorState.windows).length;
+      let windowLayoutOrder = windowsCount + 1;
+      if (windowsCount >= MAX_MIRADOR_WINDOWS) {
+        let windowToClose = Object.keys(miradorState.windows)[0];
+        windowLayoutOrder = miradorState.windows[windowToClose].layoutOrder;
+        this.state.miradorState.dispatch(actions.focusWindow(windowToClose));
+        this.state.miradorState.dispatch(actions.removeWindow(windowToClose));
+        this.state.miradorState.dispatch(actions.updateWorkspaceMosaicLayout());
       }
-      let windowObject = {
-        loadedManifest: selectedManifestURI,
+      let windowProps = {
+        manifestId: selectedManifestURI,
+        canvasIndex: 0,
+        collectionIndex: 0,
+        sideBarOpen: false,
+        view: "single",
         thumbnailNavigationPosition: "far-bottom",
-        canvasIndex: manifestsLength
-        //targetSlot: "row1.column1"
-        //viewType: "ImageView",
-        //sidePanel: false
-      };
-      windowObjects.unshift(windowObject);
-
-      for (let m = 1, len = windowObjects.length; m < len; m++) {
-        if (m == 1) {
-          windowObjects[m]["targetSlot"] = "row1.column2";
-        } else if (m == 2) {
-          windowObjects[m]["targetSlot"] = "row2.column1";
-        } else if (m == 3) {
-          windowObjects[m]["targetSlot"] = "row2.column2";
-        }
+        draggingEnabled: true,
+        layoutOrder: windowLayoutOrder
       }
+      this.state.miradorState.dispatch(actions.addWindow(windowProps));
 
-      let miradorLayout = "1x1";
-      if (windowObjects.length == 2) {
-        miradorLayout = "1x2";
-      } else if (windowObjects.length >= 3) {
-        miradorLayout = "2x2";
-      }
+      this.setState({ tabIndex: 1 });
     }
-
-    this.setState({ manifestURIs, windowObjects, miradorLayout, tabIndex: 1 });
   }
 
   onHiddenChange(showOrHide, rowOrColumn, itemID) {
@@ -334,6 +312,49 @@ class DashTabs extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({allowUpdates: true});
+  }
+
+  componentWillMount() {
+
+    let manifestURIs = [];
+    for (let ms of this.props.manuscripts) {
+      if (ms.manifest === null) {
+        continue;
+      }
+      manifestURIs.push(ms.manifest);
+    }
+
+    let miradorState = createStore();
+    settings.id = 'mirador';
+    settings.workspace.type = "mosaic";
+    miradorState.dispatch(actions.setConfig(settings));
+    miradorState.dispatch(actions.setWorkspaceAddVisibility(true));
+    for (let manifestURL of manifestURIs) {
+      miradorState.dispatch(actions.fetchManifest(manifestURL));
+    }
+
+    for (let m = 0; m < Math.min(MAX_MIRADOR_WINDOWS, manifestURIs.length); m++) {
+      let windowProps = {
+        manifestId: manifestURIs[m],
+        canvasIndex: 0,
+        collectionIndex: 0,
+        sideBarOpen: false,
+        view: "single",
+        thumbnailNavigationPosition: "far-bottom",
+        draggingEnabled: true,
+        layoutOrder: m+1
+      }
+      miradorState.dispatch(actions.addWindow(windowProps));
+    }
+
+    miradorState.dispatch(actions.setWorkspaceAddVisibility(false));
+
+    miradorState.subscribe(this.manifestListener);
+    this.setState({miradorState});
+  }
+
   render() {
 
     if (this.props.showTabs == false) {
@@ -369,18 +390,6 @@ class DashTabs extends React.Component {
       columnManuscripts = this.state.columnManuscripts;
     }
 
-    let manifestURIs = this.state.manifestURIs;
-    let windowObjects = [...this.state.windowObjects];
-    let miradorLayout = this.state.miradorLayout;
-
-    if (Object.keys(manifestURIs).length == 0 && this.props.manuscripts) {
-      [
-        manifestURIs,
-        windowObjects,
-        miradorLayout
-      ] = this.getMiradorParameters();
-    }
-
     return (
       <div className="columns">
         <BookmarkModal
@@ -392,7 +401,9 @@ class DashTabs extends React.Component {
           <Tabs
             defaultFocus={true}
             selectedIndex={this.state.tabIndex}
-            onSelect={tabIndex => this.setState({ tabIndex })}
+            onSelect={(tabIndex, lastIndex, e) => { 
+              this.setState({ tabIndex });
+            }}
           >
             <TabList>
               <Tab>
@@ -434,15 +445,13 @@ class DashTabs extends React.Component {
               />
             </TabPanel>
             <TabPanel>
-              <MiradorViewer
-                manifests={manifestURIs}
-                miradorLayout={miradorLayout}
-                windowObjects={windowObjects}
-              />
+              <Provider store={this.state.miradorState}>
+                <MiradorViewer/>
+              </Provider>
               {/*<Mirador config={{ id: "mirador",
                                  manifests: manifestURIs,
                                  windows=this.props.windowObjects
-             }} />*/}
+                                 }} />*/}
             </TabPanel>
             <TabPanel>
               <ChartAccordion

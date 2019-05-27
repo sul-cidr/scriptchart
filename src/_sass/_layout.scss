@@ -62,14 +62,6 @@ body:not(.contact-page) .post-content::after {
   }
 }
 
-.sidebar {
-  width: 20%;
-  flex-shrink: 0;
-  margin: 10px !important;  // higher specificity of .box:not(:last-child) applies bigger bottom margin otherwise
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
 .site-header {
   font-family: $family-primary;
 }

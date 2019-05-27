@@ -34,8 +34,8 @@ library.add(faBookOpen, faTable, faImage);
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 
-import ManuscriptForm from "./ManuscriptForm";
 import DashTabs from "./DashTabs";
+import ScriptchartSidebar from "./ScriptchartSidebar";
 
 export const API_ROOT = process.env.API_ROOT;
 export const IMAGE_SERVER_ROOT = process.env.IMAGE_SERVER_ROOT;
@@ -270,49 +270,12 @@ class App extends Component {
     return (
       <div className="scriptchart-app">
         <ReactTooltip place="top" type="dark" effect="solid" />
-        <div
-          className={
-            "button " +
-            (!this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
-          }
-          onClick={this.toggleSidebar}
-        >
-          <i
-            className="fa fa-arrow-right"
-            title="Open the viewer options form."
-            style={{ cursor: "pointer" }}
-          />
-        </div>
-        <div
-          className={
-            "sidebar box small-padding " +
-            (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
-          }
-        >
-          <div className={"box-header columns"}>
-            <div className={"column is-three-quarters"}>
-              <h4 className={"title is-5"}>Viewer options</h4>
-            </div>
-            <div className={"column is-one-quarter"}>
-              <span className={"icon arrow-button"}>
-                <i
-                  className="fa fa-arrow-left"
-                  title="Close the viewer options form."
-                  onClick={this.toggleSidebar}
-                  style={{ cursor: "pointer" }}
-                />
-              </span>
-            </div>
-          </div>
-          <div className={"box-content"}>
-            <ManuscriptForm
-              formSubmit={this.handleSubmit}
-              manuscripts={this.state.allManuscripts}
-              sortManuscripts={this.sortManuscripts}
-              formData={this.state.formData}
-            />
-          </div>
-        </div>
+        <ScriptchartSidebar
+          sidebarOpen={this.state.sidebarOpen}
+          toggleSidebar={this.toggleSidebar.bind(this)}
+          manuscripts={this.state.manuscripts}
+          onFormSubmitted={this.onFormSubmitted.bind(this)}
+        />
         <div className="scriptchart">
           <DashTabs
             key={chartKey}

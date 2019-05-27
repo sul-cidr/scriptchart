@@ -1,0 +1,51 @@
+$sidebar-width: 25rem;
+
+.sidebar {
+  transition: margin-left .7s;
+  width: $sidebar-width;
+  flex-shrink: 0;
+  margin: 10px;
+  margin-bottom: 10px !important;  // higher specificity of .box:not(:last-child) applies bigger bottom margin otherwise
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+
+  &.box {
+    background: $panel-bg;
+  }
+
+  &.sidebar-closed {
+    margin-left: -.5rem - $sidebar-width;
+
+    .sidebar-toggle {
+      transform: rotate(0deg);
+      margin-left: $sidebar-width - 1rem;
+
+      &:hover {
+        margin-left: $sidebar-width - .3rem;
+      }
+    }
+  }
+}
+
+.sidebar-toggle {
+  position: fixed;
+  outline: none;
+  width: 2.5rem;
+  height: 3rem;
+  margin-left: $sidebar-width - 2.5rem;
+  margin-top: 0;
+  transform: rotate(180deg);
+  cursor: pointer;
+  transition: .5s;
+  border: 2px solid $off-white !important;
+  border-radius: 6px;
+  z-index: 1;
+
+  i {
+    font-size: 1rem;
+    height: 1rem;
+    width: 1rem;
+    color: $white;
+  }
+}

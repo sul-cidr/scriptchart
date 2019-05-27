@@ -4,7 +4,7 @@
     left: 30vw;
     right: 30vw;
     background-color: whitesmoke;
-    z-index: 100;
+    z-index: 1201;
 }
 
 .Overlay {
@@ -14,7 +14,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(54, 54, 54, 0.6);
-    z-index: 32;
+    z-index: 1200;
 }
 
 .bookmarktext {

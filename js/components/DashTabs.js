@@ -25,6 +25,7 @@ import ScriptChart from "./ScriptChart";
 import MiradorViewer from "./MiradorViewer";
 import ChartAccordion from "./ChartAccordion";
 import BookmarkModal from "./BookmarkModal";
+import SyriacSpinner from "./SyriacSpinner";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -360,17 +361,21 @@ class DashTabs extends React.Component {
   }
 
   render() {
-    if (this.props.showTabs == false && this.props.loadingMessage == "") {
+    if (this.props.loading) {
+      return (<SyriacSpinner></SyriacSpinner>);
+    }
+
+    if (!Object.keys(this.props.tableData).length) {
       return (
         <div className="help-text">
           <h5 className="subtitle is-5">
-            Please select one or more manuscripts and letters from the options
-            menu, then click the "Submit" button.
+            Please select one or more manuscripts and letters from the
+            options menu, then click the "Submit" button.
           </h5>
           <hr />
           <p className="content">
-            Here's a quick guide to using the scriptchart and options form. For
-            full help documentation, see our{" "}
+            Here's a quick guide to using the scriptchart and options
+            form. For full help documentation, see our{" "}
             <a href={"../guide/"}>How-to Guide</a>.
           </p>
           <img
@@ -382,17 +387,6 @@ class DashTabs extends React.Component {
             src="../assets/img/help-images/options-annotated.png"
             alt="Explanation of DASH Options Panel"
           />
-        </div>
-      );
-    } else if (
-      this.props.showTabs == false &&
-      this.props.loadingMessage != ""
-    ) {
-      return (
-        <div>
-          <span>
-            <strong>{this.props.loadingMessage}</strong>
-          </span>
         </div>
       );
     }

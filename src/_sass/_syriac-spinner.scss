@@ -1,0 +1,63 @@
+.syriac-spinner {
+  padding-top: 2rem;
+
+  > div {
+    width: 15vh;
+    height: 15vh;
+    margin: 0 auto;
+
+    animation: syriac-spinner-rotate 4.0s infinite linear;
+
+    > div {
+      width: 70%;
+      height: 70%;
+      display: inline-block;
+      position: absolute;
+      animation: syriac-spinner-bounce 4.0s infinite ease-in-out;
+
+      svg path {
+        fill: rgba($secondary, .8);
+      }
+
+      &:first-child {
+        top: 0;
+        left: 0;
+      }
+
+      &:nth-child(2) {
+        top: 0;
+        right: 0;
+        animation-delay: -1.0s;
+      }
+
+      &:nth-child(3) {
+        bottom: 0;
+        left: 0;
+        animation-delay: -2.0s;
+      }
+
+      &:nth-child(4) {
+        bottom: 0;
+        right: 0;
+        animation-delay: -3.0s;
+      }
+    }
+  }
+
+  p {
+    font: bold 2rem $family-primary;
+    text-align: center;
+    margin-top: 4rem;
+    color: $secondary;
+  }
+}
+
+@keyframes syriac-spinner-rotate { 100% { transform: rotate(360deg) }}
+
+@keyframes syriac-spinner-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+  } 50% {
+    transform: scale(1.0);
+  }
+}

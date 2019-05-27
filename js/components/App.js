@@ -47,7 +47,7 @@ class App extends Component {
     this.state = {
       manuscripts: [], // Only the selected mss, sent to the table (sorted)
       allManuscripts: [], // Populates the form list, to be sorted as needed
-      showTabs: false,
+      loading: false,
       formData: {},
       tableData: {},
       sidebarOpen: true,
@@ -219,7 +219,7 @@ class App extends Component {
 
   handleSubmit(formData) {
     this.setState({
-      showTabs: false,
+      loading: true,
       loadingMessage: "Loading manuscripts..."
     });
 
@@ -242,7 +242,7 @@ class App extends Component {
         this.setState({
           tableData: json.mss,
           formData: formData,
-          showTabs: true
+          loading: false
         })
       )
       .catch(function(error) {
@@ -316,7 +316,7 @@ class App extends Component {
         <div className="scriptchart">
           <DashTabs
             key={chartKey}
-            showTabs={this.state.showTabs}
+            loading={this.state.loading}
             formData={this.state.formData}
             tableData={this.state.tableData}
             manuscripts={this.state.manuscripts}

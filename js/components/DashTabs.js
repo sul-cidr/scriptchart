@@ -84,10 +84,12 @@ class DashTabs extends React.Component {
   }
 
   manifestListener() {
+
+    console.log("mirador state event");
     
     function findMiddleCanvas(manifest) {
       if (('sequences' in manifest.json) && ('canvases' in manifest.json.sequences[0])) {
-        return Math.floor(manifest.json.sequences[0].canvases.length / 2);
+        return Math.max(0, Math.floor(manifest.json.sequences[0].canvases.length / 2)-1);
       }
       return 0;
     }
@@ -96,7 +98,7 @@ class DashTabs extends React.Component {
     let manifestMiddleCanvases = this.state.manifestMiddleCanvases;
 
     for (let msID in currentState.manifests) {
-      if ((msID in this.state.manifestMiddleCanvases) || (currentState.manifests[msID].isFetching == true)) {
+      if ((currentState.manifests[msID].isFetching == true) || (msID in this.state.manifestMiddleCanvases)) {
         continue;
       }
       if ('json' in currentState.manifests[msID]) {
@@ -106,6 +108,7 @@ class DashTabs extends React.Component {
         if (windowProps != undefined) {
           windowProps.canvasIndex = middleCanvas; // this is so easy
         }
+        manifestMiddleCanvases[msID] = middleCanvas;
       }
     }
 

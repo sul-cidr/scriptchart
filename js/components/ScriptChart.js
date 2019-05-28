@@ -215,7 +215,6 @@ class ScriptChart extends React.Component {
   }
 
   componentDidMount() {
-    console.log("script chart mounted");
     this.setState({mounted: true});
   }
 

@@ -262,7 +262,7 @@ class DashTabs extends React.Component {
         collectionIndex: 0,
         sideBarOpen: false,
         view: "single",
-        thumbnailNavigationPosition: "far-bottom",
+        thumbnailNavigationPosition: "off",
         draggingEnabled: true,
         layoutOrder: windowLayoutOrder
       }
@@ -344,7 +344,7 @@ class DashTabs extends React.Component {
         collectionIndex: 0,
         sideBarOpen: false,
         view: "single",
-        thumbnailNavigationPosition: "far-bottom",
+        thumbnailNavigationPosition: "off",
         draggingEnabled: true,
         layoutOrder: m+1
       }

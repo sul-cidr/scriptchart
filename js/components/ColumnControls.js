@@ -57,13 +57,6 @@ class ColumnControls extends React.Component {
         >
           <b>&#10007;</b>
         </div>
-        <div className={"header-icon"}>
-          <i
-            className="fa fa-info-circle"
-            title="Information about this manuscript"
-            style={{ cursor: "pointer", color: "#0000FF" }}
-          />
-        </div>
         {manifestDiv}
       </div>
     );

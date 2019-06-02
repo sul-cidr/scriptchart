@@ -21,7 +21,7 @@ class ManuscriptForm extends React.Component {
     /* Most of the form defaults are set here */
     this.state = {
       showBinarized: true,
-      showCropped: true,
+      showCropped: false,
       contextMode: "hover",
       letterExamples: 3,
       contextSize: "large",

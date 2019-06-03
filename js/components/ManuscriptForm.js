@@ -21,10 +21,10 @@ class ManuscriptForm extends React.Component {
     /* Most of the form defaults are set here */
     this.state = {
       showBinarized: true,
-      showCropped: true,
+      showCropped: false,
       contextMode: "hover",
       letterExamples: 3,
-      contextSize: "med",
+      contextSize: "large",
       imageSize: "Medium",
       selectedShelfmarks: [],
       letters: []
@@ -272,7 +272,6 @@ class ManuscriptForm extends React.Component {
               <option value="small">Small</option>
               <option value="med">Medium</option>
               <option value="large">Large</option>
-              <option value="xl">X-Large</option>
             </select>
           </div>
         </div>

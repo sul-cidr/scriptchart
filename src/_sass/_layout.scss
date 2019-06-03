@@ -1,0 +1,60 @@
+
+html { overflow: hidden; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page-content {
+  flex-grow: 1;
+  height: 1px;
+}
+
+.post {
+  padding: 1em 30px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.scriptchart-app {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+}
+
+.scriptchart {
+  flex-grow: 1;
+  margin: 10px;
+  width: 1px;
+
+  .react-tabs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  [role="tabpanel"] {
+    overflow: auto;
+    height: 100%;
+  }
+}
+
+.sidebar {
+  width: 20%;
+  flex-shrink: 0;
+  margin: 10px !important;  // higher specificity of .box:not(:last-child) applies bigger bottom margin otherwise
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.site-footer {
+  background-color: $navbar-background-color;
+  display: flex;
+  justify-content: space-evenly;
+  height: 35px;
+  align-items: center;
+  color: $navbar-item-color;
+}

@@ -40,4 +40,7 @@ layout: home
             <a id="start-button" class="button is-danger" href="/scriptchart/viewer/"><h2 class="subtitle">Get Started</h2></a>
         </div>
     </div>
+    <div class="hero-foot">
+          {%- include footer.html -%}
+    </div>
 </section>

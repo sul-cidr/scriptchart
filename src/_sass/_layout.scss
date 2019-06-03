@@ -58,3 +58,9 @@ body {
   align-items: center;
   color: $navbar-item-color;
 }
+
+.hero-foot {
+  .site-footer {
+    background-color: $navbar-color-transparent;
+  }
+}

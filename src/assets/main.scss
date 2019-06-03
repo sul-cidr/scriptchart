@@ -25,6 +25,7 @@ $navbar-background-color: #990000;
 $navbar-item-color: $off-white;
 $navbar-item-hover-color: lighten($off-white, 20%);
 $navbar-item-hover-background-color: darken(#990000, 5%);
+$navbar-color-transparent: rgba(153, 0, 0, 0.6);
 
 $danger: $navbar-background-color;
 
@@ -74,20 +75,20 @@ $danger: $navbar-background-color;
 }
 
 .hero-head .navbar-menu {
-  background: rgba(153, 0, 0, 0.6);
+  background: $navbar-color-transparent;
   box-shadow: none;
   padding-top: 0;
   padding-bottom: 0;
 
   .navbar-item:hover {
-    background-color: darken(rgba(153, 0, 0, 0.6), 5%);
+    background-color: darken($navbar-color-transparent, 5%);
   }
 }
 
 #start-button {
-  background-color: rgba(153, 0, 0, 0.6);
+  background-color: $navbar-color-transparent;
 }
 
 #start-button:hover {
-  background-color: darken(rgba(153, 0, 0, 0.6), 5%);
+  background-color: darken($navbar-color-transparent, 5%);
 }

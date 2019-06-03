@@ -27,12 +27,14 @@ import BookmarkModal from "./BookmarkModal";
 
 // There are two ways to embed Mirador 3, see
 // https://github.com/ProjectMirador/mirador/issues/2627
+/*
 import MiradorViewer from "./MiradorViewer";
 import { Provider } from 'react-redux';
 import createStore from 'mirador/dist/es/src/state/createStore';
 import settings from 'mirador/dist/es/src/config/settings';
 import * as actions from 'mirador/dist/es/src/state/actions';
-//import Mirador from "./Mirador";
+*/
+import Mirador from "./Mirador.js";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -61,7 +63,10 @@ class DashTabs extends React.Component {
       bookmarkIsOpen: false,
       miradorState: {},
       manifestMiddleCanvases: {},
-      allowUpdates: false
+      allowUpdates: false,
+      manifestURIs: [],
+      windowObjects: [],
+      miradorLayout: "1x1",
     };
 
     this.onManifestSelected = this.onManifestSelected.bind(this);
@@ -71,7 +76,7 @@ class DashTabs extends React.Component {
     this.getBookmark = this.getBookmark.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.findWindowByManifestID = this.findWindowByManifestID.bind(this);
-    this.manifestListener = this.manifestListener.bind(this);
+    //this.manifestListener = this.manifestListener.bind(this);
   }
 
   findWindowByManifestID(windows, msid) {
@@ -83,6 +88,7 @@ class DashTabs extends React.Component {
     return null;
   }
 
+  /*
   manifestListener() {
 
     console.log("mirador state event");
@@ -116,6 +122,7 @@ class DashTabs extends React.Component {
       this.setState({manifestMiddleCanvases});
     }
   }
+  */
 
   onColumnMove(labels) {
     let sourceShelfmark = labels.sourceLabel;
@@ -241,7 +248,7 @@ class DashTabs extends React.Component {
   }
 
   onManifestSelected(selectedManifestURI) {
-
+    /*
     let miradorState = this.state.miradorState.getState();
 
     let matchingWindow = this.findWindowByManifestID(miradorState.windows, selectedManifestURI);
@@ -268,6 +275,7 @@ class DashTabs extends React.Component {
       }
       this.state.miradorState.dispatch(actions.addWindow(windowProps));
     }
+    */
     this.setState({ tabIndex: 1 });
   }
 
@@ -328,6 +336,7 @@ class DashTabs extends React.Component {
       manifestURIs.push(ms.manifest);
     }
 
+    /*
     let miradorState = createStore();
     settings.id = 'mirador';
     settings.workspace.type = "mosaic";
@@ -355,6 +364,7 @@ class DashTabs extends React.Component {
 
     miradorState.subscribe(this.manifestListener);
     this.setState({miradorState});
+    */
   }
 
   render() {
@@ -447,13 +457,13 @@ class DashTabs extends React.Component {
               />
             </TabPanel>
             <TabPanel>
-              <Provider store={this.state.miradorState}>
+              {/*<Provider store={this.state.miradorState}>
                 <MiradorViewer/>
-              </Provider>
-              {/*<Mirador config={{ id: "mirador",
-                                 manifests: manifestURIs,
-                                 windows=this.props.windowObjects
-                                 }} />*/}
+              </Provider>*/}
+              <Mirador config={{ id: "mirador",
+                                 manifests: this.state.manifestURIs,
+                                 windows: this.state.windowObjects
+                                 }} />
             </TabPanel>
             <TabPanel>
               <ChartAccordion

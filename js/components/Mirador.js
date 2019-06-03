@@ -4,9 +4,20 @@ import mirador from "mirador";
 import "./MiradorViewer.css";
 
 class Mirador extends Component {
+  constructor(props) {
+    super(props);
+    this.miradorInstance = null;
+    
+  }
+
   componentDidMount() {
     const { config, plugins } = this.props;
-    mirador.viewer(config, plugins);
+    this.miradorInstance = mirador.viewer(config, plugins);
+    // Example of subscribing to state
+    this.miradorInstance.store.subscribe(() => {
+      let state = this.miradorInstance.store.getState();
+      console.log(state.windows);
+    });
   }
 
   componentWillUnmount() {

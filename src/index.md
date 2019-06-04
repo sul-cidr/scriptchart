@@ -20,6 +20,9 @@ layout: home
                     <a class="navbar-item" href="./about/">
                         About
                     </a>
+                    <a class="navbar-item" href="./contact/">
+                        Contact
+                    </a>
                     <a class="navbar-item" href="./participants">
                         Participants
                     </a>

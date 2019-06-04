@@ -17,7 +17,7 @@ class PopupImage extends React.Component {
           trigger={this.props.triggerImage}
           position="top center"
           contentStyle={{
-            width: "auto",
+            width: `${this.props.width}px`, // note: images are sometimes smaller than this, but never bigger
             zIndex: 31 // Needs to occlude header, which is 30
           }}
           on={this.props.contextMode}
@@ -25,6 +25,7 @@ class PopupImage extends React.Component {
           modal={this.props.contextMode == "click"}
           // lockScroll={true}  // this might be nice if the panes are full-height and locked
           mouseEnterDelay={300}
+          keepTooltipInside={true}
         >
           {this.props.contextImage}
         </Popup>

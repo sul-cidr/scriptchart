@@ -22,6 +22,7 @@ import "./index.css";
 
 // Size of the largest dimension of the non-contextual letter images
 const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
+const CONTEXT_IMAGE_WIDTHS = { small: 250, med: 400, large: 500 }
 
 class LetterImage extends React.Component {
   constructor(props) {
@@ -103,6 +104,7 @@ class LetterImage extends React.Component {
           triggerImage={binarizedImage}
           contextMode={this.props.contextMode}
           contextImage={contextImage}
+          width={CONTEXT_IMAGE_WIDTHS[this.props.contextSize]}
         />
       );
     }
@@ -125,6 +127,7 @@ class LetterImage extends React.Component {
           triggerImage={croppedImage}
           contextMode={this.props.contextMode}
           contextImage={contextImage}
+          width={CONTEXT_IMAGE_WIDTHS[this.props.contextSize]}
         />
       );
     }

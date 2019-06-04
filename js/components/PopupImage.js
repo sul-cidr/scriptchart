@@ -22,8 +22,6 @@ class PopupImage extends React.Component {
           }}
           on={this.props.contextMode}
           arrow={false}
-          modal={this.props.contextMode == "click"}
-          // lockScroll={true}  // this might be nice if the panes are full-height and locked
           mouseEnterDelay={300}
           keepTooltipInside={true}
         >

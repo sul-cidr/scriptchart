@@ -155,7 +155,18 @@ class DashTabs extends React.Component {
           loadedManifest: ms.manifest,
           targetSlot: targetSlot,
           viewType: "ImageView",
-          sidePanel: false
+          sidePanel: false,
+          displayLayout: false,
+          bottomPanel: false,
+          canvasControls: {
+            annotations: {
+              annotationLayer: false,
+              annotationCreation: false,
+            },
+            imageManipulation: {
+              manipulationLayer: false,
+            }
+          }
         };
         windowObjects.push(windowObject);
       }

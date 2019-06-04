@@ -870,7 +870,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       }
     >
       <input
-        checked={true}
+        checked={false}
         id="showCropped"
         name="showCropped"
         onChange={[Function]}
@@ -960,7 +960,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
   >
     <label
       className="control"
-      htmlFor="cropMargin"
+      htmlFor="contextSize"
     >
       Context size:
        
@@ -974,23 +974,26 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       }
     >
       <select
-        id="cropMargin"
-        name="cropMargin"
+        id="contextSize"
+        name="contextSize"
         onChange={[Function]}
         type="string"
-        value="Medium"
+        value="large"
       >
-        <option>
+        <option
+          value="small"
+        >
           Small
         </option>
-        <option>
+        <option
+          value="med"
+        >
           Medium
         </option>
-        <option>
+        <option
+          value="large"
+        >
           Large
-        </option>
-        <option>
-          X-Large
         </option>
       </select>
     </div>

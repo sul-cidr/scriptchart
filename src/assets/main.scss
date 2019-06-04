@@ -92,3 +92,7 @@ $danger: $navbar-background-color;
 #start-button:hover {
   background-color: darken($navbar-color-transparent, 5%);
 }
+
+#contact-embed {
+  min-height: 100vh;
+}

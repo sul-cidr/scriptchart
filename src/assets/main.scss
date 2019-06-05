@@ -92,3 +92,8 @@ $danger: $navbar-background-color;
 #start-button:hover {
   background-color: darken($navbar-color-transparent, 5%);
 }
+
+#contact-embed {
+  height: 100%;
+  width: 100%;
+}

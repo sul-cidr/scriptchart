@@ -50,7 +50,9 @@ class ManuscriptForm extends React.Component {
       contextSize: "unset",
       imageSize: "unset",
       selectedShelfmarks: "unset",
-      letters: "unset"
+      letters: "unset",
+      markMssSelectInvalid: false,
+      markLettersSelectInvalid: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -113,6 +115,12 @@ class ManuscriptForm extends React.Component {
    * but that hasn't been workable so far.
    */
   handleSelect(name, value) {
+    if (name == "selectedShelfmarks" && value.length > 0) {
+      this.setState({ markMssSelectInvalid: false });
+    }
+    if (name == 'letters' && value.length > 0) {
+      this.setState({ markLettersSelectInvalid: false });
+    }
     this.setState({
       [name]: value
     });
@@ -153,8 +161,29 @@ class ManuscriptForm extends React.Component {
       window.history.pushState(null, "", viewerHref);
     }
 
+    let valid = true;
+
+    // This is a bit hacky, but the `setTimeout` is necessary to
+    //  force a tick between removing the animation class and
+    //  reapplying it -- otherwise the animation won't restart.
+    if (formData.selectedShelfmarks.length === 0) {
+      this.setState({ markMssSelectInvalid : false});
+      setTimeout(() => {
+        this.setState({ markMssSelectInvalid : true});
+      }, 0);
+      valid = false;
+    }
+
+    if (formData.letters.length === 0) {
+      this.setState({ markLettersSelectInvalid : false});
+      setTimeout(() => {
+        this.setState({ markLettersSelectInvalid : true});
+      }, 0);
+      valid = false;
+    }
+
     // Pass all of the form's state to the handler (which is in App)
-    this.props.formSubmit(formData);
+    if (valid) { this.props.formSubmit(formData); }
   }
 
   render() {
@@ -170,9 +199,10 @@ class ManuscriptForm extends React.Component {
           manuscripts={this.props.manuscripts}
           selectedShelfmarks={formData.selectedShelfmarks}
           sortManuscripts={this.props.sortManuscripts}
+          markInvalid={this.state.markMssSelectInvalid}
         />
 
-        <div className={"field"}>
+        <div className="field letters-select">
           <div className={"control"} style={{ marginBottom: 5 }}>
             <label className={"control"}>Select letters: </label>
             <span className="button is-small" onClick={this.lettersSelect}>
@@ -182,6 +212,7 @@ class ManuscriptForm extends React.Component {
           <LettersLoader
             selectedLetters={formData.letters}
             handleSelect={this.buttonChange}
+            markInvalid={this.state.markLettersSelectInvalid}
           />
         </div>
 

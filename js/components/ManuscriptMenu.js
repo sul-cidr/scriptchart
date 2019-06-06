@@ -73,11 +73,19 @@ class ManuscriptMenu extends React.Component {
           <label htmlFor="selectedShelfmarks" className={"control"}>
             Select manuscripts:{" "}
           </label>
-          <span className="button is-small" onClick={this.manuscriptsSelect}>
+          <span
+            className="button is-small"
+            onClick={this.manuscriptsSelect}
+          >
             All/None
           </span>
         </div>
-        <div className={"select is-multiple"}>
+        <div
+          className={
+            "select is-multiple" +
+            (this.props.markInvalid ? " is-danger invalid-shake" : "")
+          }
+        >
           <ManuscriptsLoader
             handleSelect={this.handleSelect}
             manuscripts={this.props.manuscripts}

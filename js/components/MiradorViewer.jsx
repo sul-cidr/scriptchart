@@ -10,15 +10,12 @@ export default class MiradorViewer extends Component {
   componentDidMount() {
     Mirador({
       id: "mirador",
+      mainMenuSettings: { show: false },
       layout: this.props.miradorLayout,
       buildPath: "mirador/",
       data: this.props.manifestURIs,
       windowObjects: this.props.windowObjects,
-      annotationEndpoint: {
-        name: "Local Storage",
-        module: "LocalStorageEndpoint"
-      },
-      openManifestPage: false
+      openManifestPage: false,
     });
   }
 

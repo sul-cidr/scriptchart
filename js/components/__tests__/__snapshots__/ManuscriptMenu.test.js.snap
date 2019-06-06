@@ -35,11 +35,6 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
       name="selectedShelfmarks"
       onChange={[Function]}
       size="8"
-      style={
-        Object {
-          "fontFamily": "Helvetica Neue, FontAwesome",
-        }
-      }
       type="string"
     >
       <option
@@ -48,8 +43,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         Vat. Syr. 092
          (
         823
-        ) 
-        
+        )
       </option>
       <option
         value="Vat. Syr. 112"
@@ -57,8 +51,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         Vat. Syr. 112
          (
         552
-        ) 
-        
+        )
       </option>
       <option
         value="Vat. Syr. 140"
@@ -66,8 +59,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         Vat. Syr. 140
          (
         528
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Add. 17224"
@@ -75,8 +67,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Add. 17224
          (
         1173
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Add. 12144"
@@ -84,8 +75,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Add. 12144
          (
         1081
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Add. 12134"
@@ -93,8 +83,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Add. 12134
          (
         697
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Add. 14445"
@@ -102,8 +91,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Add. 14445
          (
         532
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Add. 12146"
@@ -111,8 +99,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Add. 12146
          (
         1007
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Or. 8732"
@@ -120,8 +107,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Or. 8732
          (
         770
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Or. 8606"
@@ -129,8 +115,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Or. 8606
          (
         723
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Add. 17102"
@@ -138,8 +123,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Add. 17102
          (
         598-599
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Add. 17107"
@@ -147,8 +131,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Add. 17107
          (
         540-541
-        ) 
-        
+        )
       </option>
       <option
         value="BL. Add. 12175"
@@ -156,8 +139,7 @@ exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
         BL. Add. 12175
          (
         533-534
-        ) 
-        
+        )
       </option>
     </select>
   </div>

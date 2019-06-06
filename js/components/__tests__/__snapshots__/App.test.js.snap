@@ -75,7 +75,7 @@ exports[`App test App should match snapshot 1`] = `
               htmlFor="selectedShelfmarks"
             >
               Select manuscripts:
-               
+
             </label>
             <span
               className="button is-small"
@@ -93,11 +93,6 @@ exports[`App test App should match snapshot 1`] = `
               name="selectedShelfmarks"
               onChange={[Function]}
               size="8"
-              style={
-                Object {
-                  "fontFamily": "Helvetica Neue, FontAwesome",
-                }
-              }
               type="string"
               value={Array []}
             >
@@ -123,7 +118,7 @@ exports[`App test App should match snapshot 1`] = `
                 type="radio"
                 value="shelfmark"
               />
-               
+
               Shelfmark |
             </label>
             <label
@@ -137,7 +132,7 @@ exports[`App test App should match snapshot 1`] = `
                 type="radio"
                 value="date"
               />
-               
+
               Date
             </label>
           </div>
@@ -156,7 +151,7 @@ exports[`App test App should match snapshot 1`] = `
             <label
               className="control"
             >
-              Select letters: 
+              Select letters:
             </label>
             <span
               className="button is-small"
@@ -752,7 +747,7 @@ exports[`App test App should match snapshot 1`] = `
             htmlFor="letterExamples"
           >
             Number of examples:
-             
+
           </label>
           <div
             className="select is-small"
@@ -827,7 +822,7 @@ exports[`App test App should match snapshot 1`] = `
             htmlFor="imageSize"
           >
             Image size:
-             
+
           </label>
           <div
             className="select is-small"
@@ -873,7 +868,7 @@ exports[`App test App should match snapshot 1`] = `
                   type="radio"
                   value="hover"
                 />
-                 
+
                 Show on hover
               </label>
             </li>
@@ -889,7 +884,7 @@ exports[`App test App should match snapshot 1`] = `
                   type="radio"
                   value="click"
                 />
-                 
+
                 Show on click
               </label>
             </li>
@@ -903,7 +898,7 @@ exports[`App test App should match snapshot 1`] = `
             htmlFor="contextSize"
           >
             Context size:
-             
+
           </label>
           <div
             className="select is-small"

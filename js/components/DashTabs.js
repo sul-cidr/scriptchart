@@ -162,9 +162,6 @@ class DashTabs extends React.Component {
             annotations: {
               annotationLayer: false,
               annotationCreation: false,
-            },
-            imageManipulation: {
-              manipulationLayer: false,
             }
           }
         };

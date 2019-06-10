@@ -31,6 +31,8 @@ $danger: $navbar-background-color;
 
 @import "../../node_modules/bulma/bulma.sass";
 @import "../_sass/layout.scss";
+@import "../_sass/app.scss";
+@import "../_sass/components.scss";
 @import "fonts/syriac_fonts.css";
 
 .navbar-brand .title {

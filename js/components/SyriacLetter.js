@@ -6,8 +6,6 @@ import React from "react";
  * and not available via the backend REST API.
  */
 
-import "./index.css";
-
 import letters from "./letters.json";
 
 class SyriacLetter extends React.Component {

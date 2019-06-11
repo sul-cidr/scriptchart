@@ -30,3 +30,8 @@ exclude:
   - assets/img/HMML-background-image_JPG.jpg  # written into main.css as a base64-encoded data uri
   - assets/fonts/syriac_fonts.css  # incorporated into main.css
   - assets/bundle.js  # in case it's left there from a previous (pre-webpack update) build
+
+keep_files:
+  - assets/bundle.js
+  - assets/main.css
+  - mirador

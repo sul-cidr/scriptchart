@@ -19,8 +19,6 @@ import LetterImage from "./LetterImage";
 import ColumnControls from "./ColumnControls";
 import SyriacLetter from "./SyriacLetter";
 
-import "./index.css";
-
 const LETTER_WIDTH = 80;
 const X_WIDTH = 45;
 const CELL_WIDTH = 200;

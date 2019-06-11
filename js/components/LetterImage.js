@@ -18,8 +18,6 @@ import PopupImage from "./PopupImage";
 
 import { IMAGE_SERVER_ROOT } from "./App";
 
-import "./index.css";
-
 // Size of the largest dimension of the non-contextual letter images
 const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
 const CONTEXT_IMAGE_WIDTHS = { small: 250, med: 400, large: 500 }

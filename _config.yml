@@ -16,24 +16,22 @@
 title: Digital Analysis of Syriac Handwriting
 #email: your-email@example.com
 description: >- # this means to ignore newlines until "url:"
-  DASH: Digital Analysis of Syriac Handwriting 
-url: "https://sul-cidr.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "/scriptchart" # the subpath of your site, e.g. /blog
+  DASH: Digital Analysis of Syriac Handwriting
+url: https://dash.stanford.edu/ # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/" # the subpath of your site, e.g. /blog
 #twitter_username: jekyllrb
 #github_username: jekyll
 
 # Build settings
 source: src
 markdown: kramdown
-theme: minima
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - assets/main.scss  # processed by webpack instead of Jekyll
+  - assets/img/HMML-background-image_JPG.jpg  # written into main.css as a base64-encoded data uri
+  - assets/fonts/syriac_fonts.css  # incorporated into main.css
+  - assets/bundle.js  # in case it's left there from a previous (pre-webpack update) build
+
+keep_files:
+  - assets/bundle.js
+  - assets/main.css
+  - mirador

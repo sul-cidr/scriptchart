@@ -30,8 +30,6 @@ import "react-tabs/style/react-tabs.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./index.css";
-
 class DashTabs extends React.Component {
   constructor(props) {
     super(props);

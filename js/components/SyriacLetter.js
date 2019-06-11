@@ -6,8 +6,6 @@ import React from "react";
  * and not available via the backend REST API.
  */
 
-import "./index.css";
-
 import letters from "./letters.json";
 
 class SyriacLetter extends React.Component {
@@ -34,7 +32,7 @@ class SyriacLetter extends React.Component {
               (this.props.isButton ? "button-svg " : "chart-svg ") +
               (this.props.clicked ? "button-clicked" : "")
             }
-            src={"/scriptchart/assets/font_glyphs/" + letter.glyph_file}
+            src={"../assets/font_glyphs/" + letter.glyph_file}
           />
         </div>
       );

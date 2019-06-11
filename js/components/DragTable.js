@@ -41,19 +41,13 @@ class DragTable extends React.Component {
       column => !this.props.hiddenManuscripts.includes(column.props.msid)
     );
 
-    const tableWidth = "95vw";
-    const tableHeight = "100vh";
     const tableStyle = {
-      width: tableWidth,
       clear: "none"
     };
     const tableHeaderStyle = {
-      maxWidth: tableWidth,
       overflow: "hidden"
     };
     const tableBodyStyle = {
-      maxWidth: tableWidth,
-      maxHeight: tableHeight,
       overflow: "auto"
     };
 

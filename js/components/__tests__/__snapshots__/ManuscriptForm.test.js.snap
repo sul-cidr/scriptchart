@@ -39,11 +39,6 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         name="selectedShelfmarks"
         onChange={[Function]}
         size="8"
-        style={
-          Object {
-            "fontFamily": "Helvetica Neue, FontAwesome",
-          }
-        }
         type="string"
         value={Array []}
       >
@@ -53,8 +48,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           Vat. Syr. 092
            (
           823
-          ) 
-          
+          )
         </option>
         <option
           value="Vat. Syr. 112"
@@ -62,8 +56,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           Vat. Syr. 112
            (
           552
-          ) 
-          
+          )
         </option>
         <option
           value="Vat. Syr. 140"
@@ -71,8 +64,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           Vat. Syr. 140
            (
           528
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Add. 17224"
@@ -80,8 +72,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Add. 17224
            (
           1173
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Add. 12144"
@@ -89,8 +80,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Add. 12144
            (
           1081
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Add. 12134"
@@ -98,8 +88,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Add. 12134
            (
           697
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Add. 14445"
@@ -107,8 +96,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Add. 14445
            (
           532
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Add. 12146"
@@ -116,8 +104,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Add. 12146
            (
           1007
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Or. 8732"
@@ -125,8 +112,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Or. 8732
            (
           770
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Or. 8606"
@@ -134,8 +120,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Or. 8606
            (
           723
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Add. 17102"
@@ -143,8 +128,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Add. 17102
            (
           598-599
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Add. 17107"
@@ -152,8 +136,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Add. 17107
            (
           540-541
-          ) 
-          
+          )
         </option>
         <option
           value="BL. Add. 12175"
@@ -161,8 +144,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           BL. Add. 12175
            (
           533-534
-          ) 
-          
+          )
         </option>
       </select>
     </div>
@@ -870,7 +852,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       }
     >
       <input
-        checked={true}
+        checked={false}
         id="showCropped"
         name="showCropped"
         onChange={[Function]}
@@ -960,7 +942,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
   >
     <label
       className="control"
-      htmlFor="cropMargin"
+      htmlFor="contextSize"
     >
       Context size:
        
@@ -974,23 +956,26 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       }
     >
       <select
-        id="cropMargin"
-        name="cropMargin"
+        id="contextSize"
+        name="contextSize"
         onChange={[Function]}
         type="string"
-        value="Medium"
+        value="large"
       >
-        <option>
+        <option
+          value="small"
+        >
           Small
         </option>
-        <option>
+        <option
+          value="med"
+        >
           Medium
         </option>
-        <option>
+        <option
+          value="large"
+        >
           Large
-        </option>
-        <option>
-          X-Large
         </option>
       </select>
     </div>

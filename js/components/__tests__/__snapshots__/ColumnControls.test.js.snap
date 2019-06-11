@@ -18,20 +18,6 @@ exports[`ColumnControls test ColumnControls should match snapshot 1`] = `
       ✗
     </b>
   </div>
-  <div
-    className="header-icon"
-  >
-    <i
-      className="fa fa-info-circle"
-      style={
-        Object {
-          "color": "#0000FF",
-          "cursor": "pointer",
-        }
-      }
-      title="Information about this manuscript"
-    />
-  </div>
   
 </div>
 `;

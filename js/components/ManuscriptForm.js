@@ -39,22 +39,34 @@ class ManuscriptForm extends React.Component {
 
     /* Most of the form defaults are set here */
     this.state = {
-      showBinarized: "unset",
-      showCropped: "unset",
-      contextMode: "unset",
-      letterExamples: "unset",
-      cropMargin: "unset",
-      imageSize: "unset",
-      selectedLetters: "unset",
-      selectedShelfmarks: "unset"
+      showBinarized: true,
+      showCropped: false,
+      contextMode: "hover",
+      letterExamples: 3,
+      contextSize: "large",
+      imageSize: "Medium",
+      selectedShelfmarks: [],
+      letters: []
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-    this.reconcileFormField = this.reconcileFormField.bind(this);
+    this.changeContextSize = this.changeContextSize.bind(this);
+    this.changeContextMode = this.changeContextMode.bind(this);
+  }
+
+  changeContextMode(event) {
+    const contextMode = event.target.value;
+
+    this.setState({ contextMode });
+  }
+
+  changeContextSize(event) {
+    const contextSize = event.target.value;
+
+    this.setState({ contextSize });
   }
 
   buttonChange(letterID, operation) {
@@ -312,21 +324,20 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field is-horizontal flex-row"}>
-          <label htmlFor="cropMargin" className={"control"}>
+          <label htmlFor="contextSize" className={"control"}>
             Context size:{" "}
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={formData.cropMargin}
+              value={this.state.contextSize}
               type="string"
-              name="cropMargin"
-              id="cropMargin"
-              onChange={this.handleChange}
+              name="contextSize"
+              id="contextSize"
+              onChange={this.changeContextSize}
             >
-              <option>{"Small"}</option>
-              <option>{"Medium"}</option>
-              <option>{"Large"}</option>
-              <option>{"X-Large"}</option>
+              <option value="small">Small</option>
+              <option value="med">Medium</option>
+              <option value="large">Large</option>
             </select>
           </div>
         </div>

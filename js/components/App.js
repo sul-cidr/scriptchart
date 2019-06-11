@@ -38,12 +38,8 @@ import { DragDropContext } from "react-dnd";
 import ManuscriptForm from "./ManuscriptForm";
 import DashTabs from "./DashTabs";
 
-/* The maximum number of letter examples to load (and possibly show) */
-const MAX_EXAMPLES = 5;
-
-// export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
-// export const API_ROOT = "http://localhost:8000/api/";
 export const API_ROOT = process.env.API_ROOT;
+export const IMAGE_SERVER_ROOT = process.env.IMAGE_SERVER_ROOT;
 
 class App extends Component {
   constructor(props) {
@@ -60,11 +56,8 @@ class App extends Component {
         'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
     };
 
-    //this.queryCache = {}; // XXX Just let the browser cache handle this?
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.queryManuscripts = this.queryManuscripts.bind(this);
-    this.processCoords = this.processCoords.bind(this);
     this.getYearFromDate = this.getYearFromDate.bind(this);
     this.sortManuscripts = this.sortManuscripts.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
@@ -226,114 +219,30 @@ class App extends Component {
       loadingMessage: "Loading manuscripts..."
     });
 
-    let manuscriptQueries = [];
-    let manuscripts = [];
-
-    for (let shelfmark of formData.selectedShelfmarks) {
-      let ms = this.state.allManuscripts.find(obj => obj.shelfmark == shelfmark);
-      manuscripts.push(ms);
-      let msQuery = API_ROOT + "pages?manuscript_id=" + ms.id + "&format=json";
-      manuscriptQueries.push(msQuery);
-    }
+    let manuscripts = this.state.allManuscripts.filter(ms =>
+      formData.selectedShelfmarks.includes(ms.shelfmark)
+    );
+    let letter_ids = formData.letters.map(letter => letter.id);
 
     this.setState({ manuscripts });
 
-    Promise.all(
-      manuscriptQueries.map(url =>
-        fetch(url)
-          .then(resp => resp.json())
-          .catch(function(error) {
-            console.log("URL fetch failed for " + url);
-            return [];
-          })
+    let url =
+      `${API_ROOT}letters?count=${formData.letterExamples}` +
+      `&letter_ids=${letter_ids.join("|")}` +
+      `&ms_ids=${manuscripts.map(ms => ms.id).join("|")}`;
+
+    fetch(url)
+      .then(resp => resp.json())
+      .then(json =>
+        this.setState({
+          tableData: json.mss,
+          formData: formData,
+          showTabs: true
+        })
       )
-    ).then(msResults => {
-      let coordsQueries = [];
-
-      this.setState({ loadingMessage: "Loading manuscript pages..." });
-
-      for (let pages of msResults) {
-        for (let page of pages) {
-          for (let letter of formData.selectedLetters) {
-            let coordsQuery =
-              API_ROOT +
-              "coordinates?page_id=" +
-              page.id +
-              "&letter_id=" +
-              letter.id +
-              "&format=json";
-            coordsQueries.push(coordsQuery);
-          }
-        }
-      }
-      this.processCoords(coordsQueries, formData);
-    });
-  }
-
-  processCoords(coordsQueries, formData) {
-    Promise.all(
-      coordsQueries.map(url =>
-        fetch(url)
-          .then(resp => resp.json())
-          .catch(function(error) {
-            console.log("URL fetch failed for " + url);
-            return [];
-          })
-      )
-    ).then(coordsResults => {
-      let tableData = {};
-
-      this.setState({
-        loadingMessage: "Processing letters on manuscript pages..."
+      .catch(function(error) {
+        console.log("URL fetch failed for " + url);
       });
-
-      for (let coordsData of coordsResults) {
-        if (coordsData.length == 0) {
-          continue;
-        }
-
-        for (let coords of coordsData) {
-          let msID = coords.page.manuscript;
-          let pageID = coords.page.id;
-          let pageURL = coords.page.url;
-
-          let ltID = coords.letter;
-
-          if (!(msID in tableData)) {
-            tableData[msID] = {};
-          }
-          if (!(ltID in tableData[msID])) {
-            tableData[msID][ltID] = [];
-          }
-
-          if (tableData[msID][ltID].length >= MAX_EXAMPLES) {
-            continue;
-          }
-
-          if (coords.binary_url !== null) {
-            let letterInstance = {
-              page: pageID,
-              pageurl: pageURL,
-              letter: ltID,
-              pagewidth: coords.page.width,
-              pageheight: coords.page.height,
-              binaryurl: coords.binary_url,
-              id: coords.id,
-              top: coords.top,
-              left: coords.left,
-              width: coords.width,
-              height: coords.height
-            };
-            tableData[msID][ltID].push(letterInstance);
-          }
-        }
-      }
-      this.setState({
-        tableData: tableData,
-        formData: formData,
-        showTabs: true
-      });
-    });
   }
 
   toggleSidebar() {
@@ -358,63 +267,58 @@ class App extends Component {
     let chartKey = JSON.stringify(this.state.formData) + Date.now();
 
     return (
-      <div className="App">
-        <div className={"columns main-content"}>
-          <div
-            className={
-              "button column is-narrow closed-menu " +
-              (!this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
-            }
-            onClick={this.toggleSidebar}
-          >
-            <i
-              className="fa fa-arrow-right"
-              title="Open the viewer options form."
-              style={{ cursor: "pointer" }}
-            />
-          </div>
-          <div
-            className={
-              "column is-one-fifth " +
-              (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
-            }
-          >
-            <div className={"box small-padding"}>
-              <div className={"box-header columns"}>
-                <div className={"column is-three-quarters"}>
-                  <h4 className={"title is-5"}>Viewer options</h4>
-                </div>
-                <div className={"column is-one-quarter"}>
-                  <span className={"icon arrow-button"}>
-                    <i
-                      className="fa fa-arrow-left"
-                      title="Close the viewer options form."
-                      onClick={this.toggleSidebar}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </span>
-                </div>
-              </div>
-              <div className={"box-content"}>
-                <ManuscriptForm
-                  formSubmit={this.handleSubmit}
-                  manuscripts={this.state.allManuscripts}
-                  sortManuscripts={this.sortManuscripts}
-                  formData={this.state.formData}
+      <div className="scriptchart-app">
+        <div
+          className={
+            "button " +
+            (!this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
+          }
+          onClick={this.toggleSidebar}
+        >
+          <i
+            className="fa fa-arrow-right"
+            title="Open the viewer options form."
+            style={{ cursor: "pointer" }}
+          />
+        </div>
+        <div
+          className={
+            "sidebar box small-padding " +
+            (this.state.sidebarOpen ? "sidebar-open" : "sidebar-closed")
+          }
+        >
+          <div className={"box-header columns"}>
+            <div className={"column is-three-quarters"}>
+              <h4 className={"title is-5"}>Viewer options</h4>
+            </div>
+            <div className={"column is-one-quarter"}>
+              <span className={"icon arrow-button"}>
+                <i
+                  className="fa fa-arrow-left"
+                  title="Close the viewer options form."
+                  onClick={this.toggleSidebar}
+                  style={{ cursor: "pointer" }}
                 />
-              </div>
+              </span>
             </div>
           </div>
-          <div className={"column"}>
-            <DashTabs
-              key={chartKey}
-              showTabs={this.state.showTabs}
-              formData={this.state.formData}
-              tableData={this.state.tableData}
-              manuscripts={this.state.manuscripts}
-              loadingMessage={this.state.loadingMessage}
+          <div className={"box-content"}>
+            <ManuscriptForm
+              formSubmit={this.handleSubmit}
+              manuscripts={this.state.allManuscripts}
+              sortManuscripts={this.sortManuscripts}
             />
           </div>
+        </div>
+        <div className="scriptchart">
+          <DashTabs
+            key={chartKey}
+            showTabs={this.state.showTabs}
+            formData={this.state.formData}
+            tableData={this.state.tableData}
+            manuscripts={this.state.manuscripts}
+            loadingMessage={this.state.loadingMessage}
+          />
         </div>
       </div>
     );

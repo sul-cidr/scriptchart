@@ -112,11 +112,12 @@ class ScriptChart extends React.Component {
                   key={coords.id}
                   letter={this.props.rowLetters[i].letter}
                   coords={coords}
+                  msSlug={this.props.columnManuscripts[j].slug}
                   imageSize={this.props.formData.imageSize}
                   showBinarized={this.props.formData.showBinarized}
                   showCropped={this.props.formData.showCropped}
                   contextMode={this.props.formData.contextMode}
-                  cropMargin={this.props.formData.cropMargin}
+                  contextSize={this.props.formData.contextSize}
                 />
               );
             });

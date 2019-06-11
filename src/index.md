@@ -20,6 +20,9 @@ layout: home
                     <a class="navbar-item" href="./about/">
                         About
                     </a>
+                    <a class="navbar-item" href="./contact/">
+                        Contact
+                    </a>
                     <a class="navbar-item" href="./participants">
                         Participants
                     </a>
@@ -39,5 +42,8 @@ layout: home
             <h2 class="subtitle">A digital paleography project that displays folia from 90% of surviving Syriac manuscripts securely dated before the twelfth century and generates custom designed script charts.</h2>
             <a id="start-button" class="button is-danger" href="/scriptchart/viewer/"><h2 class="subtitle">Get Started</h2></a>
         </div>
+    </div>
+    <div class="hero-foot">
+          {%- include footer.html -%}
     </div>
 </section>

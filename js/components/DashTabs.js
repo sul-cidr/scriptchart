@@ -223,7 +223,15 @@ class DashTabs extends React.Component {
           loadedManifest: ms.manifest,
           targetSlot: targetSlot,
           viewType: "ImageView",
-          sidePanel: false
+          sidePanel: false,
+          displayLayout: false,
+          bottomPanel: false,
+          canvasControls: {
+            annotations: {
+              annotationLayer: false,
+              annotationCreation: false,
+            }
+          }
         };
         windowObjects.push(windowObject);
       }
@@ -378,68 +386,66 @@ class DashTabs extends React.Component {
           closeModal={this.closeModal}
           bookmarkURL={this.state.bookmarkURL}
         />
-        <div className="column">
-          <Tabs
-            defaultFocus={true}
-            selectedIndex={this.state.tabIndex}
-            onSelect={tabIndex => this.setState({ tabIndex })}
-          >
-            <TabList>
-              <Tab>
-                <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
-                Scriptchart
-              </Tab>
-              <Tab>
-                <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
-                Manuscripts
-              </Tab>
-              <Tab
-                disabled={
-                  this.state.hiddenManuscripts.length == 0 &&
-                  this.state.hiddenLetters.length == 0
-                }
-              >
-                Hidden Items
-              </Tab>
-              <span>
-                <button className={"button is-info is-outlined"}
-                        style={{verticalAlign: "bottom"}}
-                        onClick={this.getBookmark}>
-                  Bookmark
-                </button>
-              </span>
-            </TabList>
-            <TabPanel>
-              <ScriptChart
-                onHiddenChange={this.onHiddenChange}
-                hiddenManuscripts={this.state.hiddenManuscripts}
-                hiddenLetters={this.state.hiddenLetters}
-                onManifestSelected={this.onManifestSelected}
-                formData={this.props.formData}
-                tableData={this.props.tableData}
-                columnManuscripts={columnManuscripts}
-                rowLetters={rowLetters}
-                onRowMove={this.onRowMove}
-                onColumnMove={this.onColumnMove}
-              />
-            </TabPanel>
-            <TabPanel>
-              <MiradorViewer
-                manifestURIs={manifestURIs}
-                miradorLayout={miradorLayout}
-                windowObjects={windowObjects}
-              />
-            </TabPanel>
-            <TabPanel>
-              <ChartAccordion
-                onHiddenChange={this.onHiddenChange}
-                columnManuscripts={columnManuscripts}
-                hiddenManuscripts={this.state.hiddenManuscripts}
-                hiddenLetters={this.state.hiddenLetters}
-              />
-            </TabPanel>
-          </Tabs>
-        </div>
+        <Tabs
+          defaultFocus={true}
+          selectedIndex={this.state.tabIndex}
+          onSelect={tabIndex => this.setState({ tabIndex })}
+        >
+          <TabList>
+            <Tab>
+              <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
+              Scriptchart
+            </Tab>
+            <Tab>
+              <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
+              Manuscripts
+            </Tab>
+            <Tab
+              disabled={
+                this.state.hiddenManuscripts.length == 0 &&
+                this.state.hiddenLetters.length == 0
+              }
+            >
+              Hidden Items
+            </Tab>
+            <span>
+              <button className={"button is-info is-outlined"}
+                      style={{verticalAlign: "bottom"}}
+                      onClick={this.getBookmark}>
+                Bookmark
+              </button>
+            </span>
+          </TabList>
+          <TabPanel>
+            <ScriptChart
+              onHiddenChange={this.onHiddenChange}
+              hiddenManuscripts={this.state.hiddenManuscripts}
+              hiddenLetters={this.state.hiddenLetters}
+              onManifestSelected={this.onManifestSelected}
+              formData={this.props.formData}
+              tableData={this.props.tableData}
+              columnManuscripts={columnManuscripts}
+              rowLetters={rowLetters}
+              onRowMove={this.onRowMove}
+              onColumnMove={this.onColumnMove}
+            />
+          </TabPanel>
+          <TabPanel>
+            <MiradorViewer
+              manifestURIs={manifestURIs}
+              miradorLayout={miradorLayout}
+              windowObjects={windowObjects}
+            />
+          </TabPanel>
+          <TabPanel>
+            <ChartAccordion
+              onHiddenChange={this.onHiddenChange}
+              columnManuscripts={columnManuscripts}
+              hiddenManuscripts={this.state.hiddenManuscripts}
+              hiddenLetters={this.state.hiddenLetters}
+            />
+          </TabPanel>
+        </Tabs>
       </div>
     );
   }

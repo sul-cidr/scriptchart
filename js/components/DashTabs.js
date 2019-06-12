@@ -31,8 +31,6 @@ import "react-tabs/style/react-tabs.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const VIEWER_ROOT = process.env.VIEWER_ROOT;
-
 class DashTabs extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +44,7 @@ class DashTabs extends React.Component {
       tabIndex: 0,
       rowLetters: [],
       columnManuscripts: [],
-      bookmarkURL: VIEWER_ROOT,
+      bookmarkURL: null,
       bookmarkIsOpen: false
     };
 
@@ -177,7 +175,12 @@ class DashTabs extends React.Component {
 
     this.setState({
       bookmarkIsOpen: true,
-      bookmarkURL: VIEWER_ROOT + formDataLink
+      bookmarkURL: [
+        window.location.protocol, "//",
+        window.location.host,
+        window.location.pathname,
+        formDataLink
+      ].join("")
     });
   }
 

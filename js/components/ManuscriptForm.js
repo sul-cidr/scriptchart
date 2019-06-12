@@ -143,7 +143,15 @@ class ManuscriptForm extends React.Component {
     // if the page was previously loaded from a bookmark).
     // Note that this also could be used to set the URL to reflect the current
     // form 'query', even when it is not set via a bookmark.
-    history.pushState(null, "", location.href.split("?")[0]);
+    let viewerHref = [
+      window.location.protocol,
+      "//",
+      window.location.host,
+      window.location.pathname,
+    ].join("");
+    if (window.location.href !== viewerHref) {
+      window.history.pushState(null, "", viewerHref);
+    }
 
     // Pass all of the form's state to the handler (which is in App)
     this.props.formSubmit(formData);

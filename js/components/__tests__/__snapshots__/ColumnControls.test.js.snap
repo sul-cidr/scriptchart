@@ -1,23 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ColumnControls test ColumnControls should match snapshot 1`] = `
-<div
-  className="flex-row"
->
+<div>
   <div
-    className="remove"
-    onClick={[Function]}
-    style={
-      Object {
-        "cursor": "pointer",
-      }
-    }
-    title="Hide this column"
+    className="flex-row"
   >
-    <b>
-      ✗
-    </b>
+    <span>
+      
+    </span>
+    
+    <div
+      className="header-icon remove"
+      onClick={[Function]}
+      title="Hide this column"
+    >
+      <b>
+        ✗
+      </b>
+    </div>
   </div>
-  
 </div>
 `;

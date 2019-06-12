@@ -96,7 +96,6 @@ class App extends Component {
     let params = new URLSearchParams(window.location.search);
     let queryShelfmarks = params.get("mss");
     let queryLetters = params.get("letters");
-    let letterExamples = params.get("examples");
     let optionsString = params.get("opts");
 
     if (queryLetters === null || queryShelfmarks === null) {
@@ -117,35 +116,36 @@ class App extends Component {
       letters.push(allLetters.find(lt => lt.letter == letter));
     }
 
-    if (letterExamples == null) {
-      letterExamples = 3;
-    }
-
-    // Chart display options are formatted <binarized, cropped, all><imagesize><hover, click><marginsize>
-    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
+    /* Chart display options are formatted <#examples><binarized, cropped, all><imagesize><hover, click><marginsize>
+     * with each option represented by a single number or letter: [1-5] + [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
+     */
+    let letterExamples = 3;
     let showBinarized = true;
     let showCropped = false;
     let contextMode = "hover";
     let imageSize = "Medium";
     let contextSize = "large";
-    if (optionsString != null && optionsString.length == 4) {
-      if (optionsString[0] == "a") {
+    if (optionsString != null && optionsString.length == 5) {
+      if (optionsString[0] >= 1 && optionsString[0] <= 5) {
+        letterExamples = optionsString[0];
+      }
+      if (optionsString[1] == "a") {
         showCropped = true;
-      } else if (optionsString[0] == "c") {
+      } else if (optionsString[1] == "c") {
         showBinarized = false;
         showCropped = true;
       }
-      if (optionsString[1] == "s") {
+      if (optionsString[2] == "s") {
         imageSize = "Small";
-      } else if (optionsString[1] == "l") {
+      } else if (optionsString[2] == "l") {
         imageSize = "Large";
       }
-      if (optionsString[2] == "c") {
+      if (optionsString[3] == "c") {
         contextMode = "click";
       }
-      if (optionsString[3] == "s") {
+      if (optionsString[4] == "s") {
         contextSize = "small";
-      } else if (optionsString[3] == "m") {
+      } else if (optionsString[4] == "m") {
         contextSize = "med";
       }
     }

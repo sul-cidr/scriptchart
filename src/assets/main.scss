@@ -86,9 +86,10 @@ $danger: $navbar-background-color;
     background-color: darken($navbar-color-transparent, 5%);
   }
 
+  // Need to just add these for a certain larger media size
   .navbar-dropdown {
-    // background-color: $navbar-color-transparent;
-    // border-top: 2px solid $navbar-color-transparent;
+    background-color: $navbar-color-transparent;
+    border-top: 2px solid $navbar-color-transparent;
   
     .navbar-item:hover {
       background-color: darken($navbar-color-transparent, 5%);
@@ -107,4 +108,12 @@ $danger: $navbar-background-color;
 #contact-embed {
   height: 100%;
   width: 100%;
+}
+
+.help-image-sm {
+  max-height: 40vh;
+}
+
+.help-image-lg {
+  max-height: 60vh;
 }

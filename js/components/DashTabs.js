@@ -365,7 +365,8 @@ class DashTabs extends React.Component {
       return (
         <div>
           <h2 className="subtitle is-4">
-            Here's a quick guide to using the options form:
+            Here's a quick guide to using the options form. For full help
+            documentation, see our <a href={"../guide/"}>how-to guide</a>.
           </h2>
           <img src={url} className="tutorial-image" />
         </div>

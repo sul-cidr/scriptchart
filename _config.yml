@@ -31,7 +31,22 @@ exclude:
   - assets/fonts/syriac_fonts.css  # incorporated into main.css
   - assets/bundle.js  # in case it's left there from a previous (pre-webpack update) build
 
-keep_files:
+keep_files:  # all these files are built and/or copied to the _site/ folder by webpack
   - assets/bundle.js
   - assets/main.css
   - mirador
+  # these are favicon and PWA-manifest files
+  - android-chrome-192x192.png
+  - android-chrome-512x512.png
+  - apple-touch-icon.png
+  - browserconfig.xml
+  - favicon.ico
+  - favicon-16x16.png
+  - favicon-32x32.png
+  - mstile-70x70.png
+  - mstile-144x144.png
+  - mstile-150x150.png
+  - mstile-310x150.png
+  - mstile-310x310.png
+  - safari-pinned-tab.svg
+  - site.webmanifest

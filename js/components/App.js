@@ -50,8 +50,7 @@ class App extends Component {
       formData: {},
       tableData: {},
       sidebarOpen: true,
-      loadingMessage:
-        'Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.'
+      loadingMessage: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);

@@ -29,6 +29,8 @@ import BookmarkModal from "./BookmarkModal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
+import * as url from "../../src/assets/img/help-images/options-annotated.png";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class DashTabs extends React.Component {
@@ -359,7 +361,19 @@ class DashTabs extends React.Component {
   }
 
   render() {
-    if (this.props.showTabs == false) {
+    if (this.props.showTabs == false && this.props.loadingMessage == "") {
+      return (
+        <div>
+          <h2 className="subtitle is-4">
+            Here's a quick guide to using the options form:
+          </h2>
+          <img src={url} className="tutorial-image" />
+        </div>
+      );
+    } else if (
+      this.props.showTabs == false &&
+      this.props.loadingMessage != ""
+    ) {
       return (
         <div>
           <span>

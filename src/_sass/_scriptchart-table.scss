@@ -20,4 +20,8 @@
     flex-grow: 1;
     font-weight: normal;
   }
+
+  th[msid][draggable], tr[draggable] {
+    cursor: move;
+  }
 }

@@ -953,11 +953,33 @@ exports[`App test App should match snapshot 1`] = `
     className="scriptchart"
   >
     <div>
-      <span>
-        <strong>
-          Please select one or more manuscripts and letters from the options menu, then click the "Submit" button.
-        </strong>
-      </span>
+      <h2
+        className="subtitle is-4"
+      >
+        Here's a quick guide to using the options form:
+      </h2>
+      <img
+        className="tutorial-image"
+        src={
+          Object {
+            "0": "t",
+            "1": "e",
+            "10": "s",
+            "11": "t",
+            "12": "u",
+            "13": "b",
+            "2": "s",
+            "3": "t",
+            "4": "-",
+            "5": "f",
+            "6": "i",
+            "7": "l",
+            "8": "e",
+            "9": "-",
+            "default": "test-file-stub",
+          }
+        }
+      />
     </div>
   </div>
 </div>

@@ -37,8 +37,7 @@ exports[`DashTabs test DashTabs should match snapshot 1`] = `
           style={Object {}}
         />
       </svg>
-       
-      Scriptchart
+       Scriptchart
     </li>
     <li
       aria-controls="react-tabs-3"
@@ -66,8 +65,7 @@ exports[`DashTabs test DashTabs should match snapshot 1`] = `
           style={Object {}}
         />
       </svg>
-       
-      Manuscripts
+       Manuscripts
     </li>
     <li
       aria-controls="react-tabs-5"

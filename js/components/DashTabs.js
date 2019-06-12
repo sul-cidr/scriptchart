@@ -173,15 +173,12 @@ class DashTabs extends React.Component {
       "&opts=" +
       optionsString;
 
-    this.setState({
-      bookmarkIsOpen: true,
-      bookmarkURL: [
+    return [
         window.location.protocol, "//",
         window.location.host,
         window.location.pathname,
         formDataLink
       ].join("")
-    });
   }
 
   /* Note that this helper function can be called before the component
@@ -405,7 +402,7 @@ class DashTabs extends React.Component {
             <button
               className={"button is-info is-outlined"}
               style={{ verticalAlign: "bottom" }}
-              onClick={this.getBookmark}
+              onClick={() => this.setState({ bookmarkIsOpen: true, bookmarkURL: this.getBookmark() })}
             >
               Bookmark
             </button>

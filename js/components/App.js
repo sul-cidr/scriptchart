@@ -19,7 +19,8 @@ import React, { Component } from "react";
 import "../../src/assets/syriac_fonts.css";
 import "./app.css";
 
-import letters from "./letters.json";
+// Need this to get the letter IDs of letters from query string (bookmark)
+import allLetters from "./letters.json";
 
 /* Loading fontawesome icons via React seems easier than doing
  * it via site-wide CSS */
@@ -114,9 +115,9 @@ class App extends Component {
     if (queryLetters != null) {
       splitLetters = queryLetters.split('|');
     }
-    let selectedLetters = [];
+    let letters = [];
     for (let letter of splitLetters) {
-      selectedLetters.push(letters.find(lt => lt.letter == letter));
+      letters.push(allLetters.find(lt => lt.letter == letter));
     }
 
     if (letterExamples == null) {
@@ -124,17 +125,18 @@ class App extends Component {
     }
 
     // Chart display options are formatted <binarized, cropped, all><imagesize><hover, click><marginsize>
-    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l|x]
+    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
     let showBinarized = true;
-    let showCropped = true;
+    let showCropped = false;
     let contextMode = "hover";
     let imageSize = "Medium";
-    let cropMargin = "Medium";
+    let contextSize = "large";
     if ((optionsString != null) && (optionsString.length == 4)) {
-      if (optionsString[0] == 'b') {
-        showCropped = false;
+      if (optionsString[0] == 'a') {
+        showCropped = true;
       } else if (optionsString[0] == 'c') {
         showBinarized = false;
+        showCropped = true;
       }
       if (optionsString[1] == 's') {
         imageSize = "Small";
@@ -145,11 +147,9 @@ class App extends Component {
         contextMode = "click";
       }
       if (optionsString[3] == 's') {
-        cropMargin = "Small";
-      } else if (optionsString[3] == 'l') {
-        cropMargin = "Large";
-      } else if (optionsString[3] == 'x') {
-        cropMargin = "X-Large";
+        contextSize = "small";
+      } else if (optionsString[3] == 'm') {
+        contextSize = "med";
       }
     }
 
@@ -158,10 +158,10 @@ class App extends Component {
       showCropped,
       contextMode,
       letterExamples,
-      cropMargin,
+      contextSize,
       imageSize,
       selectedShelfmarks,
-      selectedLetters
+      letters
     };
 
     this.handleSubmit(formData);
@@ -198,8 +198,10 @@ class App extends Component {
 
     this.setState({ allManuscripts });
 
-    this.handleQueryParams();
-
+    // This needs to run here, rather than incomponentDidMount(), in order to
+    // be sure that allManuscripts will be updated by the time handleSubmit()
+    // is run with the query paramters. Maybe there's a better way...
+    this.handleQueryParams(allManuscripts);
   }
 
   queryManuscripts() {
@@ -213,7 +215,6 @@ class App extends Component {
   }
 
   handleSubmit(formData) {
-
     this.setState({
       showTabs: false,
       loadingMessage: "Loading manuscripts..."
@@ -222,6 +223,7 @@ class App extends Component {
     let manuscripts = this.state.allManuscripts.filter(ms =>
       formData.selectedShelfmarks.includes(ms.shelfmark)
     );
+
     let letter_ids = formData.letters.map(letter => letter.id);
 
     this.setState({ manuscripts });
@@ -258,11 +260,7 @@ class App extends Component {
 
     /* Use the form input values as a uniquish key for the scriptchart;
      * changing this value will cause the entire tabs/chart component to
-     * be regenerated from scratch. This may seem like kind of a hack to
-     * get around the challenges of clearing local state on all of the
-     * child components. On the other hand, the specification is that
-     * submitting a new query via the form SHOULD completely reset the
-     * chart, and that's what this does.
+     * be regenerated from scratch.
      */
     let chartKey = JSON.stringify(this.state.formData) + Date.now();
 
@@ -307,6 +305,7 @@ class App extends Component {
               formSubmit={this.handleSubmit}
               manuscripts={this.state.allManuscripts}
               sortManuscripts={this.sortManuscripts}
+              formData={this.state.formData}
             />
           </div>
         </div>

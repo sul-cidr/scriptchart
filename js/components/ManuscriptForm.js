@@ -7,82 +7,74 @@ import React from "react";
  * Its state is sent back to the App as the form data, to be
  * processed by the DashTabs and ScriptChart components when the
  * form is submited.
+ * This component also detects when the viewer has been loaded from
+ * a bookmark and fills in the form options accordingly, while allowing
+ * the options to be changed and resubmitted subsequently.
  */
 
 import ManuscriptMenu from "./ManuscriptMenu";
 import LettersLoader from "./LettersLoader";
 
-import letters from "./letters.json";
+import allLetters from "./letters.json";
 
 /* Form default values */
 const FORM_DEFAULTS = {
   showBinarized: true,
-  showCropped: true,
+  showCropped: false,
   contextMode: "hover",
   letterExamples: 3,
-  cropMargin: "Medium",
+  contextSize: "large",
   imageSize: "Medium",
-  selectedLetters: [],
-  selectedShelfmarks: []
+  selectedShelfmarks: [],
+  letters: []
 };
-
-const SHOW_BINARIZED = true;
-const SHOW_CROPPED = true;
-const CONTEXT_MODE = "hover";
-const LETTER_EXAMPLES = 3;
-const CROP_MARGIN = "Medium";
-const IMAGE_SIZE = "Medium";
 
 class ManuscriptForm extends React.Component {
   constructor(props) {
     super(props);
 
-    /* Most of the form defaults are set here */
+    /* The form options are initialized to "unset" because when the viewer
+     * is loaded from a bookmark, the "bookmarked" form state is parsed
+     * by the parent App component from the URL query string and then
+     * sent here via the formData prop, and checking for a value in formData
+     * and an "unset" value here for a form option so far has been the
+     * least bad way of detecting when bookmark settings are available.
+     * If no bookmark settings are provided, then the values are set via the
+     * reconcileFormField function to their defaults (see above).
+     */
     this.state = {
-      showBinarized: true,
-      showCropped: false,
-      contextMode: "hover",
-      letterExamples: 3,
-      contextSize: "large",
-      imageSize: "Medium",
-      selectedShelfmarks: [],
-      letters: []
-    };
+      showBinarized: "unset",
+      showCropped: "unset",
+      contextMode: "unset",
+      letterExamples: "unset",
+      contextSize: "unset",
+      imageSize: "unset",
+      selectedShelfmarks: "unset",
+      letters: "unset"
+    }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
-    this.changeContextSize = this.changeContextSize.bind(this);
-    this.changeContextMode = this.changeContextMode.bind(this);
-  }
-
-  changeContextMode(event) {
-    const contextMode = event.target.value;
-
-    this.setState({ contextMode });
-  }
-
-  changeContextSize(event) {
-    const contextSize = event.target.value;
-
-    this.setState({ contextSize });
+    this.handleSelect = this.handleSelect.bind(this);
+    this.reconcileFormField = this.reconcileFormField.bind(this);
   }
 
   buttonChange(letterID, operation) {
-    let selectedLetters = [...this.state.selectedLetters];
+    let selectedLetters = [...this.state.letters];
     if (
-      this.state.selectedLetters == "unset" &&
-      this.props.formData.hasOwnProperty("selectedLetters")
+      this.state.letters == "unset" &&
+      this.props.formData.hasOwnProperty("letters")
     ) {
-      selectedLetters = this.props.formData.selectedLetters;
-    }
-
+      selectedLetters = this.props.formData.letters;
+}
     if (operation == "select") {
       /* The list of selected letters should be in "aphabetical" order */
-      let newLetter = letters.find(lt => lt.id == letterID);
+      let newLetter = allLetters.find(lt => lt.id == letterID);
       selectedLetters.push(newLetter);
-      let alphabetizedSelection = letters.reduce((result, lt) => {
+      let alphabetizedSelection = allLetters.reduce((result, lt) => {
         if (selectedLetters.findIndex(l => l.id == lt.id) >= 0) {
           result.push(lt);
         }
@@ -95,15 +87,15 @@ class ManuscriptForm extends React.Component {
         1
       );
     }
-    this.handleSelect("selectedLetters", selectedLetters);
+    this.handleSelect("letters", selectedLetters);
   }
 
   // Currently this is a simple all/none toggle
   lettersSelect(event) {
-    if (this.state.selectedLetters.length == letters.length) {
-      this.handleSelect("selectedLetters", []);
+    if (this.state.letters.length == allLetters.length) {
+      this.handleSelect("letters", []);
     } else {
-      this.handleSelect("selectedLetters", letters);
+      this.handleSelect("letters", allLetters);
     }
   }
 
@@ -112,35 +104,27 @@ class ManuscriptForm extends React.Component {
     const name = target.name;
     let value = target.type === "checkbox" ? target.checked : target.value;
 
-    /* Don't allow deselecting of both letter image options (one must always be selected) */
-    if (
-      name == "showBinarized" &&
-      value == false &&
-      this.state.showCropped == false
-    ) {
-      value = true;
-    }
-    if (
-      name == "showCropped" &&
-      value == false &&
-      this.state.showBinarized == false
-    ) {
-      value = true;
-    }
-
     this.setState({
       [name]: value
     });
   }
 
   /* This is the handler for the multi-select items (manuscript list and letter
-   * button grid).
+   * button grid). It would be nice to integrate this with handleChange(),
+   * but that hasn't been workable so far.
    */
   handleSelect(name, value) {
     this.setState({
       [name]: value
     });
   }
+
+  /* If a form option is "unset" in local state but set in formData, that
+   * means it is being loaded from a bookmark URL. Otherwise, the option value
+   * is set to its default value (to be modified later via direct input to the
+   * form), except in the case of the letters and manuscript lists, which
+   * require the use of the defaultValue parameter.
+   */
   reconcileFormField(fieldName, defaultValue = null) {
     if (this.state[fieldName] == "unset") {
       if (this.props.formData.hasOwnProperty(fieldName)) {
@@ -160,6 +144,7 @@ class ManuscriptForm extends React.Component {
   handleSubmit(event) {
     // Stop the whole darn page from reloading on form submit
     event.preventDefault();
+
     // Pass all of the form's state to the handler (which is in App)
     let formData = this.state;
 
@@ -168,9 +153,12 @@ class ManuscriptForm extends React.Component {
     }
 
     // Clear out the query string from the address bar (only matters
-    // if the page was previously loaded from a bookmark)
+    // if the page was previously loaded from a bookmark).
+    // Note that this also could be used to set the URL to reflect the current
+    // form 'query', even when it is not set via a bookmark.
     history.pushState(null, "", location.href.split("?")[0]);
 
+    // Pass all of the form's state to the handler (which is in App)
     this.props.formSubmit(formData);
   }
 
@@ -179,28 +167,18 @@ class ManuscriptForm extends React.Component {
 
     let formData = {};
 
+    /* Load form defaults from the parsed bookmark URL values, if available, or
+     * else from the FORM_DEFAULTS dictionary.
+     */
     for (let fieldName in this.state) {
       formData[fieldName] = this.reconcileFormField(fieldName);
     }
-
     formData.selectedShelfmarks = this.reconcileFormField("selectedShelfmarks", [
       ...this.state.selectedShelfmarks
     ]);
-    formData.selectedLetters = this.reconcileFormField("selectedLetters", [
-      ...this.state.selectedLetters
+    formData.letters = this.reconcileFormField("letters", [
+      ...this.state.letters
     ]);
-    
-    /*
-    formData.letterExamples = this.reconcileFormField(
-      "letterExamples",
-      LETTER_EXAMPLES
-    );
-    formData.showBinarized = this.reconcileFormField("showBinarized", SHOW_BINARIZED);
-    formData.showCropped = this.reconcileFormField("showCropped", SHOW_CROPPED);
-    formData.contextMode = this.reconcileFormField("contextMode", CONTEXT_MODE);
-    formData.imageSize = this.reconcileFormField("imageSize", IMAGE_SIZE);
-    formData.cropMargin = this.reconcileFormField("cropMargin", CROP_MARGIN);
-    */
 
     return (
       <form className={"manuscript-form"} onSubmit={this.handleSubmit}>
@@ -220,7 +198,7 @@ class ManuscriptForm extends React.Component {
             </span>
           </div>
           <LettersLoader
-            selectedLetters={formData.selectedLetters}
+            selectedLetters={formData.letters}
             handleSelect={this.buttonChange}
           />
         </div>
@@ -284,9 +262,9 @@ class ManuscriptForm extends React.Component {
               id="imageSize"
               onChange={this.handleChange}
             >
-              <option>{"Small"}</option>
-              <option>{"Medium"}</option>
-              <option>{"Large"}</option>
+              <option>Small</option>
+              <option>Medium</option>
+              <option>Large</option>
             </select>
           </div>
         </div>
@@ -329,11 +307,11 @@ class ManuscriptForm extends React.Component {
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={this.state.contextSize}
+              value={formData.contextSize}
               type="string"
               name="contextSize"
               id="contextSize"
-              onChange={this.changeContextSize}
+              onChange={this.handleChange}
             >
               <option value="small">Small</option>
               <option value="med">Medium</option>
@@ -343,10 +321,7 @@ class ManuscriptForm extends React.Component {
         </div>
 
         <div className={"field"}>
-          <div
-            className={"control"}
-            style={{ justifyContent: "space-between" }}
-          >
+          <div className={"control"}>
             <button className={"button is-link"}>Submit</button>
           </div>
         </div>

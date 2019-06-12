@@ -67,7 +67,6 @@ class DashTabs extends React.Component {
     let sourceShelfmark = labels.sourceLabel;
     let targetShelfmark = labels.targetLabel;
 
-
     let columnManuscripts = [...this.props.manuscripts];
     if (this.state.columnManuscripts.length > 0) {
       columnManuscripts = [...this.state.columnManuscripts];
@@ -107,7 +106,7 @@ class DashTabs extends React.Component {
       return;
     }
 
-    let rowLetters = [...this.props.formData.selectedLetters];
+    let rowLetters = [...this.props.formData.letters];
     if (this.state.rowLetters.length > 0) {
       rowLetters = [...this.state.rowLetters];
     }
@@ -130,7 +129,7 @@ class DashTabs extends React.Component {
 
   getBookmark() {
 
-    let letterNames = this.props.formData.selectedLetters.map(obj => obj.letter);
+    let letterNames = this.props.formData.letters.map(obj => obj.letter);
     if (this.state.rowLetters.length > 0) {
       letterNames = this.state.rowLetters.map(obj => obj.letter);
     }
@@ -161,16 +160,14 @@ class DashTabs extends React.Component {
       hoverOrClick = 'c';
     }
 
-    let marginSize = 'm';
-    if (this.props.formData.cropMargin == "Small") {
-      marginSize = 's';
-    } else if (this.props.formData.cropMargin == "Large") {
-      marginSize = 'l';
-    } else if (this.props.formData.cropMargin == "X-Large") {
-      marginSize = 'x';
+    let contextSize = 'l';
+    if (this.props.formData.contextSize == "small") {
+      contextSize = 's';
+    } else if (this.props.formData.contextSize == "med") {
+      contextSize = 'm';
     }
 
-    let optionsString = binarizedAndOrCropped + imageSize + hoverOrClick + marginSize;
+    let optionsString = binarizedAndOrCropped + imageSize + hoverOrClick + contextSize;
 
     let formDataLink =
       "?mss=" +
@@ -349,11 +346,11 @@ class DashTabs extends React.Component {
 
     if (this.state.rowLetters.length == 0) {
       for (
-        let j = 0, llen = this.props.formData.selectedLetters.length;
+        let j = 0, llen = this.props.formData.letters.length;
         j < llen;
         j++
       ) {
-      rowLetters.push(this.props.formData.selectedLetters[j]);
+      rowLetters.push(this.props.formData.letters[j]);
       }
     } else {
       rowLetters = this.state.rowLetters;
@@ -380,17 +377,16 @@ class DashTabs extends React.Component {
     }
 
     return (
-      <div className="columns">
-        <BookmarkModal
-          isOpen={this.state.bookmarkIsOpen}
-          closeModal={this.closeModal}
-          bookmarkURL={this.state.bookmarkURL}
-        />
         <Tabs
           defaultFocus={true}
           selectedIndex={this.state.tabIndex}
           onSelect={tabIndex => this.setState({ tabIndex })}
         >
+          <BookmarkModal
+            isOpen={this.state.bookmarkIsOpen}
+            closeModal={this.closeModal}
+            bookmarkURL={this.state.bookmarkURL}
+          />
           <TabList>
             <Tab>
               <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
@@ -446,7 +442,6 @@ class DashTabs extends React.Component {
             />
           </TabPanel>
         </Tabs>
-      </div>
     );
   }
 }

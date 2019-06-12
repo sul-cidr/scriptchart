@@ -59,7 +59,6 @@ class ManuscriptForm extends React.Component {
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.reconcileFormField = this.reconcileFormField.bind(this);
   }
 
   buttonChange(letterID, operation) {
@@ -119,26 +118,18 @@ class ManuscriptForm extends React.Component {
     });
   }
 
-  /* If a form option is "unset" in local state but set in formData, that
-   * means it is being loaded from a bookmark URL. Otherwise, the option value
-   * is set to its default value (to be modified later via direct input to the
-   * form), except in the case of the letters and manuscript lists, which
-   * require the use of the defaultValue parameter.
-   */
-  reconcileFormField(fieldName, defaultValue = null) {
-    if (this.state[fieldName] == "unset") {
-      if (this.props.formData.hasOwnProperty(fieldName)) {
-        return this.props.formData[fieldName];
-      } else {
-        if (defaultValue === null) {
-          return FORM_DEFAULTS[fieldName];
-        } else {
-          return defaultValue;
-        }
-      }
-    } else {
-      return this.state[fieldName];
-    }
+  reconcileFormFields() {
+    // return form values from current state, or passed in data
+    //  (from the URL), or from defaults, in that order of priority.
+    return Object.assign(
+      {},
+      FORM_DEFAULTS,
+      this.props.formData,
+      Object.keys(this.state).reduce((p, c) => {
+        if (this.state[c] !== "unset") p[c] = this.state[c];
+        return p;
+      }, {})
+    );
   }
 
   handleSubmit(event) {
@@ -146,17 +137,21 @@ class ManuscriptForm extends React.Component {
     event.preventDefault();
 
     // Pass all of the form's state to the handler (which is in App)
-    let formData = this.state;
-
-    for (let fieldName in this.state) {
-      formData[fieldName] = this.reconcileFormField(fieldName);
-    }
+    let formData = this.reconcileFormFields();
 
     // Clear out the query string from the address bar (only matters
     // if the page was previously loaded from a bookmark).
     // Note that this also could be used to set the URL to reflect the current
     // form 'query', even when it is not set via a bookmark.
-    history.pushState(null, "", location.href.split("?")[0]);
+    let viewerHref = [
+      window.location.protocol,
+      "//",
+      window.location.host,
+      window.location.pathname,
+    ].join("");
+    if (window.location.href !== viewerHref) {
+      window.history.pushState(null, "", viewerHref);
+    }
 
     // Pass all of the form's state to the handler (which is in App)
     this.props.formSubmit(formData);
@@ -165,21 +160,7 @@ class ManuscriptForm extends React.Component {
   render() {
     console.log("Rendering ManuscriptForm");
 
-    let formData = {};
-
-    /* Load form defaults from the parsed bookmark URL values, if available, or
-     * else from the FORM_DEFAULTS dictionary.
-     */
-    for (let fieldName in this.state) {
-      formData[fieldName] = this.reconcileFormField(fieldName);
-    }
-    formData.selectedShelfmarks = this.reconcileFormField(
-      "selectedShelfmarks",
-      [...this.state.selectedShelfmarks]
-    );
-    formData.letters = this.reconcileFormField("letters", [
-      ...this.state.letters
-    ]);
+    let formData = this.reconcileFormFields();
 
     return (
       <form className={"manuscript-form"} onSubmit={this.handleSubmit}>

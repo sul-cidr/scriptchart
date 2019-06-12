@@ -35,29 +35,30 @@ class ColumnControls extends React.Component {
     let manifestDiv = "";
     if (this.props.manifestURL != null) {
       manifestDiv = (
-        <div className={"header-icon"}>
+        <div className="header-icon">
           <FontAwesomeIcon
             title="Show this manuscript in the Mirador viewer"
             color="#0000FF"
             icon="book-open"
             onClick={this.showManifest}
-            style={{ cursor: "pointer" }}
           />
         </div>
       );
     }
     return (
-      <div className={"flex-row"}>
-        <div
-          className={"header-icon"}
-          title="Hide this column"
-          className="remove"
-          onClick={this.hideColumn}
-          style={{ cursor: "pointer" }}
-        >
-          <b>&#10007;</b>
+      <div>
+        {this.props.shelfmark}
+        <div className="flex-row">
+          <span>{this.props.date ? `(${this.props.date})` : ""}</span>
+          {manifestDiv}
+          <div
+            title="Hide this column"
+            className="header-icon remove"
+            onClick={this.hideColumn}
+          >
+            <b>&#10007;</b>
+          </div>
         </div>
-        {manifestDiv}
       </div>
     );
   }

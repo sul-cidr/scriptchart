@@ -54,33 +54,6 @@ class ScriptChart extends React.Component {
   getRows() {
     let rows = [];
 
-    /* Add row that will contain link to Mirador viewer, column hider Xs */
-    let colControls = { id: 0, ltid: "", letter: "", visible: true };
-
-    /* Add dates row */
-    let datesRow = {
-      id: 1,
-      ltid: "Date",
-      letter: "Date",
-      visible: !this.props.hiddenLetters.includes("Date")
-    };
-
-    for (let i = 0, len = this.props.columnManuscripts.length; i < len; i++) {
-      colControls["manuscript" + (i + 1)] = (
-        <ColumnControls
-          msid={this.props.columnManuscripts[i].id}
-          shelfmark={this.props.columnManuscripts[i].shelfmark}
-          manifestURL={this.props.columnManuscripts[i].manifest}
-          displayManifest={this.viewManifest}
-          onHideColumn={this.onHideColumn}
-          onHiddenChange={this.props.onHiddenChange}
-        />
-      );
-      datesRow["manuscript" + (i + 1)] = this.props.columnManuscripts[i].date;
-    }
-    rows.push(colControls);
-    rows.push(datesRow);
-
     /* Load the letters data into the rows array */
     for (let i = 0, len = this.props.rowLetters.length; i < len; i++) {
       let ltID = this.props.rowLetters[i].id;
@@ -175,7 +148,20 @@ class ScriptChart extends React.Component {
           props: {
             label: this.props.columnManuscripts[i].shelfmark,
             onMove: o => this.props.onColumnMove(o)
-          }
+          },
+          formatters: [
+            name => (
+              <ColumnControls
+                msid={this.props.columnManuscripts[i].id}
+                shelfmark={this.props.columnManuscripts[i].shelfmark}
+                date={this.props.columnManuscripts[i].date}
+                manifestURL={this.props.columnManuscripts[i].manifest}
+                displayManifest={this.viewManifest}
+                onHideColumn={this.onHideColumn}
+                onHiddenChange={this.props.onHiddenChange}
+              />
+            )
+          ]
         },
         visible: !this.props.hiddenManuscripts.includes(
           this.props.columnManuscripts[i].id

@@ -1,0 +1,23 @@
+.scriptchart-table-wrapper {
+  display: flex;
+  height: 100%;
+
+  table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  thead {
+    display: block;
+  }
+
+  tbody {
+    display: block;
+    overflow-x: hidden;
+  }
+
+  th span {
+    flex-grow: 1;
+    font-weight: normal;
+  }
+}

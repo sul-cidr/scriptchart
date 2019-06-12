@@ -15,6 +15,18 @@
     </div>
     <div class="navbar-menu" id="navMenu">
       <div class="navbar-start">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            About
+          </a>
+          <div class="navbar-dropdown">
+            {% for page in site.pages %}
+              {% if page.about == true %}
+                <a class="navbar-item" href="{{ page.url | relative_url }}">{{ page.title | escape }}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
         {% for page in site.pages %}
           {% if page.include == true %}
             <a class="navbar-item" href="{{ page.url | relative_url }}">{{ page.title | escape }}</a>

@@ -1,8 +1,9 @@
 ---
 layout: page
-title: About
+title: About DASH
 permalink: /about/
-include: true
+include: false
+about: true
 ---
 
 The Digital Analysis of Syriac Handwriting (DASH) project began in 2010 as a collaboration between a professor of religious studies, a professor of computer science, and an engineering major in search of a senior thesis. In recent years, it has expanded to include a professor of visual analytics as an additional principal collaborator, researchers from Duke, UC Davis, Notre Dame, and Belgium as consultants, and over 30 undergraduate and graduate research assistants. The project has received support from the Andrew Mellon Foundation, the American Council of Learned Societies, the American Academy of Religion, Mount Holyoke College, Smith College, and Stanford University.

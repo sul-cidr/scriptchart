@@ -198,8 +198,13 @@ class App extends Component {
     // This needs to run here, rather than in componentDidMount(), in order
     // to be sure that allManuscripts will be updated by the time
     // handleSubmit() is run with the query paramters.
+    // It should only be run if there aren't already options in formData
+    // (indicating that the form has already been submitted or a bookmark
+    // has already been loaded).
     // Maybe there's a better way...
-    this.handleQueryParams(allManuscripts);
+    if (Object.keys(this.state.formData).length === 0) {
+      this.handleQueryParams(allManuscripts);
+    }
   }
 
   queryManuscripts() {

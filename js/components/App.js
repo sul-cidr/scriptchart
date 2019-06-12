@@ -116,10 +116,6 @@ class App extends Component {
       letters.push(allLetters.find(lt => lt.letter == letter));
     }
 
-    if (letterExamples == null) {
-      
-    }
-
     /* Chart display options are formatted <#examples><binarized, cropped, all><imagesize><hover, click><marginsize>
      * with each option represented by a single number or letter: [1-5] + [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
      */

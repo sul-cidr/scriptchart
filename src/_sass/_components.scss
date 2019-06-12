@@ -88,6 +88,11 @@ tr:nth-child(even) {
   filter: invert(1);
 }
 
-.tutorial-image {
+.help-text {
   max-height: 85vh;
+  overflow: scroll;
+
+  .subtitle:not(:last-child) {
+    margin-bottom: 0;
+  }
 }

@@ -6,7 +6,7 @@ include: false
 about: true
 ---
 
-## Form 
+## Viewer options 
 
 Within DASH, the scriptchart and manuscript viewer are controlled by the "Viewer options" form. To select which manuscripts you want to include in the scriptchart or see in the viewer, click each manuscript shelfmark while holding command on Mac (⌘) or control (Ctrl). You can re-order the list of manuscripts by selecting either "Shelfmark" or "Date." Whichever you select will affect the order of the manuscripts in the scriptchart as well. 
 

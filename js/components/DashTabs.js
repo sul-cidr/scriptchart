@@ -363,7 +363,7 @@ class DashTabs extends React.Component {
   render() {
     if (this.props.showTabs == false && this.props.loadingMessage == "") {
       return (
-        <div>
+        <div className="help-text">
           <h2 className="subtitle is-4">
             Here's a quick guide to using the options form. For full help
             documentation, see our <a href={"../guide/"}>how-to guide</a>.

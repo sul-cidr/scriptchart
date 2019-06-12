@@ -132,8 +132,13 @@ class DashTabs extends React.Component {
       msNames = this.state.columnManuscripts.map(obj => obj.shelfmark);
     }
 
-    // Chart display options are formatted <binarized, cropped, all><imagesize><hover, click><marginsize>
-    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
+    /* Chart display options are formatted <#examples><binarized, cropped, all><imagesize><hover, click><marginsize>
+     * with each option represented by a single number or letter: [1-5] + [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
+     */
+    let letterExamples = 3;
+    if (1 <= this.props.formData.letterExamples <= 5) {
+      letterExamples = this.props.formData.letterExamples;
+    }
     let binarizedAndOrCropped = "b";
     if (this.props.formData.showBinarized && this.props.formData.showCropped) {
       binarizedAndOrCropped = "a";
@@ -161,15 +166,13 @@ class DashTabs extends React.Component {
     }
 
     let optionsString =
-      binarizedAndOrCropped + imageSize + hoverOrClick + contextSize;
+      letterExamples + binarizedAndOrCropped + imageSize + hoverOrClick + contextSize;
 
     let formDataLink =
       "?mss=" +
       msNames.join("|") +
       "&letters=" +
       letterNames.join("|") +
-      "&examples=" +
-      this.props.formData.letterExamples +
       "&opts=" +
       optionsString;
 

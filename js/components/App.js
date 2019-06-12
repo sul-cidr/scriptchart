@@ -15,10 +15,6 @@ import React, { Component } from "react";
  * data about letters in the selected manuscripts, and passes
  * these on to the scriptchart.
  */
-/*
-import "../../src/assets/syriac_fonts.css";
-import "./app.css";
-*/
 
 // Need this to get the letter IDs of letters from query string (bookmark)
 import allLetters from "./letters.json";
@@ -199,9 +195,10 @@ class App extends Component {
 
     this.setState({ allManuscripts });
 
-    // This needs to run here, rather than incomponentDidMount(), in order to
-    // be sure that allManuscripts will be updated by the time handleSubmit()
-    // is run with the query paramters. Maybe there's a better way...
+    // This needs to run here, rather than in componentDidMount(), in order
+    // to be sure that allManuscripts will be updated by the time
+    // handleSubmit() is run with the query paramters.
+    // Maybe there's a better way...
     this.handleQueryParams(allManuscripts);
   }
 

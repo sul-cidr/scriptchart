@@ -133,7 +133,7 @@ class DashTabs extends React.Component {
     }
 
     // Chart display options are formatted <binarized, cropped, all><imagesize><hover, click><marginsize>
-    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l|x]
+    // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
     let binarizedAndOrCropped = "b";
     if (this.props.formData.showBinarized && this.props.formData.showCropped) {
       binarizedAndOrCropped = "a";

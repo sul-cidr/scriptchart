@@ -136,7 +136,10 @@ class DashTabs extends React.Component {
      * with each option represented by a single number or letter: [1-5] + [b|c|a] + [s|m|l] + [h|c] + [s|m|l]
      */
     let letterExamples = 3;
-    if (1 <= this.props.formData.letterExamples <= 5) {
+    if (
+      this.props.formData.LetterExamples >= 1 &&
+      this.props.formData.letterExamples <= 5
+    ) {
       letterExamples = this.props.formData.letterExamples;
     }
     let binarizedAndOrCropped = "b";
@@ -166,7 +169,11 @@ class DashTabs extends React.Component {
     }
 
     let optionsString =
-      letterExamples + binarizedAndOrCropped + imageSize + hoverOrClick + contextSize;
+      letterExamples +
+      binarizedAndOrCropped +
+      imageSize +
+      hoverOrClick +
+      contextSize;
 
     let formDataLink =
       "?mss=" +
@@ -177,11 +184,12 @@ class DashTabs extends React.Component {
       optionsString;
 
     return [
-        window.location.protocol, "//",
-        window.location.host,
-        window.location.pathname,
-        formDataLink
-      ].join("")
+      window.location.protocol,
+      "//",
+      window.location.host,
+      window.location.pathname,
+      formDataLink
+    ].join("");
   }
 
   /* Note that this helper function can be called before the component
@@ -405,7 +413,12 @@ class DashTabs extends React.Component {
             <button
               className={"button is-info is-outlined"}
               style={{ verticalAlign: "bottom" }}
-              onClick={() => this.setState({ bookmarkIsOpen: true, bookmarkURL: this.getBookmark() })}
+              onClick={() =>
+                this.setState({
+                  bookmarkIsOpen: true,
+                  bookmarkURL: this.getBookmark()
+                })
+              }
             >
               Bookmark
             </button>

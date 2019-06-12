@@ -126,9 +126,9 @@ class App extends Component {
     let imageSize = "Medium";
     let contextSize = "large";
     if (optionsString != null && optionsString.length == 5) {
-      if (1 <= optionsString[0] <= 5) {
+      if (optionsString[0] >= 1 && optionsString[0] <= 5) {
         letterExamples = optionsString[0];
-      } 
+      }
       if (optionsString[1] == "a") {
         showCropped = true;
       } else if (optionsString[1] == "c") {

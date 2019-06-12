@@ -32,13 +32,12 @@ class BookmarkModal extends React.Component {
         </div>
         <div className={"field box"}>
           <div className={"control"}>
-            <div className="bookmarktext">
-              {this.props.bookmarkURL}
-            </div>
+            <div className="bookmarktext">{this.props.bookmarkURL}</div>
             <CopyToClipboard
               text={this.props.bookmarkURL}
               onCopy={() => this.setState({ copied: true })}
-            ><div className={"box has-text-centered"}>
+            >
+              <div className={"box has-text-centered"}>
                 <button className={"button is-info"}>Copy to clipboard</button>
               </div>
             </CopyToClipboard>

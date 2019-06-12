@@ -109,12 +109,12 @@ class App extends Component {
 
     let selectedShelfmarks = [];
     if (queryShelfmarks != null) {
-      selectedShelfmarks = queryShelfmarks.split('|');
+      selectedShelfmarks = queryShelfmarks.split("|");
     }
 
     let splitLetters = [];
     if (queryLetters != null) {
-      splitLetters = queryLetters.split('|');
+      splitLetters = queryLetters.split("|");
     }
     let letters = [];
     for (let letter of splitLetters) {
@@ -132,24 +132,24 @@ class App extends Component {
     let contextMode = "hover";
     let imageSize = "Medium";
     let contextSize = "large";
-    if ((optionsString != null) && (optionsString.length == 4)) {
-      if (optionsString[0] == 'a') {
+    if (optionsString != null && optionsString.length == 4) {
+      if (optionsString[0] == "a") {
         showCropped = true;
-      } else if (optionsString[0] == 'c') {
+      } else if (optionsString[0] == "c") {
         showBinarized = false;
         showCropped = true;
       }
-      if (optionsString[1] == 's') {
+      if (optionsString[1] == "s") {
         imageSize = "Small";
-      } else if (optionsString[1] == 'l') {
+      } else if (optionsString[1] == "l") {
         imageSize = "Large";
       }
-      if (optionsString[2] == 'c') {
+      if (optionsString[2] == "c") {
         contextMode = "click";
       }
-      if (optionsString[3] == 's') {
+      if (optionsString[3] == "s") {
         contextSize = "small";
-      } else if (optionsString[3] == 'm') {
+      } else if (optionsString[3] == "m") {
         contextSize = "med";
       }
     }

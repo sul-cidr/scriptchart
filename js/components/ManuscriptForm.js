@@ -51,7 +51,7 @@ class ManuscriptForm extends React.Component {
       imageSize: "unset",
       selectedShelfmarks: "unset",
       letters: "unset"
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -69,7 +69,7 @@ class ManuscriptForm extends React.Component {
       this.props.formData.hasOwnProperty("letters")
     ) {
       selectedLetters = this.props.formData.letters;
-}
+    }
     if (operation == "select") {
       /* The list of selected letters should be in "aphabetical" order */
       let newLetter = allLetters.find(lt => lt.id == letterID);
@@ -173,9 +173,10 @@ class ManuscriptForm extends React.Component {
     for (let fieldName in this.state) {
       formData[fieldName] = this.reconcileFormField(fieldName);
     }
-    formData.selectedShelfmarks = this.reconcileFormField("selectedShelfmarks", [
-      ...this.state.selectedShelfmarks
-    ]);
+    formData.selectedShelfmarks = this.reconcileFormField(
+      "selectedShelfmarks",
+      [...this.state.selectedShelfmarks]
+    );
     formData.letters = this.reconcileFormField("letters", [
       ...this.state.letters
     ]);

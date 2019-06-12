@@ -48,9 +48,7 @@ class SyriacLetter extends React.Component {
       letter_display = (
         <div
           title={letter.letter}
-          className={
-            (this.props.isButton ? "button-letter" : "chart-letter")
-          }
+          className={this.props.isButton ? "button-letter" : "chart-letter"}
           style={{
             fontFamily: font
           }}

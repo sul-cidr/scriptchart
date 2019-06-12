@@ -20,7 +20,7 @@ import { IMAGE_SERVER_ROOT } from "./App";
 
 // Size of the largest dimension of the non-contextual letter images
 const IMAGE_DIMS = { Small: 25, Medium: 50, Large: 100 };
-const CONTEXT_IMAGE_WIDTHS = { small: 250, med: 400, large: 500 }
+const CONTEXT_IMAGE_WIDTHS = { small: 250, med: 400, large: 500 };
 
 class LetterImage extends React.Component {
   constructor(props) {
@@ -38,11 +38,13 @@ class LetterImage extends React.Component {
   }
 
   composeImageURL(imageType) {
-    return `${IMAGE_SERVER_ROOT}${imageType}/` +
+    return (
+      `${IMAGE_SERVER_ROOT}${imageType}/` +
       `${this.props.msSlug}/${this.props.coords.page}_` +
       `${this.props.letter}_${this.props.coords.left}_` +
       `${this.props.coords.top}_${this.props.coords.width}_` +
-      `${this.props.coords.height}.png`;
+      `${this.props.coords.height}.png`
+    );
   }
 
   composeTrimmedImageURL() {
@@ -78,11 +80,7 @@ class LetterImage extends React.Component {
     let contextURL = this.composeContextImageURL(this.props.contextSize);
 
     let contextImage = (
-      <img
-        alt={this.props.letter}
-        ref="context"
-        src={contextURL}
-      />
+      <img alt={this.props.letter} ref="context" src={contextURL} />
     );
 
     if (this.props.showBinarized) {

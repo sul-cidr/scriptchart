@@ -124,7 +124,6 @@ class DashTabs extends React.Component {
   }
 
   getBookmark() {
-
     let letterNames = this.props.formData.letters.map(obj => obj.letter);
     if (this.state.rowLetters.length > 0) {
       letterNames = this.state.rowLetters.map(obj => obj.letter);
@@ -139,40 +138,42 @@ class DashTabs extends React.Component {
     // with each option represented by a single letter: [b|c|a] + [s|m|l] + [h|c] + [s|m|l|x]
     let binarizedAndOrCropped = "b";
     if (this.props.formData.showBinarized && this.props.formData.showCropped) {
-      binarizedAndOrCropped = 'a';
+      binarizedAndOrCropped = "a";
     } else if (this.props.formData.showCropped) {
-      binarizedAndOrCropped = 'c';
-    } 
+      binarizedAndOrCropped = "c";
+    }
 
     let imageSize = "m";
     if (this.props.formData.imageSize == "Large") {
-      imageSize = 'l';
+      imageSize = "l";
     } else if (this.props.formData.imageSize == "Small") {
-      imageSize = 's';
+      imageSize = "s";
     }
 
-    let hoverOrClick = 'h';
+    let hoverOrClick = "h";
     if (this.props.formData.contextMode == "click") {
-      hoverOrClick = 'c';
+      hoverOrClick = "c";
     }
 
-    let contextSize = 'l';
+    let contextSize = "l";
     if (this.props.formData.contextSize == "small") {
-      contextSize = 's';
+      contextSize = "s";
     } else if (this.props.formData.contextSize == "med") {
-      contextSize = 'm';
+      contextSize = "m";
     }
 
-    let optionsString = binarizedAndOrCropped + imageSize + hoverOrClick + contextSize;
+    let optionsString =
+      binarizedAndOrCropped + imageSize + hoverOrClick + contextSize;
 
     let formDataLink =
       "?mss=" +
-      msNames.join('|') +
+      msNames.join("|") +
       "&letters=" +
-      letterNames.join('|') +
+      letterNames.join("|") +
       "&examples=" +
       this.props.formData.letterExamples +
-      "&opts=" + optionsString;
+      "&opts=" +
+      optionsString;
 
     this.setState({
       bookmarkIsOpen: true,
@@ -222,7 +223,7 @@ class DashTabs extends React.Component {
           canvasControls: {
             annotations: {
               annotationLayer: false,
-              annotationCreation: false,
+              annotationCreation: false
             }
           }
         };
@@ -326,7 +327,6 @@ class DashTabs extends React.Component {
   }
 
   render() {
-
     if (this.props.showTabs == false) {
       return (
         <div>
@@ -346,7 +346,7 @@ class DashTabs extends React.Component {
         j < llen;
         j++
       ) {
-      rowLetters.push(this.props.formData.letters[j]);
+        rowLetters.push(this.props.formData.letters[j]);
       }
     } else {
       rowLetters = this.state.rowLetters;
@@ -373,71 +373,71 @@ class DashTabs extends React.Component {
     }
 
     return (
-        <Tabs
-          defaultFocus={true}
-          selectedIndex={this.state.tabIndex}
-          onSelect={tabIndex => this.setState({ tabIndex })}
-        >
-          <BookmarkModal
-            isOpen={this.state.bookmarkIsOpen}
-            closeModal={this.closeModal}
-            bookmarkURL={this.state.bookmarkURL}
-          />
-          <TabList>
-            <Tab>
-              <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
-              Scriptchart
-            </Tab>
-            <Tab>
-              <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
-              Manuscripts
-            </Tab>
-            <Tab
-              disabled={
-                this.state.hiddenManuscripts.length == 0 &&
-                this.state.hiddenLetters.length == 0
-              }
+      <Tabs
+        defaultFocus={true}
+        selectedIndex={this.state.tabIndex}
+        onSelect={tabIndex => this.setState({ tabIndex })}
+      >
+        <BookmarkModal
+          isOpen={this.state.bookmarkIsOpen}
+          closeModal={this.closeModal}
+          bookmarkURL={this.state.bookmarkURL}
+        />
+        <TabList>
+          <Tab>
+            <FontAwesomeIcon className={"tab-icon"} icon="table" /> Scriptchart
+          </Tab>
+          <Tab>
+            <FontAwesomeIcon className={"tab-icon"} icon="image" /> Manuscripts
+          </Tab>
+          <Tab
+            disabled={
+              this.state.hiddenManuscripts.length == 0 &&
+              this.state.hiddenLetters.length == 0
+            }
+          >
+            Hidden Items
+          </Tab>
+          <span>
+            <button
+              className={"button is-info is-outlined"}
+              style={{ verticalAlign: "bottom" }}
+              onClick={this.getBookmark}
             >
-              Hidden Items
-            </Tab>
-            <span>
-              <button className={"button is-info is-outlined"}
-                      style={{verticalAlign: "bottom"}}
-                      onClick={this.getBookmark}>
-                Bookmark
-              </button>
-            </span>
-          </TabList>
-          <TabPanel>
-            <ScriptChart
-              onHiddenChange={this.onHiddenChange}
-              hiddenManuscripts={this.state.hiddenManuscripts}
-              hiddenLetters={this.state.hiddenLetters}
-              onManifestSelected={this.onManifestSelected}
-              formData={this.props.formData}
-              tableData={this.props.tableData}
-              columnManuscripts={columnManuscripts}
-              rowLetters={rowLetters}
-              onRowMove={this.onRowMove}
-              onColumnMove={this.onColumnMove}
-            />
-          </TabPanel>
-          <TabPanel>
-            <MiradorViewer
-              manifestURIs={manifestURIs}
-              miradorLayout={miradorLayout}
-              windowObjects={windowObjects}
-            />
-          </TabPanel>
-          <TabPanel>
-            <ChartAccordion
-              onHiddenChange={this.onHiddenChange}
-              columnManuscripts={columnManuscripts}
-              hiddenManuscripts={this.state.hiddenManuscripts}
-              hiddenLetters={this.state.hiddenLetters}
-            />
-          </TabPanel>
-        </Tabs>
+              Bookmark
+            </button>
+          </span>
+        </TabList>
+        <TabPanel>
+          <ScriptChart
+            onHiddenChange={this.onHiddenChange}
+            hiddenManuscripts={this.state.hiddenManuscripts}
+            hiddenLetters={this.state.hiddenLetters}
+            onManifestSelected={this.onManifestSelected}
+            formData={this.props.formData}
+            tableData={this.props.tableData}
+            columnManuscripts={columnManuscripts}
+            rowLetters={rowLetters}
+            onRowMove={this.onRowMove}
+            onColumnMove={this.onColumnMove}
+          />
+        </TabPanel>
+        <TabPanel>
+          <MiradorViewer
+            manifestURIs={manifestURIs}
+            miradorLayout={miradorLayout}
+            windowObjects={windowObjects}
+          />
+        </TabPanel>
+        <TabPanel>
+          <ChartAccordion
+            onHiddenChange={this.onHiddenChange}
+            columnManuscripts={columnManuscripts}
+            hiddenManuscripts={this.state.hiddenManuscripts}
+            hiddenLetters={this.state.hiddenLetters}
+          />
+        </TabPanel>
+      </Tabs>
     );
   }
 }

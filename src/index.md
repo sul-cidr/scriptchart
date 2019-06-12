@@ -17,9 +17,18 @@ layout: home
             </div>
             <div id="navbarMenuHero" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="./about/">
-                        About
-                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            About
+                        </a>
+                        <div class="navbar-dropdown">
+                            {% for page in site.pages %}
+                            {% if page.about == true %}
+                                <a class="navbar-item" href="{{ page.url | relative_url }}">{{ page.title | escape }}</a>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
                     <a class="navbar-item" href="./contact/">
                         Contact
                     </a>

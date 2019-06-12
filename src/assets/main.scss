@@ -85,6 +85,15 @@ $danger: $navbar-background-color;
   .navbar-item:hover {
     background-color: darken($navbar-color-transparent, 5%);
   }
+
+  .navbar-dropdown {
+    // background-color: $navbar-color-transparent;
+    // border-top: 2px solid $navbar-color-transparent;
+  
+    .navbar-item:hover {
+      background-color: darken($navbar-color-transparent, 5%);
+    }
+  }
 }
 
 #start-button {

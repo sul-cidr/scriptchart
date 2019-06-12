@@ -28,8 +28,6 @@ class DragTable extends React.Component {
   }
 
   render() {
-    console.log("Rendering DragTable");
-
     const renderers = {
       header: {
         cell: dnd.Header

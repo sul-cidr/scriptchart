@@ -7,27 +7,50 @@ import React from "react";
  * Its state is sent back to the App as the form data, to be
  * processed by the DashTabs and ScriptChart components when the
  * form is submited.
+ * This component also detects when the viewer has been loaded from
+ * a bookmark and fills in the form options accordingly, while allowing
+ * the options to be changed and resubmitted subsequently.
  */
 
 import ManuscriptMenu from "./ManuscriptMenu";
 import LettersLoader from "./LettersLoader";
 
-import letters from "./letters.json";
+import allLetters from "./letters.json";
+
+/* Form default values */
+const FORM_DEFAULTS = {
+  showBinarized: true,
+  showCropped: false,
+  contextMode: "hover",
+  letterExamples: 3,
+  contextSize: "large",
+  imageSize: "Medium",
+  selectedShelfmarks: [],
+  letters: []
+};
 
 class ManuscriptForm extends React.Component {
   constructor(props) {
     super(props);
 
-    /* Most of the form defaults are set here */
+    /* The form options are initialized to "unset" because when the viewer
+     * is loaded from a bookmark, the "bookmarked" form state is parsed
+     * by the parent App component from the URL query string and then
+     * sent here via the formData prop, and checking for a value in formData
+     * and an "unset" value here for a form option so far has been the
+     * least bad way of detecting when bookmark settings are available.
+     * If no bookmark settings are provided, then the values are set via the
+     * reconcileFormField function to their defaults (see above).
+     */
     this.state = {
-      showBinarized: true,
-      showCropped: false,
-      contextMode: "hover",
-      letterExamples: 3,
-      contextSize: "large",
-      imageSize: "Medium",
-      selectedShelfmarks: [],
-      letters: []
+      showBinarized: "unset",
+      showCropped: "unset",
+      contextMode: "unset",
+      letterExamples: "unset",
+      contextSize: "unset",
+      imageSize: "unset",
+      selectedShelfmarks: "unset",
+      letters: "unset"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,29 +58,22 @@ class ManuscriptForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.buttonChange = this.buttonChange.bind(this);
     this.lettersSelect = this.lettersSelect.bind(this);
-    this.changeContextSize = this.changeContextSize.bind(this);
-    this.changeContextMode = this.changeContextMode.bind(this);
-  }
-
-  changeContextMode(event) {
-    const contextMode = event.target.value;
-
-    this.setState({ contextMode });
-  }
-
-  changeContextSize(event) {
-    const contextSize = event.target.value;
-
-    this.setState({ contextSize });
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   buttonChange(letterID, operation) {
     let selectedLetters = [...this.state.letters];
+    if (
+      this.state.letters == "unset" &&
+      this.props.formData.hasOwnProperty("letters")
+    ) {
+      selectedLetters = this.props.formData.letters;
+    }
     if (operation == "select") {
       /* The list of selected letters should be in "aphabetical" order */
-      let newLetter = letters.find(lt => lt.id == letterID);
+      let newLetter = allLetters.find(lt => lt.id == letterID);
       selectedLetters.push(newLetter);
-      let alphabetizedSelection = letters.reduce((result, lt) => {
+      let alphabetizedSelection = allLetters.reduce((result, lt) => {
         if (selectedLetters.findIndex(l => l.id == lt.id) >= 0) {
           result.push(lt);
         }
@@ -75,44 +91,17 @@ class ManuscriptForm extends React.Component {
 
   // Currently this is a simple all/none toggle
   lettersSelect(event) {
-    let selectedLetters = [...this.state.letters];
-    for (let lt of letters) {
-      let ltid = lt.id;
-      if (
-        //which == "All" &&
-        selectedLetters.findIndex(l => l.id == ltid) < 0
-      ) {
-        selectedLetters.push(lt);
-      } else {
-        selectedLetters = [];
-        break;
-      }
+    if (this.state.letters.length == allLetters.length) {
+      this.handleSelect("letters", []);
+    } else {
+      this.handleSelect("letters", allLetters);
     }
-    this.handleSelect("letters", selectedLetters);
   }
 
   handleChange(event) {
     const target = event.target;
     const name = target.name;
     let value = target.type === "checkbox" ? target.checked : target.value;
-
-    /* Don't allow deselecting of both letter image options (one must always be selected) */
-    if (
-      name == "showBinarized" &&
-      value == false &&
-      this.state.showCropped == false
-    ) {
-      value = true;
-    }
-    if (
-      name == "showCropped" &&
-      value == false &&
-      this.state.showBinarized == false
-    ) {
-      value = true;
-    }
-
-    console.log("setting " + name + " to " + value);
 
     this.setState({
       [name]: value
@@ -129,22 +118,57 @@ class ManuscriptForm extends React.Component {
     });
   }
 
+  reconcileFormFields() {
+    // return form values from current state, or passed in data
+    //  (from the URL), or from defaults, in that order of priority.
+    return Object.assign(
+      {},
+      FORM_DEFAULTS,
+      this.props.formData,
+      Object.keys(this.state).reduce((p, c) => {
+        if (this.state[c] !== "unset") p[c] = this.state[c];
+        return p;
+      }, {})
+    );
+  }
+
   handleSubmit(event) {
     // Stop the whole darn page from reloading on form submit
     event.preventDefault();
+
     // Pass all of the form's state to the handler (which is in App)
-    this.props.formSubmit(this.state);
+    let formData = this.reconcileFormFields();
+
+    // Clear out the query string from the address bar (only matters
+    // if the page was previously loaded from a bookmark).
+    // Note that this also could be used to set the URL to reflect the current
+    // form 'query', even when it is not set via a bookmark.
+    let viewerHref = [
+      window.location.protocol,
+      "//",
+      window.location.host,
+      window.location.pathname,
+    ].join("");
+    if (window.location.href !== viewerHref) {
+      window.history.pushState(null, "", viewerHref);
+    }
+
+    // Pass all of the form's state to the handler (which is in App)
+    this.props.formSubmit(formData);
   }
 
   render() {
     console.log("Rendering ManuscriptForm");
+
+    let formData = this.reconcileFormFields();
+
     return (
       <form className={"manuscript-form"} onSubmit={this.handleSubmit}>
         <ManuscriptMenu
           handleChange={this.handleChange}
           handleSelect={this.handleSelect}
           manuscripts={this.props.manuscripts}
-          selectedShelfmarks={this.state.selectedShelfmarks}
+          selectedShelfmarks={formData.selectedShelfmarks}
           sortManuscripts={this.props.sortManuscripts}
         />
 
@@ -156,7 +180,7 @@ class ManuscriptForm extends React.Component {
             </span>
           </div>
           <LettersLoader
-            selectedLetters={this.state.letters}
+            selectedLetters={formData.letters}
             handleSelect={this.buttonChange}
           />
         </div>
@@ -167,7 +191,7 @@ class ManuscriptForm extends React.Component {
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={this.state.letterExamples}
+              value={formData.letterExamples}
               type="number"
               name="letterExamples"
               id="letterExamples"
@@ -188,7 +212,7 @@ class ManuscriptForm extends React.Component {
               name="showBinarized"
               id="showBinarized"
               onChange={this.handleChange}
-              checked={this.state.showBinarized}
+              checked={formData.showBinarized}
             />
             {" Trimmed |"}
           </label>
@@ -202,7 +226,7 @@ class ManuscriptForm extends React.Component {
               name="showCropped"
               id="showCropped"
               onChange={this.handleChange}
-              checked={this.state.showCropped}
+              checked={formData.showCropped}
             />
             {" Untrimmed"}
           </label>
@@ -214,7 +238,7 @@ class ManuscriptForm extends React.Component {
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={this.state.imageSize}
+              value={formData.imageSize}
               type="string"
               name="imageSize"
               id="imageSize"
@@ -236,8 +260,9 @@ class ManuscriptForm extends React.Component {
                   type="radio"
                   value="hover"
                   id="hoverContext"
-                  onChange={this.changeContextMode}
-                  checked={this.state.contextMode == "hover"}
+                  name="contextMode"
+                  onChange={this.handleChange}
+                  checked={formData.contextMode == "hover"}
                 />{" "}
                 Show on hover
               </label>
@@ -248,8 +273,9 @@ class ManuscriptForm extends React.Component {
                   type="radio"
                   value="click"
                   id="clickContext"
-                  onChange={this.changeContextMode}
-                  checked={this.state.contextMode == "click"}
+                  name="contextMode"
+                  onChange={this.handleChange}
+                  checked={formData.contextMode == "click"}
                 />{" "}
                 Show on click
               </label>
@@ -263,11 +289,11 @@ class ManuscriptForm extends React.Component {
           </label>
           <div className={"select is-small"} style={{ marginLeft: "5px" }}>
             <select
-              value={this.state.contextSize}
+              value={formData.contextSize}
               type="string"
               name="contextSize"
               id="contextSize"
-              onChange={this.changeContextSize}
+              onChange={this.handleChange}
             >
               <option value="small">Small</option>
               <option value="med">Medium</option>

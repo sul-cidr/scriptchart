@@ -3,10 +3,7 @@ import Modal from "react-modal";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import "./modal.css";
-import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
-
-Modal.setAppElement("#app");
+Modal.setAppElement("#content");
 
 class BookmarkModal extends React.Component {
   constructor(props) {
@@ -27,7 +24,7 @@ class BookmarkModal extends React.Component {
         overlayClassName="Overlay"
         contentLabel="Bookmark URL"
       >
-        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+        <div className={"modal_header"}>
           <b>Bookmark</b>
           <button className={"button is-small"} onClick={this.props.closeModal}>
             Close
@@ -48,7 +45,7 @@ class BookmarkModal extends React.Component {
           </div>
 
           {this.state.copied ? (
-            <p className={"help is-success"}>Copied.</p>
+            <p className={"has-text-success is-large"}>Copied.</p>
           ) : null}
         </div>
       </Modal>

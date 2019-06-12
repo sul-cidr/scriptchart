@@ -210,7 +210,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     >
       <img
         className="button-svg "
-        src="/scriptchart/assets/font_glyphs/yudh_connected.svg"
+        src="../assets/font_glyphs/yudh_connected.svg"
       />
     </div>
   </span>
@@ -244,7 +244,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     >
       <img
         className="button-svg "
-        src="/scriptchart/assets/font_glyphs/kaph.svg"
+        src="../assets/font_glyphs/kaph.svg"
       />
     </div>
   </span>
@@ -294,7 +294,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     >
       <img
         className="button-svg "
-        src="/scriptchart/assets/font_glyphs/lamadh.svg"
+        src="../assets/font_glyphs/lamadh.svg"
       />
     </div>
   </span>
@@ -328,7 +328,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     >
       <img
         className="button-svg "
-        src="/scriptchart/assets/font_glyphs/mim.svg"
+        src="../assets/font_glyphs/mim.svg"
       />
     </div>
   </span>
@@ -362,7 +362,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     >
       <img
         className="button-svg "
-        src="/scriptchart/assets/font_glyphs/nun.svg"
+        src="../assets/font_glyphs/nun.svg"
       />
     </div>
   </span>
@@ -380,7 +380,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     >
       <img
         className="button-svg "
-        src="/scriptchart/assets/font_glyphs/nun_final.svg"
+        src="../assets/font_glyphs/nun_final.svg"
       />
     </div>
   </span>
@@ -558,7 +558,7 @@ exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
     >
       <img
         className="button-svg "
-        src="/scriptchart/assets/font_glyphs/taw_triangular.svg"
+        src="../assets/font_glyphs/taw_triangular.svg"
       />
     </div>
   </span>

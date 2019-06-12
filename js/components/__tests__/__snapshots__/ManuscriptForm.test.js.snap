@@ -40,7 +40,13 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         onChange={[Function]}
         size="8"
         type="string"
-        value={Array []}
+        value={
+          Array [
+            "Vat. Syr. 112",
+            "Vat. Syr. 140",
+            "BL. Add. 17224",
+          ]
+        }
       >
         <option
           value="Vat. Syr. 092"
@@ -211,7 +217,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
       className="buttons are-small"
     >
       <span
-        className="button is-outlined"
+        className="button is-success"
         onClick={[Function]}
       >
         <div
@@ -416,7 +422,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         >
           <img
             className="button-svg "
-            src="/scriptchart/assets/font_glyphs/yudh_connected.svg"
+            src="../assets/font_glyphs/yudh_connected.svg"
           />
         </div>
       </span>
@@ -450,7 +456,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         >
           <img
             className="button-svg "
-            src="/scriptchart/assets/font_glyphs/kaph.svg"
+            src="../assets/font_glyphs/kaph.svg"
           />
         </div>
       </span>
@@ -471,7 +477,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         </div>
       </span>
       <span
-        className="button is-outlined"
+        className="button is-success"
         onClick={[Function]}
       >
         <div
@@ -500,7 +506,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         >
           <img
             className="button-svg "
-            src="/scriptchart/assets/font_glyphs/lamadh.svg"
+            src="../assets/font_glyphs/lamadh.svg"
           />
         </div>
       </span>
@@ -534,7 +540,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         >
           <img
             className="button-svg "
-            src="/scriptchart/assets/font_glyphs/mim.svg"
+            src="../assets/font_glyphs/mim.svg"
           />
         </div>
       </span>
@@ -568,7 +574,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         >
           <img
             className="button-svg "
-            src="/scriptchart/assets/font_glyphs/nun.svg"
+            src="../assets/font_glyphs/nun.svg"
           />
         </div>
       </span>
@@ -586,7 +592,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         >
           <img
             className="button-svg "
-            src="/scriptchart/assets/font_glyphs/nun_final.svg"
+            src="../assets/font_glyphs/nun_final.svg"
           />
         </div>
       </span>
@@ -655,7 +661,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         </div>
       </span>
       <span
-        className="button is-outlined"
+        className="button is-success"
         onClick={[Function]}
       >
         <div
@@ -764,7 +770,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         >
           <img
             className="button-svg "
-            src="/scriptchart/assets/font_glyphs/taw_triangular.svg"
+            src="../assets/font_glyphs/taw_triangular.svg"
           />
         </div>
       </span>
@@ -884,7 +890,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
         name="imageSize"
         onChange={[Function]}
         type="string"
-        value="Medium"
+        value="Small"
       >
         <option>
           Small
@@ -911,6 +917,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           <input
             checked={true}
             id="hoverContext"
+            name="contextMode"
             onChange={[Function]}
             type="radio"
             value="hover"
@@ -927,6 +934,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
           <input
             checked={false}
             id="clickContext"
+            name="contextMode"
             onChange={[Function]}
             type="radio"
             value="click"

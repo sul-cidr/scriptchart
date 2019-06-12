@@ -15,9 +15,10 @@ import React, { Component } from "react";
  * data about letters in the selected manuscripts, and passes
  * these on to the scriptchart.
  */
-
+/*
 import "../../src/assets/syriac_fonts.css";
 import "./app.css";
+*/
 
 // Need this to get the letter IDs of letters from query string (bookmark)
 import allLetters from "./letters.json";

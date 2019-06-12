@@ -8,8 +8,6 @@ import ReactDOM from "react-dom";
 
 import Popup from "reactjs-popup";
 
-import "./index.css";
-
 class PopupImage extends React.Component {
   render() {
     return (

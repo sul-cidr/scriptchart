@@ -1,0 +1,35 @@
+@font-face {
+	font-family: 'EstrangeloEdessa';
+	src: local('Estrangelo Edessa');
+	src: url('syrcomedessa.eot');
+	src: url('syrcomedessa.eot?#iefix') format('embedded-opentype'), url('syrcomedessa.woff') format('woff'), url('syrcomedessa.ttf') format('truetype'), url('syrcomedessa.svg#syrcomedessa') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SertoJerusalem';
+	src: local('Serto Jerusalem');
+	src: url('syrcomjerusalem.eot');
+	src: url('syrcomjerusalem.eot?#iefix') format('embedded-opentype'), url('syrcomjerusalem.woff') format('woff'), url('syrcomjerusalem.ttf') format('truetype'), url('syrcomjerusalem.svg#syrcomjerusalem') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SertoJerusalem';
+	src: local('Serto Jerusalem Bold');
+	src: url('syrcomjerusalembold.eot');
+	src: url('syrcomjerusalembold.eot?#iefix') format('embedded-opentype'), url('syrcomjerusalembold.woff') format('woff'), url('syrcomjerusalembold.ttf') format('truetype'), url('syrcomjerusalembold.svg#syrcomjerusalembold') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SertoJerusalem';
+	src: local('Serto Jerusalem Italic');
+	src: url('syrcomjerusalemitalic.eot');
+	src: url('syrcomjerusalemitalic.eot?#iefix') format('embedded-opentype'), url('syrcomjerusalemitalic.woff') format('woff'), url('syrcomjerusalemitalic.ttf') format('truetype'), url('syrcomjerusalemitalic.svg#syrcomjerusalemitalic') format('svg');
+	font-weight: normal;
+	font-style: italic;
+}

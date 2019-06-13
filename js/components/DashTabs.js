@@ -229,7 +229,7 @@ class DashTabs extends React.Component {
           targetSlot: targetSlot,
           viewType: "ImageView",
           sidePanel: false,
-          displayLayout: false,
+          displayLayout: true,
           bottomPanel: false,
           canvasControls: {
             annotations: {
@@ -246,8 +246,6 @@ class DashTabs extends React.Component {
 
   onManifestSelected(selectedManifestURI) {
     let manifestURIs = [...this.state.manifestURIs];
-    let windowObjects = [...this.state.windowObjects];
-    let miradorLayout = this.state.miradorLayout;
 
     if (manifestURIs.length == 0 && this.props.manuscripts) {
       [
@@ -257,39 +255,22 @@ class DashTabs extends React.Component {
       ] = this.getMiradorParameters();
     }
 
-    // If the selected manifest is already being shown in the viewer, do nothing.
-    if (
-      windowObjects.findIndex(o => o.loadedManifest == selectedManifestURI) < 0
-    ) {
-      // Otherwise, treat the Mirador viewer windows as a FIFO queue of size 1-4
-      if (windowObjects.length == 4) {
-        windowObjects.pop();
-      }
-      let windowObject = {
-        loadedManifest: selectedManifestURI,
-        targetSlot: "row1.column1",
-        viewType: "ImageView",
-        sidePanel: false
-      };
-      windowObjects.unshift(windowObject);
-
-      for (let m = 1, len = windowObjects.length; m < len; m++) {
-        if (m == 1) {
-          windowObjects[m]["targetSlot"] = "row1.column2";
-        } else if (m == 2) {
-          windowObjects[m]["targetSlot"] = "row2.column1";
-        } else if (m == 3) {
-          windowObjects[m]["targetSlot"] = "row2.column2";
+    let windowObjects = [{
+      loadedManifest: selectedManifestURI,
+      targetSlot: "row1.column1",
+      viewType: "ImageView",
+      sidePanel: false,
+      displayLayout: true,
+      bottomPanel: false,
+      canvasControls: {
+        annotations: {
+          annotationLayer: false,
+          annotationCreation: false
         }
       }
+    }];
 
-      let miradorLayout = "1x1";
-      if (windowObjects.length == 2) {
-        miradorLayout = "1x2";
-      } else if (windowObjects.length >= 3) {
-        miradorLayout = "2x2";
-      }
-    }
+    let miradorLayout = "1x1";
 
     this.setState({ manifestURIs, windowObjects, miradorLayout, tabIndex: 1 });
   }

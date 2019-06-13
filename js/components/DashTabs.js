@@ -29,7 +29,8 @@ import BookmarkModal from "./BookmarkModal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-import * as url from "../../src/assets/img/help-images/options-annotated.png";
+import * as optionsUrl from "../../src/assets/img/help-images/options-annotated.png";
+import * as tabsUrl from "../../src/assets/img/help-images/dash-tabs.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -363,12 +364,25 @@ class DashTabs extends React.Component {
   render() {
     if (this.props.showTabs == false && this.props.loadingMessage == "") {
       return (
-        <div className="help-text">
-          <h2 className="subtitle is-4">
+        <div className="help-text box">
+          <h5 className="subtitle is-5">
+            Please select one or more manuscripts and letters from the options
+            menu, then click the "Submit" button.
+          </h5>
+          <p className="content">
             Here's a quick guide to using the options form. For full help
             documentation, see our <a href={"../guide/"}>how-to guide</a>.
-          </h2>
-          <img src={url} className="tutorial-image" />
+          </p>
+          <article className="message">
+            <div className="message-body">
+              <img src={tabsUrl} className="tutorial=image" />
+            </div>
+          </article>
+          <article className="message">
+            <div className="message-body">
+              <img src={optionsUrl} className="tutorial-image" />
+            </div>
+          </article>
         </div>
       );
     } else if (

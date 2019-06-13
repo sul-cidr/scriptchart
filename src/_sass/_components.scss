@@ -89,10 +89,6 @@ tr:nth-child(even) {
 }
 
 .help-text {
-  max-height: 85vh;
+  max-height: 85.5vh;
   overflow: scroll;
-
-  .subtitle:not(:last-child) {
-    margin-bottom: 0;
-  }
 }

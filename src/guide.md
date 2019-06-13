@@ -1,6 +1,6 @@
 ---
 layout: page
-title: DASH how-to
+title: DASH how-to guide
 permalink: /guide/
 include: false
 about: true

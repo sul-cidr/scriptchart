@@ -229,7 +229,7 @@ class DashTabs extends React.Component {
           targetSlot: targetSlot,
           viewType: "ImageView",
           sidePanel: false,
-          displayLayout: true,
+          displayLayout: false,
           bottomPanel: false,
           canvasControls: {
             annotations: {
@@ -246,6 +246,8 @@ class DashTabs extends React.Component {
 
   onManifestSelected(selectedManifestURI) {
     let manifestURIs = [...this.state.manifestURIs];
+    let windowObjects = [...this.state.windowObjects];
+    let miradorLayout = this.state.miradorLayout;
 
     if (manifestURIs.length == 0 && this.props.manuscripts) {
       [
@@ -255,22 +257,60 @@ class DashTabs extends React.Component {
       ] = this.getMiradorParameters();
     }
 
-    let windowObjects = [{
-      loadedManifest: selectedManifestURI,
-      targetSlot: "row1.column1",
-      viewType: "ImageView",
-      sidePanel: false,
-      displayLayout: true,
-      bottomPanel: false,
-      canvasControls: {
-        annotations: {
-          annotationLayer: false,
-          annotationCreation: false
-        }
-      }
-    }];
+    /* This code moves the selected manuscript to the front of the list, or
+     * adds it there (removing the last manuscript) if it's not already in the
+     * list. The idea is that the newly selected manuscript should always be
+     * at the top left corner of the viewer's windows, but in practice Mirador
+     * ignores the windows' "targetSlot" settings and just displays the manifests
+     * in the order in which they're loaded -- so the layout ends up being
+     * fairly arbitrary.
+     */
+    let windowManifests = windowObjects.map(wo => wo.loadedManifest);
+    let windowIndex = windowManifests.findIndex(wm => wm == selectedManifestURI);
+    if ((windowManifests.length == 4) && (windowIndex < 0)) {
+      windowManifests.pop();
+    } else {
+      windowManifests.splice(windowIndex, 1);
+    }
+    windowManifests.unshift(selectedManifestURI);
 
-    let miradorLayout = "1x1";
+    windowObjects = [];
+
+    for (let m = 0, len = windowManifests.length; m < len; m++) {
+
+      let targetSlot = "row1.column1";
+      if (m == 1) {
+        targetSlot = "row1.column2";
+      } else if (m == 2) {
+        targetSlot = "row2.column1";
+      } else if (m == 3) {
+        targetSlot = "row2.column2";
+      }
+      
+      let windowObject = {
+        loadedManifest: windowManifests[m],
+        targetSlot: targetSlot,
+        viewType: "ImageView",
+        sidePanel: false,
+        displayLayout: false,
+        bottomPanel: false,
+        canvasControls: {
+          annotations: {
+            annotationLayer: false,
+            annotationCreation: false
+          }
+        }
+      };
+
+      windowObjects.push(windowObject);
+
+      let miradorLayout = "1x1";
+      if (windowObjects.length == 2) {
+        miradorLayout = "1x2";
+      } else if (windowObjects.length >= 3) {
+        miradorLayout = "2x2";
+      }
+    }
 
     this.setState({ manifestURIs, windowObjects, miradorLayout, tabIndex: 1 });
   }

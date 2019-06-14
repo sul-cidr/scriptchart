@@ -31,7 +31,7 @@ When working with the scriptchart or the manuscript viewer, you can collape the 
 
 ## Scriptchart
 
-Within the scriptchart, letters and manuscripts will appear in a table ordered by the "Viewer options." If you want to reorder the letters or manuscripts, you can drag the columns or rows into whatever order you choose. 
+Within the scriptchart, letters and manuscripts will appear in a table ordered by the "Viewer options." If you want to reorder the letters or manuscripts, you can drag the columns or rows into whatever order you choose. To create a shareable URL for your scriptchart, click "Bookmark" in the tabs above the scriptchart.  
 
 ![Scriptchart](assets/img/help-images/scriptchart.png){: .help-image-lg}
 

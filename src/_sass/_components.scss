@@ -87,3 +87,8 @@ tr:nth-child(even) {
 .button-clicked {
   filter: invert(1);
 }
+
+.help-text {
+  max-height: 85.5vh;
+  overflow: scroll;
+}

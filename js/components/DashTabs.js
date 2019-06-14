@@ -29,6 +29,9 @@ import BookmarkModal from "./BookmarkModal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
+import * as optionsUrl from "../../src/assets/img/help-images/options-annotated.png";
+import * as tabsUrl from "../../src/assets/img/help-images/dash-tabs.png";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class DashTabs extends React.Component {
@@ -266,8 +269,10 @@ class DashTabs extends React.Component {
      * fairly arbitrary.
      */
     let windowManifests = windowObjects.map(wo => wo.loadedManifest);
-    let windowIndex = windowManifests.findIndex(wm => wm == selectedManifestURI);
-    if ((windowManifests.length == 4) && (windowIndex < 0)) {
+    let windowIndex = windowManifests.findIndex(
+      wm => wm == selectedManifestURI
+    );
+    if (windowManifests.length == 4 && windowIndex < 0) {
       windowManifests.pop();
     } else {
       windowManifests.splice(windowIndex, 1);
@@ -277,7 +282,6 @@ class DashTabs extends React.Component {
     windowObjects = [];
 
     for (let m = 0, len = windowManifests.length; m < len; m++) {
-
       let targetSlot = "row1.column1";
       if (m == 1) {
         targetSlot = "row1.column2";
@@ -286,7 +290,7 @@ class DashTabs extends React.Component {
       } else if (m == 3) {
         targetSlot = "row2.column2";
       }
-      
+
       let windowObject = {
         loadedManifest: windowManifests[m],
         targetSlot: targetSlot,
@@ -359,7 +363,35 @@ class DashTabs extends React.Component {
   }
 
   render() {
-    if (this.props.showTabs == false) {
+    if (this.props.showTabs == false && this.props.loadingMessage == "") {
+      return (
+        <div className="help-text box">
+          <h5 className="subtitle is-5">
+            Please select one or more manuscripts and letters from the options
+            menu, then click the "Submit" button.
+          </h5>
+          <hr />
+          <p className="content">
+            Here's a quick guide to using the scriptchart and options form. For
+            full help documentation, see our{" "}
+            <a href={"../guide/"}>How-to Guide</a>.
+          </p>
+          <article className="message">
+            <div className="message-body">
+              <img src={tabsUrl} className="tutorial=image" />
+            </div>
+          </article>
+          <article className="message">
+            <div className="message-body">
+              <img src={optionsUrl} className="tutorial-image" />
+            </div>
+          </article>
+        </div>
+      );
+    } else if (
+      this.props.showTabs == false &&
+      this.props.loadingMessage != ""
+    ) {
       return (
         <div>
           <span>

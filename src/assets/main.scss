@@ -20,6 +20,11 @@ $navbar-item-color: $off-white;
 $navbar-item-hover-color: lighten($off-white, 20%);
 $navbar-item-hover-background-color: darken(#990000, 5%);
 $navbar-color-transparent: rgba(153, 0, 0, 0.6);
+$navbar-dropdown-arrow: $off-white;
+$navbar-dropdown-background-color: $navbar-background-color;
+$navbar-dropdown-item-hover-background-color: $navbar-item-hover-background-color;
+$navbar-dropdown-item-hover-color: $navbar-item-hover-color;
+$navbar-dropdown-offset: 10px;
 
 $danger: $navbar-background-color;
 
@@ -81,6 +86,17 @@ $danger: $navbar-background-color;
   .navbar-item:hover {
     background-color: darken($navbar-color-transparent, 5%);
   }
+
+  @include desktop {
+    .navbar-dropdown {
+      background-color: $navbar-color-transparent;
+      border-top: 2px solid $navbar-color-transparent;
+    
+      .navbar-item:hover {
+        background-color: darken($navbar-color-transparent, 5%);
+      }
+    }
+  }
 }
 
 #start-button {
@@ -94,4 +110,12 @@ $danger: $navbar-background-color;
 #contact-embed {
   height: 100%;
   width: 100%;
+}
+
+.help-image-sm {
+  max-height: 40vh;
+}
+
+.help-image-lg {
+  max-height: 60vh;
 }

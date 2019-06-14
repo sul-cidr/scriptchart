@@ -269,8 +269,10 @@ class DashTabs extends React.Component {
      * fairly arbitrary.
      */
     let windowManifests = windowObjects.map(wo => wo.loadedManifest);
-    let windowIndex = windowManifests.findIndex(wm => wm == selectedManifestURI);
-    if ((windowManifests.length == 4) && (windowIndex < 0)) {
+    let windowIndex = windowManifests.findIndex(
+      wm => wm == selectedManifestURI
+    );
+    if (windowManifests.length == 4 && windowIndex < 0) {
       windowManifests.pop();
     } else {
       windowManifests.splice(windowIndex, 1);
@@ -280,7 +282,6 @@ class DashTabs extends React.Component {
     windowObjects = [];
 
     for (let m = 0, len = windowManifests.length; m < len; m++) {
-
       let targetSlot = "row1.column1";
       if (m == 1) {
         targetSlot = "row1.column2";
@@ -289,7 +290,7 @@ class DashTabs extends React.Component {
       } else if (m == 3) {
         targetSlot = "row2.column2";
       }
-      
+
       let windowObject = {
         loadedManifest: windowManifests[m],
         targetSlot: targetSlot,
@@ -369,9 +370,11 @@ class DashTabs extends React.Component {
             Please select one or more manuscripts and letters from the options
             menu, then click the "Submit" button.
           </h5>
+          <hr />
           <p className="content">
-            Here's a quick guide to using the options form. For full help
-            documentation, see our <a href={"../guide/"}>how-to guide</a>.
+            Here's a quick guide to using the scriptchart and options form. For
+            full help documentation, see our{" "}
+            <a href={"../guide/"}>How-to Guide</a>.
           </p>
           <article className="message">
             <div className="message-body">

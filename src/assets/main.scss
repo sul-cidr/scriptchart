@@ -87,13 +87,14 @@ $danger: $navbar-background-color;
     background-color: darken($navbar-color-transparent, 5%);
   }
 
-  // Need to just add these for a certain larger media size
-  .navbar-dropdown {
-    background-color: $navbar-color-transparent;
-    border-top: 2px solid $navbar-color-transparent;
-  
-    .navbar-item:hover {
-      background-color: darken($navbar-color-transparent, 5%);
+  @include desktop {
+    .navbar-dropdown {
+      background-color: $navbar-color-transparent;
+      border-top: 2px solid $navbar-color-transparent;
+    
+      .navbar-item:hover {
+        background-color: darken($navbar-color-transparent, 5%);
+      }
     }
   }
 }

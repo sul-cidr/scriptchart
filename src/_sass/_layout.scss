@@ -69,11 +69,12 @@ body {
     color: $navbar-item-color;
 
     &:hover {
-      text-shadow: 0 0 2px white;
+      -webkit-filter: drop-shadow(0 0 2px white);
+      filter: drop-shadow(0 0 2px white);
     }
   }
 
-  > div {
+  div {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -90,7 +91,13 @@ body {
       margin-left: auto;
       text-align: right;
     }
+  }
 
+  img {
+    display: inline-block;
+    height: 25px;
+    margin-left: 4px;
+    vertical-align: middle;
   }
 }
 

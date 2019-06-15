@@ -377,7 +377,6 @@ class DashTabs extends React.Component {
             <div className="message-body">
               <img
                 src="../assets/img/help-images/dash-tabs.png"
-                className="tutorial=image"
               />
             </div>
           </article>
@@ -385,7 +384,6 @@ class DashTabs extends React.Component {
             <div className="message-body">
               <img
                 src="../assets/img/help-images/options-annotated.png"
-                className="tutorial-image"
               />
             </div>
           </article>

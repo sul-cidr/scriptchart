@@ -94,7 +94,10 @@ body {
   }
 
   img {
-    height: 1rem;
+    display: inline-block;
+    height: 25px;
+    margin-left: 4px;
+    vertical-align: middle;
   }
 }
 

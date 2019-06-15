@@ -29,9 +29,6 @@ import BookmarkModal from "./BookmarkModal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-import * as optionsUrl from "../../src/assets/img/help-images/options-annotated.png";
-import * as tabsUrl from "../../src/assets/img/help-images/dash-tabs.png";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class DashTabs extends React.Component {
@@ -378,12 +375,18 @@ class DashTabs extends React.Component {
           </p>
           <article className="message">
             <div className="message-body">
-              <img src={tabsUrl} className="tutorial=image" />
+              <img
+                src="../assets/img/help-images/dash-tabs.png"
+                alt="Explanation of DASH Tabs"
+              />
             </div>
           </article>
           <article className="message">
             <div className="message-body">
-              <img src={optionsUrl} className="tutorial-image" />
+              <img
+                src="../assets/img/help-images/options-annotated.png"
+                alt="Explanation of DASH Options Panel"
+              />
             </div>
           </article>
         </div>

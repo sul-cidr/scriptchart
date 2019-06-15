@@ -59,10 +59,39 @@ body {
 .site-footer {
   background-color: $navbar-background-color;
   display: flex;
-  justify-content: space-evenly;
-  height: 35px;
+  min-height: 35px;
   align-items: center;
   color: $navbar-item-color;
+  padding: 0 1%;
+  line-height: 1;
+
+  a {
+    color: $navbar-item-color;
+
+    &:hover {
+      text-shadow: 0 0 2px white;
+    }
+  }
+
+  > div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    &:first-child > span {
+      margin-right: auto;
+    }
+
+    &:nth-child(2) {
+      text-align: center;
+    }
+
+    &:last-child  > span {
+      margin-left: auto;
+      text-align: right;
+    }
+
+  }
 }
 
 .hero-foot {

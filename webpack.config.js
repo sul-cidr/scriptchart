@@ -96,6 +96,11 @@ module.exports = {
           from: "node_modules/mirador/dist/locales/en/translation.json",
           to: "../mirador/locales/en",
           flatten: true
+        },
+        {
+          from: "assets/*",
+          to: "../",
+          flatten: true
         }
       ],
       { copyUnmodified: true }

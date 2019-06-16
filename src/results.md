@@ -50,3 +50,4 @@ This chart uses a 100-year window to trace chronologically the prevalence of tri
 ![Graph of size of Syriac Codices over time](assets/img/area-over-time.png)
 
 This preliminary plot looks at the currently preserved size of early securely dated manuscripts. These first results suggest that there is at most a minor correlation between a manuscript’s size and when it was copied. By comparison, genre appears to play a much greater role in book size.
+<br/><br/><br/>

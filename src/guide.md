@@ -42,3 +42,4 @@ If you no longer want to see all of the letters or manuscripts in the scriptchar
 In order to view the manuscripts in the Mirador manuscript viewer, click "Manuscripts" in the tab bar. The first four manuscripts loaded into the scriptchart will appear. Within the scriptchart, click the book icon at the top of the manuscript column to load that manuscript into the Mirador viewer. It will replace the last tile of the manuscript viewer. 
 
 ![Mirador Viewer ](assets/img/help-images/mirador.png){: .help-image-lg}
+<br/><br/><br/>

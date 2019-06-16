@@ -77,5 +77,5 @@ include: true
 - Kira Yates
 
 
-
-We are particularly grateful for funding support from the American Council of Learned Societies (through an ACLS Digital Extension Grant), the Andrew W. Mellon Foundation (through a Five College Digital Humanities Grant), the American Academy of Religion (through an AAR Research Grant), a Roberta Bowman Denning Grant in the Digital Humanities, Mount Holyoke College, Smith College, Stanford University, and for development support from the Stanford Libraries.
+**We are particularly grateful for funding support from the American Council of Learned Societies (through an ACLS Digital Extension Grant), the Andrew W. Mellon Foundation (through a Five College Digital Humanities Grant), the American Academy of Religion (through an AAR Research Grant), a Roberta Bowman Denning Grant in the Digital Humanities, Mount Holyoke College, Smith College, Stanford University, and for development support from the Stanford Libraries.**
+<br/><br/><br/>

@@ -14,7 +14,7 @@ body {
 }
 
 .post {
-  padding: 1em 30px 4em;
+  padding: 1em 30px;
   overflow-y: auto;
   height: 100%;
   display: flex;
@@ -23,6 +23,12 @@ body {
 
 .post-content {
   flex-grow: 1;
+
+  &::after {
+    content: "";
+    display: block;
+    height: 4em;
+  }
 }
 
 .scriptchart-app {

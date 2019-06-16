@@ -46,4 +46,3 @@ Images Copyright Biblioteca Apostolica Vaticana
 
 *Yale Syriac 6 (Beinecke MS Syriac 6)*<br/>
 Provided by the Beinecke Rare Book and Manuscript Library, Yale University
-<br/><br/><br/>

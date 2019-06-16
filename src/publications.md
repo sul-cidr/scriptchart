@@ -24,4 +24,3 @@ include: true
 “A Character Style Library for Syriac Manuscripts,” *Proceedings of the International Workshop on Historical Document Imaging and Processing* (2015). Michael Penn, Nicholas Howe, and Alice Yang.
 
 “The Wright Decoder: A Page Index to the *British Library Catalogue of Syriac Manuscripts*” *Hugoye: Journal of Syriac Studies* 15.1 (2012): 30-76. Michael Penn and Betsy Reif.
-<br/><br/><br/>

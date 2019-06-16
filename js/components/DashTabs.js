@@ -447,8 +447,8 @@ class DashTabs extends React.Component {
       >
         <BookmarkModal
           isOpen={this.state.bookmarkIsOpen}
-          closeModal={this.closeModal}
           bookmarkURL={this.state.bookmarkURL}
+          closeModal={this.closeModal}
         />
         <TabList>
           <Tab>

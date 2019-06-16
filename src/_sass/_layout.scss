@@ -23,12 +23,12 @@ body {
 
 .post-content {
   flex-grow: 1;
+}
 
-  &::after {
-    content: "";
-    display: block;
-    height: 4em;
-  }
+body:not(.contact-page) .post-content::after {
+  content: "";
+  display: block;
+  height: 4em;
 }
 
 .scriptchart-app {

@@ -89,6 +89,6 @@ tr:nth-child(even) {
 }
 
 .help-text {
-  max-height: 85.5vh;
-  overflow: scroll;
+  height: 100%;
+  overflow-y: auto;
 }

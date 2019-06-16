@@ -91,4 +91,13 @@ tr:nth-child(even) {
 .help-text {
   height: 100%;
   overflow-y: auto;
+
+  img {
+    filter: opacity(.3);
+    transition: filter .5s ease;
+
+    &:hover {
+      filter: opacity(.6);
+    }
+  }
 }

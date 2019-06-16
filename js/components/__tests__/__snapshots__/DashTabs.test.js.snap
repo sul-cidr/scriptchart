@@ -78,6 +78,19 @@ exports[`DashTabs test DashTabs should match snapshot 1`] = `
     >
       Hidden Items
     </li>
+    <span>
+      <button
+        className="button is-info is-outlined"
+        onClick={[Function]}
+        style={
+          Object {
+            "verticalAlign": "bottom",
+          }
+        }
+      >
+        Bookmark
+      </button>
+    </span>
   </ul>
   <div
     aria-labelledby="react-tabs-0"

@@ -4,9 +4,9 @@ title: Results
 permalink: /results/
 include: true
 ---
-Having the world’s largest database of Syriac letter forms allows one to both describe and quantify important developments in Syriac manuscript culture. In some cases, this helps with computer assisted paleography. That is, automated results provide data that allow human paleographers to better localize Syriac manuscripts. In other cases, project data challenges long held assumptions in the field (e.g. the traditional way of categorizing Syriac script) or opens up new fields of inquiry (e.g. the relationship between script and genre). Although more details appear in project publications, the following provide several quick case examples for how large data sets, digital analysis, and visual analytics can help researchers address key philological and historical problems. 
+Having the world’s largest database of Syriac letter forms allows one to both describe and quantify important developments in Syriac manuscript culture. In some cases, this helps with computer assisted paleography. That is, automated results provide data that allow human paleographers to better localize Syriac manuscripts. In other cases, project data challenges long held assumptions in the field (e.g. the traditional way of categorizing Syriac script) or opens up new fields of inquiry (e.g. the relationship between script and genre). Although more details appear in project publications, the following provide several quick case examples for how large data sets, digital analysis, and visual analytics can help researchers address key philological and historical problems.
 
-The hope is that these visuals will spur ideas for your own research projects. If you find DASH helpful for a presentation or publication, please do contact us. We would love to include a citation, link, or abstract of your work on this website. Knowing that you are using DASH will also help us justify future updates and expansions to the project. In addition to the images that are publicly accessible on this website, we have much additional paleographic data that may be helpful to researchers. If you have a project for which you think a larger dataset could be of use, do send us a note using the “contact” menu above.  
+The hope is that these visuals will spur ideas for your own research projects. If you find DASH helpful for a presentation or publication, please do contact us. We would love to include a citation, link, or abstract of your work on this website. Knowing that you are using DASH will also help us justify future updates and expansions to the project. In addition to the images that are publicly accessible on this website, we have much additional paleographic data that may be helpful to researchers. If you have a project for which you think a larger dataset could be of use, do send us a note using the “contact” menu above.
 
 
 ### Automatic Script Charts
@@ -19,7 +19,7 @@ The project database has over 110,000 individual letter images, each “hand” 
 
 ![Scatterplot of Chronological Markedness of Syriac Letters](assets/img/scatterPlot.jpg)
 
-Having access to 96% of early, securely dated Syriac manuscripts allows one to identify the first appearance of various letter forms. These, in turn, can help scholars estimate composition dates for the majority of Syriac manuscripts that do not have a scribal colophon stating when they were written. 
+Having access to 96% of early, securely dated Syriac manuscripts allows one to identify the first appearance of various letter forms. These, in turn, can help scholars estimate composition dates for the majority of Syriac manuscripts that do not have a scribal colophon stating when they were written.
 
 ### Parallel Coordinates Plot Illustrating the Use of E and S Forms Among Securely Dated Manuscripts
 
@@ -31,7 +31,7 @@ This chart indicates whether a specific manuscript has an E (Estrangela) form of
 
 ![Chart showing use of both letter forms in a manuscript](assets/img/parallelCoords2.jpg)
 
-As with securely dated manuscripts, data from 593 manuscripts that the cataloger William Wright estimated as being written prior to the 1100s also shows the prevalence of mixed-script manuscripts. Every time a line crosses from top to bottom or bottom to top it represents a scribe using the E form of some letters but the S form of others. 
+As with securely dated manuscripts, data from 593 manuscripts that the cataloger William Wright estimated as being written prior to the 1100s also shows the prevalence of mixed-script manuscripts. Every time a line crosses from top to bottom or bottom to top it represents a scribe using the E form of some letters but the S form of others.
 
 ### Correlation Between Script and Genre
 

@@ -15,14 +15,10 @@ Images of Staatsbibliothek zu Berlin - Preussischer Kulturbesitz, Orientabteilun
 *BL. Or. 5021, 8606, 8732*<br/>
 Images by permission of the British Library
 
-*Damascus Patr. 12/13: ff 110b, 151a, 239a, 374a*<br/>
-*Damascus Patr. 12/21: ff. 85a, 117a, 149a, 149b, 170a*<br/>
-*Damascus Patr. 12/8: ff. 26a, 62a, 343b*<br/>
-*Damascus Patr. 12/9: 29a, 133b, 214b*<br/>
+*Damascus Patr. 12/8, 12/9, 12/13, 12/21*<br/>
 By permission of the Syriac Orthodox Patriarchate of Antioch
 
-*Florence I.40, ff. 79a, 80a, 81a, 83a, 84a*<br/>
-*Florence I.56, ff. 72a, 73a, 74a, 75a, 76a*<br/>
+*Florence I.40, I.56*<br/>
 By permission of the Biblioteca Medicea Laurenziana
 
 *Har. Syr. 176 (MS Syriac 176)*<br/>
@@ -48,5 +44,5 @@ Provided by the Stanford University Libraries
 *Vat. Syr. 001, 013-4, 021, 092-4, 104, 111-2, 116, 122, 137-8, 140, 142-3, 152, 160, 268, 623*<br/>
 Images Copyright Biblioteca Apostolica Vaticana
 
-*Beinecke MS Syriac 6 (Yale Syriac 6)*<br/>
+*Yale Syriac 6 (Beinecke MS Syriac 6)*<br/>
 Provided by the Beinecke Rare Book and Manuscript Library, Yale University

@@ -373,22 +373,14 @@ class DashTabs extends React.Component {
             full help documentation, see our{" "}
             <a href={"../guide/"}>How-to Guide</a>.
           </p>
-          <article className="message">
-            <div className="message-body">
-              <img
-                src="../assets/img/help-images/dash-tabs.png"
-                alt="Explanation of DASH Tabs"
-              />
-            </div>
-          </article>
-          <article className="message">
-            <div className="message-body">
-              <img
-                src="../assets/img/help-images/options-annotated.png"
-                alt="Explanation of DASH Options Panel"
-              />
-            </div>
-          </article>
+          <img
+            src="../assets/img/help-images/dash-tabs.png"
+            alt="Explanation of DASH Tabs"
+          />
+          <img
+            src="../assets/img/help-images/options-annotated.png"
+            alt="Explanation of DASH Options Panel"
+          />
         </div>
       );
     } else if (

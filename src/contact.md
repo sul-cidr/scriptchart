@@ -3,6 +3,7 @@ layout: page
 title: Contact
 permalink: /contact/
 include: true
+body_class: contact-page
 ---
 
 

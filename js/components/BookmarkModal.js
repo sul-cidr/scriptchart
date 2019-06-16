@@ -10,6 +10,13 @@ class BookmarkModal extends React.Component {
     this.state = {
       copied: false
     };
+
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  closeModal() {
+    this.setState({ copied: false });
+    this.props.closeModal();
   }
 
   render() {
@@ -20,20 +27,22 @@ class BookmarkModal extends React.Component {
         onClose={this.props.closeModal}
       >
         <div className="bookmark-modal">
-          <a className="close" onClick={this.props.closeModal}>
-            &times;
-          </a>
-          <div className="header">Bookmark URL</div>
+          <div className="header">
+            Bookmark URL
+            <button className="button is-small" onClick={this.closeModal}>
+              Close
+            </button>
+          </div>
           <div className="control">
             <div className="bookmarktext">{this.props.bookmarkURL}</div>
-            <CopyToClipboard
-              text={this.props.bookmarkURL}
-              onCopy={() => this.setState({ copied: true })}
-            >
-              <div className={"box has-text-centered"}>
+            <div className={"box has-text-centered"}>
+              <CopyToClipboard
+                text={this.props.bookmarkURL}
+                onCopy={() => this.setState({ copied: true })}
+              >
                 <button className={"button is-info"}>Copy to clipboard</button>
-              </div>
-            </CopyToClipboard>
+              </CopyToClipboard>
+            </div>
             {this.state.copied ? (
               <p className={"has-text-success is-large"}>Copied.</p>
             ) : null}

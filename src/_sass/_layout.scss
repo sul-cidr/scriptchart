@@ -25,6 +25,10 @@ body {
   flex-grow: 1;
 }
 
+body.contact-page .post-content {
+  display: flex;
+}
+
 body:not(.contact-page) .post-content::after {
   content: "";
   display: block;

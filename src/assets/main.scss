@@ -108,7 +108,8 @@ $danger: $navbar-background-color;
 }
 
 #contact-embed {
-  height: 100%;
+  display: flex;
+  flex: 1;
   width: 100%;
 }
 

@@ -91,13 +91,19 @@ tr:nth-child(even) {
 .help-text {
   height: 100%;
   overflow-y: auto;
+  padding-right: 20px;
+
+  .subtitle {
+    font-weight: bold;
+    margin: 1.5em 0;
+  }
 
   img {
-    filter: opacity(.3);
+    filter: opacity(.5);
     transition: filter .5s ease;
 
     &:hover {
-      filter: opacity(.6);
+      filter: opacity(.8);
     }
   }
 }

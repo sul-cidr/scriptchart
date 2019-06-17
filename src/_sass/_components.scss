@@ -107,3 +107,34 @@ tr:nth-child(even) {
     }
   }
 }
+
+.manuscripts-select {
+  .select, select {
+    transition: border-color .1s ease;
+  }
+}
+
+.image-types {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 2px;
+  transition: border-color .1s ease;
+
+  &.is-danger {
+    border-color: $danger;
+  }
+}
+
+.letters-select {
+  .buttons {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: border-color .1s ease;
+
+    &.is-danger {
+      border-color: $danger;
+    }
+
+    .button { margin: 2px !important; }
+  }
+}

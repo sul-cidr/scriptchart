@@ -49,7 +49,7 @@ layout: home
         <div class="container has-text-centered">
             <h1 class="title">Digital Analysis of Syriac Handwriting</h1>
             <h2 class="subtitle">A digital paleography project that displays folia from 90% of surviving Syriac manuscripts securely dated before the twelfth century and generates custom designed script charts.</h2>
-            <a id="start-button" class="button is-danger" href="./viewer/"><h2 class="subtitle">Get Started</h2></a>
+            <a id="start-button" class="button is-primary" href="./viewer/"><h2 class="subtitle">Get Started</h2></a>
         </div>
     </div>
     <div class="hero-foot">

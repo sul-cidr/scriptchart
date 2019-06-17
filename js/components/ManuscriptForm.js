@@ -50,7 +50,10 @@ class ManuscriptForm extends React.Component {
       contextSize: "unset",
       imageSize: "unset",
       selectedShelfmarks: "unset",
-      letters: "unset"
+      letters: "unset",
+      markMssSelectInvalid: false,
+      markLettersSelectInvalid: false,
+      markImageTypesInvalid: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -103,9 +106,19 @@ class ManuscriptForm extends React.Component {
     const name = target.name;
     let value = target.type === "checkbox" ? target.checked : target.value;
 
-    this.setState({
-      [name]: value
-    });
+    this.setState(
+      { [name]: value },
+      () => {
+        if (["showBinarized", "showCropped"].includes(name)) {
+          // TODO: don't like this -- do something about it in connection with
+          //       a broader review of state and data-flow.
+          let formData = this.reconcileFormFields();
+          if (formData.showBinarized || formData.showCropped) {
+            this.setState({ markImageTypesInvalid: false });
+          }
+        }
+      }
+    );
   }
 
   /* This is the handler for the multi-select items (manuscript list and letter
@@ -113,6 +126,12 @@ class ManuscriptForm extends React.Component {
    * but that hasn't been workable so far.
    */
   handleSelect(name, value) {
+    if (name == "selectedShelfmarks" && value.length > 0) {
+      this.setState({ markMssSelectInvalid: false });
+    }
+    if (name == 'letters' && value.length > 0) {
+      this.setState({ markLettersSelectInvalid: false });
+    }
     this.setState({
       [name]: value
     });
@@ -153,8 +172,31 @@ class ManuscriptForm extends React.Component {
       window.history.pushState(null, "", viewerHref);
     }
 
+    let invalid = Array();
+    if (formData.selectedShelfmarks.length === 0) {
+      invalid.push("markMssSelectInvalid");
+    }
+
+    if (formData.letters.length === 0) {
+      invalid.push("markLettersSelectInvalid");
+    }
+
+    if (!(formData.showBinarized || formData.showCropped)) {
+      invalid.push("markImageTypesInvalid");
+    }
+
+    // This is a bit hacky, but the `setTimeout` is necessary to
+    //  force a tick between removing the animation class and
+    //  reapplying it -- otherwise the animation won't restart.
+    if (invalid.length) {
+      this.setState(Object.assign(...invalid.map(val => ({ [val]: false }))));
+      setTimeout(() => {
+        this.setState(Object.assign(...invalid.map(val => ({ [val]: true }))));
+      }, 0);
+    }
+
     // Pass all of the form's state to the handler (which is in App)
-    this.props.formSubmit(formData);
+    if (!invalid.length) { this.props.formSubmit(formData); }
   }
 
   render() {
@@ -170,9 +212,10 @@ class ManuscriptForm extends React.Component {
           manuscripts={this.props.manuscripts}
           selectedShelfmarks={formData.selectedShelfmarks}
           sortManuscripts={this.props.sortManuscripts}
+          markInvalid={this.state.markMssSelectInvalid}
         />
 
-        <div className={"field"}>
+        <div className="field letters-select">
           <div className={"control"} style={{ marginBottom: 5 }}>
             <label className={"control"}>Select letters: </label>
             <span className="button is-small" onClick={this.lettersSelect}>
@@ -182,6 +225,7 @@ class ManuscriptForm extends React.Component {
           <LettersLoader
             selectedLetters={formData.letters}
             handleSelect={this.buttonChange}
+            markInvalid={this.state.markLettersSelectInvalid}
           />
         </div>
 
@@ -204,7 +248,12 @@ class ManuscriptForm extends React.Component {
           </div>
         </div>
 
-        <div className={"control"}>
+        <div
+          className={
+            "control image-types" +
+            (this.state.markImageTypesInvalid ? " is-danger invalid-shake" : "")
+          }
+        >
           <p>Show letter images:</p>
           <label htmlFor="showBinarized" className={"checkbox"}>
             <input

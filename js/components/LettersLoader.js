@@ -44,7 +44,16 @@ class LettersLoader extends React.Component {
         />
       );
     });
-    return <div className={"buttons are-small"}>{buttons}</div>;
+    return (
+      <div
+        className={
+          "buttons are-small" +
+          (this.props.markInvalid ? " is-danger invalid-shake" : "")
+        }
+      >
+        {buttons}
+      </div>
+    );
   }
 }
 

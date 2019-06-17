@@ -26,7 +26,7 @@ $navbar-dropdown-item-hover-background-color: $navbar-item-hover-background-colo
 $navbar-dropdown-item-hover-color: $navbar-item-hover-color;
 $navbar-dropdown-offset: 10px;
 
-$danger: $navbar-background-color;
+$primary: $navbar-background-color;
 
 @import "../../node_modules/bulma/bulma.sass";
 @import "../_sass/layout.scss";
@@ -34,6 +34,7 @@ $danger: $navbar-background-color;
 @import "../_sass/components.scss";
 @import "../_sass/scriptchart-table.scss";
 @import "./fonts/syriac_fonts.css";
+@import "../_sass/animations.scss";
 
 .navbar-brand .title {
   color: $off-white;
@@ -91,7 +92,7 @@ $danger: $navbar-background-color;
     .navbar-dropdown {
       background-color: $navbar-color-transparent;
       border-top: 2px solid $navbar-color-transparent;
-    
+
       .navbar-item:hover {
         background-color: darken($navbar-color-transparent, 5%);
       }

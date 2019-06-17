@@ -114,10 +114,22 @@ tr:nth-child(even) {
   }
 }
 
+.image-types {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 2px;
+  transition: border-color .1s ease;
+
+  &.is-danger {
+    border-color: $danger;
+  }
+}
+
 .letters-select {
   .buttons {
     border: 1px solid transparent;
     border-radius: 4px;
+    transition: border-color .1s ease;
 
     &.is-danger {
       border-color: $danger;

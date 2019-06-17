@@ -52,7 +52,8 @@ class ManuscriptForm extends React.Component {
       selectedShelfmarks: "unset",
       letters: "unset",
       markMssSelectInvalid: false,
-      markLettersSelectInvalid: false
+      markLettersSelectInvalid: false,
+      markImageTypesInvalid: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -105,9 +106,19 @@ class ManuscriptForm extends React.Component {
     const name = target.name;
     let value = target.type === "checkbox" ? target.checked : target.value;
 
-    this.setState({
-      [name]: value
-    });
+    this.setState(
+      { [name]: value },
+      () => {
+        if (["showBinarized", "showCropped"].includes(name)) {
+          // TODO: don't like this -- do something about it in connection with
+          //       a broader review of state and data-flow.
+          let formData = this.reconcileFormFields();
+          if (formData.showBinarized || formData.showCropped) {
+            this.setState({ markImageTypesInvalid: false });
+          }
+        }
+      }
+    );
   }
 
   /* This is the handler for the multi-select items (manuscript list and letter
@@ -166,6 +177,8 @@ class ManuscriptForm extends React.Component {
     // This is a bit hacky, but the `setTimeout` is necessary to
     //  force a tick between removing the animation class and
     //  reapplying it -- otherwise the animation won't restart.
+    // (It's also causing one repaint for each invalid element
+    //  at present, which could certainly be improved.)
     if (formData.selectedShelfmarks.length === 0) {
       this.setState({ markMssSelectInvalid : false});
       setTimeout(() => {
@@ -178,6 +191,14 @@ class ManuscriptForm extends React.Component {
       this.setState({ markLettersSelectInvalid : false});
       setTimeout(() => {
         this.setState({ markLettersSelectInvalid : true});
+      }, 0);
+      valid = false;
+    }
+
+    if (!(formData.showBinarized || formData.showCropped)) {
+      this.setState({ markImageTypesInvalid: false });
+      setTimeout(() => {
+        this.setState({ markImageTypesInvalid: true });
       }, 0);
       valid = false;
     }
@@ -235,7 +256,12 @@ class ManuscriptForm extends React.Component {
           </div>
         </div>
 
-        <div className={"control"}>
+        <div
+          className={
+            "control image-types" +
+            (this.state.markImageTypesInvalid ? " is-danger invalid-shake" : "")
+          }
+        >
           <p>Show letter images:</p>
           <label htmlFor="showBinarized" className={"checkbox"}>
             <input

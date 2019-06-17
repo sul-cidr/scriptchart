@@ -25,9 +25,8 @@ body {
   flex-grow: 1;
 }
 
-.contact-post {
+body.contact-page .post-content {
   display: flex;
-  flex-grow: 1;
 }
 
 body:not(.contact-page) .post-content::after {

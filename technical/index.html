@@ -13,17 +13,17 @@
   <meta name="application-name" content="DASH">
   <meta name="msapplication-TileColor" content="#8c1515">
   <meta name="theme-color" content="#ffffff"><!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Contact | Digital Analysis of Syriac Handwriting</title>
+<title>Technical Details | Digital Analysis of Syriac Handwriting</title>
 <meta name="generator" content="Jekyll v3.7.4" />
-<meta property="og:title" content="Contact" />
+<meta property="og:title" content="Technical Details" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="DASH: Digital Analysis of Syriac Handwriting" />
 <meta property="og:description" content="DASH: Digital Analysis of Syriac Handwriting" />
-<link rel="canonical" href="https://dash.stanford.edu//scriptchart/contact/" />
-<meta property="og:url" content="https://dash.stanford.edu//scriptchart/contact/" />
+<link rel="canonical" href="https://dash.stanford.edu//scriptchart/technical/" />
+<meta property="og:url" content="https://dash.stanford.edu//scriptchart/technical/" />
 <meta property="og:site_name" content="Digital Analysis of Syriac Handwriting" />
 <script type="application/ld+json">
-{"url":"https://dash.stanford.edu//scriptchart/contact/","headline":"Contact","description":"DASH: Digital Analysis of Syriac Handwriting","@type":"WebPage","@context":"http://schema.org"}</script>
+{"url":"https://dash.stanford.edu//scriptchart/technical/","headline":"Technical Details","description":"DASH: Digital Analysis of Syriac Handwriting","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/scriptchart/assets/main.3a19d14a-b818-432f-bb37-8a91b99eb0fe.css">
   <link rel="stylesheet" href="/scriptchart/mirador/css/mirador-combined.min.css"><script>
@@ -33,7 +33,7 @@ ga('send', 'pageview');
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 </head>
-<body class="contact-page"><header class="site-header" role="banner">
+<body><header class="site-header" role="banner">
 
   <nav class="navbar" role="navigation">
     <div class="navbar-brand">
@@ -140,11 +140,18 @@ ga('send', 'pageview');
       <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Contact</h1>
+    <h1 class="post-title">Technical Details</h1>
   </header>
 
   <div class="post-content content">
-    <iframe id="contact-embed" src="https://docs.google.com/forms/d/e/1FAIpQLSdlHQnMGFTK-KS-4_bIdm3QD1cSf2HI3Ur_disvE4cmwTxQFw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    <p><em>Digital Analysis of Syriac Handwriting (DASH)</em> is a bespoke web application that enables scholars to build custom scriptcharts from Syriac manuscripts. On the front-end, the scriptchart is a <a href="https://reactjs.org/">React</a> application housed within a static website built with <a href="https://jekyllrb.com/">Jekyll</a>. It uses <a href="https://webpack.js.org/">Webpack</a> to build the Javascript bundle and <a href="https://bulma.io/">Bulma</a> as a CSS framework.</p>
+
+<p>A <a href="https://www.djangoproject.com/">Django</a> application provides an API that supplies data from a MySQL database to the Scriptchart application. The same Django application provides an administrative interface for project participants to manage data about the manuscripts and letter examples, and allows investigators to identify new letter examples.</p>
+
+<p>DASH is hosted on shared hosting from <a href="https://reclaimhosting.com/">Reclaim Hosting</a>.</p>
+
+<p>Feel free to check out the <a href="https://github.com/sul-cidr/scriptchart/">front-end code</a> and the <a href="https://github.com/sul-cidr/scriptchart-backend">back-end</a> code. Both are under MIT license.</p>
+
 
   </div>
 

@@ -191,7 +191,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="field"
+    className="field letters-select"
   >
     <div
       className="control"
@@ -830,7 +830,7 @@ exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="control"
+    className="control image-types"
   >
     <p>
       Show letter images:

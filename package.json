@@ -5,7 +5,7 @@
   "homepage": "https://sul-cidr.github.io/scriptchart",
   "main": "index.js",
   "scripts": {
-    "build": "bundle exec jekyll clean && JEKYLL_ENV=production bundle exec jekyll build && NODE_ENV=production node_modules/.bin/webpack -p",
+    "build": "bundle exec jekyll clean && JEKYLL_ENV=prod bundle exec jekyll build && NODE_ENV=production node_modules/.bin/webpack -p",
     "dev": "yarn concurrently \"bundle exec jekyll serve --baseurl /scriptchart\" \"node_modules/.bin/webpack --watch\"",
     "precommit": "lint-staged",
     "deploy": "bundle exec jekyll clean && JEKYLL_ENV=production bundle exec jekyll build --baseurl /scriptchart && NODE_ENV=production node_modules/.bin/webpack -p && gh-pages -d _site",

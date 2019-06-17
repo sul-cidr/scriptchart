@@ -89,6 +89,21 @@ tr:nth-child(even) {
 }
 
 .help-text {
-  max-height: 85.5vh;
-  overflow: scroll;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 20px;
+
+  .subtitle {
+    font-weight: bold;
+    margin: 1.5em 0;
+  }
+
+  img {
+    filter: opacity(.5);
+    transition: filter .5s ease;
+
+    &:hover {
+      filter: opacity(.8);
+    }
+  }
 }

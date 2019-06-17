@@ -362,7 +362,7 @@ class DashTabs extends React.Component {
   render() {
     if (this.props.showTabs == false && this.props.loadingMessage == "") {
       return (
-        <div className="help-text box">
+        <div className="help-text">
           <h5 className="subtitle is-5">
             Please select one or more manuscripts and letters from the options
             menu, then click the "Submit" button.
@@ -373,22 +373,15 @@ class DashTabs extends React.Component {
             full help documentation, see our{" "}
             <a href={"../guide/"}>How-to Guide</a>.
           </p>
-          <article className="message">
-            <div className="message-body">
-              <img
-                src="../assets/img/help-images/dash-tabs.png"
-                alt="Explanation of DASH Tabs"
-              />
-            </div>
-          </article>
-          <article className="message">
-            <div className="message-body">
-              <img
-                src="../assets/img/help-images/options-annotated.png"
-                alt="Explanation of DASH Options Panel"
-              />
-            </div>
-          </article>
+          <img
+            src="../assets/img/help-images/dash-tabs.png"
+            alt="Explanation of DASH Tabs"
+          />
+          <hr/>
+          <img
+            src="../assets/img/help-images/options-annotated.png"
+            alt="Explanation of DASH Options Panel"
+          />
         </div>
       );
     } else if (

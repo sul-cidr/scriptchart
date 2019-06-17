@@ -955,7 +955,7 @@ exports[`App test App should match snapshot 1`] = `
     className="scriptchart"
   >
     <div
-      className="help-text box"
+      className="help-text"
     >
       <h5
         className="subtitle is-5"
@@ -975,30 +975,15 @@ exports[`App test App should match snapshot 1`] = `
         </a>
         .
       </p>
-      <article
-        className="message"
-      >
-        <div
-          className="message-body"
-        >
-          <img
-            alt="Explanation of DASH Tabs"
-            src="../assets/img/help-images/dash-tabs.png"
-          />
-        </div>
-      </article>
-      <article
-        className="message"
-      >
-        <div
-          className="message-body"
-        >
-          <img
-            alt="Explanation of DASH Options Panel"
-            src="../assets/img/help-images/options-annotated.png"
-          />
-        </div>
-      </article>
+      <img
+        alt="Explanation of DASH Tabs"
+        src="../assets/img/help-images/dash-tabs.png"
+      />
+      <hr />
+      <img
+        alt="Explanation of DASH Options Panel"
+        src="../assets/img/help-images/options-annotated.png"
+      />
     </div>
   </div>
 </div>

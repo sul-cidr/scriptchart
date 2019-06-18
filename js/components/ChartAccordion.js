@@ -59,7 +59,7 @@ class ChartAccordion extends React.Component {
         <AccordionItem expanded={this.props.hiddenLetters.length > 0}>
           <AccordionItemTitle>
             <h4 className="u-position-relative">
-              Rows (letters, dates)
+              Rows (letters)
               <div className="accordion__arrow" role="presentation" />
             </h4>
           </AccordionItemTitle>

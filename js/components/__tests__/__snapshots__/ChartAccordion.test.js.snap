@@ -52,7 +52,7 @@ exports[`ChartAccordion test ChartAccordion should match snapshot 1`] = `
       <h4
         className="u-position-relative"
       >
-        Rows (letters, dates)
+        Rows (letters)
         <div
           className="accordion__arrow"
           role="presentation"

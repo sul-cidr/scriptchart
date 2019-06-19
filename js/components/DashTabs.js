@@ -39,12 +39,6 @@ import "react-tabs/style/react-tabs.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./index.css";
-
-export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
-//export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
-//export const VIEWER_ROOT = process.env.VIEWER_ROOT;
-
 const MAX_MIRADOR_WINDOWS = 4;
 
 class DashTabs extends React.Component {
@@ -57,16 +51,11 @@ class DashTabs extends React.Component {
       tabIndex: 0,
       rowLetters: [],
       columnManuscripts: [],
-<<<<<<< HEAD
       bookmarkURL: null,
-      bookmarkIsOpen: false
-=======
-      bookmarkURL: VIEWER_ROOT,
       bookmarkIsOpen: false,
       miradorState: {},
       manifestMiddleCanvases: {},
       allowUpdates: false
->>>>>>> 6f44293... Tab switches, Mirador window swapping and middle canvas selection all work
     };
 
     this.onManifestSelected = this.onManifestSelected.bind(this);
@@ -446,64 +435,70 @@ class DashTabs extends React.Component {
           bookmarkURL={this.state.bookmarkURL}
           closeModal={this.closeModal}
         />
-            <TabList>
-              <Tab>
-                <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
-                Scriptchart
-              </Tab>
-              <Tab>
-                <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
-                Manuscripts
-              </Tab>
-              <Tab
-                disabled={
-                  this.state.hiddenManuscripts.length == 0 &&
-                  this.state.hiddenLetters.length == 0
-                }
-              >
-                Hidden Items
-              </Tab>
-              <span>
-                <button className={"button is-info is-outlined"}
-                        style={{verticalAlign: "bottom"}}
-                        onClick={this.getBookmark}>
-                  Bookmark
-                </button>
-              </span>
-            </TabList>
-            <TabPanel>
-              <ScriptChart
-                onHiddenChange={this.onHiddenChange}
-                hiddenManuscripts={this.state.hiddenManuscripts}
-                hiddenLetters={this.state.hiddenLetters}
-                onManifestSelected={this.onManifestSelected}
-                formData={this.props.formData}
-                tableData={this.props.tableData}
-                columnManuscripts={columnManuscripts}
-                rowLetters={rowLetters}
-                onRowMove={this.onRowMove}
-                onColumnMove={this.onColumnMove}
-              />
-            </TabPanel>
-            <TabPanel>
-              <Provider store={this.state.miradorState}>
-                <MiradorViewer/>
-              </Provider>
-              {/*<Mirador config={{ id: "mirador",
-                                 manifests: manifestURIs,
-                                 windows=this.props.windowObjects
-                                 }} />*/}
-            </TabPanel>
-            <TabPanel>
-              <ChartAccordion
-                onHiddenChange={this.onHiddenChange}
-                columnManuscripts={columnManuscripts}
-                hiddenManuscripts={this.state.hiddenManuscripts}
-                hiddenLetters={this.state.hiddenLetters}
-              />
-            </TabPanel>
-            
-          </Tabs>
+        <TabList>
+          <Tab>
+            <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
+            Scriptchart
+          </Tab>
+          <Tab>
+            <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
+            Manuscripts
+          </Tab>
+          <Tab
+            disabled={
+              this.state.hiddenManuscripts.length == 0 &&
+              this.state.hiddenLetters.length == 0
+            }
+          >
+            Hidden Items
+          </Tab>
+          <span>
+            <button
+              className={"button is-info is-outlined"}
+              style={{ verticalAlign: "bottom" }}
+              onClick={() =>
+                this.setState({
+                  bookmarkIsOpen: true,
+                  bookmarkURL: this.getBookmark()
+                })
+              }
+            >
+              Bookmark
+            </button>
+          </span>
+        </TabList>
+        <TabPanel>
+          <ScriptChart
+            onHiddenChange={this.onHiddenChange}
+            hiddenManuscripts={this.state.hiddenManuscripts}
+            hiddenLetters={this.state.hiddenLetters}
+            onManifestSelected={this.onManifestSelected}
+            formData={this.props.formData}
+            tableData={this.props.tableData}
+            columnManuscripts={columnManuscripts}
+            rowLetters={rowLetters}
+            onRowMove={this.onRowMove}
+            onColumnMove={this.onColumnMove}
+          />
+        </TabPanel>
+        <TabPanel>
+          <Provider store={this.state.miradorState}>
+            <MiradorViewer/>
+          </Provider>
+          {/*<Mirador config={{ id: "mirador",
+                              manifests: manifestURIs,
+                              windows=this.props.windowObjects
+                              }} />*/}
+        </TabPanel>
+        <TabPanel>
+          <ChartAccordion
+            onHiddenChange={this.onHiddenChange}
+            columnManuscripts={columnManuscripts}
+            hiddenManuscripts={this.state.hiddenManuscripts}
+            hiddenLetters={this.state.hiddenLetters}
+          />
+        </TabPanel>
+      </Tabs>
     );
   }
 }

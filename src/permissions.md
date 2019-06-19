@@ -38,7 +38,7 @@ By permission of the The Morgan Library & Museum, New York
 *Sinai Syr. 30, 46*  
 Provided by the Library of Congress
 
-*St. Mark’s 7, St. Petersburg ns 1, NS 23*  
+*St. Mark’s 7*  
 Provided by the Stanford University Libraries
 
 *Vat. Syr. 001, 013-4, 021, 092-4, 104, 111-2, 116, 122, 137-8, 140, 142-3, 152, 160, 268, 623*  

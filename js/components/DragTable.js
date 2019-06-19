@@ -10,6 +10,9 @@ import React from "react";
 import * as Table from "reactabular-table";
 import * as dnd from "reactabular-dnd";
 
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 class DragTable extends React.Component {
 
   render() {
@@ -44,4 +47,8 @@ class DragTable extends React.Component {
   }
 }
 
+<<<<<<< HEAD
 export default DragTable;
+=======
+export default DragDropContext(HTML5Backend)(DragTable);
+>>>>>>> b28636b7bda38632b43015199a646a34598cf897

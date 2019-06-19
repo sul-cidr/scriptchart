@@ -39,6 +39,15 @@ import "react-tabs/style/react-tabs.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+<<<<<<< HEAD
+=======
+import "./index.css";
+
+export const VIEWER_ROOT = "https://sul-cidr.github.io/scriptchart/viewer/";
+//export const VIEWER_ROOT = "http://localhost:4000/scriptchart/viewer/";
+//export const VIEWER_ROOT = process.env.VIEWER_ROOT;
+
+>>>>>>> b28636b7bda38632b43015199a646a34598cf897
 const MAX_MIRADOR_WINDOWS = 4;
 
 class DashTabs extends React.Component {
@@ -51,7 +60,11 @@ class DashTabs extends React.Component {
       tabIndex: 0,
       rowLetters: [],
       columnManuscripts: [],
+<<<<<<< HEAD
       bookmarkURL: null,
+=======
+      bookmarkURL: VIEWER_ROOT,
+>>>>>>> b28636b7bda38632b43015199a646a34598cf897
       bookmarkIsOpen: false,
       miradorState: {},
       manifestMiddleCanvases: {},
@@ -342,6 +355,31 @@ class DashTabs extends React.Component {
     for (let manifestURL of manifestURIs) {
       miradorState.dispatch(actions.fetchManifest(manifestURL));
     }
+<<<<<<< HEAD
+=======
+
+    for (let m = 0; m < Math.min(MAX_MIRADOR_WINDOWS, manifestURIs.length); m++) {
+      let windowProps = {
+        manifestId: manifestURIs[m],
+        canvasIndex: 0,
+        collectionIndex: 0,
+        sideBarOpen: false,
+        view: "single",
+        thumbnailNavigationPosition: "off",
+        draggingEnabled: true,
+        layoutOrder: m+1
+      }
+      miradorState.dispatch(actions.addWindow(windowProps));
+    }
+
+    miradorState.dispatch(actions.setWorkspaceAddVisibility(false));
+
+    miradorState.subscribe(this.manifestListener);
+    this.setState({miradorState});
+  }
+
+  render() {
+>>>>>>> b28636b7bda38632b43015199a646a34598cf897
 
     for (let m = 0; m < Math.min(MAX_MIRADOR_WINDOWS, manifestURIs.length); m++) {
       let windowProps = {
@@ -435,6 +473,7 @@ class DashTabs extends React.Component {
           bookmarkURL={this.state.bookmarkURL}
           closeModal={this.closeModal}
         />
+<<<<<<< HEAD
         <TabList>
           <Tab>
             <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
@@ -499,6 +538,75 @@ class DashTabs extends React.Component {
           />
         </TabPanel>
       </Tabs>
+=======
+        <div className="column">
+          <Tabs
+            defaultFocus={true}
+            selectedIndex={this.state.tabIndex}
+            onSelect={(tabIndex, lastIndex, e) => { 
+              this.setState({ tabIndex });
+            }}
+          >
+            <TabList>
+              <Tab>
+                <FontAwesomeIcon className={"tab-icon"} icon="table" />{" "}
+                Scriptchart
+              </Tab>
+              <Tab>
+                <FontAwesomeIcon className={"tab-icon"} icon="image" />{" "}
+                Manuscripts
+              </Tab>
+              <Tab
+                disabled={
+                  this.state.hiddenManuscripts.length == 0 &&
+                  this.state.hiddenLetters.length == 0
+                }
+              >
+                Hidden Items
+              </Tab>
+              <span>
+                <button className={"button is-info is-outlined"}
+                        style={{verticalAlign: "bottom"}}
+                        onClick={this.getBookmark}>
+                  Bookmark
+                </button>
+              </span>
+            </TabList>
+            <TabPanel>
+              <ScriptChart
+                onHiddenChange={this.onHiddenChange}
+                hiddenManuscripts={this.state.hiddenManuscripts}
+                hiddenLetters={this.state.hiddenLetters}
+                onManifestSelected={this.onManifestSelected}
+                formData={this.props.formData}
+                tableData={this.props.tableData}
+                columnManuscripts={columnManuscripts}
+                rowLetters={rowLetters}
+                onRowMove={this.onRowMove}
+                onColumnMove={this.onColumnMove}
+              />
+            </TabPanel>
+            <TabPanel>
+              <Provider store={this.state.miradorState}>
+                <MiradorViewer/>
+              </Provider>
+              {/*<Mirador config={{ id: "mirador",
+                                 manifests: manifestURIs,
+                                 windows=this.props.windowObjects
+                                 }} />*/}
+            </TabPanel>
+            <TabPanel>
+              <ChartAccordion
+                onHiddenChange={this.onHiddenChange}
+                columnManuscripts={columnManuscripts}
+                hiddenManuscripts={this.state.hiddenManuscripts}
+                hiddenLetters={this.state.hiddenLetters}
+              />
+            </TabPanel>
+          </Tabs>
+        </div>
+      </div>
+>>>>>>> b28636b7bda38632b43015199a646a34598cf897
     );
   }
 }

@@ -35,8 +35,17 @@ import { DragDropContext } from "react-dnd";
 import ManuscriptForm from "./ManuscriptForm";
 import DashTabs from "./DashTabs";
 
+<<<<<<< HEAD
 export const API_ROOT = process.env.API_ROOT;
 export const IMAGE_SERVER_ROOT = process.env.IMAGE_SERVER_ROOT;
+=======
+/* The maximum number of letter examples to load (and possibly show) */
+const MAX_EXAMPLES = 5;
+
+ export const API_ROOT = "https://db.syriac.reclaim.hosting/api/";
+// export const API_ROOT = "http://localhost:8000/api/";
+// export const API_ROOT = process.env.API_ROOT;
+>>>>>>> b28636b7bda38632b43015199a646a34598cf897
 
 class App extends Component {
   constructor(props) {
@@ -325,4 +334,4 @@ class App extends Component {
   }
 }
 
-export default DragDropContext(HTML5Backend)(App);
+export default App;

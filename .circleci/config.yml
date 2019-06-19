@@ -1,0 +1,79 @@
+# CircleCI 2.0 configuration file
+#
+version: 2
+jobs:
+  build:
+
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+
+    working_directory: ~/repo
+
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "29:16:a8:fc:b4:9c:80:7d:d6:65:2a:0b:19:67:e7:e2"
+            - "64:32:ad:d6:0a:2e:e3:eb:82:81:f1:6b:34:32:b3:4d"
+
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - node-dependencies-{{ checksum "yarn.lock" }}
+            - node-dependencies-
+
+      - restore_cache:
+          keys:
+            - ruby-dependencies-{{ checksum "Gemfile.lock" }}
+            - ruby-dependencies-
+
+      - run:
+          name: jekyll setup
+          command: |
+            bundle install --path=vendor/bundle
+      
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: ruby-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run: yarn
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-dependencies-{{ checksum "yarn.lock" }}
+
+      # build app
+      - run:
+          name: set env vars and build
+          command: |
+            echo "API_ROOT=${API_ROOT}" >> .env
+            echo "IMAGE_SERVER_ROOT=${IMAGE_SERVER_ROOT}" >> .env
+            yarn build
+
+      # run tests!
+      - run: yarn test
+
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              yarn deploy
+            fi
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
+              sudo apt install rsync
+              rsync -avcz --exclude=.htaccess --delete _site/* syriacre@syriac.reclaim.hosting:dash/www_roots/frontend/scriptchart/
+            fi
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
+                - master

@@ -97,14 +97,19 @@ body:not(.contact-page) .post-content::after {
       text-align: center;
     }
 
-    &:last-child  > span {
+    &:last-child > span {
       margin-left: auto;
       text-align: right;
+
+      a {
+        display: flex;
+        align-items: center;
+      }
     }
   }
 
   img {
-    display: inline-block;
+    display: block;
     height: 25px;
     margin-left: 4px;
     vertical-align: middle;

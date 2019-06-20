@@ -13,7 +13,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "29:16:a8:fc:b4:9c:80:7d:d6:65:2a:0b:19:67:e7:e2"
-            - "64:32:ad:d6:0a:2e:e3:eb:82:81:f1:6b:34:32:b3:4d"
 
       - checkout
 
@@ -64,7 +63,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
               sudo apt install rsync
-              rsync -avcz --exclude=.htaccess --delete _site/* syriacre@syriac.reclaim.hosting:dash/www_roots/frontend/scriptchart/
+              rsync -avcz --exclude=.htaccess --delete _site/* syriacre@syriac.reclaim.hosting:dash/www_roots/frontend/
             fi
 
 workflows:

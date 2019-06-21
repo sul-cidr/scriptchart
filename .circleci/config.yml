@@ -1,0 +1,83 @@
+# CircleCI 2.0 configuration file
+# Build and deploy DASH - Digital Analysis of Syriac Handwriting
+version: 2
+jobs:
+  build:
+
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - node-dependencies-{{ checksum "yarn.lock" }}
+            - node-dependencies-
+      - restore_cache:
+          keys:
+            - ruby-dependencies-v2-{{ checksum "Gemfile.lock" }}
+            - ruby-dependencies-v2-
+
+      - run: # Install Ruby dependencies if not cached
+          name: Bundle Install
+          command: bundle check --path ~/repo/vendor/bundle || bundle install --path ~/repo/vendor/bundle
+      
+      - save_cache:
+          key: ruby-dependencies-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/repo/vendor/bundle
+
+      - run: yarn
+
+      - save_cache:
+          key: node-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/repo/node_modules
+
+      - run:
+          name: Create .env file
+          command: |
+            echo "API_ROOT=${API_ROOT}" >> .env
+            echo "IMAGE_SERVER_ROOT=${IMAGE_SERVER_ROOT}" >> .env
+
+      - add_ssh_keys:
+          fingerprints:
+            - "29:16:a8:fc:b4:9c:80:7d:d6:65:2a:0b:19:67:e7:e2"
+
+      - run:
+          name: Build and test, if deploying to master
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # Build the app
+              yarn build
+              # Run tests!
+              yarn test
+            fi
+
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              git config --global user.email $GH_EMAIL
+              git config --global user.name $GH_NAME
+              yarn deploy
+            fi
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
+              sudo apt install rsync
+              rsync -avcz --exclude=.htaccess --delete _site/* syriacre@syriac.reclaim.hosting:dash/www_roots/frontend/
+            fi
+
+workflows:
+  version: 2
+  install_build_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
+                - master

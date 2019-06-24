@@ -1,0 +1,123 @@
+
+html { overflow: hidden; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page-content {
+  flex-grow: 1;
+  height: 1px;
+}
+
+.post {
+  padding: 1em 30px;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-content {
+  flex-grow: 1;
+}
+
+body.contact-page .post-content {
+  display: flex;
+}
+
+body:not(.contact-page) .post-content::after {
+  content: "";
+  display: block;
+  height: 4em;
+}
+
+.scriptchart-app {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+}
+
+.scriptchart {
+  flex-grow: 1;
+  margin: 10px;
+  width: 1px;
+
+  .react-tabs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  [role="tabpanel"] {
+    overflow: auto;
+    height: 100%;
+  }
+}
+
+.sidebar {
+  width: 20%;
+  flex-shrink: 0;
+  margin: 10px !important;  // higher specificity of .box:not(:last-child) applies bigger bottom margin otherwise
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.site-footer {
+  background-color: $navbar-background-color;
+  display: flex;
+  min-height: 35px;
+  align-items: center;
+  color: $navbar-item-color;
+  padding: 0 1%;
+  line-height: 1;
+
+  a {
+    color: $navbar-item-color;
+
+    &:hover {
+      -webkit-filter: drop-shadow(0 0 2px white);
+      filter: drop-shadow(0 0 2px white);
+    }
+  }
+
+  div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    &:first-child > span {
+      margin-right: auto;
+    }
+
+    &:nth-child(2) {
+      text-align: center;
+    }
+
+    &:last-child > span {
+      margin-left: auto;
+      text-align: right;
+
+      a {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  img {
+    display: block;
+    height: 25px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+}
+
+.hero-foot {
+  .site-footer {
+    background-color: $navbar-color-transparent;
+  }
+}

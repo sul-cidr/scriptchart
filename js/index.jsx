@@ -1,11 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import MiradorViewer from './components/MiradorViewer';
+import App from "./components/App";
 
-ReactDOM.render(
-  <MiradorViewer />,
-  document.getElementById('app')
-);
-
-module.hot.accept();
+ReactDOM.render(<App />, document.getElementById("content"));

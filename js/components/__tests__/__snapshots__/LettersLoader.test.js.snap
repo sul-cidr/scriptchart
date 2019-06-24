@@ -1,0 +1,582 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LettersLoader test LettersLoader should match snapshot 1`] = `
+<div
+  className="buttons are-small"
+>
+  <span
+    className="button is-success"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Alaph (Angular)"
+    >
+      ܐ
+    </div>
+  </span>
+  <span
+    className="button is-success"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "SertoJerusalem",
+        }
+      }
+      title="Alaph (Round)"
+    >
+      ܐ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Beth"
+    >
+      ܒ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Gamal"
+    >
+      ܓ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Dalath (Angular)"
+    >
+      ܕ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "SertoJerusalem",
+        }
+      }
+      title="Dalath (Round)"
+    >
+      ܕ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="He (Angular)"
+    >
+      ܗ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "SertoJerusalem",
+        }
+      }
+      title="He (Round)"
+    >
+      ܗ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Waw"
+    >
+      ܘ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Zain"
+    >
+      ܙ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Heth"
+    >
+      ܚ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Teth"
+    >
+      ܛ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "verticalAlign": "center",
+        }
+      }
+      title="Yudh (Connected)"
+    >
+      <img
+        className="button-svg "
+        src="../assets/font_glyphs/yudh_connected.svg"
+      />
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Yudh (Stand-alone)"
+    >
+      ܝ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "verticalAlign": "center",
+        }
+      }
+      title="Kaph"
+    >
+      <img
+        className="button-svg "
+        src="../assets/font_glyphs/kaph.svg"
+      />
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Kaph (Final)"
+    >
+      ܟ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Lamadh (Final, open)"
+    >
+      ܠ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "verticalAlign": "center",
+        }
+      }
+      title="Lamadh"
+    >
+      <img
+        className="button-svg "
+        src="../assets/font_glyphs/lamadh.svg"
+      />
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "SertoJerusalem",
+        }
+      }
+      title="Lamadh (Final, closed)"
+    >
+      ܠ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "verticalAlign": "center",
+        }
+      }
+      title="Mim"
+    >
+      <img
+        className="button-svg "
+        src="../assets/font_glyphs/mim.svg"
+      />
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Mim (Final)"
+    >
+      ܡ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "verticalAlign": "center",
+        }
+      }
+      title="Nun"
+    >
+      <img
+        className="button-svg "
+        src="../assets/font_glyphs/nun.svg"
+      />
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "verticalAlign": "center",
+        }
+      }
+      title="Nun (Final, connected)"
+    >
+      <img
+        className="button-svg "
+        src="../assets/font_glyphs/nun_final.svg"
+      />
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Nun (Final, unconnected)"
+    >
+      ܢ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Semkath"
+    >
+      ܣ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Ayin"
+    >
+      ܥ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Pe"
+    >
+      ܦ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Sadhe"
+    >
+      ܨ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Qaph"
+    >
+      ܩ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Rish (Angular)"
+    >
+      ܪ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "SertoJerusalem",
+        }
+      }
+      title="Rish (Round)"
+    >
+      ܪ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Shin"
+    >
+      ܫ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "EstrangeloEdessa",
+        }
+      }
+      title="Taw (Looped)"
+    >
+      ܬ
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "verticalAlign": "center",
+        }
+      }
+      title="Taw (Triangular)"
+    >
+      <img
+        className="button-svg "
+        src="../assets/font_glyphs/taw_triangular.svg"
+      />
+    </div>
+  </span>
+  <span
+    className="button is-outlined"
+    onClick={[Function]}
+  >
+    <div
+      className="button-letter"
+      style={
+        Object {
+          "fontFamily": "SertoJerusalem",
+        }
+      }
+      title="Taw (L-shaped)"
+    >
+      ܬ
+    </div>
+  </span>
+</div>
+`;

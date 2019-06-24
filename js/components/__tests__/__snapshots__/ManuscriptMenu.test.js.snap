@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManuscriptMenu test ManuscriptMenu should match snapshot 1`] = `
+<div
+  className="field"
+>
+  <div
+    className="control"
+    style={
+      Object {
+        "marginBottom": 5,
+      }
+    }
+  >
+    <label
+      className="control"
+      htmlFor="selectedShelfmarks"
+    >
+      Select manuscripts:
+       
+    </label>
+    <span
+      className="button is-small"
+      onClick={[Function]}
+    >
+      All/None
+    </span>
+  </div>
+  <div
+    className="select is-multiple"
+  >
+    <select
+      id="selectedShelfmarks"
+      multiple={true}
+      name="selectedShelfmarks"
+      onChange={[Function]}
+      size="8"
+      type="string"
+    >
+      <option
+        value="Vat. Syr. 092"
+      >
+        Vat. Syr. 092
+         (
+        823
+        )
+      </option>
+      <option
+        value="Vat. Syr. 112"
+      >
+        Vat. Syr. 112
+         (
+        552
+        )
+      </option>
+      <option
+        value="Vat. Syr. 140"
+      >
+        Vat. Syr. 140
+         (
+        528
+        )
+      </option>
+      <option
+        value="BL. Add. 17224"
+      >
+        BL. Add. 17224
+         (
+        1173
+        )
+      </option>
+      <option
+        value="BL. Add. 12144"
+      >
+        BL. Add. 12144
+         (
+        1081
+        )
+      </option>
+      <option
+        value="BL. Add. 12134"
+      >
+        BL. Add. 12134
+         (
+        697
+        )
+      </option>
+      <option
+        value="BL. Add. 14445"
+      >
+        BL. Add. 14445
+         (
+        532
+        )
+      </option>
+      <option
+        value="BL. Add. 12146"
+      >
+        BL. Add. 12146
+         (
+        1007
+        )
+      </option>
+      <option
+        value="BL. Or. 8732"
+      >
+        BL. Or. 8732
+         (
+        770
+        )
+      </option>
+      <option
+        value="BL. Or. 8606"
+      >
+        BL. Or. 8606
+         (
+        723
+        )
+      </option>
+      <option
+        value="BL. Add. 17102"
+      >
+        BL. Add. 17102
+         (
+        598-599
+        )
+      </option>
+      <option
+        value="BL. Add. 17107"
+      >
+        BL. Add. 17107
+         (
+        540-541
+        )
+      </option>
+      <option
+        value="BL. Add. 12175"
+      >
+        BL. Add. 12175
+         (
+        533-534
+        )
+      </option>
+    </select>
+  </div>
+  <div
+    className="control"
+  >
+    <p>
+      Order manuscripts by
+    </p>
+    <label
+      className="radio"
+      htmlFor="shelfmarkSort"
+    >
+      <input
+        checked={true}
+        id="shelfmarkSort"
+        onChange={[Function]}
+        type="radio"
+        value="shelfmark"
+      />
+       
+      Shelfmark |
+    </label>
+    <label
+      className="radio"
+      htmlFor="dateSort"
+    >
+      <input
+        checked={false}
+        id="dateSort"
+        onChange={[Function]}
+        type="radio"
+        value="date"
+      />
+       
+      Date
+    </label>
+  </div>
+</div>
+`;

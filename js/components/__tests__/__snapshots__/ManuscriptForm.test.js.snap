@@ -1,0 +1,1005 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManuscriptForm test ManuscriptForm should match snapshot 1`] = `
+<form
+  className="manuscript-form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field"
+  >
+    <div
+      className="control"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }
+    >
+      <label
+        className="control"
+        htmlFor="selectedShelfmarks"
+      >
+        Select manuscripts:
+         
+      </label>
+      <span
+        className="button is-small"
+        onClick={[Function]}
+      >
+        All/None
+      </span>
+    </div>
+    <div
+      className="select is-multiple"
+    >
+      <select
+        id="selectedShelfmarks"
+        multiple={true}
+        name="selectedShelfmarks"
+        onChange={[Function]}
+        size="8"
+        type="string"
+        value={
+          Array [
+            "Vat. Syr. 112",
+            "Vat. Syr. 140",
+            "BL. Add. 17224",
+          ]
+        }
+      >
+        <option
+          value="Vat. Syr. 092"
+        >
+          Vat. Syr. 092
+           (
+          823
+          )
+        </option>
+        <option
+          value="Vat. Syr. 112"
+        >
+          Vat. Syr. 112
+           (
+          552
+          )
+        </option>
+        <option
+          value="Vat. Syr. 140"
+        >
+          Vat. Syr. 140
+           (
+          528
+          )
+        </option>
+        <option
+          value="BL. Add. 17224"
+        >
+          BL. Add. 17224
+           (
+          1173
+          )
+        </option>
+        <option
+          value="BL. Add. 12144"
+        >
+          BL. Add. 12144
+           (
+          1081
+          )
+        </option>
+        <option
+          value="BL. Add. 12134"
+        >
+          BL. Add. 12134
+           (
+          697
+          )
+        </option>
+        <option
+          value="BL. Add. 14445"
+        >
+          BL. Add. 14445
+           (
+          532
+          )
+        </option>
+        <option
+          value="BL. Add. 12146"
+        >
+          BL. Add. 12146
+           (
+          1007
+          )
+        </option>
+        <option
+          value="BL. Or. 8732"
+        >
+          BL. Or. 8732
+           (
+          770
+          )
+        </option>
+        <option
+          value="BL. Or. 8606"
+        >
+          BL. Or. 8606
+           (
+          723
+          )
+        </option>
+        <option
+          value="BL. Add. 17102"
+        >
+          BL. Add. 17102
+           (
+          598-599
+          )
+        </option>
+        <option
+          value="BL. Add. 17107"
+        >
+          BL. Add. 17107
+           (
+          540-541
+          )
+        </option>
+        <option
+          value="BL. Add. 12175"
+        >
+          BL. Add. 12175
+           (
+          533-534
+          )
+        </option>
+      </select>
+    </div>
+    <div
+      className="control"
+    >
+      <p>
+        Order manuscripts by
+      </p>
+      <label
+        className="radio"
+        htmlFor="shelfmarkSort"
+      >
+        <input
+          checked={true}
+          id="shelfmarkSort"
+          onChange={[Function]}
+          type="radio"
+          value="shelfmark"
+        />
+         
+        Shelfmark |
+      </label>
+      <label
+        className="radio"
+        htmlFor="dateSort"
+      >
+        <input
+          checked={false}
+          id="dateSort"
+          onChange={[Function]}
+          type="radio"
+          value="date"
+        />
+         
+        Date
+      </label>
+    </div>
+  </div>
+  <div
+    className="field letters-select"
+  >
+    <div
+      className="control"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }
+    >
+      <label
+        className="control"
+      >
+        Select letters: 
+      </label>
+      <span
+        className="button is-small"
+        onClick={[Function]}
+      >
+        All/None
+      </span>
+    </div>
+    <div
+      className="buttons are-small"
+    >
+      <span
+        className="button is-success"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Alaph (Angular)"
+        >
+          ܐ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "SertoJerusalem",
+            }
+          }
+          title="Alaph (Round)"
+        >
+          ܐ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Beth"
+        >
+          ܒ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Gamal"
+        >
+          ܓ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Dalath (Angular)"
+        >
+          ܕ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "SertoJerusalem",
+            }
+          }
+          title="Dalath (Round)"
+        >
+          ܕ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="He (Angular)"
+        >
+          ܗ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "SertoJerusalem",
+            }
+          }
+          title="He (Round)"
+        >
+          ܗ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Waw"
+        >
+          ܘ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Zain"
+        >
+          ܙ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Heth"
+        >
+          ܚ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Teth"
+        >
+          ܛ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          style={
+            Object {
+              "verticalAlign": "center",
+            }
+          }
+          title="Yudh (Connected)"
+        >
+          <img
+            className="button-svg "
+            src="../assets/font_glyphs/yudh_connected.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Yudh (Stand-alone)"
+        >
+          ܝ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          style={
+            Object {
+              "verticalAlign": "center",
+            }
+          }
+          title="Kaph"
+        >
+          <img
+            className="button-svg "
+            src="../assets/font_glyphs/kaph.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Kaph (Final)"
+        >
+          ܟ
+        </div>
+      </span>
+      <span
+        className="button is-success"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Lamadh (Final, open)"
+        >
+          ܠ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          style={
+            Object {
+              "verticalAlign": "center",
+            }
+          }
+          title="Lamadh"
+        >
+          <img
+            className="button-svg "
+            src="../assets/font_glyphs/lamadh.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "SertoJerusalem",
+            }
+          }
+          title="Lamadh (Final, closed)"
+        >
+          ܠ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          style={
+            Object {
+              "verticalAlign": "center",
+            }
+          }
+          title="Mim"
+        >
+          <img
+            className="button-svg "
+            src="../assets/font_glyphs/mim.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Mim (Final)"
+        >
+          ܡ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          style={
+            Object {
+              "verticalAlign": "center",
+            }
+          }
+          title="Nun"
+        >
+          <img
+            className="button-svg "
+            src="../assets/font_glyphs/nun.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          style={
+            Object {
+              "verticalAlign": "center",
+            }
+          }
+          title="Nun (Final, connected)"
+        >
+          <img
+            className="button-svg "
+            src="../assets/font_glyphs/nun_final.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Nun (Final, unconnected)"
+        >
+          ܢ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Semkath"
+        >
+          ܣ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Ayin"
+        >
+          ܥ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Pe"
+        >
+          ܦ
+        </div>
+      </span>
+      <span
+        className="button is-success"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Sadhe"
+        >
+          ܨ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Qaph"
+        >
+          ܩ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Rish (Angular)"
+        >
+          ܪ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "SertoJerusalem",
+            }
+          }
+          title="Rish (Round)"
+        >
+          ܪ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Shin"
+        >
+          ܫ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "EstrangeloEdessa",
+            }
+          }
+          title="Taw (Looped)"
+        >
+          ܬ
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          style={
+            Object {
+              "verticalAlign": "center",
+            }
+          }
+          title="Taw (Triangular)"
+        >
+          <img
+            className="button-svg "
+            src="../assets/font_glyphs/taw_triangular.svg"
+          />
+        </div>
+      </span>
+      <span
+        className="button is-outlined"
+        onClick={[Function]}
+      >
+        <div
+          className="button-letter"
+          style={
+            Object {
+              "fontFamily": "SertoJerusalem",
+            }
+          }
+          title="Taw (L-shaped)"
+        >
+          ܬ
+        </div>
+      </span>
+    </div>
+  </div>
+  <div
+    className="field is-horizontal flex-row"
+  >
+    <label
+      className="control"
+      htmlFor="letterExamples"
+    >
+      Number of examples:
+       
+    </label>
+    <div
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
+        }
+      }
+    >
+      <select
+        id="letterExamples"
+        name="letterExamples"
+        onChange={[Function]}
+        type="number"
+        value={3}
+      >
+        <option>
+          1
+        </option>
+        <option>
+          3
+        </option>
+        <option>
+          5
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="control image-types"
+  >
+    <p>
+      Show letter images:
+    </p>
+    <label
+      className="checkbox"
+      htmlFor="showBinarized"
+    >
+      <input
+        checked={true}
+        id="showBinarized"
+        name="showBinarized"
+        onChange={[Function]}
+        type="checkbox"
+      />
+       Trimmed |
+    </label>
+    <label
+      className="checkbox"
+      htmlFor="showCropped"
+      style={
+        Object {
+          "marginLeft": "8px",
+        }
+      }
+    >
+      <input
+        checked={false}
+        id="showCropped"
+        name="showCropped"
+        onChange={[Function]}
+        type="checkbox"
+      />
+       Untrimmed
+    </label>
+  </div>
+  <div
+    className="field is-horizontal flex-row"
+  >
+    <label
+      className="control"
+      htmlFor="imageSize"
+    >
+      Image size:
+       
+    </label>
+    <div
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
+        }
+      }
+    >
+      <select
+        id="imageSize"
+        name="imageSize"
+        onChange={[Function]}
+        type="string"
+        value="Small"
+      >
+        <option>
+          Small
+        </option>
+        <option>
+          Medium
+        </option>
+        <option>
+          Large
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="control"
+  >
+    Letter in context:
+    <ul>
+      <li>
+        <label
+          className="radio"
+          htmlFor="hoverContext"
+        >
+          <input
+            checked={true}
+            id="hoverContext"
+            name="contextMode"
+            onChange={[Function]}
+            type="radio"
+            value="hover"
+          />
+           
+          Show on hover
+        </label>
+      </li>
+      <li>
+        <label
+          className="radio"
+          htmlFor="clickContext"
+        >
+          <input
+            checked={false}
+            id="clickContext"
+            name="contextMode"
+            onChange={[Function]}
+            type="radio"
+            value="click"
+          />
+           
+          Show on click
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="field is-horizontal flex-row"
+  >
+    <label
+      className="control"
+      htmlFor="contextSize"
+    >
+      Context size:
+       
+    </label>
+    <div
+      className="select is-small"
+      style={
+        Object {
+          "marginLeft": "5px",
+        }
+      }
+    >
+      <select
+        id="contextSize"
+        name="contextSize"
+        onChange={[Function]}
+        type="string"
+        value="large"
+      >
+        <option
+          value="small"
+        >
+          Small
+        </option>
+        <option
+          value="med"
+        >
+          Medium
+        </option>
+        <option
+          value="large"
+        >
+          Large
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <div
+      className="control"
+    >
+      <button
+        className="button is-link"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
+`;

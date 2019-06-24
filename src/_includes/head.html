@@ -2,10 +2,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  {%- seo -%} <link rel="stylesheet" href="{{
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "/apple-touch-icon.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon-32x32.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ "/favicon-16x16.png" | relative_url }}">
+  <link rel="manifest" href="{{ "/site.webmanifest" | relative_url }}">
+  <link rel="mask-icon" href="{{ "/safari-pinned-tab.svg" | relative_url }}" color="#8c1515">
+  <meta name="apple-mobile-web-app-title" content="DASH">
+  <meta name="application-name" content="DASH">
+  <meta name="msapplication-TileColor" content="#8c1515">
+  <meta name="theme-color" content="#ffffff">
+
+  {%- seo -%}
+  <link rel="stylesheet" href="{{
     "/assets/main.css" | relative_url
-  }}"> <link rel="stylesheet" href="{{
+  }}">
+  <link rel="stylesheet" href="{{
     "/mirador/css/mirador-combined.min.css" | relative_url
-  }}"> {%- feed_meta -%} {%- if jekyll.environment == 'production' and
+  }}">
+
+  {%- if jekyll.environment == 'prod' and
   site.google_analytics -%} {%- include google-analytics.html -%} {%- endif -%}
 </head>

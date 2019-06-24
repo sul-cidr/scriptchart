@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DashTabs test DashTabs should match snapshot 1`] = `
+<div
+  className="react-tabs"
+  data-tabs={true}
+  onClick={[Function]}
+  onKeyDown={[Function]}
+>
+  <ul
+    className="react-tabs__tab-list"
+    role="tablist"
+  >
+    <li
+      aria-controls="react-tabs-1"
+      aria-disabled="false"
+      aria-selected="true"
+      className="react-tabs__tab react-tabs__tab--selected"
+      id="react-tabs-0"
+      role="tab"
+      tabIndex="0"
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-table fa-w-16 tab-icon"
+        data-icon="table"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"
+          fill="currentColor"
+          style={Object {}}
+        />
+      </svg>
+       Scriptchart
+    </li>
+    <li
+      aria-controls="react-tabs-3"
+      aria-disabled="false"
+      aria-selected="false"
+      className="react-tabs__tab"
+      id="react-tabs-2"
+      role="tab"
+      tabIndex={null}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-image fa-w-16 tab-icon"
+        data-icon="image"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M464 448H48c-26.51 0-48-21.49-48-48V112c0-26.51 21.49-48 48-48h416c26.51 0 48 21.49 48 48v288c0 26.51-21.49 48-48 48zM112 120c-30.928 0-56 25.072-56 56s25.072 56 56 56 56-25.072 56-56-25.072-56-56-56zM64 384h384V272l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L208 320l-55.515-55.515c-4.686-4.686-12.284-4.686-16.971 0L64 336v48z"
+          fill="currentColor"
+          style={Object {}}
+        />
+      </svg>
+       Manuscripts
+    </li>
+    <li
+      aria-controls="react-tabs-5"
+      aria-disabled="true"
+      aria-selected="false"
+      className="react-tabs__tab react-tabs__tab--disabled"
+      id="react-tabs-4"
+      role="tab"
+      tabIndex={null}
+    >
+      Hidden Items
+    </li>
+    <span>
+      <button
+        className="button is-info is-outlined"
+        onClick={[Function]}
+        style={
+          Object {
+            "verticalAlign": "bottom",
+          }
+        }
+      >
+        Bookmark
+      </button>
+    </span>
+  </ul>
+  <div
+    aria-labelledby="react-tabs-0"
+    className="react-tabs__tab-panel react-tabs__tab-panel--selected"
+    id="react-tabs-1"
+    role="tabpanel"
+  />
+  <div
+    aria-labelledby="react-tabs-2"
+    className="react-tabs__tab-panel"
+    id="react-tabs-3"
+    role="tabpanel"
+  />
+  <div
+    aria-labelledby="react-tabs-4"
+    className="react-tabs__tab-panel"
+    id="react-tabs-5"
+    role="tabpanel"
+  />
+</div>
+`;

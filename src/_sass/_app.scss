@@ -1,0 +1,52 @@
+.arrow-button:hover {
+    color: hsl(217, 71%, 53%);
+}
+
+.sidebar-closed {
+    display: none;
+}
+
+.sidebar-open {
+    display: block;
+}
+
+.closed-menu {
+    padding-bottom: 2.25rem;
+    margin-top: .75rem;
+}
+
+.closed-menu:hover {
+    color: hsl(217, 71%, 53%);
+}
+
+.small-padding {
+    padding: 10px 10px 10px 10px;
+}
+
+.bookmark-modal {
+    font-size: 12px;
+}
+.bookmark-modal > .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 18px;
+    padding: 5px;
+}
+.bookmark-modal > .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    font-size: 24px;
+    background: #ffffff;
+}
+
+.bookmarktext {
+    border: ridge 1px;
+    padding: 5px;
+    width: 100%;
+    min-height: 5em;
+    overflow: auto;
+}

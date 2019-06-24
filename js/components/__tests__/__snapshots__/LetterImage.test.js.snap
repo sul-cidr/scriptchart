@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LetterImage test LetterImage should match snapshot 1`] = `
+<div
+  className="letter-block"
+>
+  <div
+    className="letter-column"
+  >
+    
+    
+  </div>
+</div>
+`;

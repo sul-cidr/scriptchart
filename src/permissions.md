@@ -28,7 +28,7 @@ License: <http://nrs.harvard.edu/urn-3:hul.ois:hlviewerterms>
 *Mingana 42*  
 By permission of the Cadbury Research Library: Special Collections, University of Birmingham
 
-*NL. Russia Syr. NS 1, 23*
+*NL. Russia Syr. NS 1, 23*  
 By permission of the National Library of Russia
 
 *Par. Syr. 27, 69, 70, 154, 342*  

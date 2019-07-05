@@ -43,7 +43,8 @@ Provided by the Library of Congress
 
 *St. Mark’s 7*  
 Images from Saint Mark's Syriac Orthodox Monastery, Jerusalem, MS 129, provided by the Hill Museum & Manuscript Library,
-Saint John's University. Used with permission.
+Saint John's University.  
+Used with permission.
 
 *Vat. Syr. 001, 013-4, 021, 092-4, 104, 111-2, 116, 122, 137-8, 140, 142-3, 152, 160, 268, 623*  
 Images Copyright Biblioteca Apostolica Vaticana

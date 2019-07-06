@@ -28,6 +28,9 @@ License: <http://nrs.harvard.edu/urn-3:hul.ois:hlviewerterms>
 *Mingana 42*  
 By permission of the Cadbury Research Library: Special Collections, University of Birmingham
 
+*NL. Russia Syr. NS 1, 23*  
+By permission of the National Library of Russia
+
 *Par. Syr. 27, 69, 70, 154, 342*  
 By permission of the Bibliothèque nationale de France  
 License: <https://gallica.bnf.fr/html/und/conditions-dutilisation-des-contenus-de-gallica>
@@ -39,7 +42,9 @@ By permission of the The Morgan Library & Museum, New York
 Provided by the Library of Congress
 
 *St. Mark’s 7*  
-Provided by the Stanford University Libraries
+Images from Saint Mark's Syriac Orthodox Monastery, Jerusalem, MS 129, provided by the Hill Museum & Manuscript Library,
+Saint John's University.  
+Used with permission.
 
 *Vat. Syr. 001, 013-4, 021, 092-4, 104, 111-2, 116, 122, 137-8, 140, 142-3, 152, 160, 268, 623*  
 Images Copyright Biblioteca Apostolica Vaticana

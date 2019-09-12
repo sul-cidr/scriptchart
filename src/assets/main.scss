@@ -121,3 +121,16 @@ $primary: $navbar-background-color;
 .help-image-lg {
   max-height: 60vh;
 }
+
+#contact-message {
+  background-color: azure;
+  transform: translateX(-25%);
+  width: 10rem;
+  >.navbar-item {
+    color: black;
+    padding: 0 10px;
+    white-space: normal;
+    flex-direction: column;
+    text-align: center;
+  }
+}

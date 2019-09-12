@@ -34,6 +34,30 @@
           });
         });
       }
+
+      // Get the dropdown elements, to hide the Contact callout when About is hovered
+      const $navbarDropdowns = Array.prototype.slice.call(document.querySelectorAll('.has-dropdown'), 0);
+      // Assumption: there's at most one callout message on the navbar
+      const $navbarCallout = document.querySelector('.has-callout');
+
+      if ($navbarCallout !== null) {
+
+        $navbarDropdowns.forEach(el => {
+          el.addEventListener('mouseover', () => {
+            console.log("dropdown hovered");
+            if (!el.classList.contains('has-callout')) {
+              $navbarCallout.classList.remove('is-active');
+            }
+          });
+          el.addEventListener('mouseleave', () => {
+            console.log("dropdown left");
+            if (!el.classList.contains('has-callout')) {
+              $navbarCallout.classList.add('is-active');
+            }
+          });
+        });
+      }
+
     });
   </script>
 </body>

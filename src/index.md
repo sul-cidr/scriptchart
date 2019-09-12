@@ -29,9 +29,16 @@ layout: home
                             {% endfor %}
                         </div>
                     </div>
-                    <a class="navbar-item" href="./contact/">
-                        Contact
-                    </a>
+                    <div class="navbar-item has-callout has-dropdown is-active">
+                        <a class="navbar-item" href="./contact/">
+                            Contact
+                        </a>
+                        <div id="contact-message" class="navbar-dropdown">
+                            <a class="navbar-item">
+                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+<p>After using the DASH viewer, please leave a comment here.</p></a>
+                        </div>
+                    </div>
                     <a class="navbar-item" href="./participants">
                         Participants
                     </a>

@@ -44,13 +44,11 @@
 
         $navbarDropdowns.forEach(el => {
           el.addEventListener('mouseover', () => {
-            console.log("dropdown hovered");
             if (!el.classList.contains('has-callout')) {
               $navbarCallout.classList.remove('is-active');
             }
           });
           el.addEventListener('mouseleave', () => {
-            console.log("dropdown left");
             if (!el.classList.contains('has-callout')) {
               $navbarCallout.classList.add('is-active');
             }

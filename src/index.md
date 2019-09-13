@@ -34,9 +34,10 @@ layout: home
                             Contact
                         </a>
                         <div id="contact-message" class="navbar-dropdown">
-                            <a class="navbar-item">
-                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
-<p>After using the DASH viewer, please leave a comment here.</p></a>
+                            <a class="navbar-item" href="./contact/">
+                              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                              <p>After using the DASH viewer, please leave a comment here.</p>
+                            </a>
                         </div>
                     </div>
                     <a class="navbar-item" href="./participants">

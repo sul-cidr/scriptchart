@@ -123,9 +123,14 @@ $primary: $navbar-background-color;
 }
 
 #contact-message {
-  background-color: azure;
+  background-color: $off-white;
+  opacity: 0.8;
   transform: translateX(-25%);
   width: 10rem;
+  :hover {
+    background-color: $off-white;
+    opacity: 0.8;
+  }
   >.navbar-item {
     color: black;
     padding: 0 10px;

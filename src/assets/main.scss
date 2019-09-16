@@ -124,9 +124,9 @@ $primary: $navbar-background-color;
 
 #contact-message {
   background-color: $off-white;
-  opacity: 0.8;
   transform: translateX(-25%);
   width: 10rem;
+  opacity: 0.8;
 
   :hover {
     background-color: $off-white;
@@ -139,11 +139,4 @@ $primary: $navbar-background-color;
     flex-direction: column;
     text-align: center;
   }
-}
-
-@keyframes cssAnimation {
-    100% {opacity: 0;}
-}
-@-webkit-keyframes cssAnimation {
-    100% {opacity: 0;}
 }

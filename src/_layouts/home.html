@@ -35,16 +35,17 @@
         });
       }
 
-      // Get the dropdown elements, to hide the Contact callout when About is hovered
+      // Get all dropdown elements, to hide the Contact callout when About is hovered
       const $navbarDropdowns = Array.prototype.slice.call(document.querySelectorAll('.has-dropdown'), 0);
       // Assumption: there's at most one callout message on the navbar
       const $navbarCallout = document.querySelector('.has-callout');
       const CALLOUT_TIMEOUT = 4000;
 
+      /* Not great, but CSS solutions that involve waiting for a fadeout
+       * transition to complete before disabling the dropdown seem
+       * even less desirable. */
       function removeCallout(navbarCallout) {
-
         var fadeTarget = document.getElementById('contact-message');
-
         setTimeout(function() {
           var fadeEffect = setInterval(function () {
             if (!fadeTarget.style.opacity) {
@@ -60,32 +61,34 @@
         }, CALLOUT_TIMEOUT);
       }
 
+      // Just in case the front page doesn't have a callout, for some reason
       if ($navbarCallout !== null) {
-
-        //setTimeout(function(){ $navbarCallout.classList.remove('is-active'); }, CALLOUT_TIMEOUT);
         
+        // Start the timer to remove the callout
         removeCallout($navbarCallout);
         $contactMessage = document.getElementById('contact-message');
 
         $navbarDropdowns.forEach(el => {
           el.addEventListener('mouseover', () => {
+            // Disable the callout on mouseover of the About dropdown
             if (!el.classList.contains('has-callout')) {
               $navbarCallout.classList.remove('is-active');
-            }
-            else {
+            } else {
+              // Re-display the callout on mousover if it has been turned off
               if (!$navbarCallout.classList.contains('is-active')) {
                 $navbarCallout.classList.add('is-active');
                 $contactMessage.style.opacity = .8;
               }
-              removeCallout($navbarCallout);
             }
           });
           el.addEventListener('mouseleave', () => {
+            // Re-enable the callout on mouseleave of the About dropdown
             if (!el.classList.contains('has-callout')) {
               $navbarCallout.classList.add('is-active');
               $contactMessage.style.opacity = .8;
-              removeCallout($navbarCallout);
             }
+            // Begin callout removal timer after any menu mouseleave
+            removeCallout($navbarCallout);
           });
         });
       }

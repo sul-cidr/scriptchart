@@ -127,9 +127,10 @@ $primary: $navbar-background-color;
   opacity: 0.8;
   transform: translateX(-25%);
   width: 10rem;
+
   :hover {
     background-color: $off-white;
-    opacity: 0.8;
+    opacity: 1;
   }
   >.navbar-item {
     color: black;
@@ -138,4 +139,11 @@ $primary: $navbar-background-color;
     flex-direction: column;
     text-align: center;
   }
+}
+
+@keyframes cssAnimation {
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    100% {opacity: 0;}
 }

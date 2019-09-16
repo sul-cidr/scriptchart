@@ -39,23 +39,56 @@
       const $navbarDropdowns = Array.prototype.slice.call(document.querySelectorAll('.has-dropdown'), 0);
       // Assumption: there's at most one callout message on the navbar
       const $navbarCallout = document.querySelector('.has-callout');
+      const CALLOUT_TIMEOUT = 4000;
+
+      function removeCallout(navbarCallout) {
+
+        var fadeTarget = document.getElementById('contact-message');
+
+        setTimeout(function() {
+          var fadeEffect = setInterval(function () {
+            if (!fadeTarget.style.opacity) {
+              fadeTarget.style.opacity = .8;
+            }
+            if (fadeTarget.style.opacity > 0) {
+              fadeTarget.style.opacity -= 0.1;
+            } else {
+              clearInterval(fadeEffect);
+              navbarCallout.classList.remove('is-active')
+            }
+          }, 20);
+        }, CALLOUT_TIMEOUT);
+      }
 
       if ($navbarCallout !== null) {
+
+        //setTimeout(function(){ $navbarCallout.classList.remove('is-active'); }, CALLOUT_TIMEOUT);
+        
+        removeCallout($navbarCallout);
+        $contactMessage = document.getElementById('contact-message');
 
         $navbarDropdowns.forEach(el => {
           el.addEventListener('mouseover', () => {
             if (!el.classList.contains('has-callout')) {
               $navbarCallout.classList.remove('is-active');
             }
+            else {
+              if (!$navbarCallout.classList.contains('is-active')) {
+                $navbarCallout.classList.add('is-active');
+                $contactMessage.style.opacity = .8;
+              }
+              removeCallout($navbarCallout);
+            }
           });
           el.addEventListener('mouseleave', () => {
             if (!el.classList.contains('has-callout')) {
               $navbarCallout.classList.add('is-active');
+              $contactMessage.style.opacity = .8;
+              removeCallout($navbarCallout);
             }
           });
         });
       }
-
     });
   </script>
 </body>

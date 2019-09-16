@@ -36,7 +36,7 @@ layout: home
                         <div id="contact-message" class="navbar-dropdown">
                             <a class="navbar-item" href="./contact/">
                               <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                              <p>After using the DASH viewer, please leave a comment here.</p>
+                              <p>We'd appreciate feedback about using the DASH viewer.</p>
                             </a>
                         </div>
                     </div>

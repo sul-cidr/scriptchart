@@ -6,3 +6,5 @@ node_modules/
 src/assets/bundle.js
 src/mirador
 .env
+.bundle/config
+vendor/bundle

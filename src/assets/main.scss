@@ -121,3 +121,22 @@ $primary: $navbar-background-color;
 .help-image-lg {
   max-height: 60vh;
 }
+
+#contact-message {
+  background-color: $off-white;
+  transform: translateX(-25%);
+  width: 10rem;
+  opacity: 0.8;
+
+  :hover {
+    background-color: $off-white;
+    opacity: 1;
+  }
+  >.navbar-item {
+    color: black;
+    padding: 0 10px;
+    white-space: normal;
+    flex-direction: column;
+    text-align: center;
+  }
+}

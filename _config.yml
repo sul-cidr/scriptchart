@@ -20,8 +20,7 @@ description: >- # this means to ignore newlines until "url:"
 url: https://dash.stanford.edu # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/" # the subpath of your site, e.g. /blog
 repository: "sul-cidr/scriptchart"
-# Google Analytics
-google_analytics: UA-142238250-1
+google_analytics: G-MB51PBHRGX
 #twitter_username: jekyllrb
 #github_username: jekyll
 

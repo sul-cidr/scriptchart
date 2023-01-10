@@ -26,4 +26,12 @@ Based on [the Minimal React Webpack Babel Setup](https://www.robinwieruch.de/min
 
 ## Deployment
 
-- `yarn deploy` updates the remotely hosted version of the site with the contents of the `_site` folder. At present, the remote site is accessed by visiting this Github Pages URL: `https://sul-cidr.github.io/scriptchart/`
+- Deployment is done manually in conjunction with the `scriptchard-backend` application.
+
+## Update Jan. 2023
+
+Attempting to install dependencies and build the site in 2023 involves some pain points, as the versions of (esp.) Ruby and NodeJS that the code requires can be awkward to install on up-to-date systems.  For this reason, a docker configuration has been added to make things easier.  Docker (and Docker Compose for older docker versions) is required.
+
+- To launch a live development server, just use `docker-compose up` from the repository folder
+- To build the site to the `_site` folder, use `docker compose run app bash -c "cd /opt; bundle install --path vendor/bundle && yarn && yarn build"`
+

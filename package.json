@@ -8,7 +8,6 @@
     "build": "bundle exec jekyll clean && JEKYLL_ENV=prod bundle exec jekyll build && NODE_ENV=production node_modules/.bin/webpack -p",
     "dev": "yarn concurrently \"bundle exec jekyll serve --baseurl /scriptchart -H 0.0.0.0\" \"node_modules/.bin/webpack --watch\"",
     "precommit": "lint-staged",
-    "deploy": "bundle exec jekyll clean && JEKYLL_ENV=production bundle exec jekyll build --baseurl /scriptchart && NODE_ENV=production node_modules/.bin/webpack -p && gh-pages -d _site -m 'deploy [ci skip]'",
     "test": "node_modules/.bin/jest",
     "test:update": "node_modules/.bin/jest -u",
     "coverage": "node_modules/.bin/jest --coverage"
@@ -67,7 +66,6 @@
     "eslint-config-react-app": "^3.0.7",
     "eslint-plugin-prettier": "^3.0.1",
     "file-loader": "^3.0.1",
-    "gh-pages": "^2.0.1",
     "image-webpack-loader": "^4.6.0",
     "jest": "^24.1.0",
     "jest-serializer-enzyme": "^1.0.0",

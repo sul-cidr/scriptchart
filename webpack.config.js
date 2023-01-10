@@ -24,7 +24,8 @@ module.exports = {
   mode: isDev ? "development" : "production",
   output: {
     path: path.resolve(__dirname, "_site/assets"),
-    filename: isDev ? "[name].js" : `[name].${uniqueId}.js`
+    filename: isDev ? "[name].js" : `[name].${uniqueId}.js`,
+    hashFunction: "sha256"
   },
   resolve: {
     extensions: [".js", ".jsx"]

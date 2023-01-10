@@ -1,0 +1,11 @@
+version: "3"
+services:
+  app:
+    build:
+      context: docker
+    volumes:
+      - ./:/opt
+    ports:
+      - "127.0.0.1:4000:4000"
+    command: >
+        bash -c "cd /opt; bundle install --path vendor/bundle && yarn && yarn dev"
